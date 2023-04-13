@@ -42,8 +42,8 @@ npm install node-red-contrib-ngsi-ld
 
 ## Related links
 
--   [https://flows.nodered.org/node/node-red-contrib-ngsi-ld](https://flows.nodered.org/node/node-red-contrib-letsfiware-ngsi)
--   [https://www.npmjs.com/package/node-red-contrib-ngsi-ld](https://www.npmjs.com/package/node-red-contrib-letsfiware-ngsi)
+-   [https://flows.nodered.org/node/node-red-contrib-ngsi-ld](https://flows.nodered.org/node/node-red-contrib-ngsi-ld)
+-   [https://www.npmjs.com/package/node-red-contrib-ngsi-ld](https://www.npmjs.com/package/node-red-contrib-ngsi-ld)
 -   [Open Source Insights](https://deps.dev/npm/node-red-contrib-ngsi-ld)
 
 ## Copyright and License

@@ -1,0 +1,14 @@
+site_name: "node-red-contrib-NGSI-LD"
+site_description: node-red-contrib-NGSI-LD (Let's FIWARE)
+
+nav:
+  - 'Home':
+    - 'Index': index.md
+    - 'Installation': installation.md
+    - 'Custom nodes':
+      - 'NGSI-LD Entity': custom_nodes/entity.md
+      - 'NGSI-LD Entities': custom_nodes/entities.md
+      - 'NGSI-LD Entity attribute': custom_nodes/entity-attribute.md
+      - 'NGSI-LD Entity attributes': custom_nodes/entity-attributes.md
+      - 'NGSI-LD Batch operations': custom_nodes/batch-operations.md
+      - 'Broker version': custom_nodes/version.md

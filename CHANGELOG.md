@@ -1,3 +1,7 @@
-## node-red-contrib-NGSI-LD v0.0.1 - xx April, 2023
+## node-red-contrib-NGSI-LD v0.0.1-next
+
+-   ADD documentation (#1)
+
+## node-red-contrib-NGSI-LD v0.0.1 - 13 April, 2023
 
 -   Initial release

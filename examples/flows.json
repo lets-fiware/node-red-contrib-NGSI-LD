@@ -1,0 +1,582 @@
+[
+    {
+        "id": "9462fed0a5871269",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "04c624a94a909ca5",
+        "type": "inject",
+        "z": "9462fed0a5871269",
+        "name": "Get version",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 130,
+        "y": 60,
+        "wires": [
+            [
+                "8c535d6be0a29f6d"
+            ]
+        ]
+    },
+    {
+        "id": "4bf413c89e3818ab",
+        "type": "debug",
+        "z": "9462fed0a5871269",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "8c535d6be0a29f6d",
+        "type": "NGSI-LD broker version",
+        "z": "9462fed0a5871269",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "x": 430,
+        "y": 60,
+        "wires": [
+            [
+                "4bf413c89e3818ab"
+            ]
+        ]
+    },
+    {
+        "id": "342657a4a6097ebd",
+        "type": "inject",
+        "z": "9462fed0a5871269",
+        "name": "Create entity",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"id\":\"urn:ngsi-ld:TemperatureSensor:001\",\"type\":\"TemperatureSensor\",\"category\":{\"type\":\"Property\",\"value\":\"sensor\"},\"temperature\":{\"type\":\"Property\",\"value\":25,\"unitCode\":\"CEL\"},\"location\":{\"type\":\"GeoProperty\",\"value\":{\"type\":\"Point\",\"coordinates\":[-73.975,40.775556]}}}",
+        "payloadType": "json",
+        "x": 130,
+        "y": 140,
+        "wires": [
+            [
+                "8c146a5be05db832"
+            ]
+        ]
+    },
+    {
+        "id": "8c146a5be05db832",
+        "type": "NGSI-LD Entity",
+        "z": "9462fed0a5871269",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "atContext": "",
+        "actionType": "create",
+        "entityId": "",
+        "attrs": "",
+        "geometryProperty": "",
+        "lang": "",
+        "x": 400,
+        "y": 140,
+        "wires": [
+            [
+                "93f0eed9b57db31e"
+            ]
+        ]
+    },
+    {
+        "id": "8ee2701ea217b4f6",
+        "type": "NGSI-LD Entity",
+        "z": "9462fed0a5871269",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "atContext": "",
+        "actionType": "read",
+        "entityId": "",
+        "attrs": "",
+        "sysAttrs": "true",
+        "representation": "keyValues",
+        "geometryProperty": "",
+        "lang": "",
+        "accept": "application/json",
+        "x": 400,
+        "y": 200,
+        "wires": [
+            [
+                "93f0eed9b57db31e"
+            ]
+        ]
+    },
+    {
+        "id": "719a467b2e96a1ff",
+        "type": "NGSI-LD Entity",
+        "z": "9462fed0a5871269",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "atContext": "",
+        "actionType": "delete",
+        "entityId": "",
+        "attrs": "",
+        "x": 400,
+        "y": 260,
+        "wires": [
+            [
+                "93f0eed9b57db31e"
+            ]
+        ]
+    },
+    {
+        "id": "7e2e646a8dfa981e",
+        "type": "inject",
+        "z": "9462fed0a5871269",
+        "name": "Read entity",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "urn:ngsi-ld:TemperatureSensor:001",
+        "payloadType": "str",
+        "x": 130,
+        "y": 200,
+        "wires": [
+            [
+                "8ee2701ea217b4f6"
+            ]
+        ]
+    },
+    {
+        "id": "410db6c14f81c0d3",
+        "type": "inject",
+        "z": "9462fed0a5871269",
+        "name": "Delete entity",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "urn:ngsi-ld:TemperatureSensor:001",
+        "payloadType": "str",
+        "x": 130,
+        "y": 260,
+        "wires": [
+            [
+                "719a467b2e96a1ff"
+            ]
+        ]
+    },
+    {
+        "id": "81134d77380e42d4",
+        "type": "inject",
+        "z": "9462fed0a5871269",
+        "name": "Batch create",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[{\"id\":\"urn:ngsi-ld:TemperatureSensor:002\",\"type\":\"TemperatureSensor\",\"category\":{\"type\":\"Property\",\"value\":\"sensor\"},\"temperature\":{\"type\":\"Property\",\"value\":20,\"unitCode\":\"CEL\"}},{\"id\":\"urn:ngsi-ld:TemperatureSensor:003\",\"type\":\"TemperatureSensor\",\"category\":{\"type\":\"Property\",\"value\":\"sensor\"},\"temperature\":{\"type\":\"Property\",\"value\":2,\"unitCode\":\"CEL\"}},{\"id\":\"urn:ngsi-ld:TemperatureSensor:004\",\"type\":\"TemperatureSensor\",\"category\":{\"type\":\"Property\",\"value\":\"sensor\"},\"temperature\":{\"type\":\"Property\",\"value\":100,\"unitCode\":\"CEL\"}}]",
+        "payloadType": "json",
+        "x": 130,
+        "y": 440,
+        "wires": [
+            [
+                "9085f69cbfd11c6b"
+            ]
+        ]
+    },
+    {
+        "id": "93f0eed9b57db31e",
+        "type": "debug",
+        "z": "9462fed0a5871269",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "95594dc78659386a",
+        "type": "inject",
+        "z": "9462fed0a5871269",
+        "name": "Batch delete",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[\"urn:ngsi-ld:TemperatureSensor:002\",\"urn:ngsi-ld:TemperatureSensor:003\",\"urn:ngsi-ld:TemperatureSensor:004\"]",
+        "payloadType": "json",
+        "x": 130,
+        "y": 600,
+        "wires": [
+            [
+                "52f447eed1071c17"
+            ]
+        ]
+    },
+    {
+        "id": "e155491bafad9a6a",
+        "type": "inject",
+        "z": "9462fed0a5871269",
+        "name": "Batch upsert",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[{\"id\":\"urn:ngsi-ld:TemperatureSensor:002\",\"type\":\"TemperatureSensor\",\"category\":{\"type\":\"Property\",\"value\":\"sensor\"},\"temperature\":{\"type\":\"Property\",\"value\":21,\"unitCode\":\"CEL\"}},{\"id\":\"urn:ngsi-ld:TemperatureSensor:003\",\"type\":\"TemperatureSensor\",\"category\":{\"type\":\"Property\",\"value\":\"sensor\"},\"temperature\":{\"type\":\"Property\",\"value\":27,\"unitCode\":\"CEL\"}}]",
+        "payloadType": "json",
+        "x": 130,
+        "y": 520,
+        "wires": [
+            [
+                "f50c13b71945ca01"
+            ]
+        ]
+    },
+    {
+        "id": "9085f69cbfd11c6b",
+        "type": "NGSI-LD Batch operations",
+        "z": "9462fed0a5871269",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "actionType": "create",
+        "atContext": "",
+        "x": 380,
+        "y": 440,
+        "wires": [
+            [
+                "15e14d94e4f343f6"
+            ]
+        ]
+    },
+    {
+        "id": "f50c13b71945ca01",
+        "type": "NGSI-LD Batch operations",
+        "z": "9462fed0a5871269",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "actionType": "upsert",
+        "atContext": "",
+        "x": 380,
+        "y": 520,
+        "wires": [
+            [
+                "15e14d94e4f343f6"
+            ]
+        ]
+    },
+    {
+        "id": "52f447eed1071c17",
+        "type": "NGSI-LD Batch operations",
+        "z": "9462fed0a5871269",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "actionType": "delete",
+        "atContext": "",
+        "x": 380,
+        "y": 600,
+        "wires": [
+            [
+                "15e14d94e4f343f6"
+            ]
+        ]
+    },
+    {
+        "id": "d60b2ebad5cc9ae3",
+        "type": "NGSI-LD entities",
+        "z": "9462fed0a5871269",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "representation": "keyValues",
+        "entityId": "",
+        "entityType": "",
+        "idPattern": "",
+        "attrs": "",
+        "sysAttrs": "false",
+        "query": "",
+        "csf": "",
+        "georel": "",
+        "geometry": "",
+        "coordinates": "",
+        "geoproperty": "",
+        "geometryProperty": "",
+        "lang": "",
+        "accept": "application/ld+json",
+        "atContext": "",
+        "buffering": "off",
+        "x": 410,
+        "y": 340,
+        "wires": [
+            [
+                "378b17e87b1e0548"
+            ]
+        ]
+    },
+    {
+        "id": "378b17e87b1e0548",
+        "type": "debug",
+        "z": "9462fed0a5871269",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "20a7f0181657fd55",
+        "type": "inject",
+        "z": "9462fed0a5871269",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": ".*",
+        "payloadType": "str",
+        "x": 110,
+        "y": 340,
+        "wires": [
+            [
+                "d60b2ebad5cc9ae3"
+            ]
+        ]
+    },
+    {
+        "id": "f0f252ddf818deb9",
+        "type": "NGSI-LD entity attributes",
+        "z": "9462fed0a5871269",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "actionType": "append",
+        "entityId": "urn:ngsi-ld:TemperatureSensor:001",
+        "atContext": "",
+        "x": 360,
+        "y": 700,
+        "wires": [
+            [
+                "51d29893d58937ea"
+            ]
+        ]
+    },
+    {
+        "id": "15e14d94e4f343f6",
+        "type": "debug",
+        "z": "9462fed0a5871269",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "51d29893d58937ea",
+        "type": "debug",
+        "z": "9462fed0a5871269",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "25db30d2809774ef",
+        "type": "inject",
+        "z": "9462fed0a5871269",
+        "name": "Append attrs",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"batteryLevel\":{\"type\":\"Property\",\"value\":0.9,\"unitCode\":\"C62\"},\"controlledAsset\":{\"type\":\"Relationship\",\"object\":\"urn:ngsi-ld:Building:barn002\"}}",
+        "payloadType": "json",
+        "x": 130,
+        "y": 700,
+        "wires": [
+            [
+                "f0f252ddf818deb9"
+            ]
+        ]
+    },
+    {
+        "id": "7f97364bf693528e",
+        "type": "NGSI-LD entity attributes",
+        "z": "9462fed0a5871269",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "actionType": "update",
+        "entityId": "urn:ngsi-ld:TemperatureSensor:001",
+        "atContext": "",
+        "x": 360,
+        "y": 760,
+        "wires": [
+            [
+                "51d29893d58937ea"
+            ]
+        ]
+    },
+    {
+        "id": "9aa3a6a7fb40431f",
+        "type": "inject",
+        "z": "9462fed0a5871269",
+        "name": "Update attrs",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"batteryLevel\":{\"type\":\"Property\",\"value\":0.5,\"unitCode\":\"C62\"},\"controlledAsset\":{\"type\":\"Relationship\",\"object\":\"urn:ngsi-ld:Building:barn001\"}}",
+        "payloadType": "json",
+        "x": 130,
+        "y": 760,
+        "wires": [
+            [
+                "7f97364bf693528e"
+            ]
+        ]
+    },
+    {
+        "id": "fa1223e9d82f946c",
+        "type": "inject",
+        "z": "9462fed0a5871269",
+        "name": "Upsert attrs",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"batteryLevel\":{\"type\":\"Property\",\"value\":0.1,\"unitCode\":\"C62\"},\"controlledAsset\":{\"type\":\"Relationship\",\"object\":\"urn:ngsi-ld:Building:barn003\"}}",
+        "payloadType": "json",
+        "x": 130,
+        "y": 820,
+        "wires": [
+            [
+                "21e58c334fd53442"
+            ]
+        ]
+    },
+    {
+        "id": "21e58c334fd53442",
+        "type": "NGSI-LD entity attributes",
+        "z": "9462fed0a5871269",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "actionType": "upsert",
+        "entityId": "urn:ngsi-ld:TemperatureSensor:001",
+        "atContext": "",
+        "x": 360,
+        "y": 820,
+        "wires": [
+            [
+                "51d29893d58937ea"
+            ]
+        ]
+    },
+    {
+        "id": "907c553d7533ec10",
+        "type": "NGSI-LD broker",
+        "name": "Orion-LD",
+        "brokerType": "orion-ld",
+        "apiEndpoint": "http://orion-ld:1026",
+        "mintaka": "http://mintaka:8080",
+        "atContext": "https://raw.githubusercontent.com/FIWARE/tutorials.CRUD-Operations/NGSI-LD/data-models/ngsi-context.jsonld",
+        "tenant": "",
+        "idmEndpoint": "",
+        "idmType": "none"
+    }
+]

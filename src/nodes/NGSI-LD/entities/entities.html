@@ -1,0 +1,180 @@
+<!--
+   MIT License
+
+   Copyright 2023 Kazuhito Suda
+
+   This file is part of node-red-contrib-NGSI-LD
+
+   https://github.com/lets-fiware/node-red-contrib-NGSI-LD
+
+   Permission is hereby granted, free of charge, to any person obtaining a copy
+   of this software and associated documentation files (the "Software"), to deal
+   in the Software without restriction, including without limitation the rights
+   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+   copies of the Software, and to permit persons to whom the Software is
+   furnished to do so, subject to the following conditions:
+
+   The above copyright notice and this permission notice shall be included in all
+   copies or substantial portions of the Software.
+
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+   SOFTWARE.
+-->
+
+<script type="text/javascript">
+    RED.nodes.registerType('NGSI-LD entities', {
+      category: 'NGSI',
+      color: '#A9E2F3',
+      defaults: {
+        name: { value: '' },
+        broker: {
+          type: 'NGSI-LD broker',
+          required: true
+        },
+        representation: { value: 'normalized' },
+        entityId: { value: '' },
+        entityType: { value: '' },
+        idPattern: { value: '' },
+        attrs: { value: '' },
+        sysAttrs: { value: 'false' },
+        query: { value: '' },
+        csf: { value: '' },
+        georel: { value: '' },
+        geometry: { value: '' },
+        coordinates: { value: '' },
+        geoproperty: { value: '' },
+        geometryProperty: { value: '' },
+        lang: { value: '' },
+        accept: { value: 'application/ld+json' },
+        atContext: { value: '' },
+        buffering: { value: 'off' }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: 'fiware-non-free.svg',
+      label: function () {
+        return this.name || 'NGSI-LD entities';
+      },
+      paletteLabel: 'entities'
+    });
+</script>
+
+<script type="text/x-red" data-template-name="NGSI-LD entities">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-broker"><i class="fa fa-tag"></i> Broker</label>
+        <input type="text" id="node-input-broker">
+    </div>
+    <div class="form-row" id="representation">
+        <label for="node-input-representation"><i class="fa fa-tag"></i> Representation</label>
+        <select id="node-input-representation">
+            <option value="normalized" enabled>normalized</option>
+            <option value="concise">concise</option>
+            <option value="keyValues">keyValues</option>
+        </select>
+    </div>
+    <div class="form-row" id="entityId">
+        <label for="node-input-entityId"><i class="fa fa-tag"></i> Entity id</label>
+        <input type="text" id="node-input-entityId">
+    </div>
+    <div class="form-row">
+        <label for="node-input-entityType"><i class="fa fa-tag"></i> Entity type</label>
+        <input type="text" id="node-input-entityType">
+    </div>
+    <div class="form-row">
+        <label for="node-input-idPattern"><i class="fa fa-tag"></i> ID pattern</label>
+        <input type="text" id="node-input-idPattern">
+    </div>
+    <div class="form-row">
+        <label for="node-input-attrs"><i class="fa fa-tag"></i> Attritubes</label>
+        <input type="text" id="node-input-attrs">
+    </div>
+    <div class="form-row" id="sysAttrs">
+        <label for="node-input-sysAttrs"><i class="fa fa-tag"></i> System attrs</label>
+        <select id="node-input-sysAttrs">
+            <option value="false" enabled>false</option>
+            <option value="true">true</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-query"><i class="fa fa-tag"></i> Query</label>
+        <input type="text" id="node-input-query">
+    </div>
+    <div class="form-row" id="csf">
+        <label for="node-input-csf"><i class="fa fa-tag"></i> CSF</label>
+        <input type="text" id="node-input-csf">
+    </div>
+    <div class="form-row" id="georel">
+        <label for="node-input-georel"><i class="fa fa-tag"></i> Geo relationship</label>
+        <input type="text" id="node-input-georel">
+    </div>
+    <div class="form-row" id="geometry">
+        <label for="node-input-geometry"><i class="fa fa-tag"></i> Geometry</label>
+        <input type="text" id="node-input-geometry">
+    </div>
+    <div class="form-row" id="coordinates">
+        <label for="node-input-coordinates"><i class="fa fa-tag"></i> Coordinates</label>
+        <input type="text" id="node-input-coordinates">
+    </div>
+    <div class="form-row" id="geoproperty">
+        <label for="node-input-geoproperty"><i class="fa fa-tag"></i> Geo property</label>
+        <input type="text" id="node-input-geoproperty">
+    </div>
+    <div class="form-row" id="geometryProperty">
+        <label for="node-input-geometryProperty"><i class="fa fa-tag"></i> Geometry property</label>
+        <input type="text" id="node-input-geometryProperty">
+    </div>
+    <div class="form-row" id="lang">
+        <label for="node-input-lang"><i class="fa fa-tag"></i> Language</label>
+        <input type="text" id="node-input-lang">
+    </div>
+    <div class="form-row" id="accept">
+        <label for="node-input-accept"><i class="fa fa-tag"></i> Accept</label>
+        <select id="node-input-accept">
+            <option value="application/ld+json" enabled>JSON-LD</option>
+            <option value="application/json">JSON</option>
+            <option value="application/geo+json">GeoJSON</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-atContext"><i class="icon-tag"></i> @context</label>
+        <input type="text" id="node-input-atContext">
+    </div>
+    <div class="form-row">
+        <label for="node-input-buffering"><i class="fa fa-tag"></i> Buffering</label>
+        <select id="node-input-buffering">
+            <option value="off" selected>off</option>
+            <option value="on">on</option>
+        </select>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="NGSI-LD entities">
+    <p>A simple node that allows to obtain NGSI-LD entities</p>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>payload
+            <span class="property-type">JSON Object</span>
+        </dt>
+        <dd>Payload containing a query condition that retrieves NGSI-LD entitites</dd>
+    </dl>
+
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>payload
+            <span class="property-type">JSON Array</span>
+        </dt>
+        <dd>List of NGSI-LD entities</dd>
+    </dl>
+
+    <h3>Details</h3>
+    <p>See <a href="https://node-red-contrib-letsfiware-ngsi.letsfiware.jp/en/custom_nodes/entities/">here</a> for full documentation.</p>
+</script>

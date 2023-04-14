@@ -1,4 +1,4 @@
-# FIWARE version 
+# NGSI-LD broker version 
 
 This custom node is a simple node that allows to obtain the version information of NGSI-LD broker.
 

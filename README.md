@@ -7,6 +7,7 @@
 <br/>
 [![Unit Tests](https://github.com/lets-fiware/node-red-contrib-NGSI-LD/actions/workflows/ci.yml/badge.svg)](https://github.com/lets-fiware/node-red-contrib-NGSI-LD/actions/workflows/ci.yml)
 [![Coverage Status](https://coveralls.io/repos/github/lets-fiware/node-red-contrib-NGSI-LD/badge.svg?branch=main)](https://coveralls.io/github/lets-fiware/node-red-contrib-NGSI-LD?branch=main)
+![GitHub Discussions](https://img.shields.io/github/discussions/lets-fiware/node-red-contrib-NGSI-LD)
 
 # node-red-contrib-NGSI-LD
 
@@ -22,7 +23,7 @@ Node-RED implementation for NGSI-LD
 -   [NGSI-LD Entity attribute](docs/en/custom_nodes/entity-attribute.md)
 -   [NGSI-LD Entity attributes](docs/en/custom_nodes/entity-attributes.md)
 -   [NGSI-LD Batch operations](docs/en/custom_nodes/batch-operations.md)
--   [Broker version](docs/en/custom_nodes/version.md)
+-   [NGSI-LD Broker version](docs/en/custom_nodes/version.md)
 
 ## Documentation
 

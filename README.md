@@ -2,12 +2,12 @@
 [![NGSI LD](https://img.shields.io/badge/NGSI-LD-d6604d.svg)](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.05.01_60/gs_CIM009v010501p.pdf)
 
 [![platform](https://img.shields.io/badge/platform-Node--RED-red)](https://nodered.org)
-![NPM version](https://badge.fury.io/js/node-red-contrib-ngsi-ld.svg)
+[![NPM version](https://badge.fury.io/js/node-red-contrib-ngsi-ld.svg)](https://www.npmjs.com/package/node-red-contrib-ngsi-ld)
 [![License: MIT](https://img.shields.io/npm/l/node-red-contrib-ngsi-ld)](https://opensource.org/licenses/MIT)
 <br/>
 [![Unit Tests](https://github.com/lets-fiware/node-red-contrib-NGSI-LD/actions/workflows/ci.yml/badge.svg)](https://github.com/lets-fiware/node-red-contrib-NGSI-LD/actions/workflows/ci.yml)
 [![Coverage Status](https://coveralls.io/repos/github/lets-fiware/node-red-contrib-NGSI-LD/badge.svg?branch=main)](https://coveralls.io/github/lets-fiware/node-red-contrib-NGSI-LD?branch=main)
-![GitHub Discussions](https://img.shields.io/github/discussions/lets-fiware/node-red-contrib-NGSI-LD)
+[![GitHub Discussions](https://img.shields.io/github/discussions/lets-fiware/node-red-contrib-NGSI-LD)](https://github.com/lets-fiware/node-red-contrib-NGSI-LD/discussions)
 
 # node-red-contrib-NGSI-LD
 

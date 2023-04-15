@@ -10,6 +10,8 @@ Node-RED NGSI integration
 <br/>
 [![Unit Tests](https://github.com/lets-fiware/node-red-contrib-NGSI-LD/actions/workflows/ci.yml/badge.svg)](https://github.com/lets-fiware/node-red-contrib-NGSI-LD/actions/workflows/ci.yml)
 [![Coverage Status](https://coveralls.io/repos/github/lets-fiware/node-red-contrib-NGSI-LD/badge.svg?branch=main)](https://coveralls.io/github/lets-fiware/node-red-contrib-NGSI-LD?branch=main)
+[![E2E Tests](https://github.com/lets-fiware/node-red-contrib-NGSI-LD/actions/workflows/e2e.yml/badge.svg)](https://github.com/lets-fiware/node-red-contrib-NGSI-LD/actions/workflows/e2e.yml)
+<br/>
 [![GitHub Discussions](https://img.shields.io/github/discussions/lets-fiware/node-red-contrib-NGSI-LD)](https://github.com/lets-fiware/node-red-contrib-NGSI-LD/discussions)
 
 ## Supported custom nodes

@@ -6,6 +6,7 @@
     "lint": "./node_modules/eslint/bin/eslint.js --ext .json,.js src test && eslint -c .eslintrc.html.json --ext .html src",
     "format": "./node_modules/eslint/bin/eslint.js --fix --ext .json,.js src test && eslint -c .eslintrc.html.json --fix --ext .html src",
     "test": "./node_modules/nyc/bin/nyc.js --reporter=html --reporter=text ./node_modules/mocha/bin/mocha.js \"test/unit/**/*_spec.js\"",
+    "e2e": "./node_modules/nyc/bin/nyc.js --reporter=html --reporter=text ./node_modules/mocha/bin/mocha.js \"test/e2e/**/*_spec.js\"",
     "coverage": "mkdir -p coverage && ./node_modules/nyc/bin/nyc.js --reporter=text-lcov ./node_modules/mocha/bin/mocha.js \"test/unit/**/*_spec.js\" > ./coverage/coverage.lcov"
   },
   "node-red": {

@@ -1,5 +1,6 @@
 ## node-red-contrib-letsfiware-NGSI v0.2.0-next
 
+-   ADD E2E test (#10)
 -   ADD hyperlink in documentations (#9)
 
 ## node-red-contrib-NGSI-LD v0.2.0 - 14 April, 2023

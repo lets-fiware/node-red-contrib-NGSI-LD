@@ -11,3 +11,4 @@ images/
 *.bmp
 yarn.lock
 data/
+nohup.out

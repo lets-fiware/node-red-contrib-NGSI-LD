@@ -1,0 +1,64 @@
+[
+    {
+        "id": "9462fed0a5871269",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "dd9e1a3db966f305",
+        "type": "http in",
+        "z": "9462fed0a5871269",
+        "name": "",
+        "url": "/version",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 60,
+        "wires": [
+            [
+                "fbe807245dd8ba4d"
+            ]
+        ]
+    },
+    {
+        "id": "23fa23675dc21bbb",
+        "type": "http response",
+        "z": "9462fed0a5871269",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 610,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "fbe807245dd8ba4d",
+        "type": "NGSI-LD broker version",
+        "z": "9462fed0a5871269",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "x": 350,
+        "y": 60,
+        "wires": [
+            [
+                "23fa23675dc21bbb"
+            ]
+        ]
+    },
+    {
+        "id": "907c553d7533ec10",
+        "type": "NGSI-LD broker",
+        "name": "Orion-LD",
+        "brokerType": "orion-ld",
+        "apiEndpoint": "http://localhost:1026",
+        "mintaka": "http://localhost:8080",
+        "atContext": "https://raw.githubusercontent.com/FIWARE/tutorials.CRUD-Operations/NGSI-LD/data-models/ngsi-context.jsonld",
+        "tenant": "",
+        "idmEndpoint": "",
+        "idmType": "none"
+    }
+]

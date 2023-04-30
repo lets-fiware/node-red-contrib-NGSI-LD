@@ -1,6 +1,6 @@
 [
     {
-        "id": "9462fed0a5871269",
+        "id": "554141bee26226c1",
         "type": "tab",
         "label": "Flow 1",
         "disabled": false,
@@ -8,46 +8,665 @@
         "env": []
     },
     {
-        "id": "dd9e1a3db966f305",
+        "id": "54dd982794c9d988",
         "type": "http in",
-        "z": "9462fed0a5871269",
+        "z": "554141bee26226c1",
         "name": "",
         "url": "/version",
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 110,
+        "x": 170,
         "y": 60,
         "wires": [
             [
-                "fbe807245dd8ba4d"
+                "13f0399d21a9656c"
             ]
         ]
     },
     {
-        "id": "23fa23675dc21bbb",
+        "id": "d539b1d8e13511cd",
         "type": "http response",
-        "z": "9462fed0a5871269",
+        "z": "554141bee26226c1",
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 610,
+        "x": 670,
         "y": 60,
         "wires": []
     },
     {
-        "id": "fbe807245dd8ba4d",
+        "id": "13f0399d21a9656c",
         "type": "NGSI-LD broker version",
-        "z": "9462fed0a5871269",
+        "z": "554141bee26226c1",
         "name": "",
         "broker": "907c553d7533ec10",
-        "x": 350,
+        "x": 430,
         "y": 60,
         "wires": [
             [
-                "23fa23675dc21bbb"
+                "d539b1d8e13511cd"
             ]
         ]
+    },
+    {
+        "id": "c79974792d601ef8",
+        "type": "http in",
+        "z": "554141bee26226c1",
+        "name": "",
+        "url": "/create-entity",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 160,
+        "wires": [
+            [
+                "27608188a9b638c5"
+            ]
+        ]
+    },
+    {
+        "id": "cb9b90c9faadc345",
+        "type": "http response",
+        "z": "554141bee26226c1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 670,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "27608188a9b638c5",
+        "type": "NGSI-LD Entity",
+        "z": "554141bee26226c1",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "atContext": "",
+        "actionType": "create",
+        "entityId": "",
+        "attrs": "",
+        "sysAttrs": "false",
+        "representation": "normalized",
+        "geometryProperty": "",
+        "lang": "",
+        "accept": "application/ld+json",
+        "x": 420,
+        "y": 160,
+        "wires": [
+            [
+                "cb9b90c9faadc345"
+            ]
+        ]
+    },
+    {
+        "id": "9efc4d2697c11e73",
+        "type": "http in",
+        "z": "554141bee26226c1",
+        "name": "",
+        "url": "/read-entity",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 180,
+        "y": 220,
+        "wires": [
+            [
+                "72e6cc1da0446dc2"
+            ]
+        ]
+    },
+    {
+        "id": "18bf9ff92ad0de6f",
+        "type": "http response",
+        "z": "554141bee26226c1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 670,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "72e6cc1da0446dc2",
+        "type": "NGSI-LD Entity",
+        "z": "554141bee26226c1",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "atContext": "",
+        "actionType": "read",
+        "entityId": "",
+        "attrs": "",
+        "sysAttrs": "false",
+        "representation": "normalized",
+        "geometryProperty": "",
+        "lang": "",
+        "accept": "application/ld+json",
+        "x": 420,
+        "y": 220,
+        "wires": [
+            [
+                "18bf9ff92ad0de6f"
+            ]
+        ]
+    },
+    {
+        "id": "a53ab4fe535c6be6",
+        "type": "http in",
+        "z": "554141bee26226c1",
+        "name": "",
+        "url": "/delete-entity",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 280,
+        "wires": [
+            [
+                "582fc0c681af33d1"
+            ]
+        ]
+    },
+    {
+        "id": "c6a1d4cf765c1e06",
+        "type": "http response",
+        "z": "554141bee26226c1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 670,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "582fc0c681af33d1",
+        "type": "NGSI-LD Entity",
+        "z": "554141bee26226c1",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "atContext": "",
+        "actionType": "delete",
+        "entityId": "",
+        "attrs": "",
+        "sysAttrs": "false",
+        "representation": "normalized",
+        "geometryProperty": "",
+        "lang": "",
+        "accept": "application/ld+json",
+        "x": 420,
+        "y": 280,
+        "wires": [
+            [
+                "c6a1d4cf765c1e06"
+            ]
+        ]
+    },
+    {
+        "id": "549a45d436cf6d55",
+        "type": "NGSI-LD entities",
+        "z": "554141bee26226c1",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "representation": "normalized",
+        "entityId": "",
+        "entityType": "",
+        "idPattern": "",
+        "attrs": "",
+        "sysAttrs": "false",
+        "query": "",
+        "csf": "",
+        "georel": "",
+        "geometry": "",
+        "coordinates": "",
+        "geoproperty": "",
+        "geometryProperty": "",
+        "lang": "",
+        "accept": "application/ld+json",
+        "atContext": "",
+        "buffering": "on",
+        "x": 430,
+        "y": 380,
+        "wires": [
+            [
+                "313dbb43f58032f7"
+            ]
+        ]
+    },
+    {
+        "id": "ca4fa245e6ccb4c1",
+        "type": "http in",
+        "z": "554141bee26226c1",
+        "name": "",
+        "url": "/read-entities",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 380,
+        "wires": [
+            [
+                "549a45d436cf6d55"
+            ]
+        ]
+    },
+    {
+        "id": "313dbb43f58032f7",
+        "type": "http response",
+        "z": "554141bee26226c1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 670,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "a0920f29da382e88",
+        "type": "NGSI-LD entity attributes",
+        "z": "554141bee26226c1",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "actionType": "append",
+        "entityId": "urn:ngsi-ld:TemperatureSensor:201",
+        "atContext": "",
+        "x": 440,
+        "y": 740,
+        "wires": [
+            [
+                "82915a90797a72da"
+            ]
+        ]
+    },
+    {
+        "id": "7e01ecb3b2f0a6ed",
+        "type": "NGSI-LD entity attributes",
+        "z": "554141bee26226c1",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "actionType": "update",
+        "entityId": "urn:ngsi-ld:TemperatureSensor:201",
+        "atContext": "",
+        "x": 440,
+        "y": 800,
+        "wires": [
+            [
+                "79be6580c646cfa4"
+            ]
+        ]
+    },
+    {
+        "id": "84f2c478f2dd54d0",
+        "type": "NGSI-LD entity attributes",
+        "z": "554141bee26226c1",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "actionType": "upsert",
+        "entityId": "urn:ngsi-ld:TemperatureSensor:201",
+        "atContext": "",
+        "x": 440,
+        "y": 860,
+        "wires": [
+            [
+                "c36821dd22c0bbf3"
+            ]
+        ]
+    },
+    {
+        "id": "82915a90797a72da",
+        "type": "http response",
+        "z": "554141bee26226c1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 670,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "79be6580c646cfa4",
+        "type": "http response",
+        "z": "554141bee26226c1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 670,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "c36821dd22c0bbf3",
+        "type": "http response",
+        "z": "554141bee26226c1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 670,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "b19baef5bedf27c6",
+        "type": "http in",
+        "z": "554141bee26226c1",
+        "name": "",
+        "url": "/append-attrs",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 740,
+        "wires": [
+            [
+                "a0920f29da382e88"
+            ]
+        ]
+    },
+    {
+        "id": "d1aba0ec45e215ea",
+        "type": "http in",
+        "z": "554141bee26226c1",
+        "name": "",
+        "url": "/update-attrs",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 800,
+        "wires": [
+            [
+                "7e01ecb3b2f0a6ed"
+            ]
+        ]
+    },
+    {
+        "id": "2d30a3b16e606d72",
+        "type": "http in",
+        "z": "554141bee26226c1",
+        "name": "",
+        "url": "/upsert-attrs",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 860,
+        "wires": [
+            [
+                "84f2c478f2dd54d0"
+            ]
+        ]
+    },
+    {
+        "id": "acba86ad0b4cf7f0",
+        "type": "NGSI-LD Batch operations",
+        "z": "554141bee26226c1",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "actionType": "create",
+        "atContext": "",
+        "x": 460,
+        "y": 460,
+        "wires": [
+            [
+                "0d7e7316a2934f57"
+            ]
+        ]
+    },
+    {
+        "id": "9170ae4788f40952",
+        "type": "NGSI-LD Batch operations",
+        "z": "554141bee26226c1",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "actionType": "update",
+        "atContext": "",
+        "x": 460,
+        "y": 520,
+        "wires": [
+            [
+                "4ba448faed348393"
+            ]
+        ]
+    },
+    {
+        "id": "1909d48ce262ce57",
+        "type": "NGSI-LD Batch operations",
+        "z": "554141bee26226c1",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "actionType": "upsert",
+        "atContext": "",
+        "x": 460,
+        "y": 580,
+        "wires": [
+            [
+                "891f0a9ddcf39d78"
+            ]
+        ]
+    },
+    {
+        "id": "2368fa56b9a53d3b",
+        "type": "NGSI-LD entity attribute",
+        "z": "554141bee26226c1",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "actionType": "update",
+        "entityId": "urn:ngsi-ld:TemperatureSensor:301",
+        "attrName": "category",
+        "deleteAll": "false",
+        "datasetId": "",
+        "atContext": "",
+        "x": 430,
+        "y": 980,
+        "wires": [
+            [
+                "ad200afa292436a6"
+            ]
+        ]
+    },
+    {
+        "id": "2ad7ea8bad959f92",
+        "type": "NGSI-LD entity attribute",
+        "z": "554141bee26226c1",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "actionType": "delete",
+        "entityId": "urn:ngsi-ld:TemperatureSensor:301",
+        "attrName": "",
+        "deleteAll": "false",
+        "datasetId": "",
+        "atContext": "",
+        "x": 430,
+        "y": 1040,
+        "wires": [
+            [
+                "c2bf8013eca33fa7"
+            ]
+        ]
+    },
+    {
+        "id": "07a4508132e4989f",
+        "type": "http in",
+        "z": "554141bee26226c1",
+        "name": "",
+        "url": "/batch-create",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 460,
+        "wires": [
+            [
+                "acba86ad0b4cf7f0"
+            ]
+        ]
+    },
+    {
+        "id": "ee2c2f6b20a2c3c6",
+        "type": "http in",
+        "z": "554141bee26226c1",
+        "name": "",
+        "url": "/batch-update",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 520,
+        "wires": [
+            [
+                "9170ae4788f40952"
+            ]
+        ]
+    },
+    {
+        "id": "11de2e0f348fdd90",
+        "type": "http in",
+        "z": "554141bee26226c1",
+        "name": "",
+        "url": "/batch-upsert",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 580,
+        "wires": [
+            [
+                "1909d48ce262ce57"
+            ]
+        ]
+    },
+    {
+        "id": "0d7e7316a2934f57",
+        "type": "http response",
+        "z": "554141bee26226c1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 690,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "4ba448faed348393",
+        "type": "http response",
+        "z": "554141bee26226c1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 690,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "891f0a9ddcf39d78",
+        "type": "http response",
+        "z": "554141bee26226c1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 690,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "0a9d56550121dc47",
+        "type": "http in",
+        "z": "554141bee26226c1",
+        "name": "",
+        "url": "/batch-delete",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 640,
+        "wires": [
+            [
+                "add2fb49b94294ef"
+            ]
+        ]
+    },
+    {
+        "id": "41191e9d8c9420d7",
+        "type": "http response",
+        "z": "554141bee26226c1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 690,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "add2fb49b94294ef",
+        "type": "NGSI-LD Batch operations",
+        "z": "554141bee26226c1",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "actionType": "delete",
+        "atContext": "",
+        "x": 460,
+        "y": 640,
+        "wires": [
+            [
+                "41191e9d8c9420d7"
+            ]
+        ]
+    },
+    {
+        "id": "b3b2a68936b1ff78",
+        "type": "http in",
+        "z": "554141bee26226c1",
+        "name": "",
+        "url": "/update-attr",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 180,
+        "y": 980,
+        "wires": [
+            [
+                "2368fa56b9a53d3b"
+            ]
+        ]
+    },
+    {
+        "id": "ad200afa292436a6",
+        "type": "http response",
+        "z": "554141bee26226c1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 670,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "e2724a4e72c7c376",
+        "type": "http in",
+        "z": "554141bee26226c1",
+        "name": "",
+        "url": "/delete-attr",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 180,
+        "y": 1040,
+        "wires": [
+            [
+                "2ad7ea8bad959f92"
+            ]
+        ]
+    },
+    {
+        "id": "c2bf8013eca33fa7",
+        "type": "http response",
+        "z": "554141bee26226c1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 670,
+        "y": 1040,
+        "wires": []
     },
     {
         "id": "907c553d7533ec10",

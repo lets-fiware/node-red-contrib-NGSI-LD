@@ -1,4 +1,4 @@
-## node-red-contrib-letsfiware-NGSI v0.2.0-next
+## node-red-contrib-letsfiware-NGSI v0.3.0 - 30 April, 2023
 
 -   ADD tutorial (#13)
 -   Improve output data (#11)

@@ -30,7 +30,7 @@
 
 const lib = require('../../../lib.js');
 
-const updateAttrs = async function (param) {
+const updateAttrs = async function (msg, param) {
   const options = {
     method: param.method,
     baseURL: param.host,
@@ -43,34 +43,37 @@ const updateAttrs = async function (param) {
 
   try {
     const res = await lib.http(options);
+    msg.payload = res.data;
+    msg.statusCode = Number(res.status);
     if (res.status === 204) {
-      return Number(res.status);
+      return;
     } else {
       this.error(`Error while updating attributes: ${res.status} ${res.statusText}`);
       if (res.data) {
         this.error('Error details: ' + JSON.stringify(res.data));
       }
-      return Number(res.status);
+      return;
     }
   } catch (error) {
-    this.error(`Exception while updating attributes: ${error}`);
-    return null;
+    this.error(`Exception while updating attributes: ${error.message}`);
+    msg.payload = { error: error.message };
+    msg.statusCode = 500;
   }
 };
 
-const validateConfig = function (config) {
+const validateConfig = function (msg, config) {
   if (typeof config.entityId !== 'string') {
-    this.error('entityId not string');
+    msg.payload = { error: 'entityId not string' };
     return false;
   }
 
   if (config.entityId === '') {
-    this.error('entityId is empty');
+    msg.payload = { error: 'entityId is empty' };
     return false;
   }
 
   if (!lib.isJson(config.attributes)) {
-    this.error('attributes not JSON Object');
+    msg.payload = { error: 'attributes not JSON Object' };
     return false;
   }
 
@@ -79,7 +82,7 @@ const validateConfig = function (config) {
 
 const createParam = function (msg, config, brokerConfig) {
   if (!lib.isJson(msg.payload)) {
-    this.error('payload not JSON Object');
+    msg.payload = { error: 'payload not JSON Object' };
     return null;
   }
 
@@ -115,11 +118,11 @@ const createParam = function (msg, config, brokerConfig) {
       param.method = 'patch';
       break;
     default:
-      this.error('ActionType error: ' + defaultConfig.actionType);
+      msg.payload = { error: 'ActionType error: ' + defaultConfig.actionType };
       return null;
   }
 
-  if (!validateConfig.call(this, param.config)) {
+  if (!validateConfig(msg, param.config)) {
     return null;
   }
 
@@ -134,13 +137,15 @@ module.exports = function (RED) {
     const brokerConfig = RED.nodes.getNode(config.broker);
 
     node.on('input', async function (msg) {
-      const param = createParam.call(node, msg, config, brokerConfig);
+      const param = createParam(msg, config, brokerConfig);
 
       if (param) {
-        const result = await updateAttrs.call(node, param);
-        msg.payload = result;
-        node.send(msg);
+        await updateAttrs.call(node, msg, param);
+      } else {
+        node.error(msg.payload.error);
+        msg.statusCode = 500;
       }
+      node.send(msg);
     });
   }
   RED.nodes.registerType('NGSI-LD entity attributes', entityAttributes);

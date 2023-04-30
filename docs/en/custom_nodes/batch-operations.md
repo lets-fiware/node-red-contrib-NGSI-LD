@@ -34,7 +34,7 @@ It allows to create NGSI-LD entities.
 
 ### Input
 
-Payload *JSON Array*
+payload *JSON Array*
 
 A `msg.payload` should contain NGSI-LD entities as JSON Array.
 
@@ -84,16 +84,12 @@ A `msg.payload` should contain NGSI-LD entities as JSON Array.
 
 ### Output
 
-Payload *Number* or *null*
+statusCode *Number*
 
-A `msg.payload` contains a status code.
+A `msg.statusCode` contains a status code.
 
 ```
 204
-```
-
-```
-null
 ```
 
 ## Update entities
@@ -113,7 +109,7 @@ It allows to update NGSI-LD entities.
 
 ### Input
 
-Payload *JSON Array*
+payload *JSON Array*
 
 A `msg.payload` should contain NGSI-LD entities as JSON Array.
 
@@ -150,16 +146,12 @@ A `msg.payload` should contain NGSI-LD entities as JSON Array.
 
 ### Output
 
-Payload *Number* or *null*
+statusCode *Number*
 
-A `msg.payload` contains a status code.
+A `msg.statusCode` contains a status code.
 
 ```
 204
-```
-
-```
-null
 ```
 
 ## Upsert entities
@@ -179,7 +171,7 @@ It allows to upsert NGSI-LD entities.
 
 ### Input
 
-Payload *JSON Array*
+payload *JSON Array*
 
 A `msg.payload` should contain NGSI-LD entities as JSON Array.
 
@@ -216,16 +208,12 @@ A `msg.payload` should contain NGSI-LD entities as JSON Array.
 
 ### Output
 
-Payload *Number* or *null*
+statusCode *Number*
 
-A `msg.payload` contains a status code.
+A `msg.statusCode` contains a status code.
 
 ```
 204
-```
-
-```
-null
 ```
 
 ## Delete entities
@@ -245,7 +233,7 @@ It allows to delete NGSI-LD entities.
 
 ### Input
 
-Payload *JSON Araay*
+payload *JSON Araay*
 
 A `msg.payload` should contain NGSI-LD entities as JSON Array.
 
@@ -259,14 +247,10 @@ A `msg.payload` should contain NGSI-LD entities as JSON Array.
 
 ### Output
 
-Payload *Number* or *null*
+statusCode *Number*
 
-A `msg.payload` contains a status code.
+A `msg.statusCode` contains a status code.
 
 ```
 204
-```
-
-```
-null
 ```

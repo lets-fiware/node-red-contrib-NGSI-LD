@@ -30,7 +30,7 @@
 
 const lib = require('../../../lib.js');
 
-const batchOperations = async function (param) {
+const batchOperations = async function (msg, param) {
   const options = {
     method: 'post',
     baseURL: param.host,
@@ -41,26 +41,27 @@ const batchOperations = async function (param) {
 
   try {
     const res = await lib.http(options);
-    if (res.status === 201) {
-      return res.data;
-    } else if (res.status === 204) {
-      return Number(res.status);
+    msg.payload = res.data;
+    msg.statusCode = Number(res.status);
+    if (res.status === 201 || res.status === 204) {
+      return;
     } else {
       this.error(`Error while manipulating entities: ${res.status} ${res.statusText}`);
       if (res.data) {
         this.error('Error details: ' + JSON.stringify(res.data));
       }
-      return Number(res.status);
     }
   } catch (error) {
-    this.error(`Exception while manipulating entities: ${error}`);
-    return null;
+    this.error(`Exception while manipulating entities: ${error.message}`);
+    msg.payload = { error: error.message };
+    msg.statusCode = 500;
   }
 };
 
 const createParam = function (msg, config, brokerConfig) {
   if (typeof msg.payload !== 'object') {
-    this.error('payload not JSON Object');
+    msg.payload = { error: 'payload not JSON Object' };
+    this.error(msg.payload.error);
     return null;
   }
 
@@ -92,10 +93,11 @@ module.exports = function (RED) {
       const param = createParam.call(node, msg, config, brokerConfig);
 
       if (param) {
-        const result = await batchOperations.call(node, param);
-        msg.payload = result;
-        node.send(msg);
+        await batchOperations.call(node, msg, param);
+      } else {
+        msg.statusCode = 500;
       }
+      node.send(msg);
     });
   }
   RED.nodes.registerType('NGSI-LD Batch operations', batchOperationsNode);

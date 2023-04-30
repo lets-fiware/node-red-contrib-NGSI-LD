@@ -35,7 +35,7 @@ It allows to update an attribute in NGSI-LD entity.
 
 #### Input 1
 
-Payload *JSON Object*
+payload *JSON Object*
 
 A `msg.payload` should contain an object representing the attribute to update.
 
@@ -50,6 +50,8 @@ A `msg.payload` should contain an object representing the attribute to update.
 ```
 
 #### Input 2
+
+payload *JSON Object*
 
 A `msg.payload` should contain information related to the attribute to update.
 The values in the payload may overwrite properties.
@@ -76,16 +78,12 @@ The values in the payload may overwrite properties.
 
 #### Output
 
-Payload *Number* or *null*
+statusCode *Number*
 
-A `msg.payload` contains a status code.
+A `msg.statusCode` contains a status code.
 
 ```
 204
-```
-
-```
-null
 ```
 
 ## Delete an attribute
@@ -111,7 +109,7 @@ It allows to delete an attribute in NGSI-LD entity.
 
 #### Input1
 
-Payload *JSON Object*
+payload *JSON Object*
 
 A `msg.payload` should contain an empty JSON Object.  The attribute name specified by the property will be deleted.
 
@@ -121,7 +119,7 @@ A `msg.payload` should contain an empty JSON Object.  The attribute name specifi
 
 #### Input2
 
-Payload *JSON Object*
+payload *JSON Object*
 
 A `msg.payload` should contain information related to the attribute to delete.
 The values in the payload may overwrite properties.
@@ -142,14 +140,10 @@ The values in the payload may overwrite properties.
 
 #### Output
 
-Payload *Number* or *null*
+statusCode *Number*
 
-A `msg.payload` contains a status code.
+A `msg.statusCode` contains a status code.
 
 ```
 204
-```
-
-```
-null
 ```

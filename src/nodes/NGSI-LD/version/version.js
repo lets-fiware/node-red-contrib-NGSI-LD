@@ -30,7 +30,7 @@
 
 const lib = require('../../../lib.js');
 
-const getVersion = async function (param) {
+const getVersion = async function (msg, param) {
   const options = {
     method: 'get',
     baseURL: param.host,
@@ -40,15 +40,17 @@ const getVersion = async function (param) {
 
   try {
     const res = await lib.http(options);
+    msg.payload = res.data;
+    msg.statusCode = Number(res.status);
     if (res.status === 200) {
-      return res.data;
+      return;
     } else {
       this.error(`Error while getting version: ${res.status} ${res.statusText}`);
-      return null;
     }
   } catch (error) {
-    this.error(`Exception while getting version: ${error}`);
-    return null;
+    this.error(`Exception while getting version: ${error.message}`);
+    msg.payload = { error: error.message };
+    msg.statusCode = 500;
   }
 };
 
@@ -60,23 +62,19 @@ module.exports = function (RED) {
     const brokerConfig = RED.nodes.getNode(config.broker);
 
     node.on('input', async function (msg) {
-      if (brokerConfig.brokerType !== 'orion-ld') {
-        node.error('not Orion-LD');
-        return;
+      if (brokerConfig.brokerType === 'orion-ld') {
+        const param = {
+          host: brokerConfig.apiEndpoint,
+          pathname: '/ngsi-ld/ex/v1/version',
+          getToken: brokerConfig.getToken === null ? null : brokerConfig.getToken.bind(brokerConfig),
+        };
+        await getVersion.call(node, msg, param);
+      } else {
+        msg.payload = { error: 'Broker not Orion-LD' };
+        msg.statusCode = 500;
+        node.error(msg.payload.error);
       }
-
-      const param = {
-        host: brokerConfig.apiEndpoint,
-        pathname: '/ngsi-ld/ex/v1/version',
-        getToken: brokerConfig.getToken === null ? null : brokerConfig.getToken.bind(brokerConfig),
-      };
-
-      const version = await getVersion.call(node, param);
-
-      if (version) {
-        msg.payload = version;
-        node.send(msg);
-      }
+      node.send(msg);
     });
   }
   RED.nodes.registerType('NGSI-LD broker version', BrokerVersion);

@@ -49,13 +49,7 @@ describe('entity-attribute.js', () => {
         http: async () => Promise.resolve({
           status: 204,
           headers: {},
-          data: {
-            'value': [
-              'sensor',
-              'actuator'
-            ],
-            'type': 'Property'
-          },
+          data: undefined,
         }),
         buildHTTPHeader: async () => { return {}; },
         buildParams: () => new URLSearchParams(),
@@ -72,15 +66,19 @@ describe('entity-attribute.js', () => {
         },
       };
 
-      const actual = await httpRequest(param);
+      const message = {};
 
-      assert.deepEqual(actual, 204);
+      await httpRequest(message, param);
+
+      assert.equal(message.payload, undefined);
+      assert.equal(message.statusCode, 204);
     });
     it('Delete attribute', async () => {
       entityAttributeNode.__set__('lib', {
         http: async () => Promise.resolve({
           status: 204,
           headers: {},
+          data: undefined,
         }),
         buildHTTPHeader: async () => { return {}; },
         buildParams: () => new URLSearchParams(),
@@ -97,9 +95,12 @@ describe('entity-attribute.js', () => {
         },
       };
 
-      const actual = await httpRequest(param);
+      const message = {};
 
-      assert.deepEqual(actual, 204);
+      await httpRequest(message, param);
+
+      assert.equal(message.payload, undefined);
+      assert.equal(message.statusCode, 204);
     });
     it('should be 400 Bad Request', async () => {
       entityAttributeNode.__set__('lib', {
@@ -120,10 +121,13 @@ describe('entity-attribute.js', () => {
       let msg = '';
       const node = { msg: '', error: (e) => { msg = e; } };
 
-      const actual = await httpRequest.call(node, param);
+      const message = {};
 
-      assert.equal(actual, 400);
+      await httpRequest.call(node, message, param);
+
       assert.equal(msg, 'Error while managing attribute: 400 Bad Request');
+      assert.deepEqual(message.payload, undefined);
+      assert.equal(message.statusCode, 400);
     });
     it('should be 400 Bad Request with details', async () => {
       entityAttributeNode.__set__('lib', {
@@ -141,20 +145,23 @@ describe('entity-attribute.js', () => {
         },
       };
 
+      const message = {};
+
       let msg = [];
       const node = { msg: '', error: (e) => { msg.push(e); } };
 
-      const actual = await httpRequest.call(node, param);
+      await httpRequest.call(node, message, param);
 
-      assert.equal(actual, 400);
       assert.deepEqual(msg, [
         'Error while managing attribute: 400 Bad Request',
         'Error details: {"error":"detail"}',
       ]);
+      assert.deepEqual(message.payload, { error: 'detail' });
+      assert.equal(message.statusCode, 400);
     });
     it('Should be unknown error', async () => {
       entityAttributeNode.__set__('lib', {
-        http: async () => Promise.reject('unknown error'),
+        http: async () => Promise.reject({ message: 'unknown error' }),
         buildHTTPHeader: () => { return {}; },
         buildParams: () => new URLSearchParams(),
       });
@@ -168,110 +175,99 @@ describe('entity-attribute.js', () => {
         },
       };
 
+      const message = {};
+
       let msg = '';
       const node = { msg: '', error: (e) => { msg = e; } };
 
-      const actual = await httpRequest.call(node, param);
+      await httpRequest.call(node, message, param);
 
-      assert.equal(actual, null);
       assert.equal(msg, 'Exception while managing attribute: unknown error');
+      assert.deepEqual(message.payload, { error: 'unknown error' });
+      assert.equal(message.statusCode, 500);
     });
   });
   describe('validateConfig', () => {
     it('result true', () => {
       const validateConfig = entityAttributeNode.__get__('validateConfig');
 
-      const actual = validateConfig({});
+      const msg = {};
+      const actual = validateConfig(msg, {});
 
       assert.equal(actual, true);
+      assert.deepEqual(msg, {});
     });
     it('atContext not string', () => {
       const validateConfig = entityAttributeNode.__get__('validateConfig');
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
-
-      const actual = validateConfig.call(node, { atContext: 123 });
+      const msg = {};
+      const actual = validateConfig(msg, { atContext: 123 });
 
       assert.equal(actual, false);
-      assert.equal(msg, 'atContext not string');
+      assert.deepEqual(msg, { payload: { error: 'atContext not string' } });
     });
     it('entityId not string', () => {
       const validateConfig = entityAttributeNode.__get__('validateConfig');
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
-
-      const actual = validateConfig.call(node, { entityId: 123 });
+      const msg = {};
+      const actual = validateConfig(msg, { entityId: 123 });
 
       assert.equal(actual, false);
-      assert.equal(msg, 'entityId not string');
+      assert.deepEqual(msg, { payload: { error: 'entityId not string' } });
     });
     it('attrName not string', () => {
       const validateConfig = entityAttributeNode.__get__('validateConfig');
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
-
-      const actual = validateConfig.call(node, { attrName: 123 });
+      const msg = {};
+      const actual = validateConfig(msg, { attrName: 123 });
 
       assert.equal(actual, false);
-      assert.equal(msg, 'attrName not string');
+      assert.deepEqual(msg, { payload: { error: 'attrName not string' } });
     });
     it('datasetid not string', () => {
       const validateConfig = entityAttributeNode.__get__('validateConfig');
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
-
-      const actual = validateConfig.call(node, { datasetid: 123 });
+      const msg = {};
+      const actual = validateConfig(msg, { datasetid: 123 });
 
       assert.equal(actual, false);
-      assert.equal(msg, 'datasetid not string');
+      assert.deepEqual(msg, { payload: { error: 'datasetid not string' } });
     });
     it('entityId not found', () => {
       const validateConfig = entityAttributeNode.__get__('validateConfig');
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
-
-      const actual = validateConfig.call(node, { entityId: '' });
+      const msg = {};
+      const actual = validateConfig(msg, { entityId: '' });
 
       assert.equal(actual, false);
-      assert.equal(msg, 'entityId not found');
+      assert.deepEqual(msg, { payload: { error: 'entityId not found' } });
     });
     it('attrName not found', () => {
       const validateConfig = entityAttributeNode.__get__('validateConfig');
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
-
-      const actual = validateConfig.call(node, { attrName: '' });
+      const msg = {};
+      const actual = validateConfig(msg, { attrName: '' });
 
       assert.equal(actual, false);
-      assert.equal(msg, 'attrName not found');
+      assert.deepEqual(msg, { payload: { error: 'attrName not found' } });
     });
     it('deleteAll not boolean', () => {
       const validateConfig = entityAttributeNode.__get__('validateConfig');
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
-
-      const actual = validateConfig.call(node, { deleteAll: 123 });
+      const msg = {};
+      const actual = validateConfig(msg, { deleteAll: 123 });
 
       assert.equal(actual, false);
-      assert.equal(msg, 'deleteAll not boolean');
+      assert.deepEqual(msg, { payload: { error: 'deleteAll not boolean' } });
     });
     it('attribute not JSON Object', () => {
       const validateConfig = entityAttributeNode.__get__('validateConfig');
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
-
-      const actual = validateConfig.call(node, { actionType: 'update', attribute: 123 });
+      const msg = {};
+      const actual = validateConfig(msg, { actionType: 'update', attribute: 123 });
 
       assert.equal(actual, false);
-      assert.equal(msg, 'attribute not JSON Object');
+      assert.deepEqual(msg, { payload: { error: 'attribute not JSON Object' } });
     });
   });
   describe('createParam', () => {
@@ -556,14 +552,11 @@ describe('entity-attribute.js', () => {
         atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
       };
 
-      let errmsg = '';
-      const node = { msg: '', error: (e) => { errmsg = e; } };
-
-      const actual = createParam.call(node, msg, config, brokerConfig);
+      const actual = createParam(msg, config, brokerConfig);
 
       const expected = null;
       assert.equal(actual, expected);
-      assert.equal(errmsg, 'Payload not stirng or JSON Object');
+      assert.deepEqual(msg, { payload: { error: 'Payload not stirng or JSON Object' } });
     });
     it('ActionType error', () => {
       const createParam = entityAttributeNode.__get__('createParam');
@@ -586,14 +579,11 @@ describe('entity-attribute.js', () => {
         atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
       };
 
-      let errmsg = '';
-      const node = { msg: '', error: (e) => { errmsg = e; } };
-
-      const actual = createParam.call(node, msg, config, brokerConfig);
+      const actual = createParam(msg, config, brokerConfig);
 
       const expected = null;
       assert.equal(actual, expected);
-      assert.equal(errmsg, 'ActionType error: create');
+      assert.deepEqual(msg, { payload: { error: 'ActionType error: create' } });
     });
     it('Error validateConfig', () => {
       const createParam = entityAttributeNode.__get__('createParam');
@@ -618,14 +608,11 @@ describe('entity-attribute.js', () => {
         atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
       };
 
-      let errmsg = '';
-      const node = { msg: '', error: (e) => { errmsg = e; } };
-
-      const actual = createParam.call(node, msg, config, brokerConfig);
+      const actual = createParam(msg, config, brokerConfig);
 
       const expected = null;
       assert.equal(actual, expected);
-      assert.equal(errmsg, 'deleteAll not boolean');
+      assert.deepEqual(msg, { payload: { error: 'deleteAll not boolean' } });
     });
   });
   describe('NGSI-LD entities node', () => {
@@ -676,7 +663,7 @@ describe('entity-attribute.js', () => {
         }
       });
 
-      assert.deepEqual(red.getOutput(), { payload: 204 });
+      assert.deepEqual(red.getOutput(), { payload: undefined, statusCode: 204 });
     });
     it('Error createParam', async () => {
       const red = new MockRed();
@@ -700,6 +687,10 @@ describe('entity-attribute.js', () => {
 
       await red.inputWithAwait({ payload: { deleteAll: 'false' } });
 
+      assert.deepEqual(red.getOutput(), {
+        payload: { error: 'deleteAll not boolean' },
+        statusCode: 500
+      });
       assert.equal(red.getMessage(), 'deleteAll not boolean');
     });
   });

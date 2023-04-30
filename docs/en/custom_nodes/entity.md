@@ -34,7 +34,7 @@ It allows to create a NGSIv2 entity.
 
 #### Input
 
-Payload *JSON Object*
+payload *JSON Object*
 
 A `msg.payload` should contain an NGSI-LD entity to create.
 
@@ -66,16 +66,12 @@ A `msg.payload` should contain an NGSI-LD entity to create.
 
 #### Output
 
-Payload *number* or *null*
+statusCode *Number*
 
-A `msg.payload` contains a status code.
+A `msg.statusCode` contains a status code.
 
 ```
 201
-```
-
-```
-null
 ```
 
 ## Read an entity
@@ -104,7 +100,7 @@ It allows to read a NGSI-LD entity.
 
 #### Input 1
 
-Payload *string*
+payload *string*
 
 A `msg.payload` should contain an entity Id to read the NGSI-LD entity.
 A value of the payload may overwrite the entity id specified by property.
@@ -115,7 +111,7 @@ urn:ngsi-ld:Building:store001
 
 #### Input 2
 
-Payload *JSON Object*
+payload *JSON Object*
 
 A `msg.payload` should contain a condition to read the NGSI-LD entity.
 The values in the payload may overwrite properties.
@@ -141,11 +137,32 @@ The values in the payload may overwrite properties.
 
 #### Output
 
-Payload *JSON Object*
+payload *JSON Object*
 
 A `msg.payload` contains the NGSI-LD entity.
 
 ```
+{
+  "id": "urn:ngsi-ld:TemperatureSensor:001",
+  "type": "TemperatureSensor",
+  "category": "sensor",
+  "temperature": 25,
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      -73.975,
+      40.775556
+    ]
+  }
+}
+```
+
+statusCode *Number*
+
+A `msg.statusCode` contains a status code.
+
+```
+200
 ```
 
 ## Delete an entity
@@ -168,7 +185,7 @@ It allows to delete a NGSI-LD entity.
 
 #### Input
 
-Payload *string* or *JSON Object*
+payload *string* or *JSON Object*
 
 A `msg.payload` should contain an id of the entity to delete the NGSI-LD entity.
 
@@ -178,14 +195,10 @@ urn:ngsi-ld:Building:store001
 
 #### Output
 
-Payload *number* or *null*
+statusCode *Number*
 
-A `msg.payload` contains a status code.
+A `msg.statusCode` contains a status code.
 
 ```
 204
-```
-
-```
-null
 ```

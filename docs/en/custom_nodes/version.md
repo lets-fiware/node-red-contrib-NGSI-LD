@@ -26,7 +26,7 @@ This custom node is a simple node that allows to obtain the version information 
 
 ## Input
 
-### Payload  *JSON Object*
+payload  *JSON Object*
 
 A `msg.payload` should contain an empty JSON Object.
 
@@ -36,7 +36,7 @@ A `msg.payload` should contain an empty JSON Object.
 
 ## Output
 
-### Payload *JSON Array*
+payload *JSON Array*
 
 A `msg.payload` contains the version information of NGSI-LD broker.
 
@@ -64,4 +64,12 @@ A `msg.payload` contains the version information of NGSI-LD broker.
   "cached subscriptions": 0,
   "Next File Descriptor": 26
 }
+```
+
+statusCode *Number*
+
+A `msg.statusCode` contains a status code.
+
+```
+200
 ```

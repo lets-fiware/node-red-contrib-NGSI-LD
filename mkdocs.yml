@@ -5,6 +5,7 @@ nav:
   - 'Home':
     - 'Index': index.md
     - 'Installation': installation.md
+    - 'Tutorial': tutorial.md
     - 'Custom nodes':
       - 'NGSI-LD Entity': custom_nodes/entity.md
       - 'NGSI-LD Entities': custom_nodes/entities.md
@@ -12,3 +13,4 @@ nav:
       - 'NGSI-LD Entity attributes': custom_nodes/entity-attributes.md
       - 'NGSI-LD Batch operations': custom_nodes/batch-operations.md
       - 'Broker version': custom_nodes/version.md
+      - 'NGSI-LD broker': custom_nodes/ngsi-ld-broker.md

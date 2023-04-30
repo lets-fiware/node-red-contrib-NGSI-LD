@@ -79,6 +79,31 @@ The values in the payload may overwrite properties.
 
 ## Output
 
-### Payload *JSON Array*
+payload *JSON Array*
 
 A `msg.payload` contains NGSI-LD entities.
+
+[
+  {
+    "id": "urn:ngsi-ld:TemperatureSensor:001",
+    "type": "TemperatureSensor",
+    "category": "sensor",
+    "temperature": 25,
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.975,
+        40.775556
+      ]
+    }
+  }
+]```
+```
+
+statusCode *Number*
+
+A `msg.statusCode` contains a status code.
+
+```
+200
+```

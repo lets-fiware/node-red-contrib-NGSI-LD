@@ -1,5 +1,6 @@
 ## node-red-contrib-letsfiware-NGSI v0.2.0-next
 
+-   Improve output data (#11)
 -   ADD E2E test (#10)
 -   ADD hyperlink in documentations (#9)
 

@@ -30,7 +30,7 @@
 
 const lib = require('../../../lib.js');
 
-const httpRequest = async function (param) {
+const httpRequest = async function (msg, param) {
   const options = {
     method: param.method,
     baseURL: param.host,
@@ -45,48 +45,51 @@ const httpRequest = async function (param) {
 
   try {
     const res = await lib.http(options);
+    msg.payload = res.data;
+    msg.statusCode = Number(res.status);
     if (res.status === 204) {
-      return Number(res.status);
+      return;
     } else {
       this.error(`Error while managing attribute: ${res.status} ${res.statusText}`);
       if (res.data) {
         this.error('Error details: ' + JSON.stringify(res.data));
       }
-      return Number(res.status);
+      return;
     }
   } catch (error) {
-    this.error(`Exception while managing attribute: ${error}`);
-    return null;
+    this.error(`Exception while managing attribute: ${error.message}`);
+    msg.payload = { error: error.message };
+    msg.statusCode = 500;
   }
 };
 
-const validateConfig = function (config) {
+const validateConfig = function (msg, config) {
   const items = ['atContext', 'entityId', 'attrName', 'datasetid'];
   for (let i = 0; i < items.length; i++) {
     const e = items[i];
     if (config[e] && typeof config[e] !== 'string') {
-      this.error(e + ' not string');
+      msg.payload = { error: e + ' not string' };
       return false;
     }
   }
 
   if (config.entityId === '') {
-    this.error('entityId not found');
+    msg.payload = { error: 'entityId not found' };
     return false;
   }
 
   if (config.attrName === '') {
-    this.error('attrName not found');
+    msg.payload = { error: 'attrName not found' };
     return false;
   }
 
   if (config.deleteAll && typeof config.deleteAll !== 'boolean') {
-    this.error('deleteAll not boolean');
+    msg.payload = { error: 'deleteAll not boolean' };
     return false;
   }
 
   if (config.actionType === 'update' && (!config.attribute || !lib.isJson(config.attribute))) {
-    this.error('attribute not JSON Object');
+    msg.payload = { error: 'attribute not JSON Object' };
     return false;
   }
 
@@ -95,7 +98,7 @@ const validateConfig = function (config) {
 
 const createParam = function (msg, config, brokerConfig) {
   if (!lib.isStringOrJson(msg.payload)) {
-    this.error('Payload not stirng or JSON Object');
+    msg.payload = { error: 'Payload not stirng or JSON Object' };
     return null;
   }
 
@@ -140,13 +143,13 @@ const createParam = function (msg, config, brokerConfig) {
       param.method = 'delete';
       break;
     default:
-      this.error('ActionType error: ' + defaultConfig.actionType);
+      msg.payload = { error: 'ActionType error: ' + defaultConfig.actionType };
       return null;
   }
 
   param.config = defaultConfig;
 
-  if (!validateConfig.call(this, param.config)) {
+  if (!validateConfig(msg, param.config)) {
     return null;
   }
 
@@ -164,10 +167,12 @@ module.exports = function (RED) {
       const param = createParam.call(node, msg, config, brokerConfig);
 
       if (param) {
-        const result = await httpRequest.call(node, param);
-        msg.payload = result;
-        node.send(msg);
+        await httpRequest.call(node, msg, param);
+      } else {
+        node.error(msg.payload.error);
+        msg.statusCode = 500;
       }
+      node.send(msg);
     });
   }
   RED.nodes.registerType('NGSI-LD entity attribute', entityAttribute);

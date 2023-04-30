@@ -36,7 +36,7 @@ require('babel-register')({
 
 const { assert } = require('chai');
 
-const sourceNode = require('../../src/nodes/NGSI-LD/version/version.js');
+const versionNode = require('../../src/nodes/NGSI-LD/version/version.js');
 const MockRed = require('./helpers/mockred.js');
 
 const orion_version = JSON.parse('{"Orion-LD version":"1.1.2","based on orion":"1.15.0-next","kbase version":"0.8","kalloc version":"0.8","khash version":"0.8","kjson version":"0.8.2","microhttpd version":"0.9.75-0","rapidjson version":"1.0.2","libcurl version":"7.61.1","libuuid version":"UNKNOWN","mongocpp version":"1.1.3","mongoc version":"1.22.0","bson version":"1.22.0","mongodb server version":"4.4.19","boost version":"1_66","openssl version":"OpenSSL 1.1.1k  FIPS 25 Mar 2021","postgres libpq version":"15.0.0","postgres server version":"12.0.6","branch":"","cached subscriptions":0,"Next File Descriptor":28}');
@@ -44,7 +44,7 @@ const orion_version = JSON.parse('{"Orion-LD version":"1.1.2","based on orion":"
 describe('version.js', () => {
   describe('getVersion', () => {
     it('get version', async () => {
-      sourceNode.__set__('lib', {
+      versionNode.__set__('lib', {
         http: async () => Promise.resolve({
           status: 200,
           data: orion_version
@@ -52,65 +52,70 @@ describe('version.js', () => {
         buildHTTPHeader: () => { return {}; },
         buildSearchParams: () => new URLSearchParams(),
       });
-      const getVersion = sourceNode.__get__('getVersion');
+      const getVersion = versionNode.__get__('getVersion');
 
       const param = {
         host: 'http://orion-ld:1026',
         pathname: '/version'
       };
 
-      const res = await getVersion(param);
+      const message = {};
+      await getVersion(message, param);
 
-      assert.equal(res, orion_version);
+      assert.equal(message.payload, orion_version);
     });
     it('should be 400 Bad Request', async () => {
-      sourceNode.__set__('lib', {
+      versionNode.__set__('lib', {
         http: async () => Promise.resolve({ status: 400, statusText: 'Bad Request' }),
         buildHTTPHeader: () => { return {}; },
         buildSearchParams: () => new URLSearchParams(),
       });
-      const getVersion = sourceNode.__get__('getVersion');
+      const getVersion = versionNode.__get__('getVersion');
 
       const param = {
         host: 'http://orion-ld:1026',
         pathname: '/version'
       };
 
+      const message = {};
       let msg = '';
       const node = { msg: '', error: (e) => { msg = e; } };
-      const res = await getVersion.call(node, param);
+      await getVersion.call(node, message, param);
 
-      assert.equal(res, null);
       assert.equal(msg, 'Error while getting version: 400 Bad Request');
+      assert.equal(message.payload, undefined);
+      assert.equal(message.statusCode, 400);
     });
     it('Should be unknown error', async () => {
-      sourceNode.__set__('lib', {
-        http: async () => Promise.reject('unknown error'),
+      versionNode.__set__('lib', {
+        http: async () => Promise.reject({ message: 'unknown error' }),
         buildHTTPHeader: () => { return {}; },
         buildSearchParams: () => new URLSearchParams(),
       });
-      const getVersion = sourceNode.__get__('getVersion');
+      const getVersion = versionNode.__get__('getVersion');
 
       const param = {
         host: 'http://orion-ld:1026',
         pathname: '/version'
       };
 
+      const message = {};
       let msg = '';
       const node = { msg: '', error: (e) => { msg = e; } };
-      const res = await getVersion.call(node, param);
+      await getVersion.call(node, message, param);
 
-      assert.equal(res, null);
       assert.equal(msg, 'Exception while getting version: unknown error');
+      assert.deepEqual(message.payload, { error: 'unknown error' });
+      assert.equal(message.statusCode, 500);
     });
   });
   describe('Version node', () => {
     afterEach(() => {
-      sourceNode.__ResetDependency__('getVersion');
+      versionNode.__ResetDependency__('getVersion');
     });
     it('orion version', async () => {
       const red = new MockRed();
-      sourceNode(red);
+      versionNode(red);
       red.createNode({
         broker: {
           brokerType: 'orion-ld',
@@ -120,7 +125,7 @@ describe('version.js', () => {
       });
 
       let actual;
-      sourceNode.__set__('getVersion', (param) => { actual = param; return orion_version; });
+      versionNode.__set__('getVersion', (msg, param) => { actual = param; msg.payload = orion_version; msg.statusCode = 200; });
 
       await red.inputWithAwait({ payload: null });
 
@@ -128,10 +133,11 @@ describe('version.js', () => {
       assert.equal(actual.pathname, '/ngsi-ld/ex/v1/version');
       const output = red.getOutput();
       assert.equal(output.payload, orion_version);
+      assert.equal(output.statusCode, 200);
     });
     it('orion version without getToken', async () => {
       const red = new MockRed();
-      sourceNode(red);
+      versionNode(red);
       red.createNode({
         broker: {
           brokerType: 'orion-ld',
@@ -141,7 +147,7 @@ describe('version.js', () => {
       });
 
       let actual;
-      sourceNode.__set__('getVersion', (param) => { actual = param; return orion_version; });
+      versionNode.__set__('getVersion', (msg, param) => { actual = param; msg.payload = orion_version; msg.statusCode = 200; });
 
       await red.inputWithAwait({ payload: null });
 
@@ -149,10 +155,11 @@ describe('version.js', () => {
       assert.equal(actual.pathname, '/ngsi-ld/ex/v1/version');
       const output = red.getOutput();
       assert.equal(output.payload, orion_version);
+      assert.equal(output.statusCode, 200);
     });
     it('error', async () => {
       const red = new MockRed();
-      sourceNode(red);
+      versionNode(red);
       red.createNode({
         broker: {
           brokerType: 'orion-ld',
@@ -162,18 +169,19 @@ describe('version.js', () => {
       });
 
       let actual;
-      sourceNode.__set__('getVersion', (param) => { actual = param; return null; });
+      versionNode.__set__('getVersion', (msg, param) => { actual = param; msg.payload = null; msg.statusCode = 400; });
 
       await red.inputWithAwait({ payload: null });
 
       assert.equal(actual.host, 'http://orion-ld:1026');
       assert.equal(actual.pathname, '/ngsi-ld/ex/v1/version');
       const output = red.getOutput();
-      assert.deepEqual(output, []);
+      assert.equal(output.payload, null);
+      assert.equal(output.statusCode, 400);
     });
     it('not Orion-LD', async () => {
       const red = new MockRed();
-      sourceNode(red);
+      versionNode(red);
       red.createNode({
         broker: {
           brokerType: 'orion',
@@ -184,7 +192,8 @@ describe('version.js', () => {
 
       await red.inputWithAwait({ payload: null });
 
-      assert.equal(red.getMessage(), 'not Orion-LD');
+      assert.equal(red.getMessage(), 'Broker not Orion-LD');
+      assert.deepEqual(red.getOutput(), { payload: { error: 'Broker not Orion-LD' }, statusCode: 500 });
     });
   });
 });

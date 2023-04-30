@@ -1,6 +1,6 @@
 [
     {
-        "id": "9462fed0a5871269",
+        "id": "a9f15cb41dc0ee30",
         "type": "tab",
         "label": "Flow 1",
         "disabled": false,
@@ -8,9 +8,9 @@
         "env": []
     },
     {
-        "id": "04c624a94a909ca5",
+        "id": "dc51b49e5e2bb326",
         "type": "inject",
-        "z": "9462fed0a5871269",
+        "z": "a9f15cb41dc0ee30",
         "name": "Get version",
         "props": [
             {
@@ -28,20 +28,21 @@
         "y": 60,
         "wires": [
             [
-                "8c535d6be0a29f6d"
+                "ee2d60caf9ac69eb"
             ]
         ]
     },
     {
-        "id": "4bf413c89e3818ab",
+        "id": "184ee19c3308cd68",
         "type": "debug",
-        "z": "9462fed0a5871269",
+        "z": "a9f15cb41dc0ee30",
         "name": "debug 1",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "true",
+        "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
         "x": 740,
@@ -49,23 +50,23 @@
         "wires": []
     },
     {
-        "id": "8c535d6be0a29f6d",
+        "id": "ee2d60caf9ac69eb",
         "type": "NGSI-LD broker version",
-        "z": "9462fed0a5871269",
+        "z": "a9f15cb41dc0ee30",
         "name": "",
         "broker": "907c553d7533ec10",
         "x": 430,
         "y": 60,
         "wires": [
             [
-                "4bf413c89e3818ab"
+                "184ee19c3308cd68"
             ]
         ]
     },
     {
-        "id": "342657a4a6097ebd",
+        "id": "a3410f528ee375ac",
         "type": "inject",
-        "z": "9462fed0a5871269",
+        "z": "a9f15cb41dc0ee30",
         "name": "Create entity",
         "props": [
             {
@@ -83,14 +84,14 @@
         "y": 140,
         "wires": [
             [
-                "8c146a5be05db832"
+                "2b6a055f03286194"
             ]
         ]
     },
     {
-        "id": "8c146a5be05db832",
+        "id": "2b6a055f03286194",
         "type": "NGSI-LD Entity",
-        "z": "9462fed0a5871269",
+        "z": "a9f15cb41dc0ee30",
         "name": "",
         "broker": "907c553d7533ec10",
         "atContext": "",
@@ -103,14 +104,14 @@
         "y": 140,
         "wires": [
             [
-                "93f0eed9b57db31e"
+                "0b8b31ba473790f3"
             ]
         ]
     },
     {
-        "id": "8ee2701ea217b4f6",
+        "id": "7fec837efa65b713",
         "type": "NGSI-LD Entity",
-        "z": "9462fed0a5871269",
+        "z": "a9f15cb41dc0ee30",
         "name": "",
         "broker": "907c553d7533ec10",
         "atContext": "",
@@ -126,14 +127,14 @@
         "y": 200,
         "wires": [
             [
-                "93f0eed9b57db31e"
+                "0b8b31ba473790f3"
             ]
         ]
     },
     {
-        "id": "719a467b2e96a1ff",
+        "id": "58d9e8036ea72fd5",
         "type": "NGSI-LD Entity",
-        "z": "9462fed0a5871269",
+        "z": "a9f15cb41dc0ee30",
         "name": "",
         "broker": "907c553d7533ec10",
         "atContext": "",
@@ -144,14 +145,14 @@
         "y": 260,
         "wires": [
             [
-                "93f0eed9b57db31e"
+                "0b8b31ba473790f3"
             ]
         ]
     },
     {
-        "id": "7e2e646a8dfa981e",
+        "id": "26bd6fdd9039612d",
         "type": "inject",
-        "z": "9462fed0a5871269",
+        "z": "a9f15cb41dc0ee30",
         "name": "Read entity",
         "props": [
             {
@@ -169,14 +170,14 @@
         "y": 200,
         "wires": [
             [
-                "8ee2701ea217b4f6"
+                "7fec837efa65b713"
             ]
         ]
     },
     {
-        "id": "410db6c14f81c0d3",
+        "id": "7a73ea7d42c6054b",
         "type": "inject",
-        "z": "9462fed0a5871269",
+        "z": "a9f15cb41dc0ee30",
         "name": "Delete entity",
         "props": [
             {
@@ -194,14 +195,14 @@
         "y": 260,
         "wires": [
             [
-                "719a467b2e96a1ff"
+                "58d9e8036ea72fd5"
             ]
         ]
     },
     {
-        "id": "81134d77380e42d4",
+        "id": "1025df32730815de",
         "type": "inject",
-        "z": "9462fed0a5871269",
+        "z": "a9f15cb41dc0ee30",
         "name": "Batch create",
         "props": [
             {
@@ -219,20 +220,21 @@
         "y": 440,
         "wires": [
             [
-                "9085f69cbfd11c6b"
+                "e26d65c74539be2f"
             ]
         ]
     },
     {
-        "id": "93f0eed9b57db31e",
+        "id": "0b8b31ba473790f3",
         "type": "debug",
-        "z": "9462fed0a5871269",
+        "z": "a9f15cb41dc0ee30",
         "name": "debug 2",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "true",
+        "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
         "x": 740,
@@ -240,9 +242,9 @@
         "wires": []
     },
     {
-        "id": "95594dc78659386a",
+        "id": "97fb19492e327147",
         "type": "inject",
-        "z": "9462fed0a5871269",
+        "z": "a9f15cb41dc0ee30",
         "name": "Batch delete",
         "props": [
             {
@@ -260,14 +262,14 @@
         "y": 600,
         "wires": [
             [
-                "52f447eed1071c17"
+                "d93f07a0cc167ffe"
             ]
         ]
     },
     {
-        "id": "e155491bafad9a6a",
+        "id": "6062cbf3b8f8f5ae",
         "type": "inject",
-        "z": "9462fed0a5871269",
+        "z": "a9f15cb41dc0ee30",
         "name": "Batch upsert",
         "props": [
             {
@@ -285,14 +287,14 @@
         "y": 520,
         "wires": [
             [
-                "f50c13b71945ca01"
+                "ecec0fc4f372d133"
             ]
         ]
     },
     {
-        "id": "9085f69cbfd11c6b",
+        "id": "e26d65c74539be2f",
         "type": "NGSI-LD Batch operations",
-        "z": "9462fed0a5871269",
+        "z": "a9f15cb41dc0ee30",
         "name": "",
         "broker": "907c553d7533ec10",
         "actionType": "create",
@@ -301,14 +303,14 @@
         "y": 440,
         "wires": [
             [
-                "15e14d94e4f343f6"
+                "ceeb703af26e0179"
             ]
         ]
     },
     {
-        "id": "f50c13b71945ca01",
+        "id": "ecec0fc4f372d133",
         "type": "NGSI-LD Batch operations",
-        "z": "9462fed0a5871269",
+        "z": "a9f15cb41dc0ee30",
         "name": "",
         "broker": "907c553d7533ec10",
         "actionType": "upsert",
@@ -317,14 +319,14 @@
         "y": 520,
         "wires": [
             [
-                "15e14d94e4f343f6"
+                "ceeb703af26e0179"
             ]
         ]
     },
     {
-        "id": "52f447eed1071c17",
+        "id": "d93f07a0cc167ffe",
         "type": "NGSI-LD Batch operations",
-        "z": "9462fed0a5871269",
+        "z": "a9f15cb41dc0ee30",
         "name": "",
         "broker": "907c553d7533ec10",
         "actionType": "delete",
@@ -333,14 +335,14 @@
         "y": 600,
         "wires": [
             [
-                "15e14d94e4f343f6"
+                "ceeb703af26e0179"
             ]
         ]
     },
     {
-        "id": "d60b2ebad5cc9ae3",
+        "id": "4494aafcf9f7f1b7",
         "type": "NGSI-LD entities",
-        "z": "9462fed0a5871269",
+        "z": "a9f15cb41dc0ee30",
         "name": "",
         "broker": "907c553d7533ec10",
         "representation": "keyValues",
@@ -364,20 +366,21 @@
         "y": 340,
         "wires": [
             [
-                "378b17e87b1e0548"
+                "9ea76b19ceb934fd"
             ]
         ]
     },
     {
-        "id": "378b17e87b1e0548",
+        "id": "9ea76b19ceb934fd",
         "type": "debug",
-        "z": "9462fed0a5871269",
+        "z": "a9f15cb41dc0ee30",
         "name": "debug 3",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "true",
+        "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
         "x": 740,
@@ -385,9 +388,9 @@
         "wires": []
     },
     {
-        "id": "20a7f0181657fd55",
+        "id": "c76379efcb9a6bb8",
         "type": "inject",
-        "z": "9462fed0a5871269",
+        "z": "a9f15cb41dc0ee30",
         "name": "",
         "props": [
             {
@@ -405,14 +408,14 @@
         "y": 340,
         "wires": [
             [
-                "d60b2ebad5cc9ae3"
+                "4494aafcf9f7f1b7"
             ]
         ]
     },
     {
-        "id": "f0f252ddf818deb9",
+        "id": "b62278935f727d57",
         "type": "NGSI-LD entity attributes",
-        "z": "9462fed0a5871269",
+        "z": "a9f15cb41dc0ee30",
         "name": "",
         "broker": "907c553d7533ec10",
         "actionType": "append",
@@ -422,20 +425,21 @@
         "y": 700,
         "wires": [
             [
-                "51d29893d58937ea"
+                "6ef934b64201eea7"
             ]
         ]
     },
     {
-        "id": "15e14d94e4f343f6",
+        "id": "ceeb703af26e0179",
         "type": "debug",
-        "z": "9462fed0a5871269",
+        "z": "a9f15cb41dc0ee30",
         "name": "debug 4",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "true",
+        "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
         "x": 740,
@@ -443,15 +447,16 @@
         "wires": []
     },
     {
-        "id": "51d29893d58937ea",
+        "id": "6ef934b64201eea7",
         "type": "debug",
-        "z": "9462fed0a5871269",
+        "z": "a9f15cb41dc0ee30",
         "name": "debug 5",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "true",
+        "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
         "x": 740,
@@ -459,9 +464,9 @@
         "wires": []
     },
     {
-        "id": "25db30d2809774ef",
+        "id": "b6d6fa91aff79cf9",
         "type": "inject",
-        "z": "9462fed0a5871269",
+        "z": "a9f15cb41dc0ee30",
         "name": "Append attrs",
         "props": [
             {
@@ -479,14 +484,14 @@
         "y": 700,
         "wires": [
             [
-                "f0f252ddf818deb9"
+                "b62278935f727d57"
             ]
         ]
     },
     {
-        "id": "7f97364bf693528e",
+        "id": "c17c021973d91aaa",
         "type": "NGSI-LD entity attributes",
-        "z": "9462fed0a5871269",
+        "z": "a9f15cb41dc0ee30",
         "name": "",
         "broker": "907c553d7533ec10",
         "actionType": "update",
@@ -496,14 +501,14 @@
         "y": 760,
         "wires": [
             [
-                "51d29893d58937ea"
+                "6ef934b64201eea7"
             ]
         ]
     },
     {
-        "id": "9aa3a6a7fb40431f",
+        "id": "068b022533c5c2f5",
         "type": "inject",
-        "z": "9462fed0a5871269",
+        "z": "a9f15cb41dc0ee30",
         "name": "Update attrs",
         "props": [
             {
@@ -521,14 +526,14 @@
         "y": 760,
         "wires": [
             [
-                "7f97364bf693528e"
+                "c17c021973d91aaa"
             ]
         ]
     },
     {
-        "id": "fa1223e9d82f946c",
+        "id": "55bb9c4116dcce69",
         "type": "inject",
-        "z": "9462fed0a5871269",
+        "z": "a9f15cb41dc0ee30",
         "name": "Upsert attrs",
         "props": [
             {
@@ -546,14 +551,14 @@
         "y": 820,
         "wires": [
             [
-                "21e58c334fd53442"
+                "92a94029970dbeea"
             ]
         ]
     },
     {
-        "id": "21e58c334fd53442",
+        "id": "92a94029970dbeea",
         "type": "NGSI-LD entity attributes",
-        "z": "9462fed0a5871269",
+        "z": "a9f15cb41dc0ee30",
         "name": "",
         "broker": "907c553d7533ec10",
         "actionType": "upsert",
@@ -563,7 +568,114 @@
         "y": 820,
         "wires": [
             [
-                "51d29893d58937ea"
+                "6ef934b64201eea7"
+            ]
+        ]
+    },
+    {
+        "id": "16f5bcc4cda3d49a",
+        "type": "NGSI-LD entity attribute",
+        "z": "a9f15cb41dc0ee30",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "actionType": "update",
+        "entityId": "urn:ngsi-ld:TemperatureSensor:001",
+        "attrName": "category",
+        "deleteAll": "false",
+        "datasetId": "",
+        "atContext": "",
+        "x": 350,
+        "y": 900,
+        "wires": [
+            [
+                "0d2ef13c258e3f06"
+            ]
+        ]
+    },
+    {
+        "id": "cf8f05f0bb191b07",
+        "type": "inject",
+        "z": "a9f15cb41dc0ee30",
+        "name": "Update attr",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"value\":[\"sensor\",\"actuator\"],\"type\":\"Property\"}",
+        "payloadType": "json",
+        "x": 120,
+        "y": 900,
+        "wires": [
+            [
+                "16f5bcc4cda3d49a"
+            ]
+        ]
+    },
+    {
+        "id": "a2cfd81854aaa834",
+        "type": "inject",
+        "z": "a9f15cb41dc0ee30",
+        "name": "Delete attr",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "category",
+        "payloadType": "str",
+        "x": 120,
+        "y": 960,
+        "wires": [
+            [
+                "4e3e1c8eb80ba715"
+            ]
+        ]
+    },
+    {
+        "id": "0d2ef13c258e3f06",
+        "type": "debug",
+        "z": "a9f15cb41dc0ee30",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "4e3e1c8eb80ba715",
+        "type": "NGSI-LD entity attribute",
+        "z": "a9f15cb41dc0ee30",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "actionType": "delete",
+        "entityId": "urn:ngsi-ld:TemperatureSensor:001",
+        "attrName": "",
+        "deleteAll": "false",
+        "datasetId": "",
+        "atContext": "",
+        "x": 350,
+        "y": 960,
+        "wires": [
+            [
+                "0d2ef13c258e3f06"
             ]
         ]
     },

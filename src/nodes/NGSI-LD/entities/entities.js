@@ -30,7 +30,7 @@
 
 const lib = require('../../../lib.js');
 
-const getEntities = async function (param) {
+const getEntities = async function (msg, param) {
   let totalCount = 0;
   param.config.count = true;
 
@@ -62,10 +62,16 @@ const getEntities = async function (param) {
         if (res.data) {
           this.error('Error details: ' + JSON.stringify(res.data));
         }
+        msg.payload = res.data;
+        msg.statusCode = Number(res.status);
+        this.send(msg);
         break;
       }
     } catch (error) {
-      this.error(`Exception while retrieving entities: ${error}`);
+      this.error(`Exception while retrieving entities: ${error.message}`);
+      msg.payload = { error: error.message };
+      msg.statusCode = 500;
+      this.send(msg);
       break;
     }
   } while (param.config.offset < totalCount);
@@ -84,12 +90,14 @@ const nobuffering = {
   send: function (entities) {
     const message = Object.assign({}, this.msg);
     message.payload = entities;
+    message.statusCode = 200;
     this.node.send(message);
   },
   close: function () { },
   out: function (entities) {
     const message = Object.assign({}, this.msg);
     message.payload = entities;
+    message.statusCode = 200;
     this.node.send(message);
   },
 };
@@ -109,6 +117,7 @@ const buffering = {
   },
   close: function () {
     this.msg.payload = this.entities;
+    this.msg.statusCode = 200;
     this.node.send(this.msg);
   },
   out: function (entities) {
@@ -116,7 +125,7 @@ const buffering = {
   },
 };
 
-const validateConfig = function (config) {
+const validateConfig = function (msg, config) {
   const items = [
     'atContext',
     'representation',
@@ -137,28 +146,28 @@ const validateConfig = function (config) {
   for (let i = 0; i < items.length; i++) {
     const e = items[i];
     if (config[e] && typeof config[e] !== 'string') {
-      this.error(e + ' not string');
+      msg.payload = { error: e + ' not string' };
       return false;
     }
   }
 
   if (config.buffering && typeof config.buffering !== 'boolean') {
-    this.error('buffering not boolean');
+    msg.payload = { error: 'buffering not boolean' };
     return false;
   }
 
   if (config.sysAttrs && typeof config.sysAttrs !== 'boolean') {
-    this.error('sysAttrs not boolean');
+    msg.payload = { error: 'sysAttrs not boolean' };
     return false;
   }
 
   if (config.limit && typeof config.limit !== 'number') {
-    this.error('limit not number');
+    msg.payload = { error: 'limit not number' };
     return false;
   }
 
   if (config.offset && typeof config.offset !== 'number') {
-    this.error('offset not number');
+    msg.payload = { error: 'offset not number' };
     return false;
   }
 
@@ -167,7 +176,7 @@ const validateConfig = function (config) {
 
 const createParam = function (msg, config, brokerConfig) {
   if (!lib.isStringOrJson(msg.payload)) {
-    this.error('Payload not stirng or JSON Object');
+    msg.payload = { error: 'Payload not stirng or JSON Object' };
     return null;
   }
 
@@ -197,7 +206,7 @@ const createParam = function (msg, config, brokerConfig) {
       geometryProperty: config.geometryProperty.trim(),
       lang: config.lang.trim(),
       accept: config.accept.trim(),
-      buffering: config.buffering !== 'off',
+      buffering: config.buffering === 'on',
       limit: 100,
       offset: 0,
     },
@@ -227,11 +236,11 @@ const createParam = function (msg, config, brokerConfig) {
     }
   });
 
-  if (!validateConfig.call(this, param.config)) {
+  if (!validateConfig(msg, param.config)) {
     return null;
   }
 
-  param.buffer = param.config.buffering ? nobuffering.open(this, msg) : buffering.open(this, msg);
+  param.buffer = param.config.buffering ? buffering.open(this, msg) : nobuffering.open(this, msg);
 
   return param;
 };
@@ -247,7 +256,11 @@ module.exports = function (RED) {
       const param = createParam.call(node, msg, config, brokerConfig);
 
       if (param) {
-        await getEntities.call(node, param);
+        await getEntities.call(node, msg, param);
+      } else {
+        node.error(msg.payload.error);
+        msg.statusCode = 500;
+        node.send(msg);
       }
     });
   }

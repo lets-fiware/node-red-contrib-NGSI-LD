@@ -73,13 +73,15 @@ describe('entities.js', () => {
         }
       };
 
-      await getEntities(param);
+      const message = {};
+      await getEntities(message, param);
 
       assert.deepEqual(actual, {
         payload: [
           { 'id': 'urn:ngsi-ld:TemperatureSensor:001', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } },
           { 'id': 'urn:ngsi-ld:TemperatureSensor:002', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } }
-        ]
+        ],
+        statusCode: 200
       });
     });
     it('get 4 entities', async () => {
@@ -111,7 +113,8 @@ describe('entities.js', () => {
         }
       };
 
-      await getEntities(param);
+      const message = {};
+      await getEntities(message, param);
 
       assert.deepEqual(actual, [{
         payload: [
@@ -119,7 +122,8 @@ describe('entities.js', () => {
           { 'id': 'urn:ngsi-ld:TemperatureSensor:002', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } },
           { 'id': 'urn:ngsi-ld:TemperatureSensor:001', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } },
           { 'id': 'urn:ngsi-ld:TemperatureSensor:002', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } }
-        ]
+        ],
+        statusCode: 200
       }]);
     });
     it('empty', async () => {
@@ -147,9 +151,10 @@ describe('entities.js', () => {
         }
       };
 
-      await getEntities(param);
+      const message = {};
+      await getEntities(message, param);
 
-      assert.deepEqual(actual, { payload: [] });
+      assert.deepEqual(actual, { payload: [], statusCode: 200 });
     });
     it('NGSILD-Results-Count is 0', async () => {
       entitiesNode.__set__('lib', {
@@ -176,13 +181,14 @@ describe('entities.js', () => {
         }
       };
 
-      await getEntities(param);
+      const message = {};
+      await getEntities(message, param);
 
-      assert.deepEqual(actual, { payload: [{}] });
+      assert.deepEqual(actual, { payload: [{}], statusCode: 200 });
     });
     it('should be 400 Bad Request', async () => {
       entitiesNode.__set__('lib', {
-        http: async () => Promise.resolve({ status: 400, statusText: 'Bad Request' }),
+        http: async () => Promise.resolve({ status: 400, statusText: 'Bad Request', data: null }),
         buildHTTPHeader: () => { return {}; },
         buildParams: () => new URLSearchParams(),
       });
@@ -199,13 +205,15 @@ describe('entities.js', () => {
         }
       };
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
+      let errmsg = '';
+      let out = {};
+      const node = { errmsg: '', error: (e) => { errmsg = e; }, send: (o) => { out = o; } };
 
-      const actual = await getEntities.call(node, param);
+      const message = {};
+      await getEntities.call(node, message, param);
 
-      assert.equal(actual, null);
-      assert.equal(msg, 'Error while retrieving entities: 400 Bad Request');
+      assert.equal(errmsg, 'Error while retrieving entities: 400 Bad Request');
+      assert.deepEqual(out, { payload: null, statusCode: 400 });
     });
     it('should be 400 Bad Request with details', async () => {
       entitiesNode.__set__('lib', {
@@ -226,20 +234,22 @@ describe('entities.js', () => {
         }
       };
 
-      let msg = [];
-      const node = { msg: '', error: (e) => { msg.push(e); } };
+      let errmsg = [];
+      let out = undefined;
+      const node = { errmsg: '', error: (e) => { errmsg.push(e); }, send: (o) => { out = o; } };
 
-      const actual = await getEntities.call(node, param);
+      const message = {};
+      await getEntities.call(node, message, param);
 
-      assert.equal(actual, null);
-      assert.deepEqual(msg, [
+      assert.deepEqual(errmsg, [
         'Error while retrieving entities: 400 Bad Request',
         'Error details: {"error":"detail"}',
       ]);
+      assert.deepEqual(out, { payload: { error: 'detail' }, statusCode: 400 });
     });
     it('Should be unknown error', async () => {
       entitiesNode.__set__('lib', {
-        http: async () => Promise.reject('unknown error'),
+        http: async () => Promise.reject({ message: 'unknown error' }),
         buildHTTPHeader: () => { return {}; },
         buildParams: () => new URLSearchParams(),
       });
@@ -256,86 +266,86 @@ describe('entities.js', () => {
         }
       };
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
+      let errmsg = '';
+      let out = {};
+      const node = { errmsg: '', error: (e) => { errmsg = e; }, send: (o) => { out = o; } };
 
-      const actual = await getEntities.call(node, param);
+      const message = {};
+      await getEntities.call(node, message, param);
 
-      assert.equal(actual, null);
-      assert.equal(msg, 'Exception while retrieving entities: unknown error');
+      assert.equal(errmsg, 'Exception while retrieving entities: unknown error');
+      assert.deepEqual(out.payload, { error: 'unknown error' });
+      assert.equal(out.statusCode, 500);
     });
   });
   describe('nobuffering', () => {
     it('should have a entity', () => {
       const nobuffering = entitiesNode.__get__('nobuffering');
-      const msg = {};
+      const errmsg = {};
       const actual = [];
 
-      nobuffering.open({ send: (data) => { actual.push(data); } }, msg);
+      nobuffering.open({ send: (data) => { actual.push(data); } }, errmsg);
       nobuffering.send([{ id: 'E1', type: 'T' }]);
       nobuffering.close();
 
-      assert.deepEqual(actual, [{ payload: [{ id: 'E1', type: 'T' }] }]);
+      assert.deepEqual(actual, [{ payload: [{ id: 'E1', type: 'T' }], statusCode: 200 }]);
 
     });
     it('should have entities', () => {
       const nobuffering = entitiesNode.__get__('nobuffering');
-      const msg = {};
+      const errmsg = {};
       const actual = [];
 
-      nobuffering.open({ send: (data) => { actual.push(data); } }, msg);
+      nobuffering.open({ send: (data) => { actual.push(data); } }, errmsg);
       nobuffering.send([{ id: 'E1', type: 'T' }]);
       nobuffering.send([{ id: 'E2', type: 'T' }]);
       nobuffering.close();
 
       assert.deepEqual(actual, [
-        { payload: [{ id: 'E1', type: 'T' }] },
-        { payload: [{ id: 'E2', type: 'T' }] },
+        { payload: [{ id: 'E1', type: 'T' }], statusCode: 200 },
+        { payload: [{ id: 'E2', type: 'T' }], statusCode: 200 },
       ]);
     });
     it('should be empty', () => {
       const nobuffering = entitiesNode.__get__('nobuffering');
-      const msg = {};
+      const errmsg = {};
       const actual = [];
 
-      nobuffering.open({ send: (data) => { actual.push(data); } }, msg);
+      nobuffering.open({ send: (data) => { actual.push(data); } }, errmsg);
       nobuffering.close();
 
       assert.deepEqual(actual, []);
-
     });
     it('should have a entity', () => {
       const nobuffering = entitiesNode.__get__('nobuffering');
-      const msg = {};
+      const errmsg = {};
       const actual = [];
 
-      nobuffering.open({ send: (data) => { actual.push(data); } }, msg);
+      nobuffering.open({ send: (data) => { actual.push(data); } }, errmsg);
       nobuffering.out([{ id: 'E1', type: 'T' }]);
       nobuffering.close();
 
-      assert.deepEqual(actual, [{ payload: [{ id: 'E1', type: 'T' }] }]);
-
+      assert.deepEqual(actual, [{ payload: [{ id: 'E1', type: 'T' }], statusCode: 200 }]);
     });
   });
   describe('buffering', () => {
     it('should have a entity', () => {
       const buffering = entitiesNode.__get__('buffering');
-      const msg = {};
+      const errmsg = {};
       const actual = [];
 
-      buffering.open({ send: (data) => { actual.push(data); } }, msg);
+      buffering.open({ send: (data) => { actual.push(data); } }, errmsg);
       buffering.send([{ id: 'E1', type: 'T' }]);
       buffering.close();
 
-      assert.deepEqual(actual, [{ payload: [{ id: 'E1', type: 'T' }] }]);
-
+      assert.deepEqual(actual, [{ payload: [{ id: 'E1', type: 'T' }], statusCode: 200 }]);
     });
     it('should have a entities', () => {
       const buffering = entitiesNode.__get__('buffering');
-      const msg = {};
+      const errmsg = {};
       const actual = [];
 
-      buffering.open({ send: (data) => { actual.push(data); } }, msg);
+      buffering.open({ send: (data) => { actual.push(data); } }, errmsg);
       buffering.send([{ id: 'E1', type: 'T' }]);
       buffering.send([{ id: 'E2', type: 'T' }]);
       buffering.close();
@@ -345,31 +355,31 @@ describe('entities.js', () => {
           payload: [
             { id: 'E1', type: 'T' },
             { id: 'E2', type: 'T' },
-          ]
+          ],
+          statusCode: 200
         },
       ]);
     });
     it('should be empty', () => {
       const buffering = entitiesNode.__get__('buffering');
-      const msg = {};
+      const errmsg = {};
       const actual = [];
 
-      buffering.open({ send: (data) => { actual.push(data); } }, msg);
+      buffering.open({ send: (data) => { actual.push(data); } }, errmsg);
       buffering.close();
 
-      assert.deepEqual(actual, [{ 'payload': [] }]);
-
+      assert.deepEqual(actual, [{ payload: [], statusCode: 200 }]);
     });
     it('should have a entity', () => {
       const buffering = entitiesNode.__get__('buffering');
-      const msg = {};
+      const errmsg = {};
       const actual = [];
 
-      buffering.open({ send: (data) => { actual.push(data); } }, msg);
+      buffering.open({ send: (data) => { actual.push(data); } }, errmsg);
       buffering.out([{ id: 'E1', type: 'T' }]);
       buffering.close();
 
-      assert.deepEqual(actual, [{ payload: [{ id: 'E1', type: 'T' }] }]);
+      assert.deepEqual(actual, [{ payload: [{ id: 'E1', type: 'T' }], statusCode: 200 }]);
 
     });
   });
@@ -377,224 +387,188 @@ describe('entities.js', () => {
     it('result true', () => {
       const validateConfig = entitiesNode.__get__('validateConfig');
 
-      const actual = validateConfig({});
+      const msg = {};
+      const actual = validateConfig(msg, {});
 
       assert.equal(actual, true);
+      assert.deepEqual(msg, {});
     });
     it('atContext not string', () => {
       const validateConfig = entitiesNode.__get__('validateConfig');
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
-
-      const actual = validateConfig.call(node, { atContext: 123 });
+      const msg = {};
+      const actual = validateConfig(msg, { atContext: 123 });
 
       assert.equal(actual, false);
-      assert.equal(msg, 'atContext not string');
+      assert.deepEqual(msg, { payload: { error: 'atContext not string' } });
     });
     it('representation not string', () => {
       const validateConfig = entitiesNode.__get__('validateConfig');
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
-
-      const actual = validateConfig.call(node, { representation: 123 });
+      const msg = {};
+      const actual = validateConfig(msg, { representation: 123 });
 
       assert.equal(actual, false);
-      assert.equal(msg, 'representation not string');
+      assert.deepEqual(msg, { payload: { error: 'representation not string' } });
     });
     it('id not string', () => {
       const validateConfig = entitiesNode.__get__('validateConfig');
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
-
-      const actual = validateConfig.call(node, { id: 123 });
+      const msg = {};
+      const actual = validateConfig(msg, { id: 123 });
 
       assert.equal(actual, false);
-      assert.equal(msg, 'id not string');
+      assert.deepEqual(msg, { payload: { error: 'id not string' } });
     });
     it('type not string', () => {
       const validateConfig = entitiesNode.__get__('validateConfig');
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
-
-      const actual = validateConfig.call(node, { type: 123 });
+      const msg = {};
+      const actual = validateConfig(msg, { type: 123 });
 
       assert.equal(actual, false);
-      assert.equal(msg, 'type not string');
+      assert.deepEqual(msg, { payload: { error: 'type not string' } });
     });
     it('idPattern not string', () => {
       const validateConfig = entitiesNode.__get__('validateConfig');
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
-
-      const actual = validateConfig.call(node, { idPattern: 123 });
+      const msg = {};
+      const actual = validateConfig(msg, { idPattern: 123 });
 
       assert.equal(actual, false);
-      assert.equal(msg, 'idPattern not string');
+      assert.deepEqual(msg, { payload: { error: 'idPattern not string' } });
     });
     it('attrs not string', () => {
       const validateConfig = entitiesNode.__get__('validateConfig');
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
-
-      const actual = validateConfig.call(node, { attrs: 123 });
+      const msg = {};
+      const actual = validateConfig(msg, { attrs: 123 });
 
       assert.equal(actual, false);
-      assert.equal(msg, 'attrs not string');
+      assert.deepEqual(msg, { payload: { error: 'attrs not string' } });
     });
     it('q not string', () => {
       const validateConfig = entitiesNode.__get__('validateConfig');
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
-
-      const actual = validateConfig.call(node, { q: 123 });
+      const msg = {};
+      const actual = validateConfig(msg, { q: 123 });
 
       assert.equal(actual, false);
-      assert.equal(msg, 'q not string');
+      assert.deepEqual(msg, { payload: { error: 'q not string' } });
     });
     it('csf not string', () => {
       const validateConfig = entitiesNode.__get__('validateConfig');
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
-
-      const actual = validateConfig.call(node, { csf: 123 });
+      const msg = {};
+      const actual = validateConfig(msg, { csf: 123 });
 
       assert.equal(actual, false);
-      assert.equal(msg, 'csf not string');
+      assert.deepEqual(msg, { payload: { error: 'csf not string' } });
     });
     it('georel not string', () => {
       const validateConfig = entitiesNode.__get__('validateConfig');
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
-
-      const actual = validateConfig.call(node, { georel: 123 });
+      const msg = {};
+      const actual = validateConfig(msg, { georel: 123 });
 
       assert.equal(actual, false);
-      assert.equal(msg, 'georel not string');
+      assert.deepEqual(msg, { payload: { error: 'georel not string' } });
     });
     it('geometry not string', () => {
       const validateConfig = entitiesNode.__get__('validateConfig');
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
-
-      const actual = validateConfig.call(node, { geometry: 123 });
+      const msg = {};
+      const actual = validateConfig(msg, { geometry: 123 });
 
       assert.equal(actual, false);
-      assert.equal(msg, 'geometry not string');
+      assert.deepEqual(msg, { payload: { error: 'geometry not string' } });
     });
     it('coordinates not string', () => {
       const validateConfig = entitiesNode.__get__('validateConfig');
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
-
-      const actual = validateConfig.call(node, { coordinates: 123 });
+      const msg = {};
+      const actual = validateConfig(msg, { coordinates: 123 });
 
       assert.equal(actual, false);
-      assert.equal(msg, 'coordinates not string');
+      assert.deepEqual(msg, { payload: { error: 'coordinates not string' } });
     });
     it('geoproperty not string', () => {
       const validateConfig = entitiesNode.__get__('validateConfig');
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
-
-      const actual = validateConfig.call(node, { geoproperty: 123 });
+      const msg = {};
+      const actual = validateConfig(msg, { geoproperty: 123 });
 
       assert.equal(actual, false);
-      assert.equal(msg, 'geoproperty not string');
+      assert.deepEqual(msg, { payload: { error: 'geoproperty not string' } });
     });
     it('geometryProperty not string', () => {
       const validateConfig = entitiesNode.__get__('validateConfig');
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
-
-      const actual = validateConfig.call(node, { geometryProperty: 123 });
+      const msg = {};
+      const actual = validateConfig(msg, { geometryProperty: 123 });
 
       assert.equal(actual, false);
-      assert.equal(msg, 'geometryProperty not string');
+      assert.deepEqual(msg, { payload: { error: 'geometryProperty not string' } });
     });
     it('lang not string', () => {
       const validateConfig = entitiesNode.__get__('validateConfig');
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
-
-      const actual = validateConfig.call(node, { lang: 123 });
+      const msg = {};
+      const actual = validateConfig(msg, { lang: 123 });
 
       assert.equal(actual, false);
-      assert.equal(msg, 'lang not string');
+      assert.deepEqual(msg, { payload: { error: 'lang not string' } });
     });
     it('accept not string', () => {
       const validateConfig = entitiesNode.__get__('validateConfig');
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
-
-      const actual = validateConfig.call(node, { accept: 123 });
+      const msg = {};
+      const actual = validateConfig(msg, { accept: 123 });
 
       assert.equal(actual, false);
-      assert.equal(msg, 'accept not string');
+      assert.deepEqual(msg, { payload: { error: 'accept not string' } });
     });
     it('buffering not boolean', () => {
       const validateConfig = entitiesNode.__get__('validateConfig');
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
-
-      const actual = validateConfig.call(node, { buffering: 'true' });
+      const msg = {};
+      const actual = validateConfig(msg, { buffering: 'true' });
 
       assert.equal(actual, false);
-      assert.equal(msg, 'buffering not boolean');
+      assert.deepEqual(msg, { payload: { error: 'buffering not boolean' } });
     });
     it('sysAttrs not boolean', () => {
       const validateConfig = entitiesNode.__get__('validateConfig');
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
-
-      const actual = validateConfig.call(node, { sysAttrs: 'true' });
+      const msg = {};
+      const actual = validateConfig(msg, { sysAttrs: 'true' });
 
       assert.equal(actual, false);
-      assert.equal(msg, 'sysAttrs not boolean');
+      assert.deepEqual(msg, { payload: { error: 'sysAttrs not boolean' } });
     });
     it('limit not number', () => {
       const validateConfig = entitiesNode.__get__('validateConfig');
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
-
-      const actual = validateConfig.call(node, { limit: '123' });
+      const msg = {};
+      const actual = validateConfig(msg, { limit: '123' });
 
       assert.equal(actual, false);
-      assert.equal(msg, 'limit not number');
+      assert.deepEqual(msg, { payload: { error: 'limit not number' } });
     });
     it('offset not number', () => {
       const validateConfig = entitiesNode.__get__('validateConfig');
 
-      let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
-
-      const actual = validateConfig.call(node, { offset: '123' });
+      const msg = {};
+      const actual = validateConfig(msg, { offset: '123' });
 
       assert.equal(actual, false);
-      assert.equal(msg, 'offset not number');
+      assert.deepEqual(msg, { payload: { error: 'offset not number' } });
     });
   });
   describe('createParam', () => {
     it('string param', () => {
       const createParam = entitiesNode.__get__('createParam');
-      const msg = { payload: '.*' };
+      const errmsg = { payload: '.*' };
       const config = {
         representation: 'normalized',
         entityId: '',
@@ -622,7 +596,7 @@ describe('entities.js', () => {
         atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
       };
 
-      const actual = createParam(msg, config, brokerConfig);
+      const actual = createParam(errmsg, config, brokerConfig);
 
       assert.equal(actual.host, 'http://orion-ld:1026');
       assert.equal(actual.pathname, '/ngsi-ld/v1/entities/');
@@ -652,7 +626,7 @@ describe('entities.js', () => {
     });
     it('object param', () => {
       const createParam = entitiesNode.__get__('createParam');
-      const msg = { payload: { idPattern: '.*' } };
+      const errmsg = { payload: { idPattern: '.*' } };
       const config = {
         representation: 'normalized',
         entityId: '',
@@ -680,7 +654,7 @@ describe('entities.js', () => {
         atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
       };
 
-      const actual = createParam(msg, config, brokerConfig);
+      const actual = createParam(errmsg, config, brokerConfig);
 
       assert.equal(actual.host, 'http://orion-ld:1026');
       assert.equal(actual.pathname, '/ngsi-ld/v1/entities/');
@@ -710,7 +684,7 @@ describe('entities.js', () => {
     });
     it('getToken', () => {
       const createParam = entitiesNode.__get__('createParam');
-      const msg = { payload: { idPattern: '.*' } };
+      const errmsg = { payload: { idPattern: '.*' } };
       const config = {
         representation: 'normalized',
         entityId: '',
@@ -738,7 +712,7 @@ describe('entities.js', () => {
         atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
       };
 
-      const actual = createParam(msg, config, brokerConfig);
+      const actual = createParam(errmsg, config, brokerConfig);
 
       assert.equal(actual.host, 'http://orion-ld:1026');
       assert.equal(actual.pathname, '/ngsi-ld/v1/entities/');
@@ -768,7 +742,7 @@ describe('entities.js', () => {
     });
     it('atContext', () => {
       const createParam = entitiesNode.__get__('createParam');
-      const msg = { payload: { idPattern: '.*' } };
+      const errmsg = { payload: { idPattern: '.*' } };
       const config = {
         representation: 'normalized',
         entityId: '',
@@ -796,7 +770,7 @@ describe('entities.js', () => {
         atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
       };
 
-      const actual = createParam(msg, config, brokerConfig);
+      const actual = createParam(errmsg, config, brokerConfig);
 
       assert.equal(actual.host, 'http://orion-ld:1026');
       assert.equal(actual.pathname, '/ngsi-ld/v1/entities/');
@@ -827,7 +801,7 @@ describe('entities.js', () => {
     });
     it('buffering', () => {
       const createParam = entitiesNode.__get__('createParam');
-      const msg = { payload: { idPattern: '.*' } };
+      const errmsg = { payload: { idPattern: '.*' } };
       const config = {
         representation: 'normalized',
         entityId: '',
@@ -855,7 +829,7 @@ describe('entities.js', () => {
         atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
       };
 
-      const actual = createParam(msg, config, brokerConfig);
+      const actual = createParam(errmsg, config, brokerConfig);
 
       assert.equal(actual.host, 'http://orion-ld:1026');
       assert.equal(actual.pathname, '/ngsi-ld/v1/entities/');
@@ -914,14 +888,12 @@ describe('entities.js', () => {
         atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
       };
 
-      let errmsg = '';
-      const node = { msg: '', error: (e) => { errmsg = e; } };
-
+      const node = { msg: '' };
       const actual = createParam.call(node, msg, config, brokerConfig);
 
       const expected = null;
       assert.equal(actual, expected);
-      assert.equal(errmsg, 'Payload not stirng or JSON Object');
+      assert.deepEqual(msg, { payload: { error: 'Payload not stirng or JSON Object' } });
     });
     it('Error validateConfig', () => {
       const createParam = entitiesNode.__get__('createParam');
@@ -953,14 +925,12 @@ describe('entities.js', () => {
         atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
       };
 
-      let errmsg = '';
-      const node = { msg: '', error: (e) => { errmsg = e; } };
-
+      const node = { msg: '' };
       const actual = createParam.call(node, msg, config, brokerConfig);
 
       const expected = null;
       assert.equal(actual, expected);
-      assert.equal(errmsg, 'lang not string');
+      assert.deepEqual(msg, { payload: { error: 'lang not string' } });
     });
   });
   describe('NGSI-LD entities node', () => {
@@ -1017,7 +987,8 @@ describe('entities.js', () => {
         payload: [
           { 'id': 'urn:ngsi-ld:TemperatureSensor:001', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } },
           { 'id': 'urn:ngsi-ld:TemperatureSensor:002', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } }
-        ]
+        ],
+        statusCode: 200
       });
     });
     it('Error createParam', async () => {
@@ -1053,6 +1024,10 @@ describe('entities.js', () => {
 
       await red.inputWithAwait({ payload: { lang: true } });
 
+      assert.deepEqual(red.getOutput(), {
+        payload: { error: 'lang not string' },
+        statusCode: 500
+      });
       assert.equal(red.getMessage(), 'lang not string');
     });
   });

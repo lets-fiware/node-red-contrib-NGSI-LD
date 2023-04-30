@@ -71,18 +71,21 @@ describe('batch-operations.js', () => {
         },
       };
 
-      const actual = await batchOperations(param);
+      const message = {};
+      await batchOperations(message, param);
 
-      assert.deepEqual(actual, [
+      assert.deepEqual(message.payload, [
         'urn:ngsi-ld:TemperatureSensor:001',
         'urn:ngsi-ld:TemperatureSensor:002',
       ]);
+      assert.equal(message.statusCode, 201);
     });
     it('delete entities', async () => {
       batchOperationsNode.__set__('lib', {
         http: async () => Promise.resolve({
           status: 204,
           headers: {},
+          data: undefined,
         }),
         buildHTTPHeader: () => { return {}; },
         buildParams: () => new URLSearchParams(),
@@ -101,13 +104,15 @@ describe('batch-operations.js', () => {
         },
       };
 
-      const actual = await batchOperations(param);
+      const message = {};
+      await batchOperations(message, param);
 
-      assert.equal(actual, 204);
+      assert.equal(message.payload, undefined);
+      assert.equal(message.statusCode, 204);
     });
     it('should be 400 Bad Request', async () => {
       batchOperationsNode.__set__('lib', {
-        http: async () => Promise.resolve({ status: 400, statusText: 'Bad Request' }),
+        http: async () => Promise.resolve({ status: 400, statusText: 'Bad Request', data: undefined }),
         buildHTTPHeader: () => { return {}; },
         buildParams: () => new URLSearchParams(),
       });
@@ -128,10 +133,12 @@ describe('batch-operations.js', () => {
       let msg = '';
       const node = { msg: '', error: (e) => { msg = e; } };
 
-      const actual = await batchOperations.call(node, param);
+      const message = {};
+      await batchOperations.call(node, message, param);
 
-      assert.equal(actual, 400);
       assert.equal(msg, 'Error while manipulating entities: 400 Bad Request');
+      assert.equal(message.payload, undefined);
+      assert.equal(message.statusCode, 400);
     });
     it('should be 400 Bad Request with details', async () => {
       batchOperationsNode.__set__('lib', {
@@ -156,17 +163,19 @@ describe('batch-operations.js', () => {
       let msg = [];
       const node = { msg: '', error: (e) => { msg.push(e); } };
 
-      const actual = await batchOperations.call(node, param);
+      const message = {};
+      await batchOperations.call(node, message, param);
 
-      assert.equal(actual, 400);
       assert.deepEqual(msg, [
         'Error while manipulating entities: 400 Bad Request',
         'Error details: {"error":"detail"}',
       ]);
+      assert.deepEqual(message.payload, { error: 'detail' });
+      assert.equal(message.statusCode, 400);
     });
     it('Should be unknown error', async () => {
       batchOperationsNode.__set__('lib', {
-        http: async () => Promise.reject('unknown error'),
+        http: async () => Promise.reject({ message: 'unknown error' }),
         buildHTTPHeader: () => { return {}; },
         buildParams: () => new URLSearchParams(),
       });
@@ -187,10 +196,12 @@ describe('batch-operations.js', () => {
       let msg = '';
       const node = { msg: '', error: (e) => { msg = e; } };
 
-      const actual = await batchOperations.call(node, param);
+      const message = {};
+      await batchOperations.call(node, message, param);
 
-      assert.equal(actual, null);
       assert.equal(msg, 'Exception while manipulating entities: unknown error');
+      assert.deepEqual(message.payload, { error: 'unknown error' });
+      assert.equal(message.statusCode, 500);
     });
   });
   describe('createParam', () => {
@@ -360,12 +371,13 @@ describe('batch-operations.js', () => {
       });
 
       let actual;
-      batchOperationsNode.__set__('batchOperations', (param) => {
+      batchOperationsNode.__set__('batchOperations', (msg, param) => {
         actual = param;
-        return [
+        msg.payload = [
           'urn:ngsi-ld:TemperatureSensor:001',
           'urn:ngsi-ld:TemperatureSensor:002',
         ];
+        msg.statusCode = 201;
       });
 
       await red.inputWithAwait({
@@ -379,7 +391,8 @@ describe('batch-operations.js', () => {
         payload: [
           'urn:ngsi-ld:TemperatureSensor:001',
           'urn:ngsi-ld:TemperatureSensor:002',
-        ]
+        ],
+        statusCode: 201
       };
 
       assert.deepEqual(red.getOutput(), expected);
@@ -463,6 +476,12 @@ describe('batch-operations.js', () => {
         payload: ''
       });
 
+      const expected = {
+        payload: { error: 'payload not JSON Object' },
+        statusCode: 500
+      };
+
+      assert.deepEqual(red.getOutput(), expected);
       assert.equal(red.getMessage(), 'payload not JSON Object');
     });
   });

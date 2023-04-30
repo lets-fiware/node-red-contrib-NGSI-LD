@@ -30,7 +30,7 @@
 
 const lib = require('../../../lib.js');
 
-const httpRequest = async function (param) {
+const httpRequest = async function (msg, param) {
   const options = {
     method: param.method,
     baseURL: param.host,
@@ -45,33 +45,35 @@ const httpRequest = async function (param) {
 
   try {
     const res = await lib.http(options);
+    msg.payload = res.data;
+    msg.statusCode = Number(res.status);
     if (res.status === 200 && param.config.actionType === 'read') {
-      return res.data;
+      return;
     } else if (res.status === 201 && param.config.actionType === 'create') {
-      return Number(res.status);
+      return;
     } else if (res.status === 204 && param.config.actionType === 'delete') {
-      return Number(res.status);
+      return;
     } else {
       this.error(`Error while managing entity: ${res.status} ${res.statusText}`);
       if (res.data) {
         this.error('Error details: ' + JSON.stringify(res.data));
       }
-      return null;
     }
   } catch (error) {
-    this.error(`Exception while managing entity: ${error}`);
-    return null;
+    this.error(`Exception while managing entity: ${error.message}`);
+    msg.payload = { error: error.message };
+    msg.statusCode = 500;
   }
 };
 
-const validateConfig = function (config) {
+const validateConfig = function (msg, config) {
   if (config.entityId === '' && (config.actionType === 'read' || config.actionType === 'delete')) {
-    this.error('Entity id not found');
+    msg.payload = { error: 'Entity id not found' };
     return false;
   }
 
   if (typeof config.entity !== 'undefined' && !lib.isJson(config.entity)) {
-    this.error('Payload not JSON Object');
+    msg.payload = { error: 'Payload not JSON Object' };
     return false;
   }
 
@@ -87,13 +89,13 @@ const validateConfig = function (config) {
   for (let i = 0; i < items.length; i++) {
     const e = items[i];
     if (config[e] && typeof config[e] !== 'string') {
-      this.error(e + ' not string');
+      msg.payload = { error: e + ' not string' };
       return false;
     }
   }
 
   if (config.sysAttrs && typeof config.sysAttrs !== 'boolean') {
-    this.error('sysAttrs not boolean');
+    msg.payload = { error: 'sysAttrs not boolean' };
     return false;
   }
 
@@ -102,7 +104,7 @@ const validateConfig = function (config) {
 
 const createParam = function (msg, config, brokerConfig) {
   if (!lib.isStringOrJson(msg.payload)) {
-    this.error('Payload not stirng or JSON Object');
+    msg.payload = { error: 'Payload not stirng or JSON Object' };
     return null;
   }
 
@@ -152,20 +154,20 @@ const createParam = function (msg, config, brokerConfig) {
       break;
     case 'read':
       param.method = 'get';
-      param.pathname += param.config.entityId;
       param.config = Object.assign(param.config, defaultConfig);
+      param.pathname += param.config.entityId;
       break;
     case 'delete':
       param.method = 'delete';
       param.pathname += param.config.entityId;
       break;
     default:
-      this.error('ActionType error: ' + param.config.actionType);
+      msg.payload = { error: 'ActionType error: ' + param.config.actionType };
       return null;
   }
   delete param.config.entityId;
 
-  if (!validateConfig.call(this, param.config)) {
+  if (!validateConfig(msg, param.config)) {
     return null;
   }
 
@@ -180,13 +182,15 @@ module.exports = function (RED) {
     const brokerConfig = RED.nodes.getNode(config.broker);
 
     node.on('input', async function (msg) {
-      const param = createParam.call(node, msg, config, brokerConfig);
+      const param = createParam(msg, config, brokerConfig);
 
       if (param) {
-        const result = await httpRequest.call(node, param);
-        msg.payload = result;
-        node.send(msg);
+        await httpRequest.call(node, msg, param);
+      } else {
+        node.error(msg.payload.error);
+        msg.statusCode = 500;
       }
+      node.send(msg);
     });
   }
   RED.nodes.registerType('NGSI-LD Entity', entityNode);

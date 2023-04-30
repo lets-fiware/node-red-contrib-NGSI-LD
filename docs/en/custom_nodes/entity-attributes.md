@@ -35,7 +35,7 @@ It allows to append attributes of NGSI-LD entity.
 
 #### Input1
 
-Payload *JSON Object*
+payload *JSON Object*
 
 A `msg.payload` should contain an object with the attributes.
 
@@ -55,7 +55,7 @@ A `msg.payload` should contain an object with the attributes.
 
 #### Input2
 
-Payload *JSON Object*
+payload *JSON Object*
 
 A `msg.payload` should contain information related to the attributes to append.
 The values in the payload may overwrite properties.
@@ -84,16 +84,12 @@ The values in the payload may overwrite properties.
 
 #### Output
 
-Payload *Number* or *null*
+statusCode *Number*
 
-A `msg.payload` contains a status code.
+A `msg.statusCode` contains a status code.
 
 ```
 204
-```
-
-```
-null
 ```
 
 ## Update attributes
@@ -116,7 +112,7 @@ It allows to update attributes of NGSI-LD entity.
 
 #### Input1
 
-Payload *JSON Object*
+payload *JSON Object*
 
 A `msg.payload` should contain an object with the attributes.
 
@@ -136,7 +132,7 @@ A `msg.payload` should contain an object with the attributes.
 
 #### Input2
 
-Payload *JSON Object*
+payload *JSON Object*
 
 A `msg.payload` should contain information related to the attributes to update.
 The values in the payload may overwrite properties.
@@ -165,16 +161,12 @@ The values in the payload may overwrite properties.
 
 #### Output
 
-Payload *Number* or *null*
+statusCode *Number*
 
-A `msg.payload` contains a status code.
+A `msg.statusCode` contains a status code.
 
 ```
 204
-```
-
-```
-null
 ```
 
 ## Upsert attributes
@@ -197,7 +189,7 @@ It allows to upsert attributes of NGSI-LD entity.
 
 #### Input1
 
-Payload *JSON Object*
+payload *JSON Object*
 
 A `msg.payload` should contain an object with the attributes.
 
@@ -217,7 +209,7 @@ A `msg.payload` should contain an object with the attributes.
 
 #### Input2
 
-Payload *JSON Object*
+payload *JSON Object*
 
 A `msg.payload` should contain information related to the attributes to upsert.
 The values in the payload may overwrite properties.
@@ -246,14 +238,10 @@ The values in the payload may overwrite properties.
 
 #### Output
 
-Payload *Number* or *null*
+statusCode *Number*
 
-A `msg.payload` contains a status code.
+A `msg.statusCode` contains a status code.
 
 ```
 204
-```
-
-```
-null
 ```

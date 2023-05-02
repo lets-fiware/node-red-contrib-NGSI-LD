@@ -1,6 +1,7 @@
 ## node-red-contrib-letsfiware-NGSI v0.3.0-next
 
--   Improve E2E test(#12)
+-   Update Github Actions for E2E test (#13)
+-   Improve E2E test (#12)
 
 ## node-red-contrib-letsfiware-NGSI v0.3.0 - 30 April, 2023
 

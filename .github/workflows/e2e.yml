@@ -21,9 +21,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Setup node
-      run: npm ci
-
     - name: Use Node.js
       uses: actions/setup-node@v3
       with:

@@ -1,6 +1,6 @@
 # NGSI entity
 
-This custom node is a simple node that allows to create, read or delete an NGSI-LD entity.
+This custom node is a simple node that allows to create, read or delete a NGSI-LD entity.
 
 ![](https://raw.githubusercontent.com/lets-fiware/node-red-contrib-NGSI-LD/gh-pages/images/entity/entity-01.png)
 
@@ -36,7 +36,7 @@ It allows to create a NGSIv2 entity.
 
 payload *JSON Object*
 
-A `msg.payload` should contain an NGSI-LD entity to create.
+A `msg.payload` should contain a NGSI-LD entity to create.
 
 ```
 {

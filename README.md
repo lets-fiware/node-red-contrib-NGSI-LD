@@ -26,6 +26,9 @@ Node-RED implementation for NGSI-LD
 -   [NGSI-LD Entity attributes](docs/en/custom_nodes/entity-attributes.md)
 -   [NGSI-LD Batch operations](docs/en/custom_nodes/batch-operations.md)
 -   [NGSI-LD Broker version](docs/en/custom_nodes/version.md)
+-   [NGSI-LD Encode](docs/en/custom_nodes/encode.md)
+-   [NGSI-LD Decode](docs/en/custom_nodes/decode.md)
+-   [NGSI-LD Broker](docs/en/custom_nodes/ngsi-ld-broker.md)
 
 ## Documentation
 

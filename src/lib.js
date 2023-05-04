@@ -187,6 +187,57 @@ function isStringOrJson(data) {
   return typeof data === 'string' || (typeof data === 'object' && !Array.isArray(data));
 }
 
+const encodeforbiddenChar = value => value.replace(/%/g, '%25').replace(/"/g, '%22').replace(/'/g, '%27').replace(/\(/g, '%28').replace(/\)/g, '%29').replace(/;/g, '%3B').replace(/</g, '%3C').replace(/=/g, '%3D').replace(/>/g, '%3E');
+const decodeforbiddenChar = value => value.replace(/%25/g, '%').replace(/%22/g, '"').replace(/%27/g, '\'').replace(/%28/g, '(').replace(/%29/g, ')').replace(/%3B/g, ';').replace(/%3C/g, '<').replace(/%3D/g, '=').replace(/%3E/g, '>');
+
+function replaceObject(json, func) {
+  for (const [key, value] of Object.entries(json)) {
+    if (typeof value === 'string') {
+      json[key] = func(value);
+    } else if (Array.isArray(value)) {
+      replaceArray(value, func);
+    } else if (typeof value === 'object') {
+      replaceObject(value, func);
+    }
+  }
+  return json;
+}
+
+function replaceArray(arr, func) {
+  for (let i = 0; i < arr.length; ++i) {
+    if (typeof arr[i] === 'string') {
+      arr[i] = func(arr[i]);
+    } else if (Array.isArray(arr[i])) {
+      replaceArray(arr[i], func);
+    } else if (typeof arr[i] === 'object') {
+      replaceObject(arr[i], func);
+    }
+  }
+  return arr;
+}
+
+function encodeNGSI(json, on) {
+  if (on) {
+    if (Array.isArray(json)) {
+      json = replaceArray(json, encodeforbiddenChar);
+    } else {
+      json = replaceObject(json, encodeforbiddenChar);
+    }
+  }
+  return json;
+}
+
+function decodeNGSI(json, on) {
+  if (on) {
+    if (Array.isArray(json)) {
+      json = replaceArray(json, decodeforbiddenChar);
+    } else {
+      json = replaceObject(json, decodeforbiddenChar);
+    }
+  }
+  return json;
+}
+
 module.exports = {
   http,
   buildHTTPHeader,
@@ -194,4 +245,8 @@ module.exports = {
   convertDateTime,
   isJson,
   isStringOrJson,
+  encodeNGSI,
+  decodeNGSI,
+  encodeforbiddenChar,
+  decodeforbiddenChar,
 };

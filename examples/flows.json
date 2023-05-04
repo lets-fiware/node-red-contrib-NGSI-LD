@@ -680,6 +680,99 @@
         ]
     },
     {
+        "id": "5b286ee3a0ef9d91",
+        "type": "inject",
+        "z": "a9f15cb41dc0ee30",
+        "name": "Decode data",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"id\":\"urn:ngsi-ld:TemperatureSensor:001\",\"type\":\"TemperatureSensor\",\"name\":\"%3CSensor%3E\"}",
+        "payloadType": "json",
+        "x": 130,
+        "y": 1100,
+        "wires": [
+            [
+                "cf3584aa7d74e045"
+            ]
+        ]
+    },
+    {
+        "id": "f1a723fcd025c4a5",
+        "type": "debug",
+        "z": "a9f15cb41dc0ee30",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "af5cdff4247732c5",
+        "type": "NGSI-LD Encode",
+        "z": "a9f15cb41dc0ee30",
+        "name": "",
+        "x": 350,
+        "y": 1040,
+        "wires": [
+            [
+                "f1a723fcd025c4a5"
+            ]
+        ]
+    },
+    {
+        "id": "cf3584aa7d74e045",
+        "type": "NGSI-LD Decode",
+        "z": "a9f15cb41dc0ee30",
+        "name": "",
+        "x": 350,
+        "y": 1100,
+        "wires": [
+            [
+                "f1a723fcd025c4a5"
+            ]
+        ]
+    },
+    {
+        "id": "e3881d8eb5837cb6",
+        "type": "inject",
+        "z": "a9f15cb41dc0ee30",
+        "name": "Encode data",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"id\":\"urn:ngsi-ld:TemperatureSensor:001\",\"type\":\"TemperatureSensor\",\"name\":\"<Sensor>\"}",
+        "payloadType": "json",
+        "x": 130,
+        "y": 1040,
+        "wires": [
+            [
+                "af5cdff4247732c5"
+            ]
+        ]
+    },
+    {
         "id": "907c553d7533ec10",
         "type": "NGSI-LD broker",
         "name": "Orion-LD",

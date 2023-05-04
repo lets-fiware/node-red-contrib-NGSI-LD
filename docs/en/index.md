@@ -22,6 +22,9 @@ Node-RED NGSI integration
 -   [NGSI-LD Entity attributes](custom_nodes/entity-attributes.md)
 -   [NGSI-LD Batch operations](custom_nodes/batch-operations.md)
 -   [Broker version](custom_nodes/version.md)
+-   [NGSI-LD Encode](custom_nodes/encode.md)
+-   [NGSI-LD Decode](custom_nodes/decode.md)
+-   [NGSI-LD Broker](custom_nodes/ngsi-ld-broker.md)
 
 ## Documentation
 

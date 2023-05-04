@@ -18,7 +18,9 @@
       "NGSI-LD-entity-attribute": "src/nodes/NGSI-LD/entity-attribute/entity-attribute.js",
       "NGSI-LD-batch-operations": "src/nodes/NGSI-LD/batch-operations/batch-operations.js",
       "NGSI-LD-broker": "src/nodes/NGSI-LD/ngsi-ld-broker/ngsi-ld-broker.js",
-      "NGSI-LD-broker-version": "src/nodes/NGSI-LD/version/version.js"
+      "NGSI-LD-broker-version": "src/nodes/NGSI-LD/version/version.js",
+      "NGSI-LD-encode": "src/nodes/NGSI-LD/encode/encode.js",
+      "NGSI-LD-decode": "src/nodes/NGSI-LD/decode/decode.js"
     }
   },
   "repository": {

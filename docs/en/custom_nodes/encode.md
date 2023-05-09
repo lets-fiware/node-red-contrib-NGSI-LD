@@ -1,8 +1,20 @@
-# NGSI encode
+# NGSI-LD encode
 
 This custom node is a simple node that encodes forbidden characters.
 
 ![](https://raw.githubusercontent.com/lets-fiware/node-red-contrib-NGSI-LD/gh-pages/images/encode/encode-01.png)
+
+| Character | Encoded characters |
+| --------- | ------------------ |
+| "         | %22                |
+| %         | %25                |
+| '         | %27                |
+| (         | %28                |
+| )         | %29                |
+| ;         | %3B                |
+| <         | %3C                |
+| =         | %3D                |
+| >         | %3E                |
 
 ### Properties
 

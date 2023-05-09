@@ -52,6 +52,7 @@ describe('entity-attributes.js', () => {
         }),
         buildHTTPHeader: async () => { return {}; },
         buildParams: () => new URLSearchParams(),
+        encodeNGSI: (data) => data,
       });
 
       const updateAttrs = entityAttributesNode.__get__('updateAttrs');
@@ -72,6 +73,7 @@ describe('entity-attributes.js', () => {
               'object': 'urn:ngsi-ld:Building:barn002'
             }
           },
+          forbidden: false,
         },
       };
 
@@ -87,6 +89,7 @@ describe('entity-attributes.js', () => {
         http: async () => Promise.resolve({ status: 400, statusText: 'Bad Request' }),
         buildHTTPHeader: () => { return {}; },
         buildParams: () => new URLSearchParams(),
+        encodeNGSI: (data) => data,
       });
       const updateAttrs = entityAttributesNode.__get__('updateAttrs');
 
@@ -97,6 +100,7 @@ describe('entity-attributes.js', () => {
         config: {
           attributes: {
           },
+          forbidden: false,
         },
       };
 
@@ -116,6 +120,7 @@ describe('entity-attributes.js', () => {
         http: async () => Promise.resolve({ status: 400, statusText: 'Bad Request', data: { error: 'detail' } }),
         buildHTTPHeader: () => { return {}; },
         buildParams: () => new URLSearchParams(),
+        encodeNGSI: (data) => data,
       });
       const updateAttrs = entityAttributesNode.__get__('updateAttrs');
 
@@ -126,6 +131,7 @@ describe('entity-attributes.js', () => {
         config: {
           attributes: {
           },
+          forbidden: false,
         },
       };
 
@@ -148,6 +154,7 @@ describe('entity-attributes.js', () => {
         http: async () => Promise.reject({ message: 'unknown error' }),
         buildHTTPHeader: () => { return {}; },
         buildParams: () => new URLSearchParams(),
+        encodeNGSI: (data) => data,
       });
       const updateAttrs = entityAttributesNode.__get__('updateAttrs');
 
@@ -158,6 +165,7 @@ describe('entity-attributes.js', () => {
         config: {
           attributes: {
           },
+          forbidden: false,
         },
       };
 
@@ -181,6 +189,7 @@ describe('entity-attributes.js', () => {
       const actual = validateConfig(msg, {
         entityId: 'urn:ngsi-ld:TemperatureSensor:001',
         attributes: {},
+        forbidden: false,
       });
 
       assert.equal(actual, true);
@@ -193,10 +202,24 @@ describe('entity-attributes.js', () => {
       const actual = validateConfig(msg, {
         entityId: {},
         attributes: {},
+        forbidden: false,
       });
 
       assert.equal(actual, false);
       assert.deepEqual(msg, { payload: { error: 'entityId not string' } });
+    });
+    it('forbidden not boolean', () => {
+      const validateConfig = entityAttributesNode.__get__('validateConfig');
+
+      const msg = {};
+      const actual = validateConfig(msg, {
+        entityId: '',
+        attributes: {},
+        forbidden: 'true',
+      });
+
+      assert.equal(actual, false);
+      assert.deepEqual(msg, { payload: { error: 'forbidden not boolean' } });
     });
     it('entityId is empty', () => {
       const validateConfig = entityAttributesNode.__get__('validateConfig');
@@ -205,6 +228,7 @@ describe('entity-attributes.js', () => {
       const actual = validateConfig(msg, {
         entityId: '',
         attributes: {},
+        forbidden: false
       });
 
       assert.equal(actual, false);
@@ -217,6 +241,7 @@ describe('entity-attributes.js', () => {
       const actual = validateConfig(msg, {
         entityId: 'urn:ngsi-ld:TemperatureSensor:001',
         attributes: '',
+        forbidden: false
       });
 
       assert.equal(actual, false);
@@ -243,6 +268,7 @@ describe('entity-attributes.js', () => {
         actionType: 'append',
         entityId: 'urn:ngsi-ld:TemperatureSensor:001',
         atContext: '',
+        forbidden: 'true',
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
@@ -275,6 +301,7 @@ describe('entity-attributes.js', () => {
           },
         },
         noOverwrite: true,
+        forbidden: true,
       });
     });
     it('upsert attributes', () => {
@@ -327,6 +354,7 @@ describe('entity-attributes.js', () => {
             object: 'urn:ngsi-ld:Building:barn002',
           },
         },
+        forbidden: false,
       });
     });
     it('update attributes', () => {
@@ -379,6 +407,7 @@ describe('entity-attributes.js', () => {
             object: 'urn:ngsi-ld:Building:barn002',
           },
         },
+        forbidden: false,
       });
     });
     it('append attribute with entityId and attrs', () => {
@@ -434,6 +463,7 @@ describe('entity-attributes.js', () => {
             object: 'urn:ngsi-ld:Building:barn002',
           },
         },
+        forbidden: false,
       });
     });
     it('getToken', () => {
@@ -485,6 +515,7 @@ describe('entity-attributes.js', () => {
             object: 'urn:ngsi-ld:Building:barn002',
           },
         },
+        forbidden: false,
       });
     });
     it('atContext', () => {
@@ -536,6 +567,7 @@ describe('entity-attributes.js', () => {
             object: 'urn:ngsi-ld:Building:barn002',
           },
         },
+        forbidden: false,
       });
     });
     it('payload not JSON Object', () => {
@@ -649,6 +681,7 @@ describe('entity-attributes.js', () => {
         buildParams: () => new URLSearchParams(),
         isStringOrJson: () => { return true; },
         isJson: () => { return true; },
+        encodeNGSI: (data) => data,
       });
       const red = new MockRed();
       entityAttributesNode(red);

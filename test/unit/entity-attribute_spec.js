@@ -53,6 +53,7 @@ describe('entity-attribute.js', () => {
         }),
         buildHTTPHeader: async () => { return {}; },
         buildParams: () => new URLSearchParams(),
+        encodeNGSI: (data) => data,
       });
 
       const httpRequest = entityAttributeNode.__get__('httpRequest');
@@ -63,6 +64,7 @@ describe('entity-attribute.js', () => {
         pathname: '/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001/attrs/category',
         config: {
           actionType: 'update',
+          forbidden: false,
         },
       };
 
@@ -82,6 +84,7 @@ describe('entity-attribute.js', () => {
         }),
         buildHTTPHeader: async () => { return {}; },
         buildParams: () => new URLSearchParams(),
+        encodeNGSI: (data) => data,
       });
 
       const httpRequest = entityAttributeNode.__get__('httpRequest');
@@ -92,6 +95,7 @@ describe('entity-attribute.js', () => {
         pathname: '/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001/attrs/category',
         config: {
           actionType: 'delete',
+          forbidden: false,
         },
       };
 
@@ -107,6 +111,7 @@ describe('entity-attribute.js', () => {
         http: async () => Promise.resolve({ status: 400, statusText: 'Bad Request' }),
         buildHTTPHeader: () => { return {}; },
         buildParams: () => new URLSearchParams(),
+        encodeNGSI: (data) => data,
       });
       const httpRequest = entityAttributeNode.__get__('httpRequest');
 
@@ -115,6 +120,7 @@ describe('entity-attribute.js', () => {
         pathname: '/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001/attrs/category',
         config: {
           actionType: 'delete',
+          forbidden: false,
         },
       };
 
@@ -134,6 +140,7 @@ describe('entity-attribute.js', () => {
         http: async () => Promise.resolve({ status: 400, statusText: 'Bad Request', data: { error: 'detail' } }),
         buildHTTPHeader: () => { return {}; },
         buildParams: () => new URLSearchParams(),
+        encodeNGSI: (data) => data,
       });
       const httpRequest = entityAttributeNode.__get__('httpRequest');
 
@@ -142,6 +149,7 @@ describe('entity-attribute.js', () => {
         pathname: '/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001/attrs/category',
         config: {
           actionType: 'delete',
+          forbidden: false,
         },
       };
 
@@ -164,6 +172,7 @@ describe('entity-attribute.js', () => {
         http: async () => Promise.reject({ message: 'unknown error' }),
         buildHTTPHeader: () => { return {}; },
         buildParams: () => new URLSearchParams(),
+        encodeNGSI: (data) => data,
       });
       const httpRequest = entityAttributeNode.__get__('httpRequest');
 
@@ -172,6 +181,7 @@ describe('entity-attribute.js', () => {
         pathname: '/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001/attrs/category',
         config: {
           actionType: 'delete',
+          forbidden: false,
         },
       };
 
@@ -289,6 +299,7 @@ describe('entity-attribute.js', () => {
         deleteAll: 'false',
         datasetId: '',
         atContext: '',
+        forbidden: 'true',
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
@@ -316,6 +327,7 @@ describe('entity-attribute.js', () => {
           ],
           type: 'Property',
         },
+        forbidden: true,
       });
     });
     it('update attribute with entityId and attrName', () => {
@@ -367,6 +379,7 @@ describe('entity-attribute.js', () => {
           ],
           type: 'Property',
         },
+        forbidden: false,
       });
     });
     it('Delete attribute', () => {
@@ -402,6 +415,7 @@ describe('entity-attribute.js', () => {
         attribute: null,
         datasetId: '',
         deleteAll: false,
+        forbidden: false,
       });
     });
     it('Delete attribute with attrName', () => {
@@ -437,6 +451,7 @@ describe('entity-attribute.js', () => {
         attribute: null,
         datasetId: '',
         deleteAll: false,
+        forbidden: false,
       });
     });
     it('getToken', () => {
@@ -484,6 +499,7 @@ describe('entity-attribute.js', () => {
           ],
           type: 'Property',
         },
+        forbidden: false,
       });
     });
     it('atContext', () => {
@@ -531,6 +547,7 @@ describe('entity-attribute.js', () => {
           ],
           type: 'Property',
         },
+        forbidden: false,
       });
     });
     it('Payload is not stirng or JSON Object', () => {
@@ -629,6 +646,7 @@ describe('entity-attribute.js', () => {
         buildParams: () => new URLSearchParams(),
         isStringOrJson: () => { return true; },
         isJson: () => { return true; },
+        encodeNGSI: (data) => (data),
       });
       const red = new MockRed();
       entityAttributeNode(red);
@@ -639,6 +657,7 @@ describe('entity-attribute.js', () => {
         deleteAll: 'false',
         datasetId: '',
         atContext: '',
+        forbidden: 'true',
 
         broker: {
           apiEndpoint: 'http://orion-ld:1026',
@@ -675,6 +694,7 @@ describe('entity-attribute.js', () => {
         deleteAll: 'false',
         datasetId: '',
         atContext: '',
+        forbidden: 'false',
 
         broker: {
           apiEndpoint: 'http://orion-ld:1026',

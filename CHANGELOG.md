@@ -1,5 +1,6 @@
 ## node-red-contrib-letsfiware-NGSI v0.3.0-next
 
+-   Add feature for encoding and decoding forbidden chars (#20)
 -   ADD encode / decode node (#19)
 -   Update Github Actions for E2E test (#17)
 

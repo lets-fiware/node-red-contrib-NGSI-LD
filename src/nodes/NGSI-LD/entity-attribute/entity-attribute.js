@@ -40,7 +40,7 @@ const httpRequest = async function (msg, param) {
   };
 
   if (param.config.actionType === 'update') {
-    options.data = param.config.attribute;
+    options.data = lib.encodeNGSI(param.config.attribute, param.config.forbidden);
   }
 
   try {
@@ -83,9 +83,13 @@ const validateConfig = function (msg, config) {
     return false;
   }
 
-  if (config.deleteAll && typeof config.deleteAll !== 'boolean') {
-    msg.payload = { error: 'deleteAll not boolean' };
-    return false;
+  const boolean_items = ['deleteAll', 'forbidden'];
+  for (let i = 0; i < boolean_items.length; i++) {
+    const e = boolean_items[i];
+    if (config[e] && typeof config[e] !== 'boolean') {
+      msg.payload = { error: e + ' not boolean' };
+      return false;
+    }
   }
 
   if (config.actionType === 'update' && (!config.attribute || !lib.isJson(config.attribute))) {
@@ -111,6 +115,7 @@ const createParam = function (msg, config, brokerConfig) {
     deleteAll: config.deleteAll === 'true',
     datasetId: config.datasetId,
     attribute: null,
+    forbidden: config.forbidden ? config.forbidden === 'true' : false,
   };
 
   if (lib.isJson(msg.payload)) {

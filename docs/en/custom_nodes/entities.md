@@ -20,27 +20,28 @@ This custom node is a simple node that allows to obtain NGSI-LD entities.
 ![](https://raw.githubusercontent.com/lets-fiware/node-red-contrib-NGSI-LD/gh-pages/images/entities/entities-02.png)
 
 
-| Property          | Description                                                 |
-| ----------------- | ----------------------------------------------------------- |
-| Name              | A name for a node instance                                  |
-| Broker            | An endpoint of a context broker                             |
-| Representation    | `normalized`, `concise` or `keyValues`                      |
-| Entity id         | Id of the entity to retrieve                                |
-| Entity type       | Types of the entity to retrieve                             |
-| ID pattern        | Regular expression that shall be matched by entity ids      |
-| Attributes        | Comma separated list fo attribute names                     |
-| System attrs      | `true` or `false`                                           |
-| Query             | Filter out entities by attribute values                     |
-| CSF               | Context source fileter                                      |
-| Geo relationship  | Geo relationship of geoquery                                |
-| Geometry          | Geometry of geoquery                                        |
-| Coordinates       | Coordinates of geoquery                                     |
-| Geo property      | The name of the Property that contains the geospatial data  |
-| Geometry property | GeoProperty Name                                            |
-| Language          | The preferred natural language of the response              |
-| Accept            | `JSON-LD`, `JSON` or `GeoJSON`                              |
-| @context          | NGSI-LD @context                                            |
-| Buffering         | `off` or `on`                                               |
+| Property               | Description                                                 |
+| ---------------------- | ----------------------------------------------------------- |
+| Name                   | A name for a node instance                                  |
+| Broker                 | An endpoint of a context broker                             |
+| Representation         | `normalized`, `concise` or `keyValues`                      |
+| Entity id              | Id of the entity to retrieve                                |
+| Entity type            | Types of the entity to retrieve                             |
+| ID pattern             | Regular expression that shall be matched by entity ids      |
+| Attributes             | Comma separated list fo attribute names                     |
+| System attrs           | `true` or `false`                                           |
+| Query                  | Filter out entities by attribute values                     |
+| CSF                    | Context source fileter                                      |
+| Geo relationship       | Geo relationship of geoquery                                |
+| Geometry               | Geometry of geoquery                                        |
+| Coordinates            | Coordinates of geoquery                                     |
+| Geo property           | The name of the Property that contains the geospatial data  |
+| Geometry property      | GeoProperty Name                                            |
+| Language               | The preferred natural language of the response              |
+| Accept                 | `JSON-LD`, `JSON` or `GeoJSON`                              |
+| @context               | NGSI-LD @context                                            |
+| Buffering              | `off` or `on`                                               |
+| Decode forbidden chars | `off` or `on`                                               |
 
 ## Input
 
@@ -66,6 +67,7 @@ The values in the payload may overwrite properties.
 | geometryProperty | string    | GeoProperty Name                                                    |
 | lang             | string    | The preferred natural language of the response                      |
 | accept           | string    | `application/ld+json`, `application/json` or `application/geo+json` |
+| forbidden        | boolean   | `true` or `false`                                                   |
 
 ```
 {

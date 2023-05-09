@@ -46,7 +46,7 @@ const getEntities = async function (msg, param) {
     try {
       const res = await lib.http(options);
       if (res.status === 200) {
-        param.buffer.send(res.data);
+        param.buffer.send(lib.decodeNGSI(res.data, param.config.forbidden));
         if (res.data.length === 0) {
           break;
         }
@@ -151,14 +151,17 @@ const validateConfig = function (msg, config) {
     }
   }
 
-  if (config.buffering && typeof config.buffering !== 'boolean') {
-    msg.payload = { error: 'buffering not boolean' };
-    return false;
-  }
-
-  if (config.sysAttrs && typeof config.sysAttrs !== 'boolean') {
-    msg.payload = { error: 'sysAttrs not boolean' };
-    return false;
+  const boolean_items = [
+    'buffering',
+    'sysAttrs',
+    'forbidden'
+  ];
+  for (let i = 0; i < boolean_items.length; i++) {
+    const e = boolean_items[i];
+    if (config[e] && typeof config[e] !== 'boolean') {
+      msg.payload = { error: e + ' not boolean' };
+      return false;
+    }
   }
 
   if (config.limit && typeof config.limit !== 'number') {
@@ -207,6 +210,7 @@ const createParam = function (msg, config, brokerConfig) {
       lang: config.lang.trim(),
       accept: config.accept.trim(),
       buffering: config.buffering === 'on',
+      forbidden: config.forbidden ? config.forbidden === 'true' : false,
       limit: 100,
       offset: 0,
     },
@@ -229,6 +233,7 @@ const createParam = function (msg, config, brokerConfig) {
     'lang',
     'accept',
     'buffering',
+    'forbidden',
     'limit',
     'offset'].forEach(e => {
     if (msg.payload[e]) {

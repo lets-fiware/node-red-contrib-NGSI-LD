@@ -23,12 +23,13 @@ It allows to create a NGSIv2 entity.
 
 ![](https://raw.githubusercontent.com/lets-fiware/node-red-contrib-NGSI-LD/gh-pages/images/entity/entity-02.png)
 
-| Property    | Description                     |
-| ----------- | ------------------------------- |
-| Name        | A name for a node instance      |
-| Broker      | An endpoint of a context broker |
-| Action type | `create`                        |
-| @context    | NGSI-LD @context                |
+| Property                        | Description                     |
+| ------------------------------- | ------------------------------- |
+| Name                            | A name for a node instance      |
+| Broker                          | An endpoint of a context broker |
+| Action type                     | `create`                        |
+| @context                        | NGSI-LD @context                |
+| Encode / Decode forbidden chars | `off` or `on`                   |
 
 ### Example
 
@@ -82,19 +83,20 @@ It allows to read a NGSI-LD entity.
 
 ![](https://raw.githubusercontent.com/lets-fiware/node-red-contrib-NGSI-LD/gh-pages/images/entity/entity-03.png)
 
-| Property          | Description                                    |
-| ----------------- | ---------------------------------------------- |
-| Name              | A name for a node instance                     |
-| Broker            | An endpoint of a context broker                |
-| Action type       | `read`                                         |
-| Representation    | `normalizaed`, `concise` or `keyValues`        |
-| Entity id         | Id of the entity to retrieve                   |
-| Attributes        | Comma separated list of attribute names        |
-| System attrs      | `true` or `false`                              |
-| Geometry property | GeoProperty Name                               |
-| Language          | The preferred natural language of the response |
-| Accept            | `JSON-LD`, `JSON` or `GeoJSON`                 |
-| @context          | NGSI-LD @context                               |
+| Property                        | Description                                    |
+| ------------------------------- | ---------------------------------------------- |
+| Name                            | A name for a node instance                     |
+| Broker                          | An endpoint of a context broker                |
+| Action type                     | `read`                                         |
+| Representation                  | `normalizaed`, `concise` or `keyValues`        |
+| Entity id                       | Id of the entity to retrieve                   |
+| Attributes                      | Comma separated list of attribute names        |
+| System attrs                    | `true` or `false`                              |
+| Geometry property               | GeoProperty Name                               |
+| Language                        | The preferred natural language of the response |
+| Accept                          | `JSON-LD`, `JSON` or `GeoJSON`                 |
+| @context                        | NGSI-LD @context                               |
+| Encode / Decode forbidden chars | `off` or `on`                                  |
 
 ### Examples
 
@@ -125,6 +127,7 @@ The values in the payload may overwrite properties.
 | geometryProperty | string    | GeoProperty Name                                                    |
 | lang             | string    | The preferred natural language of the response                      |
 | accept           | string    | `application/ld+json`, `application/json` or `application/geo+json` |
+| forbidden        | boolean   | `true` or `false`                                                   |
 
 ```
 {
@@ -173,13 +176,14 @@ It allows to delete a NGSI-LD entity.
 
 ![](https://raw.githubusercontent.com/lets-fiware/node-red-contrib-NGSI-LD/gh-pages/images/entity/entity-04.png)
 
-| Property    | Description                     |
-| ----------- | ------------------------------- |
-| Name        | A name for a node instance      |
-| Broker      | An endpoint of a context broker |
-| Action type | `delete`                        |
-| Entity id   | Id of the entity to delete      |
-| @context    | NGSI-LD @context                |
+| Property                        | Description                     |
+| ------------------------------- | ------------------------------- |
+| Name                            | A name for a node instance      |
+| Broker                          | An endpoint of a context broker |
+| Action type                     | `delete`                        |
+| Entity id                       | Id of the entity to delete      |
+| @context                        | NGSI-LD @context                |
+| Encode / Decode forbidden chars | `off` or `on`                   |
 
 ### Example
 

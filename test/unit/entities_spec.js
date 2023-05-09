@@ -56,6 +56,7 @@ describe('entities.js', () => {
         }),
         buildHTTPHeader: async () => { return {}; },
         buildParams: () => new URLSearchParams(),
+        decodeNGSI: (data) => data,
       });
 
       const getEntities = entitiesNode.__get__('getEntities');
@@ -70,6 +71,7 @@ describe('entities.js', () => {
         config: {
           offset: 0,
           limit: 2,
+          forbidden: false,
         }
       };
 
@@ -96,6 +98,7 @@ describe('entities.js', () => {
         }),
         buildHTTPHeader: async () => { return {}; },
         buildParams: () => new URLSearchParams(),
+        decodeNGSI: (data) => data,
       });
 
       const getEntities = entitiesNode.__get__('getEntities');
@@ -110,6 +113,7 @@ describe('entities.js', () => {
         config: {
           offset: 0,
           limit: 2,
+          forbidden: false,
         }
       };
 
@@ -135,6 +139,7 @@ describe('entities.js', () => {
         }),
         buildHTTPHeader: async () => { return {}; },
         buildParams: () => new URLSearchParams(),
+        decodeNGSI: (data) => data,
       });
 
       const getEntities = entitiesNode.__get__('getEntities');
@@ -148,6 +153,7 @@ describe('entities.js', () => {
         config: {
           offset: 0,
           limit: 2,
+          forbidden: false,
         }
       };
 
@@ -165,6 +171,7 @@ describe('entities.js', () => {
         }),
         buildHTTPHeader: async () => { return {}; },
         buildParams: () => new URLSearchParams(),
+        decodeNGSI: (data) => data,
       });
 
       const getEntities = entitiesNode.__get__('getEntities');
@@ -178,6 +185,7 @@ describe('entities.js', () => {
         config: {
           offset: 0,
           limit: 2,
+          forbidden: false,
         }
       };
 
@@ -202,6 +210,7 @@ describe('entities.js', () => {
         config: {
           offset: 0,
           limit: 2,
+          forbidden: false,
         }
       };
 
@@ -220,6 +229,7 @@ describe('entities.js', () => {
         http: async () => Promise.resolve({ status: 400, statusText: 'Bad Request', data: { error: 'detail' } }),
         buildHTTPHeader: () => { return {}; },
         buildParams: () => new URLSearchParams(),
+        decodeNGSI: (data) => data,
       });
       const getEntities = entitiesNode.__get__('getEntities');
       const nobuffering = entitiesNode.__get__('nobuffering');
@@ -231,6 +241,7 @@ describe('entities.js', () => {
         config: {
           offset: 0,
           limit: 2,
+          forbidden: false,
         }
       };
 
@@ -252,6 +263,7 @@ describe('entities.js', () => {
         http: async () => Promise.reject({ message: 'unknown error' }),
         buildHTTPHeader: () => { return {}; },
         buildParams: () => new URLSearchParams(),
+        decodeNGSI: (data) => data,
       });
       const getEntities = entitiesNode.__get__('getEntities');
       const nobuffering = entitiesNode.__get__('nobuffering');
@@ -263,6 +275,7 @@ describe('entities.js', () => {
         config: {
           offset: 0,
           limit: 2,
+          forbidden: false,
         }
       };
 
@@ -546,6 +559,15 @@ describe('entities.js', () => {
       assert.equal(actual, false);
       assert.deepEqual(msg, { payload: { error: 'sysAttrs not boolean' } });
     });
+    it('forbidden not boolean', () => {
+      const validateConfig = entitiesNode.__get__('validateConfig');
+
+      const msg = {};
+      const actual = validateConfig(msg, { forbidden: 'true' });
+
+      assert.equal(actual, false);
+      assert.deepEqual(msg, { payload: { error: 'forbidden not boolean' } });
+    });
     it('limit not number', () => {
       const validateConfig = entitiesNode.__get__('validateConfig');
 
@@ -620,6 +642,7 @@ describe('entities.js', () => {
         lang: '',
         accept: 'application/ld+json',
         buffering: false,
+        forbidden: false,
         limit: 100,
         offset: 0,
       });
@@ -645,6 +668,7 @@ describe('entities.js', () => {
         accept: 'application/ld+json',
         atContext: '',
         buffering: 'off',
+        forbidden: 'true',
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
@@ -678,6 +702,7 @@ describe('entities.js', () => {
         lang: '',
         accept: 'application/ld+json',
         buffering: false,
+        forbidden: true,
         limit: 100,
         offset: 0,
       });
@@ -736,6 +761,7 @@ describe('entities.js', () => {
         lang: '',
         accept: 'application/ld+json',
         buffering: false,
+        forbidden: false,
         limit: 100,
         offset: 0,
       });
@@ -794,6 +820,7 @@ describe('entities.js', () => {
         lang: '',
         accept: 'application/ld+json',
         buffering: false,
+        forbidden: false,
         limit: 100,
         offset: 0,
       }
@@ -853,6 +880,7 @@ describe('entities.js', () => {
         lang: '',
         accept: 'application/ld+json',
         buffering: true,
+        forbidden: false,
         limit: 100,
         offset: 0,
       }
@@ -950,6 +978,7 @@ describe('entities.js', () => {
         buildHTTPHeader: () => { return {}; },
         buildParams: () => new URLSearchParams(),
         isStringOrJson: () => { return true; },
+        decodeNGSI: (data) => data,
       });
       const red = new MockRed();
       entitiesNode(red);

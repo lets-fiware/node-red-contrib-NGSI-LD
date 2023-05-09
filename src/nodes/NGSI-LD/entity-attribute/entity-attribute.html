@@ -42,6 +42,7 @@
         deleteAll: { value: 'false' },
         datasetId: { value: '' },
         atContext: { value: '' },
+        forbidden: { value: 'false' },
       },
       inputs: 1,
       outputs: 1,
@@ -105,6 +106,13 @@
     <div class="form-row">
         <label for="node-input-atContext"><i class="icon-tag"></i> @context</label>
         <input type="text" id="node-input-atContext">
+    </div>
+    <div class="form-row">
+        <label for="node-input-forbidden"><i class="fa fa-tag"></i> Encode forbidden chars</label>
+        <select id="node-input-forbidden">
+            <option value="false" selected>off</option>
+            <option value="true">on</option>
+        </select>
     </div>
 </script>
 

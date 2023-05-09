@@ -22,14 +22,15 @@ It allows to update an attribute in NGSI-LD entity.
 
 ![](https://raw.githubusercontent.com/lets-fiware/node-red-contrib-NGSI-LD/gh-pages/images/entity-attribute/entity-attribute-02.png)
 
-| Property       | Description                               |
-| -------------- | ----------------------------------------- |
-| Name           | A name for a node instance                |
-| Broker         | An endpoint of a NGSI-LD broker           |
-| Action type    | `update`                                  |
-| Entity id      | Id of the concerned entity                |
-| Attribute name | Attribute name (Property or Relationship) | 
-| @context       | NGSI-LD @context                          |
+| Property               | Description                               |
+| ---------------------- | ----------------------------------------- |
+| Name                   | A name for a node instance                |
+| Broker                 | An endpoint of a NGSI-LD broker           |
+| Action type            | `update`                                  |
+| Entity id              | Id of the concerned entity                |
+| Attribute name         | Attribute name (Property or Relationship) | 
+| @context               | NGSI-LD @context                          |
+| Encode forbidden chars | `off` or `on`                             |
 
 ### Example
 
@@ -61,6 +62,7 @@ The values in the payload may overwrite properties.
 | entityId  | string      | Id of the concerned entity                     |
 | attrName  | string      | Attribute name (Property or Relationship)      |
 | attribute | JSON Object | An object representing the attribute to update |
+| forbidden | boolean     | `true` or `false`                              |
 
 ```
 {
@@ -94,16 +96,17 @@ It allows to delete an attribute in NGSI-LD entity.
 
 ![](https://raw.githubusercontent.com/lets-fiware/node-red-contrib-NGSI-LD/gh-pages/images/entity-attribute/entity-attribute-03.png)
 
-| Property       | Description                               |
-| -------------- | ----------------------------------------- |
-| Name           | A name for a node instance                |
-| Broker         | An endpoint of a NGSI-LD broker           |
-| Action type    | `delete`                                  |
-| Entity id      | Id of the concerned entity                |
-| Attribute name | Attribute name (Property or Relationship) | 
-| Delete all     | `true` or `false`                         |
-| Dataset id     | datasetId of the dataset to be deleted    |
-| @context       | NGSI-LD @context                          |
+| Property               | Description                               |
+| ---------------------- | ----------------------------------------- |
+| Name                   | A name for a node instance                |
+| Broker                 | An endpoint of a NGSI-LD broker           |
+| Action type            | `delete`                                  |
+| Entity id              | Id of the concerned entity                |
+| Attribute name         | Attribute name (Property or Relationship) | 
+| Delete all             | `true` or `false`                         |
+| Dataset id             | datasetId of the dataset to be deleted    |
+| @context               | NGSI-LD @context                          |
+| Encode forbidden chars | `off` or `on`                             |
 
 ### Example
 
@@ -124,12 +127,13 @@ payload *JSON Object*
 A `msg.payload` should contain information related to the attribute to delete.
 The values in the payload may overwrite properties.
 
-| Name       | Data type | Description                               |
-| ---------- | --------- | ----------------------------------------- |
-| entityId   | string    | Id of the concerned entity                |
-| attrName   | string    | Attribute name (Property or Relationship) |
-| deleteAll  | boolean   | `true` or `false`                         |
-| datasetid  | string    | datasetId of the dataset to be deleted    |
+| Name      | Data type | Description                               |
+| --------- | --------- | ----------------------------------------- |
+| entityId  | string    | Id of the concerned entity                |
+| attrName  | string    | Attribute name (Property or Relationship) |
+| deleteAll | boolean   | `true` or `false`                         |
+| datasetid | string    | datasetId of the dataset to be deleted    |
+| forbidden | boolean   | `true` or `false`                         |
 
 ```
 {

@@ -25,12 +25,13 @@ It allows to create NGSI-LD entities.
 
 ![](https://raw.githubusercontent.com/lets-fiware/node-red-contrib-NGSI-LD/gh-pages/images/batch-operations/batch-operations-02.png)
 
-| Property    | Description                   |
-| ----------- | ----------------------------- |
-| Name        | A name for a node instance    |
-| Broker      | An endpoint of NGSI-LD broker |
-| Action type | `create`                      |
-| @context    | NGSI-LD @context              |
+| Property               | Description                   |
+| ---------------------- | ----------------------------- |
+| Name                   | A name for a node instance    |
+| Broker                 | An endpoint of NGSI-LD broker |
+| Action type            | `create`                      |
+| @context               | NGSI-LD @context              |
+| Encode forbidden chars | `off` or `on`                 |
 
 ### Input
 
@@ -100,12 +101,13 @@ It allows to update NGSI-LD entities.
 
 ![](https://raw.githubusercontent.com/lets-fiware/node-red-contrib-NGSI-LD/gh-pages/images/batch-operations/batch-operations-03.png)
 
-| Property    | Description                   |
-| ----------- | ----------------------------- |
-| Name        | A name for a node instance    |
-| Broker      | An endpoint of NGSI-LD broker |
-| Action type | `update`                      |
-| @context    | NGSI-LD @context              |
+| Property               | Description                   |
+| ---------------------- | ----------------------------- |
+| Name                   | A name for a node instance    |
+| Broker                 | An endpoint of NGSI-LD broker |
+| Action type            | `update`                      |
+| @context               | NGSI-LD @context              |
+| Encode forbidden chars | `off` or `on`                 |
 
 ### Input
 
@@ -162,12 +164,13 @@ It allows to upsert NGSI-LD entities.
 
 ![](https://raw.githubusercontent.com/lets-fiware/node-red-contrib-NGSI-LD/gh-pages/images/batch-operations/batch-operations-04.png)
 
-| Property    | Description                   |
-| ----------- | ----------------------------- |
-| Name        | A name for a node instance    |
-| Broker      | An endpoint of NGSI-LD broker |
-| Action type | `upsert`                      |
-| @context    | NGSI-LD @context              |
+| Property               | Description                   |
+| ---------------------- | ----------------------------- |
+| Name                   | A name for a node instance    |
+| Broker                 | An endpoint of NGSI-LD broker |
+| Action type            | `upsert`                      |
+| @context               | NGSI-LD @context              |
+| Encode forbidden chars | `off` or `on`                 |
 
 ### Input
 
@@ -224,12 +227,13 @@ It allows to delete NGSI-LD entities.
 
 ![](https://raw.githubusercontent.com/lets-fiware/node-red-contrib-NGSI-LD/gh-pages/images/batch-operations/batch-operations-05.png)
 
-| Property    | Description                   |
-| ----------- | ----------------------------- |
-| Name        | A name for a node instance    |
-| Broker      | An endpoint of NGSI-LD broker |
-| Action type | `delete`                      |
-| @context    | NGSI-LD @context              |
+| Property               | Description                   |
+| ---------------------- | ----------------------------- |
+| Name                   | A name for a node instance    |
+| Broker                 | An endpoint of NGSI-LD broker |
+| Action type            | `delete`                      |
+| @context               | NGSI-LD @context              |
+| Encode forbidden chars | `off` or `on`                 |
 
 ### Input
 

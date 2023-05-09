@@ -53,6 +53,8 @@ describe('entity.js', () => {
         }),
         buildHTTPHeader: () => { return {}; },
         buildParams: () => new URLSearchParams(),
+        encodeNGSI: (data) => data,
+        decodeNGSI: (data) => data,
       });
       const httpRequest = entityNode.__get__('httpRequest');
 
@@ -62,6 +64,7 @@ describe('entity.js', () => {
         pathname: '/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001',
         config: {
           actionType: 'read',
+          forbidden: false,
         },
       };
 
@@ -78,6 +81,8 @@ describe('entity.js', () => {
         }),
         buildHTTPHeader: () => { return {}; },
         buildParams: () => new URLSearchParams(),
+        encodeNGSI: (data) => data,
+        decodeNGSI: (data) => data,
       });
       const httpRequest = entityNode.__get__('httpRequest');
 
@@ -88,6 +93,7 @@ describe('entity.js', () => {
         config: {
           actionType: 'create',
           data: { 'id': 'urn:ngsi-ld:TemperatureSensor:001', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } },
+          forbidden: false,
         },
       };
 
@@ -105,6 +111,8 @@ describe('entity.js', () => {
         }),
         buildHTTPHeader: () => { return {}; },
         buildParams: () => new URLSearchParams(),
+        encodeNGSI: (data) => data,
+        decodeNGSI: (data) => data,
       });
       const httpRequest = entityNode.__get__('httpRequest');
 
@@ -114,6 +122,7 @@ describe('entity.js', () => {
         pathname: '/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001',
         config: {
           actionType: 'delete',
+          forbidden: false,
         },
       };
 
@@ -128,6 +137,8 @@ describe('entity.js', () => {
         http: async () => Promise.resolve({ status: 400, statusText: 'Bad Request' }),
         buildHTTPHeader: () => { return {}; },
         buildParams: () => new URLSearchParams(),
+        encodeNGSI: (data) => data,
+        decodeNGSI: (data) => data,
       });
       const httpRequest = entityNode.__get__('httpRequest');
 
@@ -137,6 +148,7 @@ describe('entity.js', () => {
         pathname: '/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001',
         config: {
           actionType: 'read',
+          forbidden: false,
         },
       };
 
@@ -155,6 +167,8 @@ describe('entity.js', () => {
         http: async () => Promise.resolve({ status: 400, statusText: 'Bad Request', data: { error: 'detail' } }),
         buildHTTPHeader: () => { return {}; },
         buildParams: () => new URLSearchParams(),
+        encodeNGSI: (data) => data,
+        decodeNGSI: (data) => data,
       });
       const httpRequest = entityNode.__get__('httpRequest');
 
@@ -164,6 +178,7 @@ describe('entity.js', () => {
         pathname: '/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001',
         config: {
           actionType: 'read',
+          forbidden: false,
         },
       };
 
@@ -185,6 +200,8 @@ describe('entity.js', () => {
         http: async () => Promise.reject({ message: 'unknown error' }),
         buildHTTPHeader: () => { return {}; },
         buildParams: () => new URLSearchParams(),
+        encodeNGSI: (data) => data,
+        decodeNGSI: (data) => data,
       });
       const httpRequest = entityNode.__get__('httpRequest');
 
@@ -194,6 +211,7 @@ describe('entity.js', () => {
         pathname: '/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001',
         config: {
           actionType: 'read',
+          forbidden: false,
         },
       };
 
@@ -317,6 +335,15 @@ describe('entity.js', () => {
       assert.equal(actual, false);
       assert.deepEqual(msg, { payload: { error: 'sysAttrs not boolean' } });
     });
+    it('forbidden not boolean', () => {
+      const validateConfig = entityNode.__get__('validateConfig');
+
+      const msg = {};
+      const actual = validateConfig(msg, { forbidden: 'true', actionType: 'create' });
+
+      assert.equal(actual, false);
+      assert.deepEqual(msg, { payload: { error: 'forbidden not boolean' } });
+    });
   });
   describe('createParam', () => {
     it('create', () => {
@@ -332,6 +359,7 @@ describe('entity.js', () => {
         geometryProperty: '',
         lang: '',
         accept: 'application/ld+json',
+        forbidden: 'true',
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
@@ -357,6 +385,7 @@ describe('entity.js', () => {
           geometryProperty: '',
           lang: '',
           accept: 'application/ld+json',
+          forbidden: true,
         },
         method: 'get',
       };
@@ -441,6 +470,7 @@ describe('entity.js', () => {
               },
             },
           },
+          forbidden: false,
         },
         method: 'post',
       };
@@ -648,10 +678,11 @@ describe('entity.js', () => {
         entityId: '',
         attrs: '',
         representation: 'normalized',
-        sysAttrs: false,
+        sysAttrs: 'false',
         geometryProperty: '',
         lang: '',
         accept: 'application/ld+json',
+        forbidden: 'false',
 
         broker: {
           apiEndpoint: 'http://orion-ld:1026',
@@ -732,6 +763,7 @@ describe('entity.js', () => {
               },
             },
           },
+          forbidden: false,
         },
         method: 'post',
       });
@@ -745,10 +777,11 @@ describe('entity.js', () => {
         entityId: '',
         attrs: '',
         representation: 'normalized',
-        sysAttrs: false,
+        sysAttrs: 'false',
         geometryProperty: '',
         lang: '',
         accept: 'application/ld+json',
+        forbidden: 'false',
 
         broker: {
           apiEndpoint: 'http://orion-ld:1026',

@@ -100,6 +100,7 @@
         "attrs": "",
         "geometryProperty": "",
         "lang": "",
+        "forbidden": "false",
         "x": 400,
         "y": 140,
         "wires": [
@@ -123,6 +124,7 @@
         "geometryProperty": "",
         "lang": "",
         "accept": "application/json",
+        "forbidden": "false",
         "x": 400,
         "y": 200,
         "wires": [
@@ -141,6 +143,9 @@
         "actionType": "delete",
         "entityId": "",
         "attrs": "",
+        "geometryProperty": "",
+        "lang": "",
+        "forbidden": "false",
         "x": 400,
         "y": 260,
         "wires": [
@@ -299,6 +304,7 @@
         "broker": "907c553d7533ec10",
         "actionType": "create",
         "atContext": "",
+        "forbidden": "false",
         "x": 380,
         "y": 440,
         "wires": [
@@ -315,6 +321,7 @@
         "broker": "907c553d7533ec10",
         "actionType": "upsert",
         "atContext": "",
+        "forbidden": "false",
         "x": 380,
         "y": 520,
         "wires": [
@@ -331,6 +338,7 @@
         "broker": "907c553d7533ec10",
         "actionType": "delete",
         "atContext": "",
+        "forbidden": "false",
         "x": 380,
         "y": 600,
         "wires": [
@@ -362,6 +370,7 @@
         "accept": "application/ld+json",
         "atContext": "",
         "buffering": "off",
+        "forbidden": "false",
         "x": 410,
         "y": 340,
         "wires": [
@@ -421,6 +430,7 @@
         "actionType": "append",
         "entityId": "urn:ngsi-ld:TemperatureSensor:001",
         "atContext": "",
+        "forbidden": "false",
         "x": 360,
         "y": 700,
         "wires": [
@@ -497,6 +507,7 @@
         "actionType": "update",
         "entityId": "urn:ngsi-ld:TemperatureSensor:001",
         "atContext": "",
+        "forbidden": "false",
         "x": 360,
         "y": 760,
         "wires": [
@@ -564,6 +575,7 @@
         "actionType": "upsert",
         "entityId": "urn:ngsi-ld:TemperatureSensor:001",
         "atContext": "",
+        "forbidden": "false",
         "x": 360,
         "y": 820,
         "wires": [
@@ -584,6 +596,7 @@
         "deleteAll": "false",
         "datasetId": "",
         "atContext": "",
+        "forbidden": "false",
         "x": 350,
         "y": 900,
         "wires": [
@@ -671,6 +684,7 @@
         "deleteAll": "false",
         "datasetId": "",
         "atContext": "",
+        "forbidden": "false",
         "x": 350,
         "y": 960,
         "wires": [

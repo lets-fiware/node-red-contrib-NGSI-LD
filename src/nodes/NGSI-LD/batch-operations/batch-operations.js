@@ -36,7 +36,7 @@ const batchOperations = async function (msg, param) {
     baseURL: param.host,
     url: param.pathname,
     headers: await lib.buildHTTPHeader(param),
-    data: param.config.data,
+    data: lib.encodeNGSI(param.config.data, param.config.forbidden),
   };
 
   try {
@@ -70,6 +70,7 @@ const createParam = function (msg, config, brokerConfig) {
     atContext: config.atContext === '' ? brokerConfig.atContext.trim() : config.atContext.trim(),
     data: Array.isArray(msg.payload) ? msg.payload : [msg.payload],
     accept: 'application/ld+json',
+    forbidden: config.forbidden ? config.forbidden === 'true' : false,
   };
 
   const param = {

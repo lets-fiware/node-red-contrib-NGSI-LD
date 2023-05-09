@@ -92,6 +92,7 @@
         "geometryProperty": "",
         "lang": "",
         "accept": "application/ld+json",
+        "forbidden": "false",
         "x": 420,
         "y": 160,
         "wires": [
@@ -143,6 +144,7 @@
         "geometryProperty": "",
         "lang": "",
         "accept": "application/ld+json",
+        "forbidden": "false",
         "x": 420,
         "y": 220,
         "wires": [
@@ -194,6 +196,7 @@
         "geometryProperty": "",
         "lang": "",
         "accept": "application/ld+json",
+        "forbidden": "false",
         "x": 420,
         "y": 280,
         "wires": [
@@ -225,6 +228,7 @@
         "accept": "application/ld+json",
         "atContext": "",
         "buffering": "on",
+        "forbidden": "false",
         "x": 430,
         "y": 380,
         "wires": [
@@ -270,6 +274,7 @@
         "actionType": "append",
         "entityId": "urn:ngsi-ld:TemperatureSensor:201",
         "atContext": "",
+        "forbidden": "false",
         "x": 440,
         "y": 740,
         "wires": [
@@ -287,6 +292,7 @@
         "actionType": "update",
         "entityId": "urn:ngsi-ld:TemperatureSensor:201",
         "atContext": "",
+        "forbidden": "false",
         "x": 440,
         "y": 800,
         "wires": [
@@ -304,6 +310,7 @@
         "actionType": "upsert",
         "entityId": "urn:ngsi-ld:TemperatureSensor:201",
         "atContext": "",
+        "forbidden": "false",
         "x": 440,
         "y": 860,
         "wires": [
@@ -404,6 +411,7 @@
         "broker": "907c553d7533ec10",
         "actionType": "create",
         "atContext": "",
+        "forbidden": "false",
         "x": 460,
         "y": 460,
         "wires": [
@@ -420,6 +428,7 @@
         "broker": "907c553d7533ec10",
         "actionType": "update",
         "atContext": "",
+        "forbidden": "false",
         "x": 460,
         "y": 520,
         "wires": [
@@ -436,6 +445,7 @@
         "broker": "907c553d7533ec10",
         "actionType": "upsert",
         "atContext": "",
+        "forbidden": "false",
         "x": 460,
         "y": 580,
         "wires": [
@@ -456,6 +466,7 @@
         "deleteAll": "false",
         "datasetId": "",
         "atContext": "",
+        "forbidden": "false",
         "x": 430,
         "y": 980,
         "wires": [
@@ -476,6 +487,7 @@
         "deleteAll": "false",
         "datasetId": "",
         "atContext": "",
+        "forbidden": "false",
         "x": 430,
         "y": 1040,
         "wires": [
@@ -604,6 +616,7 @@
         "broker": "907c553d7533ec10",
         "actionType": "delete",
         "atContext": "",
+        "forbidden": "false",
         "x": 460,
         "y": 640,
         "wires": [
@@ -665,6 +678,638 @@
         "statusCode": "",
         "headers": {},
         "x": 670,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "dc32eea573b763bc",
+        "type": "http in",
+        "z": "554141bee26226c1",
+        "name": "",
+        "url": "/create-entity-forbidden",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 960,
+        "y": 160,
+        "wires": [
+            [
+                "bb6746c1bc8bdf3e"
+            ]
+        ]
+    },
+    {
+        "id": "b2c3a4bb2e6a5708",
+        "type": "http response",
+        "z": "554141bee26226c1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1490,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "bb6746c1bc8bdf3e",
+        "type": "NGSI-LD Entity",
+        "z": "554141bee26226c1",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "atContext": "",
+        "actionType": "create",
+        "entityId": "",
+        "attrs": "",
+        "sysAttrs": "false",
+        "representation": "normalized",
+        "geometryProperty": "",
+        "lang": "",
+        "accept": "application/ld+json",
+        "forbidden": "true",
+        "x": 1240,
+        "y": 160,
+        "wires": [
+            [
+                "b2c3a4bb2e6a5708"
+            ]
+        ]
+    },
+    {
+        "id": "1fdf9fbe7123e1ce",
+        "type": "http in",
+        "z": "554141bee26226c1",
+        "name": "",
+        "url": "/read-entity-forbidden",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 960,
+        "y": 220,
+        "wires": [
+            [
+                "8f250fd75c253d40"
+            ]
+        ]
+    },
+    {
+        "id": "09d14989da218753",
+        "type": "http response",
+        "z": "554141bee26226c1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1490,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "8f250fd75c253d40",
+        "type": "NGSI-LD Entity",
+        "z": "554141bee26226c1",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "atContext": "",
+        "actionType": "read",
+        "entityId": "",
+        "attrs": "",
+        "sysAttrs": "false",
+        "representation": "normalized",
+        "geometryProperty": "",
+        "lang": "",
+        "accept": "application/ld+json",
+        "forbidden": "true",
+        "x": 1240,
+        "y": 220,
+        "wires": [
+            [
+                "09d14989da218753"
+            ]
+        ]
+    },
+    {
+        "id": "7f9f04309ce149e7",
+        "type": "http in",
+        "z": "554141bee26226c1",
+        "name": "",
+        "url": "/delete-entity-forbidden",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 960,
+        "y": 280,
+        "wires": [
+            [
+                "46547c22716ee744"
+            ]
+        ]
+    },
+    {
+        "id": "d33a8f9557ec1d72",
+        "type": "http response",
+        "z": "554141bee26226c1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1490,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "46547c22716ee744",
+        "type": "NGSI-LD Entity",
+        "z": "554141bee26226c1",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "atContext": "",
+        "actionType": "delete",
+        "entityId": "",
+        "attrs": "",
+        "sysAttrs": "false",
+        "representation": "normalized",
+        "geometryProperty": "",
+        "lang": "",
+        "accept": "application/ld+json",
+        "forbidden": "true",
+        "x": 1240,
+        "y": 280,
+        "wires": [
+            [
+                "d33a8f9557ec1d72"
+            ]
+        ]
+    },
+    {
+        "id": "3314effacee620bd",
+        "type": "NGSI-LD entities",
+        "z": "554141bee26226c1",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "representation": "normalized",
+        "entityId": "",
+        "entityType": "",
+        "idPattern": "",
+        "attrs": "",
+        "sysAttrs": "false",
+        "query": "",
+        "csf": "",
+        "georel": "",
+        "geometry": "",
+        "coordinates": "",
+        "geoproperty": "",
+        "geometryProperty": "",
+        "lang": "",
+        "accept": "application/ld+json",
+        "atContext": "",
+        "buffering": "on",
+        "forbidden": "true",
+        "x": 1250,
+        "y": 380,
+        "wires": [
+            [
+                "786d4a1d04e97730"
+            ]
+        ]
+    },
+    {
+        "id": "ab1965f006811232",
+        "type": "http in",
+        "z": "554141bee26226c1",
+        "name": "",
+        "url": "/read-entities-forbidden",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 960,
+        "y": 380,
+        "wires": [
+            [
+                "3314effacee620bd"
+            ]
+        ]
+    },
+    {
+        "id": "786d4a1d04e97730",
+        "type": "http response",
+        "z": "554141bee26226c1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1490,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "5de855d1fb6602f9",
+        "type": "NGSI-LD entity attributes",
+        "z": "554141bee26226c1",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "actionType": "append",
+        "entityId": "urn:ngsi-ld:TemperatureSensor:201",
+        "atContext": "",
+        "forbidden": "true",
+        "x": 1260,
+        "y": 740,
+        "wires": [
+            [
+                "b9400726e5dad23f"
+            ]
+        ]
+    },
+    {
+        "id": "a2cb59dd98e7665c",
+        "type": "NGSI-LD entity attributes",
+        "z": "554141bee26226c1",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "actionType": "update",
+        "entityId": "urn:ngsi-ld:TemperatureSensor:201",
+        "atContext": "",
+        "forbidden": "true",
+        "x": 1260,
+        "y": 800,
+        "wires": [
+            [
+                "f40917935ca17ec1"
+            ]
+        ]
+    },
+    {
+        "id": "251bf9f6b1d91005",
+        "type": "NGSI-LD entity attributes",
+        "z": "554141bee26226c1",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "actionType": "upsert",
+        "entityId": "urn:ngsi-ld:TemperatureSensor:201",
+        "atContext": "",
+        "forbidden": "true",
+        "x": 1260,
+        "y": 860,
+        "wires": [
+            [
+                "66c1e65f2fe9d105"
+            ]
+        ]
+    },
+    {
+        "id": "b9400726e5dad23f",
+        "type": "http response",
+        "z": "554141bee26226c1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1490,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "f40917935ca17ec1",
+        "type": "http response",
+        "z": "554141bee26226c1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1490,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "66c1e65f2fe9d105",
+        "type": "http response",
+        "z": "554141bee26226c1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1490,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "c2f6acf83802fc7d",
+        "type": "http in",
+        "z": "554141bee26226c1",
+        "name": "",
+        "url": "/append-attrs-forbidden",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 960,
+        "y": 740,
+        "wires": [
+            [
+                "5de855d1fb6602f9"
+            ]
+        ]
+    },
+    {
+        "id": "f186d3810ade03c8",
+        "type": "http in",
+        "z": "554141bee26226c1",
+        "name": "",
+        "url": "/update-attrs-forbidden",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 960,
+        "y": 800,
+        "wires": [
+            [
+                "a2cb59dd98e7665c"
+            ]
+        ]
+    },
+    {
+        "id": "7f747ca8d39f6e0e",
+        "type": "http in",
+        "z": "554141bee26226c1",
+        "name": "",
+        "url": "/upsert-attrs-forbidden",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 960,
+        "y": 860,
+        "wires": [
+            [
+                "251bf9f6b1d91005"
+            ]
+        ]
+    },
+    {
+        "id": "ea5ef28b8d7d6867",
+        "type": "NGSI-LD Batch operations",
+        "z": "554141bee26226c1",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "actionType": "create",
+        "atContext": "",
+        "forbidden": "true",
+        "x": 1280,
+        "y": 460,
+        "wires": [
+            [
+                "0c6c0a7c3bf229c3"
+            ]
+        ]
+    },
+    {
+        "id": "5681d505d385caa8",
+        "type": "NGSI-LD Batch operations",
+        "z": "554141bee26226c1",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "actionType": "update",
+        "atContext": "",
+        "forbidden": "true",
+        "x": 1280,
+        "y": 520,
+        "wires": [
+            [
+                "e145b19fba1e22a4"
+            ]
+        ]
+    },
+    {
+        "id": "1789fc7f96d19dce",
+        "type": "NGSI-LD Batch operations",
+        "z": "554141bee26226c1",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "actionType": "upsert",
+        "atContext": "",
+        "forbidden": "true",
+        "x": 1280,
+        "y": 580,
+        "wires": [
+            [
+                "39a0935780ed3b1a"
+            ]
+        ]
+    },
+    {
+        "id": "369a13d91954fb9b",
+        "type": "NGSI-LD entity attribute",
+        "z": "554141bee26226c1",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "actionType": "update",
+        "entityId": "urn:ngsi-ld:TemperatureSensor:301",
+        "attrName": "category",
+        "deleteAll": "false",
+        "datasetId": "",
+        "atContext": "",
+        "forbidden": "true",
+        "x": 1250,
+        "y": 980,
+        "wires": [
+            [
+                "7a6c9717a6c120ac"
+            ]
+        ]
+    },
+    {
+        "id": "d6b7cbd4b165e4c0",
+        "type": "NGSI-LD entity attribute",
+        "z": "554141bee26226c1",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "actionType": "delete",
+        "entityId": "urn:ngsi-ld:TemperatureSensor:301",
+        "attrName": "",
+        "deleteAll": "false",
+        "datasetId": "",
+        "atContext": "",
+        "forbidden": "true",
+        "x": 1250,
+        "y": 1040,
+        "wires": [
+            [
+                "54c704bafcdbe4e8"
+            ]
+        ]
+    },
+    {
+        "id": "338e0c28cdf32e1e",
+        "type": "http in",
+        "z": "554141bee26226c1",
+        "name": "",
+        "url": "/batch-create-forbidden",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 960,
+        "y": 460,
+        "wires": [
+            [
+                "ea5ef28b8d7d6867"
+            ]
+        ]
+    },
+    {
+        "id": "f0d93c674c18cea3",
+        "type": "http in",
+        "z": "554141bee26226c1",
+        "name": "",
+        "url": "/batch-update-forbidden",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 960,
+        "y": 520,
+        "wires": [
+            [
+                "5681d505d385caa8"
+            ]
+        ]
+    },
+    {
+        "id": "a493bebe89154fc5",
+        "type": "http in",
+        "z": "554141bee26226c1",
+        "name": "",
+        "url": "/batch-upsert-forbidden",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 960,
+        "y": 580,
+        "wires": [
+            [
+                "1789fc7f96d19dce"
+            ]
+        ]
+    },
+    {
+        "id": "0c6c0a7c3bf229c3",
+        "type": "http response",
+        "z": "554141bee26226c1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1510,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "e145b19fba1e22a4",
+        "type": "http response",
+        "z": "554141bee26226c1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1510,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "39a0935780ed3b1a",
+        "type": "http response",
+        "z": "554141bee26226c1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1510,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "81a16d077533c11b",
+        "type": "http in",
+        "z": "554141bee26226c1",
+        "name": "",
+        "url": "/batch-delete-forbidden",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 960,
+        "y": 640,
+        "wires": [
+            [
+                "ddea8802c8e81432"
+            ]
+        ]
+    },
+    {
+        "id": "04418aaac11a86fb",
+        "type": "http response",
+        "z": "554141bee26226c1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1510,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "ddea8802c8e81432",
+        "type": "NGSI-LD Batch operations",
+        "z": "554141bee26226c1",
+        "name": "",
+        "broker": "907c553d7533ec10",
+        "actionType": "delete",
+        "atContext": "",
+        "forbidden": "true",
+        "x": 1280,
+        "y": 640,
+        "wires": [
+            [
+                "04418aaac11a86fb"
+            ]
+        ]
+    },
+    {
+        "id": "594c51b99dc9161a",
+        "type": "http in",
+        "z": "554141bee26226c1",
+        "name": "",
+        "url": "/update-attr-forbidden",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 960,
+        "y": 980,
+        "wires": [
+            [
+                "369a13d91954fb9b"
+            ]
+        ]
+    },
+    {
+        "id": "7a6c9717a6c120ac",
+        "type": "http response",
+        "z": "554141bee26226c1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1490,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "d8e8a166c30de11f",
+        "type": "http in",
+        "z": "554141bee26226c1",
+        "name": "",
+        "url": "/delete-attr-forbidden",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 950,
+        "y": 1040,
+        "wires": [
+            [
+                "d6b7cbd4b165e4c0"
+            ]
+        ]
+    },
+    {
+        "id": "54c704bafcdbe4e8",
+        "type": "http response",
+        "z": "554141bee26226c1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1490,
         "y": 1040,
         "wires": []
     },

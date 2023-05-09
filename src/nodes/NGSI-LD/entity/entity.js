@@ -40,7 +40,7 @@ const httpRequest = async function (msg, param) {
   };
 
   if (param.config.actionType === 'create') {
-    options.data = param.config.entity;
+    options.data = lib.encodeNGSI(param.config.entity, param.config.forbidden);
   }
 
   try {
@@ -48,6 +48,7 @@ const httpRequest = async function (msg, param) {
     msg.payload = res.data;
     msg.statusCode = Number(res.status);
     if (res.status === 200 && param.config.actionType === 'read') {
+      msg.payload = lib.decodeNGSI(res.data, param.config.forbidden);
       return;
     } else if (res.status === 201 && param.config.actionType === 'create') {
       return;
@@ -94,9 +95,16 @@ const validateConfig = function (msg, config) {
     }
   }
 
-  if (config.sysAttrs && typeof config.sysAttrs !== 'boolean') {
-    msg.payload = { error: 'sysAttrs not boolean' };
-    return false;
+  const boolean_items = [
+    'sysAttrs',
+    'forbidden'
+  ];
+  for (let i = 0; i < boolean_items.length; i++) {
+    const e = boolean_items[i];
+    if (config[e] && typeof config[e] !== 'boolean') {
+      msg.payload = { error: e + ' not boolean' };
+      return false;
+    }
   }
 
   return true;
@@ -127,6 +135,7 @@ const createParam = function (msg, config, brokerConfig) {
     geometryProperty: config.geometryProperty,
     lang: config.lang,
     accept: config.accept,
+    forbidden: config.forbidden ? config.forbidden === 'true' : false,
   };
 
   if (typeof msg.payload === 'string') {
@@ -139,7 +148,8 @@ const createParam = function (msg, config, brokerConfig) {
       'sysAttrs',
       'geometryProperty',
       'lang',
-      'accept'
+      'accept',
+      'forbidden'
     ].forEach(e => {
       if (msg.payload[e]) {
         defaultConfig[e] = msg.payload[e];
@@ -151,6 +161,7 @@ const createParam = function (msg, config, brokerConfig) {
     case 'create':
       param.method = 'post';
       param.config.entity = msg.payload;
+      param.config.forbidden = defaultConfig.forbidden;
       break;
     case 'read':
       param.method = 'get';

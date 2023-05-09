@@ -39,7 +39,7 @@ const updateAttrs = async function (msg, param) {
     params: lib.buildParams(param.config),
   };
 
-  options.data = param.config.attributes;
+  options.data = lib.encodeNGSI(param.config.attributes, param.config.forbidden);
 
   try {
     const res = await lib.http(options);
@@ -64,6 +64,11 @@ const updateAttrs = async function (msg, param) {
 const validateConfig = function (msg, config) {
   if (typeof config.entityId !== 'string') {
     msg.payload = { error: 'entityId not string' };
+    return false;
+  }
+
+  if (typeof config.forbidden !== 'boolean') {
+    msg.payload = { error: 'forbidden not boolean' };
     return false;
   }
 
@@ -92,6 +97,7 @@ const createParam = function (msg, config, brokerConfig) {
     actionType: config.actionType,
     entityId: config.entityId.trim(),
     attributes: msg.payload,
+    forbidden: config.forbidden ? config.forbidden === 'true' : false,
   };
 
   if (msg.payload.entityId && msg.payload.attrs) {

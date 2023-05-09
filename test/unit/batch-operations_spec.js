@@ -56,6 +56,7 @@ describe('batch-operations.js', () => {
         }),
         buildHTTPHeader: () => { return {}; },
         buildParams: () => new URLSearchParams(),
+        encodeNGSI: (data) => data,
       });
       const batchOperations = batchOperationsNode.__get__('batchOperations');
 
@@ -68,6 +69,7 @@ describe('batch-operations.js', () => {
             { 'id': 'urn:ngsi-ld:TemperatureSensor:001', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } },
             { 'id': 'urn:ngsi-ld:TemperatureSensor:002', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } }
           ],
+          forbidden: false,
         },
       };
 
@@ -89,6 +91,7 @@ describe('batch-operations.js', () => {
         }),
         buildHTTPHeader: () => { return {}; },
         buildParams: () => new URLSearchParams(),
+        encodeNGSI: (data) => data,
       });
       const batchOperations = batchOperationsNode.__get__('batchOperations');
 
@@ -101,6 +104,7 @@ describe('batch-operations.js', () => {
             'urn:ngsi-ld:TemperatureSensor:001',
             'urn:ngsi-ld:TemperatureSensor:002',
           ],
+          forbidden: false,
         },
       };
 
@@ -115,6 +119,7 @@ describe('batch-operations.js', () => {
         http: async () => Promise.resolve({ status: 400, statusText: 'Bad Request', data: undefined }),
         buildHTTPHeader: () => { return {}; },
         buildParams: () => new URLSearchParams(),
+        encodeNGSI: (data) => data,
       });
       const batchOperations = batchOperationsNode.__get__('batchOperations');
 
@@ -127,6 +132,7 @@ describe('batch-operations.js', () => {
             { 'id': 'urn:ngsi-ld:TemperatureSensor:001', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } },
             { 'id': 'urn:ngsi-ld:TemperatureSensor:002', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } }
           ],
+          forbidden: false,
         },
       };
 
@@ -145,6 +151,7 @@ describe('batch-operations.js', () => {
         http: async () => Promise.resolve({ status: 400, statusText: 'Bad Request', data: { error: 'detail' } }),
         buildHTTPHeader: () => { return {}; },
         buildParams: () => new URLSearchParams(),
+        encodeNGSI: (data) => data,
       });
       const batchOperations = batchOperationsNode.__get__('batchOperations');
 
@@ -157,6 +164,7 @@ describe('batch-operations.js', () => {
             { 'id': 'urn:ngsi-ld:TemperatureSensor:001', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } },
             { 'id': 'urn:ngsi-ld:TemperatureSensor:002', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } }
           ],
+          forbidden: false,
         },
       };
 
@@ -178,6 +186,7 @@ describe('batch-operations.js', () => {
         http: async () => Promise.reject({ message: 'unknown error' }),
         buildHTTPHeader: () => { return {}; },
         buildParams: () => new URLSearchParams(),
+        encodeNGSI: (data) => data,
       });
       const batchOperations = batchOperationsNode.__get__('batchOperations');
 
@@ -190,6 +199,7 @@ describe('batch-operations.js', () => {
             { 'id': 'urn:ngsi-ld:TemperatureSensor:001', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } },
             { 'id': 'urn:ngsi-ld:TemperatureSensor:002', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } }
           ],
+          forbidden: false,
         },
       };
 
@@ -213,6 +223,7 @@ describe('batch-operations.js', () => {
       const config = {
         atContext: '',
         actionType: 'create',
+        forbidden: 'true',
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
@@ -234,6 +245,7 @@ describe('batch-operations.js', () => {
           data: [
           ],
           accept: 'application/ld+json',
+          forbidden: true,
         },
       };
       assert.deepEqual(actual, expected);
@@ -268,6 +280,7 @@ describe('batch-operations.js', () => {
             {}
           ],
           accept: 'application/ld+json',
+          forbidden: false,
         },
       };
       assert.deepEqual(actual, expected);
@@ -322,6 +335,7 @@ describe('batch-operations.js', () => {
           data: [
           ],
           accept: 'application/ld+json',
+          forbidden: false,
         },
       };
       assert.deepEqual(actual, expected);
@@ -360,6 +374,7 @@ describe('batch-operations.js', () => {
       red.createNode({
         atContext: '',
         actionType: 'create',
+        forbidden: 'false',
 
         broker: {
           apiEndpoint: 'http://orion-ld:1026',
@@ -451,6 +466,7 @@ describe('batch-operations.js', () => {
               },
             },
           ],
+          forbidden: false,
           accept: 'application/ld+json',
         },
       }

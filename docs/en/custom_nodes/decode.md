@@ -1,8 +1,20 @@
-# NGSI decode
+# NGSI-LD decode
 
 This custom node is a simple node that decodes forbidden characters.
 
 ![](https://raw.githubusercontent.com/lets-fiware/node-red-contrib-NGSI-LD/gh-pages/images/decode/decode-01.png)
+
+| Characters | Decoded character |
+| ---------- | ----------------- |
+| %22        | "                 |
+| %25        | %                 |
+| %27        | '                 |
+| %28        | (                 |
+| %29        | )                 |
+| %3B        | ;                 |
+| %3C        | <                 |
+| %3D        | =                 |
+| %3E        | >                 |
 
 ### Properties
 

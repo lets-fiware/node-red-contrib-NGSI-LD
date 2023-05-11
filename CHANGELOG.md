@@ -1,5 +1,7 @@
 ## node-red-contrib-letsfiware-NGSI v0.4.0-next
 
+-   ADD E2E test for encode / decode node (#24)
+
 ## node-red-contrib-letsfiware-NGSI v0.4.0 - 10 May, 2023
 
 -   Add feature for encoding and decoding forbidden chars (#20)

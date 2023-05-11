@@ -1,6 +1,6 @@
 [
     {
-        "id": "554141bee26226c1",
+        "id": "716ed2717683565d",
         "type": "tab",
         "label": "Flow 1",
         "disabled": false,
@@ -8,9 +8,9 @@
         "env": []
     },
     {
-        "id": "54dd982794c9d988",
+        "id": "088fae07b9446fb6",
         "type": "http in",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "url": "/version",
         "method": "get",
@@ -20,14 +20,14 @@
         "y": 60,
         "wires": [
             [
-                "13f0399d21a9656c"
+                "29a0e201dc42b296"
             ]
         ]
     },
     {
-        "id": "d539b1d8e13511cd",
+        "id": "ce574ef4130d6d14",
         "type": "http response",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -36,23 +36,23 @@
         "wires": []
     },
     {
-        "id": "13f0399d21a9656c",
+        "id": "29a0e201dc42b296",
         "type": "NGSI-LD broker version",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "broker": "907c553d7533ec10",
         "x": 430,
         "y": 60,
         "wires": [
             [
-                "d539b1d8e13511cd"
+                "ce574ef4130d6d14"
             ]
         ]
     },
     {
-        "id": "c79974792d601ef8",
+        "id": "319e0bc8417ed708",
         "type": "http in",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "url": "/create-entity",
         "method": "post",
@@ -62,14 +62,14 @@
         "y": 160,
         "wires": [
             [
-                "27608188a9b638c5"
+                "b0b1737734829641"
             ]
         ]
     },
     {
-        "id": "cb9b90c9faadc345",
+        "id": "966f3b856eeb8b63",
         "type": "http response",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -78,9 +78,9 @@
         "wires": []
     },
     {
-        "id": "27608188a9b638c5",
+        "id": "b0b1737734829641",
         "type": "NGSI-LD Entity",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "broker": "907c553d7533ec10",
         "atContext": "",
@@ -97,14 +97,14 @@
         "y": 160,
         "wires": [
             [
-                "cb9b90c9faadc345"
+                "966f3b856eeb8b63"
             ]
         ]
     },
     {
-        "id": "9efc4d2697c11e73",
+        "id": "e0ff87d053bc9b40",
         "type": "http in",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "url": "/read-entity",
         "method": "post",
@@ -114,14 +114,14 @@
         "y": 220,
         "wires": [
             [
-                "72e6cc1da0446dc2"
+                "19cf015a6165f22a"
             ]
         ]
     },
     {
-        "id": "18bf9ff92ad0de6f",
+        "id": "333f3fbd7775e6d7",
         "type": "http response",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -130,9 +130,9 @@
         "wires": []
     },
     {
-        "id": "72e6cc1da0446dc2",
+        "id": "19cf015a6165f22a",
         "type": "NGSI-LD Entity",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "broker": "907c553d7533ec10",
         "atContext": "",
@@ -149,14 +149,14 @@
         "y": 220,
         "wires": [
             [
-                "18bf9ff92ad0de6f"
+                "333f3fbd7775e6d7"
             ]
         ]
     },
     {
-        "id": "a53ab4fe535c6be6",
+        "id": "15b4a62e75427063",
         "type": "http in",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "url": "/delete-entity",
         "method": "post",
@@ -166,14 +166,14 @@
         "y": 280,
         "wires": [
             [
-                "582fc0c681af33d1"
+                "7a5c4d4d69abd505"
             ]
         ]
     },
     {
-        "id": "c6a1d4cf765c1e06",
+        "id": "481e01eaf00c7f04",
         "type": "http response",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -182,9 +182,9 @@
         "wires": []
     },
     {
-        "id": "582fc0c681af33d1",
+        "id": "7a5c4d4d69abd505",
         "type": "NGSI-LD Entity",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "broker": "907c553d7533ec10",
         "atContext": "",
@@ -201,14 +201,14 @@
         "y": 280,
         "wires": [
             [
-                "c6a1d4cf765c1e06"
+                "481e01eaf00c7f04"
             ]
         ]
     },
     {
-        "id": "549a45d436cf6d55",
+        "id": "29edfcde03f50c91",
         "type": "NGSI-LD entities",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "broker": "907c553d7533ec10",
         "representation": "normalized",
@@ -233,14 +233,14 @@
         "y": 380,
         "wires": [
             [
-                "313dbb43f58032f7"
+                "c05e3b7d71eb5e64"
             ]
         ]
     },
     {
-        "id": "ca4fa245e6ccb4c1",
+        "id": "f73b1275d9b7df9b",
         "type": "http in",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "url": "/read-entities",
         "method": "post",
@@ -250,14 +250,14 @@
         "y": 380,
         "wires": [
             [
-                "549a45d436cf6d55"
+                "29edfcde03f50c91"
             ]
         ]
     },
     {
-        "id": "313dbb43f58032f7",
+        "id": "c05e3b7d71eb5e64",
         "type": "http response",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -266,9 +266,9 @@
         "wires": []
     },
     {
-        "id": "a0920f29da382e88",
+        "id": "4986f6b7e326a853",
         "type": "NGSI-LD entity attributes",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "broker": "907c553d7533ec10",
         "actionType": "append",
@@ -279,14 +279,14 @@
         "y": 740,
         "wires": [
             [
-                "82915a90797a72da"
+                "a85cea344760636f"
             ]
         ]
     },
     {
-        "id": "7e01ecb3b2f0a6ed",
+        "id": "520309c7d9afb417",
         "type": "NGSI-LD entity attributes",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "broker": "907c553d7533ec10",
         "actionType": "update",
@@ -297,14 +297,14 @@
         "y": 800,
         "wires": [
             [
-                "79be6580c646cfa4"
+                "e9cb8a4ea71c953b"
             ]
         ]
     },
     {
-        "id": "84f2c478f2dd54d0",
+        "id": "b7a5c786f3251125",
         "type": "NGSI-LD entity attributes",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "broker": "907c553d7533ec10",
         "actionType": "upsert",
@@ -315,14 +315,14 @@
         "y": 860,
         "wires": [
             [
-                "c36821dd22c0bbf3"
+                "a3d2eaad0c33e939"
             ]
         ]
     },
     {
-        "id": "82915a90797a72da",
+        "id": "a85cea344760636f",
         "type": "http response",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -331,9 +331,9 @@
         "wires": []
     },
     {
-        "id": "79be6580c646cfa4",
+        "id": "e9cb8a4ea71c953b",
         "type": "http response",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -342,9 +342,9 @@
         "wires": []
     },
     {
-        "id": "c36821dd22c0bbf3",
+        "id": "a3d2eaad0c33e939",
         "type": "http response",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -353,9 +353,9 @@
         "wires": []
     },
     {
-        "id": "b19baef5bedf27c6",
+        "id": "624e5af8ba90ef6b",
         "type": "http in",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "url": "/append-attrs",
         "method": "post",
@@ -365,14 +365,14 @@
         "y": 740,
         "wires": [
             [
-                "a0920f29da382e88"
+                "4986f6b7e326a853"
             ]
         ]
     },
     {
-        "id": "d1aba0ec45e215ea",
+        "id": "0a0442ef696ed5b8",
         "type": "http in",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "url": "/update-attrs",
         "method": "post",
@@ -382,14 +382,14 @@
         "y": 800,
         "wires": [
             [
-                "7e01ecb3b2f0a6ed"
+                "520309c7d9afb417"
             ]
         ]
     },
     {
-        "id": "2d30a3b16e606d72",
+        "id": "5ec35b01ecb4d4d1",
         "type": "http in",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "url": "/upsert-attrs",
         "method": "post",
@@ -399,14 +399,14 @@
         "y": 860,
         "wires": [
             [
-                "84f2c478f2dd54d0"
+                "b7a5c786f3251125"
             ]
         ]
     },
     {
-        "id": "acba86ad0b4cf7f0",
+        "id": "d9d3bb825df65377",
         "type": "NGSI-LD Batch operations",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "broker": "907c553d7533ec10",
         "actionType": "create",
@@ -416,14 +416,14 @@
         "y": 460,
         "wires": [
             [
-                "0d7e7316a2934f57"
+                "5236d8b661b36852"
             ]
         ]
     },
     {
-        "id": "9170ae4788f40952",
+        "id": "5288f2a48a61bdd6",
         "type": "NGSI-LD Batch operations",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "broker": "907c553d7533ec10",
         "actionType": "update",
@@ -433,14 +433,14 @@
         "y": 520,
         "wires": [
             [
-                "4ba448faed348393"
+                "7788ef215021306a"
             ]
         ]
     },
     {
-        "id": "1909d48ce262ce57",
+        "id": "3636f821ca6af15c",
         "type": "NGSI-LD Batch operations",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "broker": "907c553d7533ec10",
         "actionType": "upsert",
@@ -450,14 +450,14 @@
         "y": 580,
         "wires": [
             [
-                "891f0a9ddcf39d78"
+                "c5ba1004bc473d13"
             ]
         ]
     },
     {
-        "id": "2368fa56b9a53d3b",
+        "id": "6e34bfc82801b753",
         "type": "NGSI-LD entity attribute",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "broker": "907c553d7533ec10",
         "actionType": "update",
@@ -471,14 +471,14 @@
         "y": 980,
         "wires": [
             [
-                "ad200afa292436a6"
+                "4fd9221a621fe9ca"
             ]
         ]
     },
     {
-        "id": "2ad7ea8bad959f92",
+        "id": "b9b68d1c3f608e51",
         "type": "NGSI-LD entity attribute",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "broker": "907c553d7533ec10",
         "actionType": "delete",
@@ -492,14 +492,14 @@
         "y": 1040,
         "wires": [
             [
-                "c2bf8013eca33fa7"
+                "828b4679cd54e301"
             ]
         ]
     },
     {
-        "id": "07a4508132e4989f",
+        "id": "dc74ee0eca75763b",
         "type": "http in",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "url": "/batch-create",
         "method": "post",
@@ -509,14 +509,14 @@
         "y": 460,
         "wires": [
             [
-                "acba86ad0b4cf7f0"
+                "d9d3bb825df65377"
             ]
         ]
     },
     {
-        "id": "ee2c2f6b20a2c3c6",
+        "id": "fe41d438aeb829ed",
         "type": "http in",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "url": "/batch-update",
         "method": "post",
@@ -526,14 +526,14 @@
         "y": 520,
         "wires": [
             [
-                "9170ae4788f40952"
+                "5288f2a48a61bdd6"
             ]
         ]
     },
     {
-        "id": "11de2e0f348fdd90",
+        "id": "988fcdd1fd47316e",
         "type": "http in",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "url": "/batch-upsert",
         "method": "post",
@@ -543,14 +543,14 @@
         "y": 580,
         "wires": [
             [
-                "1909d48ce262ce57"
+                "3636f821ca6af15c"
             ]
         ]
     },
     {
-        "id": "0d7e7316a2934f57",
+        "id": "5236d8b661b36852",
         "type": "http response",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -559,9 +559,9 @@
         "wires": []
     },
     {
-        "id": "4ba448faed348393",
+        "id": "7788ef215021306a",
         "type": "http response",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -570,9 +570,9 @@
         "wires": []
     },
     {
-        "id": "891f0a9ddcf39d78",
+        "id": "c5ba1004bc473d13",
         "type": "http response",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -581,9 +581,9 @@
         "wires": []
     },
     {
-        "id": "0a9d56550121dc47",
+        "id": "17a6fb9c276554f5",
         "type": "http in",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "url": "/batch-delete",
         "method": "post",
@@ -593,14 +593,14 @@
         "y": 640,
         "wires": [
             [
-                "add2fb49b94294ef"
+                "04aa8276cfe1bf8c"
             ]
         ]
     },
     {
-        "id": "41191e9d8c9420d7",
+        "id": "7f9b9cedb44751dc",
         "type": "http response",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -609,9 +609,9 @@
         "wires": []
     },
     {
-        "id": "add2fb49b94294ef",
+        "id": "04aa8276cfe1bf8c",
         "type": "NGSI-LD Batch operations",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "broker": "907c553d7533ec10",
         "actionType": "delete",
@@ -621,14 +621,14 @@
         "y": 640,
         "wires": [
             [
-                "41191e9d8c9420d7"
+                "7f9b9cedb44751dc"
             ]
         ]
     },
     {
-        "id": "b3b2a68936b1ff78",
+        "id": "3b1a4870f1ae74fe",
         "type": "http in",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "url": "/update-attr",
         "method": "post",
@@ -638,14 +638,14 @@
         "y": 980,
         "wires": [
             [
-                "2368fa56b9a53d3b"
+                "6e34bfc82801b753"
             ]
         ]
     },
     {
-        "id": "ad200afa292436a6",
+        "id": "4fd9221a621fe9ca",
         "type": "http response",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -654,9 +654,9 @@
         "wires": []
     },
     {
-        "id": "e2724a4e72c7c376",
+        "id": "3d3d1667437ce0ad",
         "type": "http in",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "url": "/delete-attr",
         "method": "post",
@@ -666,14 +666,14 @@
         "y": 1040,
         "wires": [
             [
-                "2ad7ea8bad959f92"
+                "b9b68d1c3f608e51"
             ]
         ]
     },
     {
-        "id": "c2bf8013eca33fa7",
+        "id": "828b4679cd54e301",
         "type": "http response",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -682,9 +682,9 @@
         "wires": []
     },
     {
-        "id": "dc32eea573b763bc",
+        "id": "e8bff226a857751d",
         "type": "http in",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "url": "/create-entity-forbidden",
         "method": "post",
@@ -694,14 +694,14 @@
         "y": 160,
         "wires": [
             [
-                "bb6746c1bc8bdf3e"
+                "2fab5ae0e8a11525"
             ]
         ]
     },
     {
-        "id": "b2c3a4bb2e6a5708",
+        "id": "73f168dffeba3a36",
         "type": "http response",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -710,9 +710,9 @@
         "wires": []
     },
     {
-        "id": "bb6746c1bc8bdf3e",
+        "id": "2fab5ae0e8a11525",
         "type": "NGSI-LD Entity",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "broker": "907c553d7533ec10",
         "atContext": "",
@@ -729,14 +729,14 @@
         "y": 160,
         "wires": [
             [
-                "b2c3a4bb2e6a5708"
+                "73f168dffeba3a36"
             ]
         ]
     },
     {
-        "id": "1fdf9fbe7123e1ce",
+        "id": "b6624f56a4b7e546",
         "type": "http in",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "url": "/read-entity-forbidden",
         "method": "post",
@@ -746,14 +746,14 @@
         "y": 220,
         "wires": [
             [
-                "8f250fd75c253d40"
+                "ce88fcd75722feb1"
             ]
         ]
     },
     {
-        "id": "09d14989da218753",
+        "id": "274543ae91ec8eec",
         "type": "http response",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -762,9 +762,9 @@
         "wires": []
     },
     {
-        "id": "8f250fd75c253d40",
+        "id": "ce88fcd75722feb1",
         "type": "NGSI-LD Entity",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "broker": "907c553d7533ec10",
         "atContext": "",
@@ -781,14 +781,14 @@
         "y": 220,
         "wires": [
             [
-                "09d14989da218753"
+                "274543ae91ec8eec"
             ]
         ]
     },
     {
-        "id": "7f9f04309ce149e7",
+        "id": "7383452920042c2e",
         "type": "http in",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "url": "/delete-entity-forbidden",
         "method": "post",
@@ -798,14 +798,14 @@
         "y": 280,
         "wires": [
             [
-                "46547c22716ee744"
+                "11294daf06e61c8c"
             ]
         ]
     },
     {
-        "id": "d33a8f9557ec1d72",
+        "id": "d47c9e6512df4ced",
         "type": "http response",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -814,9 +814,9 @@
         "wires": []
     },
     {
-        "id": "46547c22716ee744",
+        "id": "11294daf06e61c8c",
         "type": "NGSI-LD Entity",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "broker": "907c553d7533ec10",
         "atContext": "",
@@ -833,14 +833,14 @@
         "y": 280,
         "wires": [
             [
-                "d33a8f9557ec1d72"
+                "d47c9e6512df4ced"
             ]
         ]
     },
     {
-        "id": "3314effacee620bd",
+        "id": "10d9a42ef3e35910",
         "type": "NGSI-LD entities",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "broker": "907c553d7533ec10",
         "representation": "normalized",
@@ -865,14 +865,14 @@
         "y": 380,
         "wires": [
             [
-                "786d4a1d04e97730"
+                "103412b333fba163"
             ]
         ]
     },
     {
-        "id": "ab1965f006811232",
+        "id": "0f6452a33b29cf14",
         "type": "http in",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "url": "/read-entities-forbidden",
         "method": "post",
@@ -882,14 +882,14 @@
         "y": 380,
         "wires": [
             [
-                "3314effacee620bd"
+                "10d9a42ef3e35910"
             ]
         ]
     },
     {
-        "id": "786d4a1d04e97730",
+        "id": "103412b333fba163",
         "type": "http response",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -898,9 +898,9 @@
         "wires": []
     },
     {
-        "id": "5de855d1fb6602f9",
+        "id": "3724b7d12c09ed2b",
         "type": "NGSI-LD entity attributes",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "broker": "907c553d7533ec10",
         "actionType": "append",
@@ -911,14 +911,14 @@
         "y": 740,
         "wires": [
             [
-                "b9400726e5dad23f"
+                "b6710d3d039d0733"
             ]
         ]
     },
     {
-        "id": "a2cb59dd98e7665c",
+        "id": "2aac06ec02fcd025",
         "type": "NGSI-LD entity attributes",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "broker": "907c553d7533ec10",
         "actionType": "update",
@@ -929,14 +929,14 @@
         "y": 800,
         "wires": [
             [
-                "f40917935ca17ec1"
+                "2a711175d7e4a87b"
             ]
         ]
     },
     {
-        "id": "251bf9f6b1d91005",
+        "id": "ad1e3fc832e18655",
         "type": "NGSI-LD entity attributes",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "broker": "907c553d7533ec10",
         "actionType": "upsert",
@@ -947,14 +947,14 @@
         "y": 860,
         "wires": [
             [
-                "66c1e65f2fe9d105"
+                "820abafb8764bbbc"
             ]
         ]
     },
     {
-        "id": "b9400726e5dad23f",
+        "id": "b6710d3d039d0733",
         "type": "http response",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -963,9 +963,9 @@
         "wires": []
     },
     {
-        "id": "f40917935ca17ec1",
+        "id": "2a711175d7e4a87b",
         "type": "http response",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -974,9 +974,9 @@
         "wires": []
     },
     {
-        "id": "66c1e65f2fe9d105",
+        "id": "820abafb8764bbbc",
         "type": "http response",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -985,9 +985,9 @@
         "wires": []
     },
     {
-        "id": "c2f6acf83802fc7d",
+        "id": "5fd2d79ef7903757",
         "type": "http in",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "url": "/append-attrs-forbidden",
         "method": "post",
@@ -997,14 +997,14 @@
         "y": 740,
         "wires": [
             [
-                "5de855d1fb6602f9"
+                "3724b7d12c09ed2b"
             ]
         ]
     },
     {
-        "id": "f186d3810ade03c8",
+        "id": "70a4376aef2b5bbd",
         "type": "http in",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "url": "/update-attrs-forbidden",
         "method": "post",
@@ -1014,14 +1014,14 @@
         "y": 800,
         "wires": [
             [
-                "a2cb59dd98e7665c"
+                "2aac06ec02fcd025"
             ]
         ]
     },
     {
-        "id": "7f747ca8d39f6e0e",
+        "id": "4611c522c7eeb49f",
         "type": "http in",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "url": "/upsert-attrs-forbidden",
         "method": "post",
@@ -1031,14 +1031,14 @@
         "y": 860,
         "wires": [
             [
-                "251bf9f6b1d91005"
+                "ad1e3fc832e18655"
             ]
         ]
     },
     {
-        "id": "ea5ef28b8d7d6867",
+        "id": "e88e31d56499f3cd",
         "type": "NGSI-LD Batch operations",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "broker": "907c553d7533ec10",
         "actionType": "create",
@@ -1048,14 +1048,14 @@
         "y": 460,
         "wires": [
             [
-                "0c6c0a7c3bf229c3"
+                "59d5aac418dca1a8"
             ]
         ]
     },
     {
-        "id": "5681d505d385caa8",
+        "id": "d9a187d77c03a49e",
         "type": "NGSI-LD Batch operations",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "broker": "907c553d7533ec10",
         "actionType": "update",
@@ -1065,14 +1065,14 @@
         "y": 520,
         "wires": [
             [
-                "e145b19fba1e22a4"
+                "f04abaa8c11f6cd3"
             ]
         ]
     },
     {
-        "id": "1789fc7f96d19dce",
+        "id": "21f9e4dadda3a98b",
         "type": "NGSI-LD Batch operations",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "broker": "907c553d7533ec10",
         "actionType": "upsert",
@@ -1082,14 +1082,14 @@
         "y": 580,
         "wires": [
             [
-                "39a0935780ed3b1a"
+                "fcca80249163e938"
             ]
         ]
     },
     {
-        "id": "369a13d91954fb9b",
+        "id": "9d9e4fdcf2656298",
         "type": "NGSI-LD entity attribute",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "broker": "907c553d7533ec10",
         "actionType": "update",
@@ -1103,14 +1103,14 @@
         "y": 980,
         "wires": [
             [
-                "7a6c9717a6c120ac"
+                "ad0e525f97c0cddf"
             ]
         ]
     },
     {
-        "id": "d6b7cbd4b165e4c0",
+        "id": "1c0e92a6ce9e5817",
         "type": "NGSI-LD entity attribute",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "broker": "907c553d7533ec10",
         "actionType": "delete",
@@ -1124,14 +1124,14 @@
         "y": 1040,
         "wires": [
             [
-                "54c704bafcdbe4e8"
+                "0793c05afd8127e2"
             ]
         ]
     },
     {
-        "id": "338e0c28cdf32e1e",
+        "id": "11196fb92a49ea51",
         "type": "http in",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "url": "/batch-create-forbidden",
         "method": "post",
@@ -1141,14 +1141,14 @@
         "y": 460,
         "wires": [
             [
-                "ea5ef28b8d7d6867"
+                "e88e31d56499f3cd"
             ]
         ]
     },
     {
-        "id": "f0d93c674c18cea3",
+        "id": "a80db4a0610854ad",
         "type": "http in",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "url": "/batch-update-forbidden",
         "method": "post",
@@ -1158,14 +1158,14 @@
         "y": 520,
         "wires": [
             [
-                "5681d505d385caa8"
+                "d9a187d77c03a49e"
             ]
         ]
     },
     {
-        "id": "a493bebe89154fc5",
+        "id": "006038a68d82c8c5",
         "type": "http in",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "url": "/batch-upsert-forbidden",
         "method": "post",
@@ -1175,14 +1175,14 @@
         "y": 580,
         "wires": [
             [
-                "1789fc7f96d19dce"
+                "21f9e4dadda3a98b"
             ]
         ]
     },
     {
-        "id": "0c6c0a7c3bf229c3",
+        "id": "59d5aac418dca1a8",
         "type": "http response",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -1191,9 +1191,9 @@
         "wires": []
     },
     {
-        "id": "e145b19fba1e22a4",
+        "id": "f04abaa8c11f6cd3",
         "type": "http response",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -1202,9 +1202,9 @@
         "wires": []
     },
     {
-        "id": "39a0935780ed3b1a",
+        "id": "fcca80249163e938",
         "type": "http response",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -1213,9 +1213,9 @@
         "wires": []
     },
     {
-        "id": "81a16d077533c11b",
+        "id": "4eccf5453a95fc23",
         "type": "http in",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "url": "/batch-delete-forbidden",
         "method": "post",
@@ -1225,14 +1225,14 @@
         "y": 640,
         "wires": [
             [
-                "ddea8802c8e81432"
+                "3bc22ecf65c89950"
             ]
         ]
     },
     {
-        "id": "04418aaac11a86fb",
+        "id": "0e1cc0d80adc60fe",
         "type": "http response",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -1241,9 +1241,9 @@
         "wires": []
     },
     {
-        "id": "ddea8802c8e81432",
+        "id": "3bc22ecf65c89950",
         "type": "NGSI-LD Batch operations",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "broker": "907c553d7533ec10",
         "actionType": "delete",
@@ -1253,14 +1253,14 @@
         "y": 640,
         "wires": [
             [
-                "04418aaac11a86fb"
+                "0e1cc0d80adc60fe"
             ]
         ]
     },
     {
-        "id": "594c51b99dc9161a",
+        "id": "2f1bab5a2938af62",
         "type": "http in",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "url": "/update-attr-forbidden",
         "method": "post",
@@ -1270,14 +1270,14 @@
         "y": 980,
         "wires": [
             [
-                "369a13d91954fb9b"
+                "9d9e4fdcf2656298"
             ]
         ]
     },
     {
-        "id": "7a6c9717a6c120ac",
+        "id": "ad0e525f97c0cddf",
         "type": "http response",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -1286,9 +1286,9 @@
         "wires": []
     },
     {
-        "id": "d8e8a166c30de11f",
+        "id": "31d206a04a871c38",
         "type": "http in",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "url": "/delete-attr-forbidden",
         "method": "post",
@@ -1298,20 +1298,102 @@
         "y": 1040,
         "wires": [
             [
-                "d6b7cbd4b165e4c0"
+                "1c0e92a6ce9e5817"
             ]
         ]
     },
     {
-        "id": "54c704bafcdbe4e8",
+        "id": "0793c05afd8127e2",
         "type": "http response",
-        "z": "554141bee26226c1",
+        "z": "716ed2717683565d",
         "name": "",
         "statusCode": "",
         "headers": {},
         "x": 1490,
         "y": 1040,
         "wires": []
+    },
+    {
+        "id": "3d72fa856058edfe",
+        "type": "http in",
+        "z": "716ed2717683565d",
+        "name": "",
+        "url": "/encode",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 1140,
+        "wires": [
+            [
+                "2e1e1dedf3e17be6"
+            ]
+        ]
+    },
+    {
+        "id": "e8d708ab219a0123",
+        "type": "http in",
+        "z": "716ed2717683565d",
+        "name": "",
+        "url": "/decode",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 1200,
+        "wires": [
+            [
+                "f06dbc43702bea4f"
+            ]
+        ]
+    },
+    {
+        "id": "5b008569ae44870a",
+        "type": "http response",
+        "z": "716ed2717683565d",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 670,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "1348a181254fcb4f",
+        "type": "http response",
+        "z": "716ed2717683565d",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 670,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "2e1e1dedf3e17be6",
+        "type": "NGSI-LD Encode",
+        "z": "716ed2717683565d",
+        "name": "",
+        "x": 430,
+        "y": 1140,
+        "wires": [
+            [
+                "5b008569ae44870a"
+            ]
+        ]
+    },
+    {
+        "id": "f06dbc43702bea4f",
+        "type": "NGSI-LD Decode",
+        "z": "716ed2717683565d",
+        "name": "",
+        "x": 430,
+        "y": 1200,
+        "wires": [
+            [
+                "1348a181254fcb4f"
+            ]
+        ]
     },
     {
         "id": "907c553d7533ec10",

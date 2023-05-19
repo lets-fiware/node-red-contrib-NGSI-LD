@@ -1,5 +1,6 @@
 ## node-red-contrib-letsfiware-NGSI v0.4.0-next
 
+-   Update node.js dependencies (#26)
 -   ADD GitHub action to close inactive issues (#25)
 -   ADD E2E test for encode / decode node (#24)
 

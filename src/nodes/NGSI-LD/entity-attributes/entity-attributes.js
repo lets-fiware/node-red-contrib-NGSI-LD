@@ -36,7 +36,7 @@ const updateAttrs = async function (msg, param) {
     baseURL: param.host,
     url: param.pathname,
     headers: await lib.buildHTTPHeader(param),
-    params: lib.buildParams(param.config),
+    params: lib.buildParams(param.config)
   };
 
   options.data = lib.encodeNGSI(param.config.attributes, param.config.forbidden);
@@ -97,7 +97,7 @@ const createParam = function (msg, config, brokerConfig) {
     actionType: config.actionType,
     entityId: config.entityId.trim(),
     attributes: msg.payload,
-    forbidden: config.forbidden ? config.forbidden === 'true' : false,
+    forbidden: config.forbidden ? config.forbidden === 'true' : false
   };
 
   if (msg.payload.entityId && msg.payload.attrs) {
@@ -109,7 +109,7 @@ const createParam = function (msg, config, brokerConfig) {
     host: brokerConfig.apiEndpoint,
     pathname: '/ngsi-ld/v1/entities/' + defaultConfig.entityId + '/attrs',
     getToken: brokerConfig.getToken === null ? null : brokerConfig.getToken.bind(brokerConfig),
-    config: defaultConfig,
+    config: defaultConfig
   };
 
   switch (defaultConfig.actionType) {

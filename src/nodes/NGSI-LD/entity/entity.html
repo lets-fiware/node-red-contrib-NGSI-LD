@@ -27,204 +27,204 @@
 -->
 
 <script type="text/javascript">
-    RED.nodes.registerType('NGSI-LD Entity', {
-      category: 'NGSI',
-      color: '#A9E2F3',
-      defaults: {
-        name: { value: '' },
-        broker: {
-          type: "NGSI-LD broker",
-          required: true
-        },
-        atContext: { value: '' },
-        actionType: { value: 'create' },
-        entityId: { value: '' },
-        attrs: { value: '' },
-        sysAttrs: { value: 'false' },
-        representation: { value: 'normalized' },
-        geometryProperty: { value: '' },
-        lang: { value: '' },
-        accept: { value: 'application/ld+json' },
-        forbidden: { value: 'false' },
+  RED.nodes.registerType('NGSI-LD Entity', {
+    category: 'NGSI',
+    color: '#A9E2F3',
+    defaults: {
+      name: { value: '' },
+      broker: {
+        type: 'NGSI-LD broker',
+        required: true
       },
-      inputs: 1,
-      outputs: 1,
-      icon: 'fiware-non-free.svg',
-      label: function () {
-        return this.name || 'NGSI-LD Entity';
-      },
-      paletteLabel: 'entity',
-    });
+      atContext: { value: '' },
+      actionType: { value: 'create' },
+      entityId: { value: '' },
+      attrs: { value: '' },
+      sysAttrs: { value: 'false' },
+      representation: { value: 'normalized' },
+      geometryProperty: { value: '' },
+      lang: { value: '' },
+      accept: { value: 'application/ld+json' },
+      forbidden: { value: 'false' }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'fiware-non-free.svg',
+    label: function () {
+      return this.name || 'NGSI-LD Entity';
+    },
+    paletteLabel: 'entity'
+  });
 
-    /* eslint no-unused-vars: 0 */
-    function ngsi_ld_entity_actionType_Changed(e) {
-      switch (e.target.value) {
-        case 'read':
-          document.getElementById('entityId').hidden = false;
-          document.getElementById('attrs').hidden = false;
-          document.getElementById('representation').hidden = false;
-          document.getElementById('sysAttrs').hidden = false;
-          document.getElementById('geometryProperty').hidden = false;
-          document.getElementById('lang').hidden = false;
-          document.getElementById('accept').hidden = false;
-          break;
-        case "delete":
-          document.getElementById('entityId').hidden = false;
-          document.getElementById('attrs').hidden = true;
-          document.getElementById('representation').hidden = true;
-          document.getElementById('sysAttrs').hidden = true;
-          document.getElementById('geometryProperty').hidden = true;
-          document.getElementById('lang').hidden = true;
-          document.getElementById('accept').hidden = true;
-          break;
-        case 'create':
-          document.getElementById('entityId').hidden = true;
-          document.getElementById('attrs').hidden = true;
-          document.getElementById('representation').hidden = true;
-          document.getElementById('sysAttrs').hidden = true;
-          document.getElementById('geometryProperty').hidden = true;
-          document.getElementById('lang').hidden = true;
-          document.getElementById('accept').hidden = true;
-          break;
-        default:
-          document.getElementById('entityId').hidden = false;
-          document.getElementById('attrs').hidden = false;
-          document.getElementById('representation').hidden = false;
-          document.getElementById('sysAttrs').hidden = false;
-          document.getElementById('geometryProperty').hidden = false;
-          document.getElementById('lang').hidden = false;
-          document.getElementById('accept').hidden = false;
-          break;
-      }
+  /* eslint no-unused-vars: 0 */
+  function ngsi_ld_entity_actionType_Changed(e) {
+    switch (e.target.value) {
+      case 'read':
+        document.getElementById('entityId').hidden = false;
+        document.getElementById('attrs').hidden = false;
+        document.getElementById('representation').hidden = false;
+        document.getElementById('sysAttrs').hidden = false;
+        document.getElementById('geometryProperty').hidden = false;
+        document.getElementById('lang').hidden = false;
+        document.getElementById('accept').hidden = false;
+        break;
+      case 'delete':
+        document.getElementById('entityId').hidden = false;
+        document.getElementById('attrs').hidden = true;
+        document.getElementById('representation').hidden = true;
+        document.getElementById('sysAttrs').hidden = true;
+        document.getElementById('geometryProperty').hidden = true;
+        document.getElementById('lang').hidden = true;
+        document.getElementById('accept').hidden = true;
+        break;
+      case 'create':
+        document.getElementById('entityId').hidden = true;
+        document.getElementById('attrs').hidden = true;
+        document.getElementById('representation').hidden = true;
+        document.getElementById('sysAttrs').hidden = true;
+        document.getElementById('geometryProperty').hidden = true;
+        document.getElementById('lang').hidden = true;
+        document.getElementById('accept').hidden = true;
+        break;
+      default:
+        document.getElementById('entityId').hidden = false;
+        document.getElementById('attrs').hidden = false;
+        document.getElementById('representation').hidden = false;
+        document.getElementById('sysAttrs').hidden = false;
+        document.getElementById('geometryProperty').hidden = false;
+        document.getElementById('lang').hidden = false;
+        document.getElementById('accept').hidden = false;
+        break;
     }
+  }
 </script>
 
 <script type="text/x-red" data-template-name="NGSI-LD Entity">
-    <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
-        <input type="text" id="node-input-name" placeholder="name">
-    </div>
-    <div class="form-row">
-        <label for="node-input-broker"><i class="fa fa-tag"></i> Broker</label>
-        <input type="text" id="node-input-broker">
-    </div>
-    <div class="form-row">
-        <label for="node-input-actionType"><i class="icon-tag"></i> Action type</label>
-        <select id="node-input-actionType" onchange="ngsi_ld_entity_actionType_Changed(event)">
-            <option value="create">create</option>
-            <option value="read">read</option>
-            <option value="delete">delete</option>
-        </select>
-    </div>
-    <div class="form-row" id="representation">
-        <label for="node-input-representation"><i class="fa fa-tag"></i> Representation</label>
-        <select id="node-input-representation">
-            <option value="normalized" enabled>normalized</option>
-            <option value="concise">concise</option>
-            <option value="keyValues">keyValues</option>
-        </select>
-    </div>
-    <div class="form-row" id="entityId">
-        <label for="node-input-entityId"><i class="fa fa-tag"></i> Entity id</label>
-        <input type="text" id="node-input-entityId">
-    </div>
-    <div class="form-row" id="attrs">
-        <label for="node-input-attrs"><i class="fa fa-tag"></i> Attributes</label>
-        <input type="text" id="node-input-attrs">
-    </div>
-    <div class="form-row" id="sysAttrs">
-        <label for="node-input-sysAttrs"><i class="fa fa-tag"></i> System attrs</label>
-        <select id="node-input-sysAttrs">
-            <option value="false" enabled>false</option>
-            <option value="true">true</option>
-        </select>
-    </div>
-    <div class="form-row" id="geometryProperty">
-        <label for="node-input-geometryProperty"><i class="fa fa-tag"></i> Geometry property</label>
-        <input type="text" id="node-input-geometryProperty">
-    </div>
-    <div class="form-row" id="lang">
-        <label for="node-input-lang"><i class="fa fa-tag"></i> Language</label>
-        <input type="text" id="node-input-lang">
-    </div>
-    <div class="form-row" id="accept">
-        <label for="node-input-accept"><i class="fa fa-tag"></i> Accept</label>
-        <select id="node-input-accept">
-            <option value="application/ld+json" enabled>JSON-LD</option>
-            <option value="application/json">JSON</option>
-            <option value="application/geo+json">GeoJSON</option>
-        </select>
-    </div>
-    <div class="form-row">
-        <label for="node-input-atContext"><i class="icon-tag"></i> @context</label>
-        <input type="text" id="node-input-atContext">
-    </div>
-    <div class="form-row">
-        <label for="node-input-forbidden"><i class="fa fa-tag"></i> Encode / Decode forbidden chars</label>
-        <select id="node-input-forbidden">
-            <option value="false" selected>off</option>
-            <option value="true">on</option>
-        </select>
-    </div>
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="name">
+  </div>
+  <div class="form-row">
+      <label for="node-input-broker"><i class="fa fa-tag"></i> Broker</label>
+      <input type="text" id="node-input-broker">
+  </div>
+  <div class="form-row">
+      <label for="node-input-actionType"><i class="icon-tag"></i> Action type</label>
+      <select id="node-input-actionType" onchange="ngsi_ld_entity_actionType_Changed(event)">
+          <option value="create">create</option>
+          <option value="read">read</option>
+          <option value="delete">delete</option>
+      </select>
+  </div>
+  <div class="form-row" id="representation">
+      <label for="node-input-representation"><i class="fa fa-tag"></i> Representation</label>
+      <select id="node-input-representation">
+          <option value="normalized" enabled>normalized</option>
+          <option value="concise">concise</option>
+          <option value="keyValues">keyValues</option>
+      </select>
+  </div>
+  <div class="form-row" id="entityId">
+      <label for="node-input-entityId"><i class="fa fa-tag"></i> Entity id</label>
+      <input type="text" id="node-input-entityId">
+  </div>
+  <div class="form-row" id="attrs">
+      <label for="node-input-attrs"><i class="fa fa-tag"></i> Attributes</label>
+      <input type="text" id="node-input-attrs">
+  </div>
+  <div class="form-row" id="sysAttrs">
+      <label for="node-input-sysAttrs"><i class="fa fa-tag"></i> System attrs</label>
+      <select id="node-input-sysAttrs">
+          <option value="false" enabled>false</option>
+          <option value="true">true</option>
+      </select>
+  </div>
+  <div class="form-row" id="geometryProperty">
+      <label for="node-input-geometryProperty"><i class="fa fa-tag"></i> Geometry property</label>
+      <input type="text" id="node-input-geometryProperty">
+  </div>
+  <div class="form-row" id="lang">
+      <label for="node-input-lang"><i class="fa fa-tag"></i> Language</label>
+      <input type="text" id="node-input-lang">
+  </div>
+  <div class="form-row" id="accept">
+      <label for="node-input-accept"><i class="fa fa-tag"></i> Accept</label>
+      <select id="node-input-accept">
+          <option value="application/ld+json" enabled>JSON-LD</option>
+          <option value="application/json">JSON</option>
+          <option value="application/geo+json">GeoJSON</option>
+      </select>
+  </div>
+  <div class="form-row">
+      <label for="node-input-atContext"><i class="icon-tag"></i> @context</label>
+      <input type="text" id="node-input-atContext">
+  </div>
+  <div class="form-row">
+      <label for="node-input-forbidden"><i class="fa fa-tag"></i> Encode / Decode forbidden chars</label>
+      <select id="node-input-forbidden">
+          <option value="false" selected>off</option>
+          <option value="true">on</option>
+      </select>
+  </div>
 </script>
 
 <script type="text/x-red" data-help-name="NGSI-LD Entity">
-    <p>A simple node that allows to create, read or delete a NGSI-LD entity</p>
-    <h3>Create entity</h3>
-    <h4>Input</h4>
-    <dl class="message-properties">
-        <dt>payload
-            <span class="property-type">JSON object</span>
-        </dt>
-        <dd>A NGSI-LD entity to create</dd>
-    </dl>
+  <p>A simple node that allows to create, read or delete a NGSI-LD entity</p>
+  <h3>Create entity</h3>
+  <h4>Input</h4>
+  <dl class="message-properties">
+      <dt>payload
+          <span class="property-type">JSON object</span>
+      </dt>
+      <dd>A NGSI-LD entity to create</dd>
+  </dl>
 
-    <h4>Output</h4>
-    <dl class="message-properties">
-        <dt>statusCode
-            <span class="property-type">Number</span>
-        </dt>
-        <dd>Status code returned by the NGSI-LD API</dd>
-    </dl>
+  <h4>Output</h4>
+  <dl class="message-properties">
+      <dt>statusCode
+          <span class="property-type">Number</span>
+      </dt>
+      <dd>Status code returned by the NGSI-LD API</dd>
+  </dl>
 
-    <h3>Read entity</h3>
-    <h4>Input</h4>
-    <dl class="message-properties">
-        <dt>payload
-            <span class="property-type">string or JSON object</span>
-        </dt>
-        <dd>A condition to read a NGSI-LD entity</dd>
-    </dl>
+  <h3>Read entity</h3>
+  <h4>Input</h4>
+  <dl class="message-properties">
+      <dt>payload
+          <span class="property-type">string or JSON object</span>
+      </dt>
+      <dd>A condition to read a NGSI-LD entity</dd>
+  </dl>
 
-    <h4>Output</h4>
-    <dl class="message-properties">
-        <dt>payload
-            <span class="property-type">JSON object</span>
-        </dt>
-        <dd>A NGSI-LD entity</dd>
-        <dt>statusCode
-            <span class="property-type">Number</span>
-        </dt>
-        <dd>Status code returned by the NGSI-LD API</dd>
-    </dl>
+  <h4>Output</h4>
+  <dl class="message-properties">
+      <dt>payload
+          <span class="property-type">JSON object</span>
+      </dt>
+      <dd>A NGSI-LD entity</dd>
+      <dt>statusCode
+          <span class="property-type">Number</span>
+      </dt>
+      <dd>Status code returned by the NGSI-LD API</dd>
+  </dl>
 
-    <h3>Delete entity</h3>
-    <h4>Input</h4>
-    <dl class="message-properties">
-        <dt>payload
-            <span class="property-type">string</span>
-        </dt>
-        <dd>an id of the entity to delete the NGSI-LD entity</dd>
-    </dl>
+  <h3>Delete entity</h3>
+  <h4>Input</h4>
+  <dl class="message-properties">
+      <dt>payload
+          <span class="property-type">string</span>
+      </dt>
+      <dd>an id of the entity to delete the NGSI-LD entity</dd>
+  </dl>
 
-    <h4>Output</h4>
-    <dl class="message-properties">
-        <dt>statusCode
-            <span class="property-type">Number</span>
-        </dt>
-        <dd>Status code returned by the NGSI-LD API</dd>
-    </dl>
+  <h4>Output</h4>
+  <dl class="message-properties">
+      <dt>statusCode
+          <span class="property-type">Number</span>
+      </dt>
+      <dd>Status code returned by the NGSI-LD API</dd>
+  </dl>
 
-    <h3>Details</h3>
-    <p>See <a href="https://node-red-contrib-ngsi-ld.letsfiware.jp/en/custom_nodes/entity/">here</a> for full documentation.</p>
+  <h3>Details</h3>
+  <p>See <a href="https://node-red-contrib-ngsi-ld.letsfiware.jp/en/custom_nodes/entity/">here</a> for full documentation.</p>
 </script>

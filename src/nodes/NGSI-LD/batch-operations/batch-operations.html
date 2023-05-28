@@ -27,131 +27,131 @@
 -->
 
 <script type="text/javascript">
-    RED.nodes.registerType('NGSI-LD Batch operations', {
-      category: 'NGSI',
-      color: '#A9E2F3',
-      defaults: {
-        name: { value: '' },
-        broker: {
-          type: "NGSI-LD broker",
-          required: true
-        },
-        actionType: { value: 'create' },
-        atContext: { value: '' },
-        forbidden: { value: 'false' },
+  RED.nodes.registerType('NGSI-LD Batch operations', {
+    category: 'NGSI',
+    color: '#A9E2F3',
+    defaults: {
+      name: { value: '' },
+      broker: {
+        type: 'NGSI-LD broker',
+        required: true
       },
-      inputs: 1,
-      outputs: 1,
-      icon: 'fiware-non-free.svg',
-      label: function () {
-        return this.name || 'NGSI-LD Batch operations';
-      },
-      paletteLabel: 'batch operations'
-    });
+      actionType: { value: 'create' },
+      atContext: { value: '' },
+      forbidden: { value: 'false' }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'fiware-non-free.svg',
+    label: function () {
+      return this.name || 'NGSI-LD Batch operations';
+    },
+    paletteLabel: 'batch operations'
+  });
 </script>
 
 <script type="text/x-red" data-template-name="NGSI-LD Batch operations">
-    <div class="form-row">
-        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
-        <input type="text" id="node-input-name" placeholder="name">
-    </div>
-    <div class="form-row">
-        <label for="node-input-broker"><i class="fa fa-tag"></i> Broker</label>
-        <input type="text" id="node-input-broker">
-    </div>
-    <div class="form-row">
-        <label for="node-input-actionType"><i class="icon-tag"></i> Action type</label>
-        <select id="node-input-actionType">
-            <option value="create">create</option>
-            <option value="update">update</option>
-            <option value="upsert">upsert</option>
-            <option value="delete">delete</option>
-        </select>
-    </div>
-    <div class="form-row">
-        <label for="node-input-atContext"><i class="icon-tag"></i> @context</label>
-        <input type="text" id="node-input-atContext">
-    </div>
-    <div class="form-row">
-        <label for="node-input-forbidden"><i class="fa fa-tag"></i> Encode forbidden chars</label>
-        <select id="node-input-forbidden">
-            <option value="false" selected>off</option>
-            <option value="true">on</option>
-        </select>
-    </div>
+  <div class="form-row">
+      <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="name">
+  </div>
+  <div class="form-row">
+      <label for="node-input-broker"><i class="fa fa-tag"></i> Broker</label>
+      <input type="text" id="node-input-broker">
+  </div>
+  <div class="form-row">
+      <label for="node-input-actionType"><i class="icon-tag"></i> Action type</label>
+      <select id="node-input-actionType">
+          <option value="create">create</option>
+          <option value="update">update</option>
+          <option value="upsert">upsert</option>
+          <option value="delete">delete</option>
+      </select>
+  </div>
+  <div class="form-row">
+      <label for="node-input-atContext"><i class="icon-tag"></i> @context</label>
+      <input type="text" id="node-input-atContext">
+  </div>
+  <div class="form-row">
+      <label for="node-input-forbidden"><i class="fa fa-tag"></i> Encode forbidden chars</label>
+      <select id="node-input-forbidden">
+          <option value="false" selected>off</option>
+          <option value="true">on</option>
+      </select>
+  </div>
 </script>
 
 <script type="text/x-red" data-help-name="NGSI-LD Batch operations">
-    <p>A simple node that allows to create, update, upsert or delete NGSI-LD entities in a single batch operation</p>
+  <p>A simple node that allows to create, update, upsert or delete NGSI-LD entities in a single batch operation</p>
 
-    <h3>Create entities</h3>
-    <h4>Input</h4>
-    <dl class="message-properties">
-        <dt>payload
-            <span class="property-type">JSON Array</span>
-        </dt>
-        <dd>NGSI-LD entitiies</dd>
-    </dl>
+  <h3>Create entities</h3>
+  <h4>Input</h4>
+  <dl class="message-properties">
+      <dt>payload
+          <span class="property-type">JSON Array</span>
+      </dt>
+      <dd>NGSI-LD entitiies</dd>
+  </dl>
 
-    <h4>Output</h4>
-    <dl class="message-properties">
-        <dt>statusCode
-            <span class="property-type">Number</span>
-        </dt>
-        <dd>Status code returned by the NGSI-LD API</dd>
-    </dl>
+  <h4>Output</h4>
+  <dl class="message-properties">
+      <dt>statusCode
+          <span class="property-type">Number</span>
+      </dt>
+      <dd>Status code returned by the NGSI-LD API</dd>
+  </dl>
 
-    <h3>Update entities</h3>
-    <h4>Input</h4>
-    <dl class="message-properties">
-        <dt>payload
-            <span class="property-type">JSON Array</span>
-        </dt>
-        <dd>NGSI-LD entitiies</dd>
-    </dl>
+  <h3>Update entities</h3>
+  <h4>Input</h4>
+  <dl class="message-properties">
+      <dt>payload
+          <span class="property-type">JSON Array</span>
+      </dt>
+      <dd>NGSI-LD entitiies</dd>
+  </dl>
 
-    <h4>Output</h4>
-    <dl class="message-properties">
-        <dt>statusCode
-            <span class="property-type">Number</span>
-        </dt>
-        <dd>Status code returned by the NGSI-LD API</dd>
-    </dl>
+  <h4>Output</h4>
+  <dl class="message-properties">
+      <dt>statusCode
+          <span class="property-type">Number</span>
+      </dt>
+      <dd>Status code returned by the NGSI-LD API</dd>
+  </dl>
 
-    <h3>Upsert entities</h3>
-    <h4>Input</h4>
-    <dl class="message-properties">
-        <dt>payload
-            <span class="property-type">JSON Array</span>
-        </dt>
-        <dd>NGSI-LD entitiies</dd>
-    </dl>
+  <h3>Upsert entities</h3>
+  <h4>Input</h4>
+  <dl class="message-properties">
+      <dt>payload
+          <span class="property-type">JSON Array</span>
+      </dt>
+      <dd>NGSI-LD entitiies</dd>
+  </dl>
 
-    <h4>Output</h4>
-    <dl class="message-properties">
-        <dt>statusCode
-            <span class="property-type">Number</span>
-        </dt>
-        <dd>Status code returned by the NGSI-LD API</dd>
-    </dl>
+  <h4>Output</h4>
+  <dl class="message-properties">
+      <dt>statusCode
+          <span class="property-type">Number</span>
+      </dt>
+      <dd>Status code returned by the NGSI-LD API</dd>
+  </dl>
 
-    <h3>Delete entities</h3>
-    <h4>Input</h4>
-    <dl class="message-properties">
-        <dt>payload
-            <span class="property-type">JSON Array</span>
-        </dt>
-        <dd>NGSI-LD entitiies</dd>
-    </dl>
+  <h3>Delete entities</h3>
+  <h4>Input</h4>
+  <dl class="message-properties">
+      <dt>payload
+          <span class="property-type">JSON Array</span>
+      </dt>
+      <dd>NGSI-LD entitiies</dd>
+  </dl>
 
-    <h4>Output</h4>
-    <dl class="message-properties">
-        <dt>statusCode
-            <span class="property-type">Number</span>
-        </dt>
-        <dd>Status code returned by the NGSI-LD API</dd>
-    </dl>
+  <h4>Output</h4>
+  <dl class="message-properties">
+      <dt>statusCode
+          <span class="property-type">Number</span>
+      </dt>
+      <dd>Status code returned by the NGSI-LD API</dd>
+  </dl>
 
-    <h3>Details</h3>
-    See <a href="https://node-red-contrib-letsfiware-ngsi.letsfiware.jp/en/custom_nodes/batch-operations/">here</a> for full documentation.</p>
+  <h3>Details</h3>
+  See <a href="https://node-red-contrib-letsfiware-ngsi.letsfiware.jp/en/custom_nodes/batch-operations/">here</a> for full documentation.</p>
 </script>

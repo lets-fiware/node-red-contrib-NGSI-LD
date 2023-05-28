@@ -27,59 +27,59 @@
 -->
 
 <script type="text/javascript">
-    RED.nodes.registerType('NGSI-LD broker version', {
-      category: 'NGSI',
-      color: '#A9E2F3',
-      defaults: {
-        name: { value: '' },
-        broker: {
-          type: "NGSI-LD broker",
-          required: true
-        }
-      },
-      inputs: 1,
-      outputs: 1,
-      icon: "fiware-non-free.svg",
-      label: function () {
-        return this.name || "NGSI-LD broker version";
-      },
-      paletteLabel: 'version'
-    });
+  RED.nodes.registerType('NGSI-LD broker version', {
+    category: 'NGSI',
+    color: '#A9E2F3',
+    defaults: {
+      name: { value: '' },
+      broker: {
+        type: 'NGSI-LD broker',
+        required: true
+      }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'fiware-non-free.svg',
+    label: function () {
+      return this.name || 'NGSI-LD broker version';
+    },
+    paletteLabel: 'version'
+  });
 </script>
 
 <script type="text/x-red" data-template-name="NGSI-LD broker version">
-    <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
-        <input type="text" id="node-input-name" placeholder="name">
-    </div>
-    <div class="form-row">
-        <label for="node-input-broker"><i class="fa fa-tag"></i> Broker</label>
-        <input type="text" id="node-input-broker">
-    </div>
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="name">
+  </div>
+  <div class="form-row">
+      <label for="node-input-broker"><i class="fa fa-tag"></i> Broker</label>
+      <input type="text" id="node-input-broker">
+  </div>
 </script>
 
 <script type="text/x-red" data-help-name="NGSI-LD broker version">
-    <p>A simple node that allows to obtain the version information of NGSI-LD broker</p>
-    <h3>Inputs</h3>
-    <dl class="message-properties">
-        <dt>payload
-            <span class="property-type">JSON Object</span>
-        </dt>
-        <dd>Payload containing an empty JSON Object</dd>
-    </dl>
+  <p>A simple node that allows to obtain the version information of NGSI-LD broker</p>
+  <h3>Inputs</h3>
+  <dl class="message-properties">
+      <dt>payload
+          <span class="property-type">JSON Object</span>
+      </dt>
+      <dd>Payload containing an empty JSON Object</dd>
+  </dl>
 
-    <h3>Outputs</h3>
-    <dl class="message-properties">
-        <dt>payload
-            <span class="property-type">JSON Object</span>
-        </dt>
-        <dd>The version information of NGSI-LD broker</dd>
-        <dt>statusCode
-            <span class="property-type">Number</span>
-        </dt>
-        <dd>Status code returned by the NGSI-LD API</dd>
-    </dl>
+  <h3>Outputs</h3>
+  <dl class="message-properties">
+      <dt>payload
+          <span class="property-type">JSON Object</span>
+      </dt>
+      <dd>The version information of NGSI-LD broker</dd>
+      <dt>statusCode
+          <span class="property-type">Number</span>
+      </dt>
+      <dd>Status code returned by the NGSI-LD API</dd>
+  </dl>
 
-    <h3>Details</h3>
-    <p>See <a href="https://node-red-contrib-ngsi-ld.letsfiware.jp/en/custom_nodes/broker_version/">here</a> for full documentation.</p>
+  <h3>Details</h3>
+  <p>See <a href="https://node-red-contrib-ngsi-ld.letsfiware.jp/en/custom_nodes/broker_version/">here</a> for full documentation.</p>
 </script>

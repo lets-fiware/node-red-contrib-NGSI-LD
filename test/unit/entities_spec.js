@@ -46,17 +46,38 @@ describe('entities.js', () => {
     });
     it('get entities', async () => {
       entitiesNode.__set__('lib', {
-        http: async () => Promise.resolve({
-          status: 200,
-          headers: { 'NGSILD-Results-Count': 2 },
-          data: [
-            { 'id': 'urn:ngsi-ld:TemperatureSensor:001', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } },
-            { 'id': 'urn:ngsi-ld:TemperatureSensor:002', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } }
-          ],
-        }),
-        buildHTTPHeader: async () => { return {}; },
+        http: async () =>
+          Promise.resolve({
+            status: 200,
+            headers: { 'NGSILD-Results-Count': 2 },
+            data: [
+              {
+                id: 'urn:ngsi-ld:TemperatureSensor:001',
+                type: 'TemperatureSensor',
+                category: { type: 'Property', value: 'sensor' },
+                temperature: { type: 'Property', value: 25, unitCode: 'CEL' },
+                location: {
+                  type: 'GeoProperty',
+                  value: { type: 'Point', coordinates: [-73.975, 40.775556] }
+                }
+              },
+              {
+                id: 'urn:ngsi-ld:TemperatureSensor:002',
+                type: 'TemperatureSensor',
+                category: { type: 'Property', value: 'sensor' },
+                temperature: { type: 'Property', value: 25, unitCode: 'CEL' },
+                location: {
+                  type: 'GeoProperty',
+                  value: { type: 'Point', coordinates: [-73.975, 40.775556] }
+                }
+              }
+            ]
+          }),
+        buildHTTPHeader: async () => {
+          return {};
+        },
         buildParams: () => new URLSearchParams(),
-        decodeNGSI: (data) => data,
+        decodeNGSI: (data) => data
       });
 
       const getEntities = entitiesNode.__get__('getEntities');
@@ -67,11 +88,15 @@ describe('entities.js', () => {
         method: 'get',
         host: 'http://orion-ld:1026',
         pathname: '/ngsi-ld/v1/entities/',
-        buffer: nobuffering.open({ send: (entities) => { actual = entities; } }),
+        buffer: nobuffering.open({
+          send: (entities) => {
+            actual = entities;
+          }
+        }),
         config: {
           offset: 0,
           limit: 2,
-          forbidden: false,
+          forbidden: false
         }
       };
 
@@ -80,25 +105,64 @@ describe('entities.js', () => {
 
       assert.deepEqual(actual, {
         payload: [
-          { 'id': 'urn:ngsi-ld:TemperatureSensor:001', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } },
-          { 'id': 'urn:ngsi-ld:TemperatureSensor:002', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } }
+          {
+            id: 'urn:ngsi-ld:TemperatureSensor:001',
+            type: 'TemperatureSensor',
+            category: { type: 'Property', value: 'sensor' },
+            temperature: { type: 'Property', value: 25, unitCode: 'CEL' },
+            location: {
+              type: 'GeoProperty',
+              value: { type: 'Point', coordinates: [-73.975, 40.775556] }
+            }
+          },
+          {
+            id: 'urn:ngsi-ld:TemperatureSensor:002',
+            type: 'TemperatureSensor',
+            category: { type: 'Property', value: 'sensor' },
+            temperature: { type: 'Property', value: 25, unitCode: 'CEL' },
+            location: {
+              type: 'GeoProperty',
+              value: { type: 'Point', coordinates: [-73.975, 40.775556] }
+            }
+          }
         ],
         statusCode: 200
       });
     });
     it('get 4 entities', async () => {
       entitiesNode.__set__('lib', {
-        http: async () => Promise.resolve({
-          status: 200,
-          headers: { 'NGSILD-Results-Count': 4 },
-          data: [
-            { 'id': 'urn:ngsi-ld:TemperatureSensor:001', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } },
-            { 'id': 'urn:ngsi-ld:TemperatureSensor:002', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } }
-          ],
-        }),
-        buildHTTPHeader: async () => { return {}; },
+        http: async () =>
+          Promise.resolve({
+            status: 200,
+            headers: { 'NGSILD-Results-Count': 4 },
+            data: [
+              {
+                id: 'urn:ngsi-ld:TemperatureSensor:001',
+                type: 'TemperatureSensor',
+                category: { type: 'Property', value: 'sensor' },
+                temperature: { type: 'Property', value: 25, unitCode: 'CEL' },
+                location: {
+                  type: 'GeoProperty',
+                  value: { type: 'Point', coordinates: [-73.975, 40.775556] }
+                }
+              },
+              {
+                id: 'urn:ngsi-ld:TemperatureSensor:002',
+                type: 'TemperatureSensor',
+                category: { type: 'Property', value: 'sensor' },
+                temperature: { type: 'Property', value: 25, unitCode: 'CEL' },
+                location: {
+                  type: 'GeoProperty',
+                  value: { type: 'Point', coordinates: [-73.975, 40.775556] }
+                }
+              }
+            ]
+          }),
+        buildHTTPHeader: async () => {
+          return {};
+        },
         buildParams: () => new URLSearchParams(),
-        decodeNGSI: (data) => data,
+        decodeNGSI: (data) => data
       });
 
       const getEntities = entitiesNode.__get__('getEntities');
@@ -109,37 +173,85 @@ describe('entities.js', () => {
         method: 'get',
         host: 'http://orion-ld:1026',
         pathname: '/ngsi-ld/v1/entities/',
-        buffer: buffering.open({ send: (entities) => { actual = actual.concat(entities); } }, { payload: null }),
+        buffer: buffering.open(
+          {
+            send: (entities) => {
+              actual = actual.concat(entities);
+            }
+          },
+          { payload: null }
+        ),
         config: {
           offset: 0,
           limit: 2,
-          forbidden: false,
+          forbidden: false
         }
       };
 
       const message = {};
       await getEntities(message, param);
 
-      assert.deepEqual(actual, [{
-        payload: [
-          { 'id': 'urn:ngsi-ld:TemperatureSensor:001', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } },
-          { 'id': 'urn:ngsi-ld:TemperatureSensor:002', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } },
-          { 'id': 'urn:ngsi-ld:TemperatureSensor:001', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } },
-          { 'id': 'urn:ngsi-ld:TemperatureSensor:002', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } }
-        ],
-        statusCode: 200
-      }]);
+      assert.deepEqual(actual, [
+        {
+          payload: [
+            {
+              id: 'urn:ngsi-ld:TemperatureSensor:001',
+              type: 'TemperatureSensor',
+              category: { type: 'Property', value: 'sensor' },
+              temperature: { type: 'Property', value: 25, unitCode: 'CEL' },
+              location: {
+                type: 'GeoProperty',
+                value: { type: 'Point', coordinates: [-73.975, 40.775556] }
+              }
+            },
+            {
+              id: 'urn:ngsi-ld:TemperatureSensor:002',
+              type: 'TemperatureSensor',
+              category: { type: 'Property', value: 'sensor' },
+              temperature: { type: 'Property', value: 25, unitCode: 'CEL' },
+              location: {
+                type: 'GeoProperty',
+                value: { type: 'Point', coordinates: [-73.975, 40.775556] }
+              }
+            },
+            {
+              id: 'urn:ngsi-ld:TemperatureSensor:001',
+              type: 'TemperatureSensor',
+              category: { type: 'Property', value: 'sensor' },
+              temperature: { type: 'Property', value: 25, unitCode: 'CEL' },
+              location: {
+                type: 'GeoProperty',
+                value: { type: 'Point', coordinates: [-73.975, 40.775556] }
+              }
+            },
+            {
+              id: 'urn:ngsi-ld:TemperatureSensor:002',
+              type: 'TemperatureSensor',
+              category: { type: 'Property', value: 'sensor' },
+              temperature: { type: 'Property', value: 25, unitCode: 'CEL' },
+              location: {
+                type: 'GeoProperty',
+                value: { type: 'Point', coordinates: [-73.975, 40.775556] }
+              }
+            }
+          ],
+          statusCode: 200
+        }
+      ]);
     });
     it('empty', async () => {
       entitiesNode.__set__('lib', {
-        http: async () => Promise.resolve({
-          status: 200,
-          headers: { 'NGSILD-Results-Count': 0 },
-          data: [],
-        }),
-        buildHTTPHeader: async () => { return {}; },
+        http: async () =>
+          Promise.resolve({
+            status: 200,
+            headers: { 'NGSILD-Results-Count': 0 },
+            data: []
+          }),
+        buildHTTPHeader: async () => {
+          return {};
+        },
         buildParams: () => new URLSearchParams(),
-        decodeNGSI: (data) => data,
+        decodeNGSI: (data) => data
       });
 
       const getEntities = entitiesNode.__get__('getEntities');
@@ -149,11 +261,15 @@ describe('entities.js', () => {
       const param = {
         host: 'http://orion-ld:1026',
         pathname: '/ngsi-ld/v1/entities/',
-        buffer: nobuffering.open({ send: (entities) => { actual = entities; } }),
+        buffer: nobuffering.open({
+          send: (entities) => {
+            actual = entities;
+          }
+        }),
         config: {
           offset: 0,
           limit: 2,
-          forbidden: false,
+          forbidden: false
         }
       };
 
@@ -164,14 +280,17 @@ describe('entities.js', () => {
     });
     it('NGSILD-Results-Count is 0', async () => {
       entitiesNode.__set__('lib', {
-        http: async () => Promise.resolve({
-          status: 200,
-          headers: { 'NGSILD-Results-Count': 0 },
-          data: [{}],
-        }),
-        buildHTTPHeader: async () => { return {}; },
+        http: async () =>
+          Promise.resolve({
+            status: 200,
+            headers: { 'NGSILD-Results-Count': 0 },
+            data: [{}]
+          }),
+        buildHTTPHeader: async () => {
+          return {};
+        },
         buildParams: () => new URLSearchParams(),
-        decodeNGSI: (data) => data,
+        decodeNGSI: (data) => data
       });
 
       const getEntities = entitiesNode.__get__('getEntities');
@@ -181,11 +300,15 @@ describe('entities.js', () => {
       const param = {
         host: 'http://orion-ld:1026',
         pathname: '/ngsi-ld/v1/entities/',
-        buffer: nobuffering.open({ send: (entities) => { actual = entities; } }),
+        buffer: nobuffering.open({
+          send: (entities) => {
+            actual = entities;
+          }
+        }),
         config: {
           offset: 0,
           limit: 2,
-          forbidden: false,
+          forbidden: false
         }
       };
 
@@ -196,9 +319,16 @@ describe('entities.js', () => {
     });
     it('should be 400 Bad Request', async () => {
       entitiesNode.__set__('lib', {
-        http: async () => Promise.resolve({ status: 400, statusText: 'Bad Request', data: null }),
-        buildHTTPHeader: () => { return {}; },
-        buildParams: () => new URLSearchParams(),
+        http: async () =>
+          Promise.resolve({
+            status: 400,
+            statusText: 'Bad Request',
+            data: null
+          }),
+        buildHTTPHeader: () => {
+          return {};
+        },
+        buildParams: () => new URLSearchParams()
       });
       const getEntities = entitiesNode.__get__('getEntities');
       const nobuffering = entitiesNode.__get__('nobuffering');
@@ -206,17 +336,25 @@ describe('entities.js', () => {
       const param = {
         host: 'http://orion-ld:1026',
         pathname: '/ngsi-ld/v1/entities/',
-        buffer: nobuffering.open({ send: () => { } }),
+        buffer: nobuffering.open({ send: () => {} }),
         config: {
           offset: 0,
           limit: 2,
-          forbidden: false,
+          forbidden: false
         }
       };
 
       let errmsg = '';
       let out = {};
-      const node = { errmsg: '', error: (e) => { errmsg = e; }, send: (o) => { out = o; } };
+      const node = {
+        errmsg: '',
+        error: (e) => {
+          errmsg = e;
+        },
+        send: (o) => {
+          out = o;
+        }
+      };
 
       const message = {};
       await getEntities.call(node, message, param);
@@ -226,10 +364,17 @@ describe('entities.js', () => {
     });
     it('should be 400 Bad Request with details', async () => {
       entitiesNode.__set__('lib', {
-        http: async () => Promise.resolve({ status: 400, statusText: 'Bad Request', data: { error: 'detail' } }),
-        buildHTTPHeader: () => { return {}; },
+        http: async () =>
+          Promise.resolve({
+            status: 400,
+            statusText: 'Bad Request',
+            data: { error: 'detail' }
+          }),
+        buildHTTPHeader: () => {
+          return {};
+        },
         buildParams: () => new URLSearchParams(),
-        decodeNGSI: (data) => data,
+        decodeNGSI: (data) => data
       });
       const getEntities = entitiesNode.__get__('getEntities');
       const nobuffering = entitiesNode.__get__('nobuffering');
@@ -237,33 +382,40 @@ describe('entities.js', () => {
       const param = {
         host: 'http://orion-ld:1026',
         pathname: '/ngsi-ld/v1/entities/',
-        buffer: nobuffering.open({ send: () => { } }),
+        buffer: nobuffering.open({ send: () => {} }),
         config: {
           offset: 0,
           limit: 2,
-          forbidden: false,
+          forbidden: false
         }
       };
 
       let errmsg = [];
       let out = undefined;
-      const node = { errmsg: '', error: (e) => { errmsg.push(e); }, send: (o) => { out = o; } };
+      const node = {
+        errmsg: '',
+        error: (e) => {
+          errmsg.push(e);
+        },
+        send: (o) => {
+          out = o;
+        }
+      };
 
       const message = {};
       await getEntities.call(node, message, param);
 
-      assert.deepEqual(errmsg, [
-        'Error while retrieving entities: 400 Bad Request',
-        'Error details: {"error":"detail"}',
-      ]);
+      assert.deepEqual(errmsg, ['Error while retrieving entities: 400 Bad Request', 'Error details: {"error":"detail"}']);
       assert.deepEqual(out, { payload: { error: 'detail' }, statusCode: 400 });
     });
     it('Should be unknown error', async () => {
       entitiesNode.__set__('lib', {
         http: async () => Promise.reject({ message: 'unknown error' }),
-        buildHTTPHeader: () => { return {}; },
+        buildHTTPHeader: () => {
+          return {};
+        },
         buildParams: () => new URLSearchParams(),
-        decodeNGSI: (data) => data,
+        decodeNGSI: (data) => data
       });
       const getEntities = entitiesNode.__get__('getEntities');
       const nobuffering = entitiesNode.__get__('nobuffering');
@@ -271,17 +423,25 @@ describe('entities.js', () => {
       const param = {
         host: 'http://orion-ld:1026',
         pathname: '/ngsi-ld/v1/entities/',
-        buffer: nobuffering.open({ send: () => { } }),
+        buffer: nobuffering.open({ send: () => {} }),
         config: {
           offset: 0,
           limit: 2,
-          forbidden: false,
+          forbidden: false
         }
       };
 
       let errmsg = '';
       let out = {};
-      const node = { errmsg: '', error: (e) => { errmsg = e; }, send: (o) => { out = o; } };
+      const node = {
+        errmsg: '',
+        error: (e) => {
+          errmsg = e;
+        },
+        send: (o) => {
+          out = o;
+        }
+      };
 
       const message = {};
       await getEntities.call(node, message, param);
@@ -297,26 +457,39 @@ describe('entities.js', () => {
       const errmsg = {};
       const actual = [];
 
-      nobuffering.open({ send: (data) => { actual.push(data); } }, errmsg);
+      nobuffering.open(
+        {
+          send: (data) => {
+            actual.push(data);
+          }
+        },
+        errmsg
+      );
       nobuffering.send([{ id: 'E1', type: 'T' }]);
       nobuffering.close();
 
       assert.deepEqual(actual, [{ payload: [{ id: 'E1', type: 'T' }], statusCode: 200 }]);
-
     });
     it('should have entities', () => {
       const nobuffering = entitiesNode.__get__('nobuffering');
       const errmsg = {};
       const actual = [];
 
-      nobuffering.open({ send: (data) => { actual.push(data); } }, errmsg);
+      nobuffering.open(
+        {
+          send: (data) => {
+            actual.push(data);
+          }
+        },
+        errmsg
+      );
       nobuffering.send([{ id: 'E1', type: 'T' }]);
       nobuffering.send([{ id: 'E2', type: 'T' }]);
       nobuffering.close();
 
       assert.deepEqual(actual, [
         { payload: [{ id: 'E1', type: 'T' }], statusCode: 200 },
-        { payload: [{ id: 'E2', type: 'T' }], statusCode: 200 },
+        { payload: [{ id: 'E2', type: 'T' }], statusCode: 200 }
       ]);
     });
     it('should be empty', () => {
@@ -324,7 +497,14 @@ describe('entities.js', () => {
       const errmsg = {};
       const actual = [];
 
-      nobuffering.open({ send: (data) => { actual.push(data); } }, errmsg);
+      nobuffering.open(
+        {
+          send: (data) => {
+            actual.push(data);
+          }
+        },
+        errmsg
+      );
       nobuffering.close();
 
       assert.deepEqual(actual, []);
@@ -334,7 +514,14 @@ describe('entities.js', () => {
       const errmsg = {};
       const actual = [];
 
-      nobuffering.open({ send: (data) => { actual.push(data); } }, errmsg);
+      nobuffering.open(
+        {
+          send: (data) => {
+            actual.push(data);
+          }
+        },
+        errmsg
+      );
       nobuffering.out([{ id: 'E1', type: 'T' }]);
       nobuffering.close();
 
@@ -347,7 +534,14 @@ describe('entities.js', () => {
       const errmsg = {};
       const actual = [];
 
-      buffering.open({ send: (data) => { actual.push(data); } }, errmsg);
+      buffering.open(
+        {
+          send: (data) => {
+            actual.push(data);
+          }
+        },
+        errmsg
+      );
       buffering.send([{ id: 'E1', type: 'T' }]);
       buffering.close();
 
@@ -358,7 +552,14 @@ describe('entities.js', () => {
       const errmsg = {};
       const actual = [];
 
-      buffering.open({ send: (data) => { actual.push(data); } }, errmsg);
+      buffering.open(
+        {
+          send: (data) => {
+            actual.push(data);
+          }
+        },
+        errmsg
+      );
       buffering.send([{ id: 'E1', type: 'T' }]);
       buffering.send([{ id: 'E2', type: 'T' }]);
       buffering.close();
@@ -367,10 +568,10 @@ describe('entities.js', () => {
         {
           payload: [
             { id: 'E1', type: 'T' },
-            { id: 'E2', type: 'T' },
+            { id: 'E2', type: 'T' }
           ],
           statusCode: 200
-        },
+        }
       ]);
     });
     it('should be empty', () => {
@@ -378,7 +579,14 @@ describe('entities.js', () => {
       const errmsg = {};
       const actual = [];
 
-      buffering.open({ send: (data) => { actual.push(data); } }, errmsg);
+      buffering.open(
+        {
+          send: (data) => {
+            actual.push(data);
+          }
+        },
+        errmsg
+      );
       buffering.close();
 
       assert.deepEqual(actual, [{ payload: [], statusCode: 200 }]);
@@ -388,12 +596,18 @@ describe('entities.js', () => {
       const errmsg = {};
       const actual = [];
 
-      buffering.open({ send: (data) => { actual.push(data); } }, errmsg);
+      buffering.open(
+        {
+          send: (data) => {
+            actual.push(data);
+          }
+        },
+        errmsg
+      );
       buffering.out([{ id: 'E1', type: 'T' }]);
       buffering.close();
 
       assert.deepEqual(actual, [{ payload: [{ id: 'E1', type: 'T' }], statusCode: 200 }]);
-
     });
   });
   describe('validateConfig', () => {
@@ -422,7 +636,9 @@ describe('entities.js', () => {
       const actual = validateConfig(msg, { representation: 123 });
 
       assert.equal(actual, false);
-      assert.deepEqual(msg, { payload: { error: 'representation not string' } });
+      assert.deepEqual(msg, {
+        payload: { error: 'representation not string' }
+      });
     });
     it('id not string', () => {
       const validateConfig = entitiesNode.__get__('validateConfig');
@@ -521,7 +737,9 @@ describe('entities.js', () => {
       const actual = validateConfig(msg, { geometryProperty: 123 });
 
       assert.equal(actual, false);
-      assert.deepEqual(msg, { payload: { error: 'geometryProperty not string' } });
+      assert.deepEqual(msg, {
+        payload: { error: 'geometryProperty not string' }
+      });
     });
     it('lang not string', () => {
       const validateConfig = entitiesNode.__get__('validateConfig');
@@ -608,14 +826,14 @@ describe('entities.js', () => {
         lang: '',
         accept: 'application/ld+json',
         atContext: '',
-        buffering: 'off',
+        buffering: 'off'
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
         mintaka: '',
         getToken: null,
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       const actual = createParam(errmsg, config, brokerConfig);
@@ -644,7 +862,7 @@ describe('entities.js', () => {
         buffering: false,
         forbidden: false,
         limit: 100,
-        offset: 0,
+        offset: 0
       });
     });
     it('object param', () => {
@@ -668,14 +886,14 @@ describe('entities.js', () => {
         accept: 'application/ld+json',
         atContext: '',
         buffering: 'off',
-        forbidden: 'true',
+        forbidden: 'true'
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
         mintaka: '',
         getToken: null,
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       const actual = createParam(errmsg, config, brokerConfig);
@@ -704,7 +922,7 @@ describe('entities.js', () => {
         buffering: false,
         forbidden: true,
         limit: 100,
-        offset: 0,
+        offset: 0
       });
     });
     it('getToken', () => {
@@ -727,14 +945,14 @@ describe('entities.js', () => {
         lang: '',
         accept: 'application/ld+json',
         atContext: '',
-        buffering: 'off',
+        buffering: 'off'
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
         mintaka: '',
-        getToken: () => { },
+        getToken: () => {},
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       const actual = createParam(errmsg, config, brokerConfig);
@@ -763,7 +981,7 @@ describe('entities.js', () => {
         buffering: false,
         forbidden: false,
         limit: 100,
-        offset: 0,
+        offset: 0
       });
     });
     it('atContext', () => {
@@ -786,14 +1004,14 @@ describe('entities.js', () => {
         lang: '',
         accept: 'application/ld+json',
         atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.4.jsonld',
-        buffering: 'off',
+        buffering: 'off'
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
         mintaka: '',
         getToken: null,
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       const actual = createParam(errmsg, config, brokerConfig);
@@ -822,9 +1040,8 @@ describe('entities.js', () => {
         buffering: false,
         forbidden: false,
         limit: 100,
-        offset: 0,
-      }
-      );
+        offset: 0
+      });
     });
     it('buffering', () => {
       const createParam = entitiesNode.__get__('createParam');
@@ -846,14 +1063,14 @@ describe('entities.js', () => {
         lang: '',
         accept: 'application/ld+json',
         atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
-        buffering: 'on',
+        buffering: 'on'
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
         mintaka: '',
         getToken: null,
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       const actual = createParam(errmsg, config, brokerConfig);
@@ -882,9 +1099,8 @@ describe('entities.js', () => {
         buffering: true,
         forbidden: false,
         limit: 100,
-        offset: 0,
-      }
-      );
+        offset: 0
+      });
     });
     it('Payload is not stirng or JSON Object', () => {
       const createParam = entitiesNode.__get__('createParam');
@@ -906,14 +1122,14 @@ describe('entities.js', () => {
         lang: '',
         accept: 'application/ld+json',
         atContext: '',
-        buffering: 'off',
+        buffering: 'off'
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
         mintaka: '',
-        getToken: () => { },
+        getToken: () => {},
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       const node = { msg: '' };
@@ -921,7 +1137,9 @@ describe('entities.js', () => {
 
       const expected = null;
       assert.equal(actual, expected);
-      assert.deepEqual(msg, { payload: { error: 'Payload not stirng or JSON Object' } });
+      assert.deepEqual(msg, {
+        payload: { error: 'Payload not stirng or JSON Object' }
+      });
     });
     it('Error validateConfig', () => {
       const createParam = entitiesNode.__get__('createParam');
@@ -943,14 +1161,14 @@ describe('entities.js', () => {
         lang: '',
         accept: 'application/ld+json',
         atContext: '',
-        buffering: 'off',
+        buffering: 'off'
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
         mintaka: '',
-        getToken: () => { },
+        getToken: () => {},
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       const node = { msg: '' };
@@ -967,18 +1185,41 @@ describe('entities.js', () => {
     });
     it('get entities', async () => {
       entitiesNode.__set__('lib', {
-        http: async () => Promise.resolve({
-          status: 200,
-          headers: { 'NGSILD-Results-Count': 2 },
-          data: [
-            { 'id': 'urn:ngsi-ld:TemperatureSensor:001', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } },
-            { 'id': 'urn:ngsi-ld:TemperatureSensor:002', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } }
-          ],
-        }),
-        buildHTTPHeader: () => { return {}; },
+        http: async () =>
+          Promise.resolve({
+            status: 200,
+            headers: { 'NGSILD-Results-Count': 2 },
+            data: [
+              {
+                id: 'urn:ngsi-ld:TemperatureSensor:001',
+                type: 'TemperatureSensor',
+                category: { type: 'Property', value: 'sensor' },
+                temperature: { type: 'Property', value: 25, unitCode: 'CEL' },
+                location: {
+                  type: 'GeoProperty',
+                  value: { type: 'Point', coordinates: [-73.975, 40.775556] }
+                }
+              },
+              {
+                id: 'urn:ngsi-ld:TemperatureSensor:002',
+                type: 'TemperatureSensor',
+                category: { type: 'Property', value: 'sensor' },
+                temperature: { type: 'Property', value: 25, unitCode: 'CEL' },
+                location: {
+                  type: 'GeoProperty',
+                  value: { type: 'Point', coordinates: [-73.975, 40.775556] }
+                }
+              }
+            ]
+          }),
+        buildHTTPHeader: () => {
+          return {};
+        },
         buildParams: () => new URLSearchParams(),
-        isStringOrJson: () => { return true; },
-        decodeNGSI: (data) => data,
+        isStringOrJson: () => {
+          return true;
+        },
+        decodeNGSI: (data) => data
       });
       const red = new MockRed();
       entitiesNode(red);
@@ -1006,7 +1247,7 @@ describe('entities.js', () => {
           mintaka: '',
           tenant: 'openiot',
           atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
-          getToken: null,
+          getToken: null
         }
       });
 
@@ -1014,8 +1255,26 @@ describe('entities.js', () => {
 
       assert.deepEqual(red.getOutput(), {
         payload: [
-          { 'id': 'urn:ngsi-ld:TemperatureSensor:001', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } },
-          { 'id': 'urn:ngsi-ld:TemperatureSensor:002', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } }
+          {
+            id: 'urn:ngsi-ld:TemperatureSensor:001',
+            type: 'TemperatureSensor',
+            category: { type: 'Property', value: 'sensor' },
+            temperature: { type: 'Property', value: 25, unitCode: 'CEL' },
+            location: {
+              type: 'GeoProperty',
+              value: { type: 'Point', coordinates: [-73.975, 40.775556] }
+            }
+          },
+          {
+            id: 'urn:ngsi-ld:TemperatureSensor:002',
+            type: 'TemperatureSensor',
+            category: { type: 'Property', value: 'sensor' },
+            temperature: { type: 'Property', value: 25, unitCode: 'CEL' },
+            location: {
+              type: 'GeoProperty',
+              value: { type: 'Point', coordinates: [-73.975, 40.775556] }
+            }
+          }
         ],
         statusCode: 200
       });
@@ -1047,7 +1306,7 @@ describe('entities.js', () => {
           mintaka: '',
           tenant: 'openiot',
           atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
-          getToken: null,
+          getToken: null
         }
       });
 

@@ -63,53 +63,49 @@ describe('batch-operations.js', () => {
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
         data: [
           {
-            'id': 'urn:ngsi-ld:TemperatureSensor:101',
-            'type': 'TemperatureSensor',
-            'category': {
-              'type': 'Property',
-              'value': 'sensor'
+            id: 'urn:ngsi-ld:TemperatureSensor:101',
+            type: 'TemperatureSensor',
+            category: {
+              type: 'Property',
+              value: 'sensor'
             },
-            'temperature': {
-              'type': 'Property',
-              'value': 20,
-              'unitCode': 'CEL'
+            temperature: {
+              type: 'Property',
+              value: 20,
+              unitCode: 'CEL'
             }
           },
           {
-            'id': 'urn:ngsi-ld:TemperatureSensor:102',
-            'type': 'TemperatureSensor',
-            'category': {
-              'type': 'Property',
-              'value': 'sensor'
+            id: 'urn:ngsi-ld:TemperatureSensor:102',
+            type: 'TemperatureSensor',
+            category: {
+              type: 'Property',
+              value: 'sensor'
             },
-            'temperature': {
-              'type': 'Property',
-              'value': 2,
-              'unitCode': 'CEL'
+            temperature: {
+              type: 'Property',
+              value: 2,
+              unitCode: 'CEL'
             }
           },
           {
-            'id': 'urn:ngsi-ld:TemperatureSensor:103',
-            'type': 'TemperatureSensor',
-            'category': {
-              'type': 'Property',
-              'value': 'sensor'
+            id: 'urn:ngsi-ld:TemperatureSensor:103',
+            type: 'TemperatureSensor',
+            category: {
+              type: 'Property',
+              value: 'sensor'
             },
-            'temperature': {
-              'type': 'Property',
-              'value': 100,
-              'unitCode': 'CEL'
+            temperature: {
+              type: 'Property',
+              value: 100,
+              unitCode: 'CEL'
             }
           }
         ]
       });
 
       assert.equal(actual.status, 201);
-      assert.deepEqual(actual.data, [
-        'urn:ngsi-ld:TemperatureSensor:101',
-        'urn:ngsi-ld:TemperatureSensor:102',
-        'urn:ngsi-ld:TemperatureSensor:103'
-      ]);
+      assert.deepEqual(actual.data, ['urn:ngsi-ld:TemperatureSensor:101', 'urn:ngsi-ld:TemperatureSensor:102', 'urn:ngsi-ld:TemperatureSensor:103']);
     });
     it('read entities', async () => {
       const actual = await http({
@@ -123,44 +119,44 @@ describe('batch-operations.js', () => {
       assert.deepEqual(actual.data, [
         {
           '@context': 'https://raw.githubusercontent.com/FIWARE/tutorials.CRUD-Operations/NGSI-LD/data-models/ngsi-context.jsonld',
-          'id': 'urn:ngsi-ld:TemperatureSensor:101',
-          'type': 'TemperatureSensor',
-          'category': {
-            'type': 'Property',
-            'value': 'sensor'
+          id: 'urn:ngsi-ld:TemperatureSensor:101',
+          type: 'TemperatureSensor',
+          category: {
+            type: 'Property',
+            value: 'sensor'
           },
-          'temperature': {
-            'type': 'Property',
-            'value': 20,
-            'unitCode': 'CEL'
+          temperature: {
+            type: 'Property',
+            value: 20,
+            unitCode: 'CEL'
           }
         },
         {
           '@context': 'https://raw.githubusercontent.com/FIWARE/tutorials.CRUD-Operations/NGSI-LD/data-models/ngsi-context.jsonld',
-          'id': 'urn:ngsi-ld:TemperatureSensor:102',
-          'type': 'TemperatureSensor',
-          'category': {
-            'type': 'Property',
-            'value': 'sensor'
+          id: 'urn:ngsi-ld:TemperatureSensor:102',
+          type: 'TemperatureSensor',
+          category: {
+            type: 'Property',
+            value: 'sensor'
           },
-          'temperature': {
-            'type': 'Property',
-            'value': 2,
-            'unitCode': 'CEL'
+          temperature: {
+            type: 'Property',
+            value: 2,
+            unitCode: 'CEL'
           }
         },
         {
           '@context': 'https://raw.githubusercontent.com/FIWARE/tutorials.CRUD-Operations/NGSI-LD/data-models/ngsi-context.jsonld',
-          'id': 'urn:ngsi-ld:TemperatureSensor:103',
-          'type': 'TemperatureSensor',
-          'category': {
-            'type': 'Property',
-            'value': 'sensor'
+          id: 'urn:ngsi-ld:TemperatureSensor:103',
+          type: 'TemperatureSensor',
+          category: {
+            type: 'Property',
+            value: 'sensor'
           },
-          'temperature': {
-            'type': 'Property',
-            'value': 100,
-            'unitCode': 'CEL'
+          temperature: {
+            type: 'Property',
+            value: 100,
+            unitCode: 'CEL'
           }
         }
       ]);
@@ -170,11 +166,7 @@ describe('batch-operations.js', () => {
         method: 'post',
         url: '/batch-delete',
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
-        data: [
-          'urn:ngsi-ld:TemperatureSensor:101',
-          'urn:ngsi-ld:TemperatureSensor:102',
-          'urn:ngsi-ld:TemperatureSensor:103',
-        ]
+        data: ['urn:ngsi-ld:TemperatureSensor:101', 'urn:ngsi-ld:TemperatureSensor:102', 'urn:ngsi-ld:TemperatureSensor:103']
       });
 
       assert.equal(actual.status, 204);

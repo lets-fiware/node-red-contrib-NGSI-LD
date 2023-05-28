@@ -27,84 +27,84 @@
 -->
 
 <script type="text/javascript">
-    RED.nodes.registerType('NGSI-LD entity attributes', {
-      category: 'NGSI',
-      color: '#A9E2F3',
-      defaults: {
-        name: { value: '' },
-        broker: {
-          type: 'NGSI-LD broker',
-          required: true
-        },
-        actionType: { value: 'append' },
-        entityId: { value: '' },
-        atContext: { value: '' },
-        forbidden: { value: 'false' },
+  RED.nodes.registerType('NGSI-LD entity attributes', {
+    category: 'NGSI',
+    color: '#A9E2F3',
+    defaults: {
+      name: { value: '' },
+      broker: {
+        type: 'NGSI-LD broker',
+        required: true
       },
-      inputs: 1,
-      outputs: 1,
-      icon: "fiware-non-free.svg",
-      label: function () {
-        return this.name || "NGSI-LD entity attrs";
-      },
-      paletteLabel: 'entity attrs'
-    });
+      actionType: { value: 'append' },
+      entityId: { value: '' },
+      atContext: { value: '' },
+      forbidden: { value: 'false' }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'fiware-non-free.svg',
+    label: function () {
+      return this.name || 'NGSI-LD entity attrs';
+    },
+    paletteLabel: 'entity attrs'
+  });
 </script>
 
 <script type="text/x-red" data-template-name="NGSI-LD entity attributes">
-    <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
-        <input type="text" id="node-input-name" placeholder="name">
-    </div>
-    <div class="form-row">
-        <label for="node-input-broker"><i class="fa fa-tag"></i> Broker</label>
-        <input type="text" id="node-input-broker">
-    </div>
-    <div class="form-row">
-        <label for="node-input-actionType"><i class="icon-tag"></i> Action type</label>
-        <select id="node-input-actionType">
-            <option value="append">append</option>
-            <option value="update">update</option>
-            <option value="upsert">upsert</option>
-        </select>
-    </div>
-    <div class="form-row">
-        <label for="node-input-entityId"><i class="fa fa-tag"></i> Entity id</label>
-        <input type="text" id="node-input-entityId">
-    </div>
-    <div class="form-row">
-        <label for="node-input-atContext"><i class="icon-tag"></i> @context</label>
-        <input type="text" id="node-input-atContext">
-    </div>
-    <div class="form-row">
-        <label for="node-input-forbidden"><i class="fa fa-tag"></i> Encode forbidden chars</label>
-        <select id="node-input-forbidden">
-            <option value="false" selected>off</option>
-            <option value="true">on</option>
-        </select>
-    </div>
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="name">
+  </div>
+  <div class="form-row">
+      <label for="node-input-broker"><i class="fa fa-tag"></i> Broker</label>
+      <input type="text" id="node-input-broker">
+  </div>
+  <div class="form-row">
+      <label for="node-input-actionType"><i class="icon-tag"></i> Action type</label>
+      <select id="node-input-actionType">
+          <option value="append">append</option>
+          <option value="update">update</option>
+          <option value="upsert">upsert</option>
+      </select>
+  </div>
+  <div class="form-row">
+      <label for="node-input-entityId"><i class="fa fa-tag"></i> Entity id</label>
+      <input type="text" id="node-input-entityId">
+  </div>
+  <div class="form-row">
+      <label for="node-input-atContext"><i class="icon-tag"></i> @context</label>
+      <input type="text" id="node-input-atContext">
+  </div>
+  <div class="form-row">
+      <label for="node-input-forbidden"><i class="fa fa-tag"></i> Encode forbidden chars</label>
+      <select id="node-input-forbidden">
+          <option value="false" selected>off</option>
+          <option value="true">on</option>
+      </select>
+  </div>
 </script>
 
 <script type="text/x-red" data-help-name="NGSI-LD entity attributes">
-    <p>A simple node that allows to append, update or upsert attributes of NGSI-LD entity</p>
+  <p>A simple node that allows to append, update or upsert attributes of NGSI-LD entity</p>
 
-    <h3>Append, update or upsert attributes</h3>
-    <h4>Inputs</h4>
-    <dl class="message-properties">
-        <dt>payload
-            <span class="property-type">JSON Object</span>
-        </dt>
-        <dd>An object with the attributes</dd>
-    </dl>
+  <h3>Append, update or upsert attributes</h3>
+  <h4>Inputs</h4>
+  <dl class="message-properties">
+      <dt>payload
+          <span class="property-type">JSON Object</span>
+      </dt>
+      <dd>An object with the attributes</dd>
+  </dl>
 
-    <h4>Outputs</h4>
-    <dl class="message-properties">
-        <dt>statusCode
-            <span class="property-type">Number</span>
-        </dt>
-        <dd>Status code returned by the NGSI-LD API</dd>
-    </dl>
+  <h4>Outputs</h4>
+  <dl class="message-properties">
+      <dt>statusCode
+          <span class="property-type">Number</span>
+      </dt>
+      <dd>Status code returned by the NGSI-LD API</dd>
+  </dl>
 
-    <h3>Details</h3>
-    <p>See <a href="https://node-red-contrib-letsfiware-ngsi.letsfiware.jp/en/custom_nodes/entity-attributes/">here</a> for full documentation.</p>
+  <h3>Details</h3>
+  <p>See <a href="https://node-red-contrib-letsfiware-ngsi.letsfiware.jp/en/custom_nodes/entity-attributes/">here</a> for full documentation.</p>
 </script>

@@ -46,17 +46,17 @@ describe('batch-operations.js', () => {
     });
     it('create entity', async () => {
       batchOperationsNode.__set__('lib', {
-        http: async () => Promise.resolve({
-          status: 201,
-          headers: {},
-          data: [
-            'urn:ngsi-ld:TemperatureSensor:001',
-            'urn:ngsi-ld:TemperatureSensor:002',
-          ],
-        }),
-        buildHTTPHeader: () => { return {}; },
+        http: async () =>
+          Promise.resolve({
+            status: 201,
+            headers: {},
+            data: ['urn:ngsi-ld:TemperatureSensor:001', 'urn:ngsi-ld:TemperatureSensor:002']
+          }),
+        buildHTTPHeader: () => {
+          return {};
+        },
         buildParams: () => new URLSearchParams(),
-        encodeNGSI: (data) => data,
+        encodeNGSI: (data) => data
       });
       const batchOperations = batchOperationsNode.__get__('batchOperations');
 
@@ -66,32 +66,50 @@ describe('batch-operations.js', () => {
         pathname: '/ngsi-ld/v1/entityOperations/create',
         config: {
           data: [
-            { 'id': 'urn:ngsi-ld:TemperatureSensor:001', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } },
-            { 'id': 'urn:ngsi-ld:TemperatureSensor:002', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } }
+            {
+              id: 'urn:ngsi-ld:TemperatureSensor:001',
+              type: 'TemperatureSensor',
+              category: { type: 'Property', value: 'sensor' },
+              temperature: { type: 'Property', value: 25, unitCode: 'CEL' },
+              location: {
+                type: 'GeoProperty',
+                value: { type: 'Point', coordinates: [-73.975, 40.775556] }
+              }
+            },
+            {
+              id: 'urn:ngsi-ld:TemperatureSensor:002',
+              type: 'TemperatureSensor',
+              category: { type: 'Property', value: 'sensor' },
+              temperature: { type: 'Property', value: 25, unitCode: 'CEL' },
+              location: {
+                type: 'GeoProperty',
+                value: { type: 'Point', coordinates: [-73.975, 40.775556] }
+              }
+            }
           ],
-          forbidden: false,
-        },
+          forbidden: false
+        }
       };
 
       const message = {};
       await batchOperations(message, param);
 
-      assert.deepEqual(message.payload, [
-        'urn:ngsi-ld:TemperatureSensor:001',
-        'urn:ngsi-ld:TemperatureSensor:002',
-      ]);
+      assert.deepEqual(message.payload, ['urn:ngsi-ld:TemperatureSensor:001', 'urn:ngsi-ld:TemperatureSensor:002']);
       assert.equal(message.statusCode, 201);
     });
     it('delete entities', async () => {
       batchOperationsNode.__set__('lib', {
-        http: async () => Promise.resolve({
-          status: 204,
-          headers: {},
-          data: undefined,
-        }),
-        buildHTTPHeader: () => { return {}; },
+        http: async () =>
+          Promise.resolve({
+            status: 204,
+            headers: {},
+            data: undefined
+          }),
+        buildHTTPHeader: () => {
+          return {};
+        },
         buildParams: () => new URLSearchParams(),
-        encodeNGSI: (data) => data,
+        encodeNGSI: (data) => data
       });
       const batchOperations = batchOperationsNode.__get__('batchOperations');
 
@@ -100,12 +118,9 @@ describe('batch-operations.js', () => {
         host: 'http://orion-ld:1026',
         pathname: '/ngsi-ld/v1/entityOperations/delete',
         config: {
-          data: [
-            'urn:ngsi-ld:TemperatureSensor:001',
-            'urn:ngsi-ld:TemperatureSensor:002',
-          ],
-          forbidden: false,
-        },
+          data: ['urn:ngsi-ld:TemperatureSensor:001', 'urn:ngsi-ld:TemperatureSensor:002'],
+          forbidden: false
+        }
       };
 
       const message = {};
@@ -116,10 +131,17 @@ describe('batch-operations.js', () => {
     });
     it('should be 400 Bad Request', async () => {
       batchOperationsNode.__set__('lib', {
-        http: async () => Promise.resolve({ status: 400, statusText: 'Bad Request', data: undefined }),
-        buildHTTPHeader: () => { return {}; },
+        http: async () =>
+          Promise.resolve({
+            status: 400,
+            statusText: 'Bad Request',
+            data: undefined
+          }),
+        buildHTTPHeader: () => {
+          return {};
+        },
         buildParams: () => new URLSearchParams(),
-        encodeNGSI: (data) => data,
+        encodeNGSI: (data) => data
       });
       const batchOperations = batchOperationsNode.__get__('batchOperations');
 
@@ -129,15 +151,38 @@ describe('batch-operations.js', () => {
         pathname: '/ngsi-ld/v1/entityOperations/create',
         config: {
           data: [
-            { 'id': 'urn:ngsi-ld:TemperatureSensor:001', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } },
-            { 'id': 'urn:ngsi-ld:TemperatureSensor:002', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } }
+            {
+              id: 'urn:ngsi-ld:TemperatureSensor:001',
+              type: 'TemperatureSensor',
+              category: { type: 'Property', value: 'sensor' },
+              temperature: { type: 'Property', value: 25, unitCode: 'CEL' },
+              location: {
+                type: 'GeoProperty',
+                value: { type: 'Point', coordinates: [-73.975, 40.775556] }
+              }
+            },
+            {
+              id: 'urn:ngsi-ld:TemperatureSensor:002',
+              type: 'TemperatureSensor',
+              category: { type: 'Property', value: 'sensor' },
+              temperature: { type: 'Property', value: 25, unitCode: 'CEL' },
+              location: {
+                type: 'GeoProperty',
+                value: { type: 'Point', coordinates: [-73.975, 40.775556] }
+              }
+            }
           ],
-          forbidden: false,
-        },
+          forbidden: false
+        }
       };
 
       let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
+      const node = {
+        msg: '',
+        error: (e) => {
+          msg = e;
+        }
+      };
 
       const message = {};
       await batchOperations.call(node, message, param);
@@ -148,10 +193,17 @@ describe('batch-operations.js', () => {
     });
     it('should be 400 Bad Request with details', async () => {
       batchOperationsNode.__set__('lib', {
-        http: async () => Promise.resolve({ status: 400, statusText: 'Bad Request', data: { error: 'detail' } }),
-        buildHTTPHeader: () => { return {}; },
+        http: async () =>
+          Promise.resolve({
+            status: 400,
+            statusText: 'Bad Request',
+            data: { error: 'detail' }
+          }),
+        buildHTTPHeader: () => {
+          return {};
+        },
         buildParams: () => new URLSearchParams(),
-        encodeNGSI: (data) => data,
+        encodeNGSI: (data) => data
       });
       const batchOperations = batchOperationsNode.__get__('batchOperations');
 
@@ -161,32 +213,54 @@ describe('batch-operations.js', () => {
         pathname: '/ngsi-ld/v1/entityOperations/create',
         config: {
           data: [
-            { 'id': 'urn:ngsi-ld:TemperatureSensor:001', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } },
-            { 'id': 'urn:ngsi-ld:TemperatureSensor:002', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } }
+            {
+              id: 'urn:ngsi-ld:TemperatureSensor:001',
+              type: 'TemperatureSensor',
+              category: { type: 'Property', value: 'sensor' },
+              temperature: { type: 'Property', value: 25, unitCode: 'CEL' },
+              location: {
+                type: 'GeoProperty',
+                value: { type: 'Point', coordinates: [-73.975, 40.775556] }
+              }
+            },
+            {
+              id: 'urn:ngsi-ld:TemperatureSensor:002',
+              type: 'TemperatureSensor',
+              category: { type: 'Property', value: 'sensor' },
+              temperature: { type: 'Property', value: 25, unitCode: 'CEL' },
+              location: {
+                type: 'GeoProperty',
+                value: { type: 'Point', coordinates: [-73.975, 40.775556] }
+              }
+            }
           ],
-          forbidden: false,
-        },
+          forbidden: false
+        }
       };
 
       let msg = [];
-      const node = { msg: '', error: (e) => { msg.push(e); } };
+      const node = {
+        msg: '',
+        error: (e) => {
+          msg.push(e);
+        }
+      };
 
       const message = {};
       await batchOperations.call(node, message, param);
 
-      assert.deepEqual(msg, [
-        'Error while manipulating entities: 400 Bad Request',
-        'Error details: {"error":"detail"}',
-      ]);
+      assert.deepEqual(msg, ['Error while manipulating entities: 400 Bad Request', 'Error details: {"error":"detail"}']);
       assert.deepEqual(message.payload, { error: 'detail' });
       assert.equal(message.statusCode, 400);
     });
     it('Should be unknown error', async () => {
       batchOperationsNode.__set__('lib', {
         http: async () => Promise.reject({ message: 'unknown error' }),
-        buildHTTPHeader: () => { return {}; },
+        buildHTTPHeader: () => {
+          return {};
+        },
         buildParams: () => new URLSearchParams(),
-        encodeNGSI: (data) => data,
+        encodeNGSI: (data) => data
       });
       const batchOperations = batchOperationsNode.__get__('batchOperations');
 
@@ -196,15 +270,38 @@ describe('batch-operations.js', () => {
         pathname: '/ngsi-ld/v1/entityOperations/create',
         config: {
           data: [
-            { 'id': 'urn:ngsi-ld:TemperatureSensor:001', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } },
-            { 'id': 'urn:ngsi-ld:TemperatureSensor:002', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } }
+            {
+              id: 'urn:ngsi-ld:TemperatureSensor:001',
+              type: 'TemperatureSensor',
+              category: { type: 'Property', value: 'sensor' },
+              temperature: { type: 'Property', value: 25, unitCode: 'CEL' },
+              location: {
+                type: 'GeoProperty',
+                value: { type: 'Point', coordinates: [-73.975, 40.775556] }
+              }
+            },
+            {
+              id: 'urn:ngsi-ld:TemperatureSensor:002',
+              type: 'TemperatureSensor',
+              category: { type: 'Property', value: 'sensor' },
+              temperature: { type: 'Property', value: 25, unitCode: 'CEL' },
+              location: {
+                type: 'GeoProperty',
+                value: { type: 'Point', coordinates: [-73.975, 40.775556] }
+              }
+            }
           ],
-          forbidden: false,
-        },
+          forbidden: false
+        }
       };
 
       let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
+      const node = {
+        msg: '',
+        error: (e) => {
+          msg = e;
+        }
+      };
 
       const message = {};
       await batchOperations.call(node, message, param);
@@ -218,19 +315,19 @@ describe('batch-operations.js', () => {
     it('create entities', () => {
       const createParam = batchOperationsNode.__get__('createParam');
       const msg = {
-        payload: [],
+        payload: []
       };
       const config = {
         atContext: '',
         actionType: 'create',
-        forbidden: 'true',
+        forbidden: 'true'
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
         mintaka: '',
         getToken: null,
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       const actual = createParam(msg, config, brokerConfig);
@@ -242,29 +339,28 @@ describe('batch-operations.js', () => {
         config: {
           tenant: 'openiot',
           atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
-          data: [
-          ],
+          data: [],
           accept: 'application/ld+json',
-          forbidden: true,
-        },
+          forbidden: true
+        }
       };
       assert.deepEqual(actual, expected);
     });
     it('create entity', () => {
       const createParam = batchOperationsNode.__get__('createParam');
       const msg = {
-        payload: {},
+        payload: {}
       };
       const config = {
         atContext: '',
-        actionType: 'create',
+        actionType: 'create'
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
         mintaka: '',
         getToken: null,
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       const actual = createParam(msg, config, brokerConfig);
@@ -276,30 +372,28 @@ describe('batch-operations.js', () => {
         config: {
           tenant: 'openiot',
           atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
-          data: [
-            {}
-          ],
+          data: [{}],
           accept: 'application/ld+json',
-          forbidden: false,
-        },
+          forbidden: false
+        }
       };
       assert.deepEqual(actual, expected);
     });
     it('getToken', () => {
       const createParam = batchOperationsNode.__get__('createParam');
       const msg = {
-        payload: [],
+        payload: []
       };
       const config = {
         atContext: '',
-        actionType: 'create',
+        actionType: 'create'
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
         mintaka: '',
-        getToken: () => { },
+        getToken: () => {},
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       const actual = createParam(msg, config, brokerConfig);
@@ -309,18 +403,18 @@ describe('batch-operations.js', () => {
     it('atContext', () => {
       const createParam = batchOperationsNode.__get__('createParam');
       const msg = {
-        payload: [],
+        payload: []
       };
       const config = {
         atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.5.jsonld',
-        actionType: 'create',
+        actionType: 'create'
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
         mintaka: '',
         getToken: null,
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       const actual = createParam(msg, config, brokerConfig);
@@ -332,18 +426,17 @@ describe('batch-operations.js', () => {
         config: {
           tenant: 'openiot',
           atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.5.jsonld',
-          data: [
-          ],
+          data: [],
           accept: 'application/ld+json',
-          forbidden: false,
-        },
+          forbidden: false
+        }
       };
       assert.deepEqual(actual, expected);
     });
     it('Payload not JSON Object', () => {
       const createParam = batchOperationsNode.__get__('createParam');
       const msg = {
-        payload: '',
+        payload: ''
       };
       const config = {};
       const brokerConfig = {
@@ -351,11 +444,16 @@ describe('batch-operations.js', () => {
         mintaka: '',
         getToken: null,
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       let errmsg = '';
-      const node = { msg: '', error: (e) => { errmsg = e; } };
+      const node = {
+        msg: '',
+        error: (e) => {
+          errmsg = e;
+        }
+      };
 
       const actual = createParam.call(node, msg, config, brokerConfig);
 
@@ -381,32 +479,44 @@ describe('batch-operations.js', () => {
           mintaka: '',
           tenant: 'openiot',
           atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
-          getToken: null,
+          getToken: null
         }
       });
 
       let actual;
       batchOperationsNode.__set__('batchOperations', (msg, param) => {
         actual = param;
-        msg.payload = [
-          'urn:ngsi-ld:TemperatureSensor:001',
-          'urn:ngsi-ld:TemperatureSensor:002',
-        ];
+        msg.payload = ['urn:ngsi-ld:TemperatureSensor:001', 'urn:ngsi-ld:TemperatureSensor:002'];
         msg.statusCode = 201;
       });
 
       await red.inputWithAwait({
         payload: [
-          { 'id': 'urn:ngsi-ld:TemperatureSensor:001', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } },
-          { 'id': 'urn:ngsi-ld:TemperatureSensor:002', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } }
-        ],
+          {
+            id: 'urn:ngsi-ld:TemperatureSensor:001',
+            type: 'TemperatureSensor',
+            category: { type: 'Property', value: 'sensor' },
+            temperature: { type: 'Property', value: 25, unitCode: 'CEL' },
+            location: {
+              type: 'GeoProperty',
+              value: { type: 'Point', coordinates: [-73.975, 40.775556] }
+            }
+          },
+          {
+            id: 'urn:ngsi-ld:TemperatureSensor:002',
+            type: 'TemperatureSensor',
+            category: { type: 'Property', value: 'sensor' },
+            temperature: { type: 'Property', value: 25, unitCode: 'CEL' },
+            location: {
+              type: 'GeoProperty',
+              value: { type: 'Point', coordinates: [-73.975, 40.775556] }
+            }
+          }
+        ]
       });
 
       const expected = {
-        payload: [
-          'urn:ngsi-ld:TemperatureSensor:001',
-          'urn:ngsi-ld:TemperatureSensor:002',
-        ],
+        payload: ['urn:ngsi-ld:TemperatureSensor:001', 'urn:ngsi-ld:TemperatureSensor:002'],
         statusCode: 201
       };
 
@@ -424,53 +534,46 @@ describe('batch-operations.js', () => {
               type: 'TemperatureSensor',
               category: {
                 type: 'Property',
-                value: 'sensor',
+                value: 'sensor'
               },
               temperature: {
                 type: 'Property',
                 value: 25,
-                unitCode: 'CEL',
+                unitCode: 'CEL'
               },
               location: {
                 type: 'GeoProperty',
                 value: {
                   type: 'Point',
-                  coordinates: [
-                    -73.975,
-                    40.775556,
-                  ],
-                },
-              },
+                  coordinates: [-73.975, 40.775556]
+                }
+              }
             },
             {
               id: 'urn:ngsi-ld:TemperatureSensor:002',
               type: 'TemperatureSensor',
               category: {
                 type: 'Property',
-                value: 'sensor',
+                value: 'sensor'
               },
               temperature: {
                 type: 'Property',
                 value: 25,
-                unitCode: 'CEL',
+                unitCode: 'CEL'
               },
               location: {
                 type: 'GeoProperty',
                 value: {
                   type: 'Point',
-                  coordinates: [
-                    -73.975,
-                    40.775556,
-                  ],
-                },
-              },
-            },
+                  coordinates: [-73.975, 40.775556]
+                }
+              }
+            }
           ],
           forbidden: false,
-          accept: 'application/ld+json',
-        },
-      }
-      );
+          accept: 'application/ld+json'
+        }
+      });
     });
     it('payload not JSON Object', async () => {
       const red = new MockRed();
@@ -484,7 +587,7 @@ describe('batch-operations.js', () => {
           mintaka: '',
           tenant: 'openiot',
           atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
-          getToken: null,
+          getToken: null
         }
       });
 

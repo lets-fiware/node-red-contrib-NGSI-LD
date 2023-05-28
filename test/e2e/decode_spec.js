@@ -73,17 +73,17 @@ describe('decode.js', () => {
         url: '/decode',
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
         data: {
-          'id': 'urn:ngsi-ld:TemperatureSensor:001',
-          'type': 'TemperatureSensor',
-          'name': '%3CSensor%3E'
+          id: 'urn:ngsi-ld:TemperatureSensor:001',
+          type: 'TemperatureSensor',
+          name: '%3CSensor%3E'
         }
       });
 
       assert.equal(actual.status, 200);
       assert.deepEqual(actual.data, {
-        'id': 'urn:ngsi-ld:TemperatureSensor:001',
-        'type': 'TemperatureSensor',
-        'name': '<Sensor>'
+        id: 'urn:ngsi-ld:TemperatureSensor:001',
+        type: 'TemperatureSensor',
+        name: '<Sensor>'
       });
     });
     it('decode JSON Array', async () => {
@@ -91,19 +91,23 @@ describe('decode.js', () => {
         method: 'post',
         url: '/decode',
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
-        data: [{
-          'id': 'urn:ngsi-ld:TemperatureSensor:001',
-          'type': 'TemperatureSensor',
-          'name': '%3CSensor%3E'
-        }]
+        data: [
+          {
+            id: 'urn:ngsi-ld:TemperatureSensor:001',
+            type: 'TemperatureSensor',
+            name: '%3CSensor%3E'
+          }
+        ]
       });
 
       assert.equal(actual.status, 200);
-      assert.deepEqual(actual.data, [{
-        'id': 'urn:ngsi-ld:TemperatureSensor:001',
-        'type': 'TemperatureSensor',
-        'name': '<Sensor>'
-      }]);
+      assert.deepEqual(actual.data, [
+        {
+          id: 'urn:ngsi-ld:TemperatureSensor:001',
+          type: 'TemperatureSensor',
+          name: '<Sensor>'
+        }
+      ]);
     });
   });
 });

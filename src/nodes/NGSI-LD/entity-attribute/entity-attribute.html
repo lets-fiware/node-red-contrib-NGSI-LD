@@ -27,132 +27,132 @@
 -->
 
 <script type="text/javascript">
-    RED.nodes.registerType('NGSI-LD entity attribute', {
-      category: 'NGSI',
-      color: '#A9E2F3',
-      defaults: {
-        name: { value: '' },
-        broker: {
-          type: "NGSI-LD broker",
-          required: true
-        },
-        actionType: { value: 'update' },
-        entityId: { value: '' },
-        attrName: { value: '' },
-        deleteAll: { value: 'false' },
-        datasetId: { value: '' },
-        atContext: { value: '' },
-        forbidden: { value: 'false' },
+  RED.nodes.registerType('NGSI-LD entity attribute', {
+    category: 'NGSI',
+    color: '#A9E2F3',
+    defaults: {
+      name: { value: '' },
+      broker: {
+        type: 'NGSI-LD broker',
+        required: true
       },
-      inputs: 1,
-      outputs: 1,
-      icon: "fiware-non-free.svg",
-      label: function () {
-        return this.name || "NGSI-LD entity attr";
-      },
-      paletteLabel: 'entity attr'
-    });
+      actionType: { value: 'update' },
+      entityId: { value: '' },
+      attrName: { value: '' },
+      deleteAll: { value: 'false' },
+      datasetId: { value: '' },
+      atContext: { value: '' },
+      forbidden: { value: 'false' }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'fiware-non-free.svg',
+    label: function () {
+      return this.name || 'NGSI-LD entity attr';
+    },
+    paletteLabel: 'entity attr'
+  });
 
-    /* eslint no-unused-vars: 0 */
-    function ngsi_ld_entity_attr_actionType_Changed(e) {
-      switch (e.target.value) {
-        case 'update':
-          document.getElementById('deleteAll').hidden = true;
-          document.getElementById('datasetId').hidden = true;
-          break;
-        case "delete":
-          document.getElementById('deleteAll').hidden = false;
-          document.getElementById('datasetId').hidden = false;
-          break;
-      }
+  /* eslint no-unused-vars: 0 */
+  function ngsi_ld_entity_attr_actionType_Changed(e) {
+    switch (e.target.value) {
+      case 'update':
+        document.getElementById('deleteAll').hidden = true;
+        document.getElementById('datasetId').hidden = true;
+        break;
+      case 'delete':
+        document.getElementById('deleteAll').hidden = false;
+        document.getElementById('datasetId').hidden = false;
+        break;
     }
+  }
 </script>
 
 <script type="text/x-red" data-template-name="NGSI-LD entity attribute">
-    <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
-        <input type="text" id="node-input-name" placeholder="name">
-    </div>
-    <div class="form-row">
-        <label for="node-input-broker"><i class="fa fa-tag"></i> Broker</label>
-        <input type="text" id="node-input-broker">
-    </div>
-    <div class="form-row">
-        <label for="node-input-actionType"><i class="icon-tag"></i> Action type</label>
-        <select id="node-input-actionType" onchange="ngsi_ld_entity_attr_actionType_Changed(event)">
-            <option value="update">update</option>
-            <option value="delete">delete</option>
-        </select>
-    </div>
-    <div class="form-row">
-        <label for="node-input-entityId"><i class="fa fa-tag"></i> Entity id</label>
-        <input type="text" id="node-input-entityId">
-    </div>
-    <div class="form-row">
-        <label for="node-input-attrName"><i class="fa fa-tag"></i> Attribute name</label>
-        <input type="text" id="node-input-attrName">
-    </div>
-    <div class="form-row" id="deleteAll">
-        <label for="node-input-deleteAll"><i class="fa fa-tag"></i> Delete all</label>
-        <select id="node-input-deleteAll">
-            <option value="false">false</option>
-            <option value="true">true</option>
-        </select>
-    </div>
-    <div class="form-row" id="datasetId">
-        <label for="node-input-datasetId"><i class="fa fa-tag"></i> Dataset id</label>
-        <input type="text" id="node-input-datasetId">
-    </div>
-    <div class="form-row">
-        <label for="node-input-atContext"><i class="icon-tag"></i> @context</label>
-        <input type="text" id="node-input-atContext">
-    </div>
-    <div class="form-row">
-        <label for="node-input-forbidden"><i class="fa fa-tag"></i> Encode forbidden chars</label>
-        <select id="node-input-forbidden">
-            <option value="false" selected>off</option>
-            <option value="true">on</option>
-        </select>
-    </div>
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="name">
+  </div>
+  <div class="form-row">
+      <label for="node-input-broker"><i class="fa fa-tag"></i> Broker</label>
+      <input type="text" id="node-input-broker">
+  </div>
+  <div class="form-row">
+      <label for="node-input-actionType"><i class="icon-tag"></i> Action type</label>
+      <select id="node-input-actionType" onchange="ngsi_ld_entity_attr_actionType_Changed(event)">
+          <option value="update">update</option>
+          <option value="delete">delete</option>
+      </select>
+  </div>
+  <div class="form-row">
+      <label for="node-input-entityId"><i class="fa fa-tag"></i> Entity id</label>
+      <input type="text" id="node-input-entityId">
+  </div>
+  <div class="form-row">
+      <label for="node-input-attrName"><i class="fa fa-tag"></i> Attribute name</label>
+      <input type="text" id="node-input-attrName">
+  </div>
+  <div class="form-row" id="deleteAll">
+      <label for="node-input-deleteAll"><i class="fa fa-tag"></i> Delete all</label>
+      <select id="node-input-deleteAll">
+          <option value="false">false</option>
+          <option value="true">true</option>
+      </select>
+  </div>
+  <div class="form-row" id="datasetId">
+      <label for="node-input-datasetId"><i class="fa fa-tag"></i> Dataset id</label>
+      <input type="text" id="node-input-datasetId">
+  </div>
+  <div class="form-row">
+      <label for="node-input-atContext"><i class="icon-tag"></i> @context</label>
+      <input type="text" id="node-input-atContext">
+  </div>
+  <div class="form-row">
+      <label for="node-input-forbidden"><i class="fa fa-tag"></i> Encode forbidden chars</label>
+      <select id="node-input-forbidden">
+          <option value="false" selected>off</option>
+          <option value="true">on</option>
+      </select>
+  </div>
 </script>
 
 <script type="text/x-red" data-help-name="NGSI-LD entity attribute">
-    <p>A simple node that allows to update or delete an attribute in NGSI-LD entity</p>
+  <p>A simple node that allows to update or delete an attribute in NGSI-LD entity</p>
 
-    <h3>Update an attribute</h3>
-    <h4>Inputs</h4>
-    <dl class="message-properties">
-        <dt>payload
-            <span class="property-type">JSON Object</span>
-        </dt>
-        <dd>An object representing the attribute to update</dd>
-    </dl>
+  <h3>Update an attribute</h3>
+  <h4>Inputs</h4>
+  <dl class="message-properties">
+      <dt>payload
+          <span class="property-type">JSON Object</span>
+      </dt>
+      <dd>An object representing the attribute to update</dd>
+  </dl>
 
-    <h4>Outputs</h4>
-    <dl class="message-properties">
-        <dt>statusCode
-            <span class="property-type">Number</span>
-        </dt>
-        <dd>Status code returned by the NGSI-LD API</dd>
-    </dl>
+  <h4>Outputs</h4>
+  <dl class="message-properties">
+      <dt>statusCode
+          <span class="property-type">Number</span>
+      </dt>
+      <dd>Status code returned by the NGSI-LD API</dd>
+  </dl>
 
-    <h3>Delete an attribute</h3>
-    <h4>Inputs</h4>
-    <dl class="message-properties">
-        <dt>payload
-            <span class="property-type">JSON Object</span>
-        </dt>
-        <dd>An object with information related to the attribute to delete</dd>
-    </dl>
+  <h3>Delete an attribute</h3>
+  <h4>Inputs</h4>
+  <dl class="message-properties">
+      <dt>payload
+          <span class="property-type">JSON Object</span>
+      </dt>
+      <dd>An object with information related to the attribute to delete</dd>
+  </dl>
 
-    <h4>Outputs</h4>
-    <dl class="message-properties">
-        <dt>statusCode
-            <span class="property-type">Number</span>
-        </dt>
-        <dd>Status code returned by the NGSI-LD API</dd>
-    </dl>
+  <h4>Outputs</h4>
+  <dl class="message-properties">
+      <dt>statusCode
+          <span class="property-type">Number</span>
+      </dt>
+      <dd>Status code returned by the NGSI-LD API</dd>
+  </dl>
 
-    <h3>Details</h3>
-    <p>See <a href="https://node-red-contrib-letsfiware-ngsi.letsfiware.jp/en/custom_nodes/entity-attribute/">here</a> for full documentation.</p>
+  <h3>Details</h3>
+  <p>See <a href="https://node-red-contrib-letsfiware-ngsi.letsfiware.jp/en/custom_nodes/entity-attribute/">here</a> for full documentation.</p>
 </script>

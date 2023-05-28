@@ -36,7 +36,7 @@ const httpRequest = async function (msg, param) {
     baseURL: param.host,
     url: param.pathname,
     headers: await lib.buildHTTPHeader(param),
-    params: lib.buildParams(param.config),
+    params: lib.buildParams(param.config)
   };
 
   if (param.config.actionType === 'update') {
@@ -115,12 +115,12 @@ const createParam = function (msg, config, brokerConfig) {
     deleteAll: config.deleteAll === 'true',
     datasetId: config.datasetId,
     attribute: null,
-    forbidden: config.forbidden ? config.forbidden === 'true' : false,
+    forbidden: config.forbidden ? config.forbidden === 'true' : false
   };
 
   if (lib.isJson(msg.payload)) {
     if (msg.payload.attribute || defaultConfig.actionType === 'delete') {
-      ['entityId', 'attrName', 'attribute', 'deleteAll', 'datasetid'].forEach(e => {
+      ['entityId', 'attrName', 'attribute', 'deleteAll', 'datasetid'].forEach((e) => {
         if (msg.payload[e]) {
           defaultConfig[e] = msg.payload[e];
         }
@@ -135,7 +135,7 @@ const createParam = function (msg, config, brokerConfig) {
   const param = {
     host: brokerConfig.apiEndpoint,
     pathname: '/ngsi-ld/v1/entities/' + defaultConfig.entityId + '/attrs/' + defaultConfig.attrName,
-    getToken: brokerConfig.getToken === null ? null : brokerConfig.getToken.bind(brokerConfig),
+    getToken: brokerConfig.getToken === null ? null : brokerConfig.getToken.bind(brokerConfig)
   };
 
   switch (defaultConfig.actionType) {

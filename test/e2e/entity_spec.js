@@ -62,25 +62,22 @@ describe('entity.js', () => {
         url: '/create-entity',
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
         data: {
-          'id': 'urn:ngsi-ld:TemperatureSensor:001',
-          'type': 'TemperatureSensor',
-          'category': {
-            'type': 'Property',
-            'value': 'sensor'
+          id: 'urn:ngsi-ld:TemperatureSensor:001',
+          type: 'TemperatureSensor',
+          category: {
+            type: 'Property',
+            value: 'sensor'
           },
-          'temperature': {
-            'type': 'Property',
-            'value': 25,
-            'unitCode': 'CEL'
+          temperature: {
+            type: 'Property',
+            value: 25,
+            unitCode: 'CEL'
           },
-          'location': {
-            'type': 'GeoProperty',
-            'value': {
-              'type': 'Point',
-              'coordinates': [
-                -73.975,
-                40.775556
-              ]
+          location: {
+            type: 'GeoProperty',
+            value: {
+              type: 'Point',
+              coordinates: [-73.975, 40.775556]
             }
           }
         }
@@ -100,25 +97,22 @@ describe('entity.js', () => {
       assert.equal(actual.status, 200);
       assert.deepEqual(actual.data, {
         '@context': 'https://raw.githubusercontent.com/FIWARE/tutorials.CRUD-Operations/NGSI-LD/data-models/ngsi-context.jsonld',
-        'id': 'urn:ngsi-ld:TemperatureSensor:001',
-        'type': 'TemperatureSensor',
-        'category': {
-          'type': 'Property',
-          'value': 'sensor'
+        id: 'urn:ngsi-ld:TemperatureSensor:001',
+        type: 'TemperatureSensor',
+        category: {
+          type: 'Property',
+          value: 'sensor'
         },
-        'temperature': {
-          'type': 'Property',
-          'value': 25,
-          'unitCode': 'CEL'
+        temperature: {
+          type: 'Property',
+          value: 25,
+          unitCode: 'CEL'
         },
-        'location': {
-          'type': 'GeoProperty',
-          'value': {
-            'type': 'Point',
-            'coordinates': [
-              -73.975,
-              40.775556
-            ]
+        location: {
+          type: 'GeoProperty',
+          value: {
+            type: 'Point',
+            coordinates: [-73.975, 40.775556]
           }
         }
       });
@@ -129,32 +123,29 @@ describe('entity.js', () => {
         url: '/read-entity',
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
         data: {
-          'entityId': 'urn:ngsi-ld:TemperatureSensor:001'
+          entityId: 'urn:ngsi-ld:TemperatureSensor:001'
         }
       });
 
       assert.equal(actual.status, 200);
       assert.deepEqual(actual.data, {
         '@context': 'https://raw.githubusercontent.com/FIWARE/tutorials.CRUD-Operations/NGSI-LD/data-models/ngsi-context.jsonld',
-        'id': 'urn:ngsi-ld:TemperatureSensor:001',
-        'type': 'TemperatureSensor',
-        'category': {
-          'type': 'Property',
-          'value': 'sensor'
+        id: 'urn:ngsi-ld:TemperatureSensor:001',
+        type: 'TemperatureSensor',
+        category: {
+          type: 'Property',
+          value: 'sensor'
         },
-        'temperature': {
-          'type': 'Property',
-          'value': 25,
-          'unitCode': 'CEL'
+        temperature: {
+          type: 'Property',
+          value: 25,
+          unitCode: 'CEL'
         },
-        'location': {
-          'type': 'GeoProperty',
-          'value': {
-            'type': 'Point',
-            'coordinates': [
-              -73.975,
-              40.775556
-            ]
+        location: {
+          type: 'GeoProperty',
+          value: {
+            type: 'Point',
+            coordinates: [-73.975, 40.775556]
           }
         }
       });
@@ -165,27 +156,24 @@ describe('entity.js', () => {
         url: '/read-entity',
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
         data: {
-          'entityId': 'urn:ngsi-ld:TemperatureSensor:001',
-          'representation': 'concise'
+          entityId: 'urn:ngsi-ld:TemperatureSensor:001',
+          representation: 'concise'
         }
       });
 
       assert.equal(actual.status, 200);
       assert.deepEqual(actual.data, {
         '@context': 'https://raw.githubusercontent.com/FIWARE/tutorials.CRUD-Operations/NGSI-LD/data-models/ngsi-context.jsonld',
-        'id': 'urn:ngsi-ld:TemperatureSensor:001',
-        'type': 'TemperatureSensor',
-        'category': 'sensor',
-        'temperature': {
-          'value': 25,
-          'unitCode': 'CEL'
+        id: 'urn:ngsi-ld:TemperatureSensor:001',
+        type: 'TemperatureSensor',
+        category: 'sensor',
+        temperature: {
+          value: 25,
+          unitCode: 'CEL'
         },
-        'location': {
-          'type': 'Point',
-          'coordinates': [
-            -73.975,
-            40.775556
-          ]
+        location: {
+          type: 'Point',
+          coordinates: [-73.975, 40.775556]
         }
       });
     });
@@ -195,24 +183,21 @@ describe('entity.js', () => {
         url: '/read-entity',
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
         data: {
-          'entityId': 'urn:ngsi-ld:TemperatureSensor:001',
-          'representation': 'keyValues'
+          entityId: 'urn:ngsi-ld:TemperatureSensor:001',
+          representation: 'keyValues'
         }
       });
 
       assert.equal(actual.status, 200);
       assert.deepEqual(actual.data, {
         '@context': 'https://raw.githubusercontent.com/FIWARE/tutorials.CRUD-Operations/NGSI-LD/data-models/ngsi-context.jsonld',
-        'id': 'urn:ngsi-ld:TemperatureSensor:001',
-        'type': 'TemperatureSensor',
-        'category': 'sensor',
-        'temperature': 25,
-        'location': {
-          'type': 'Point',
-          'coordinates': [
-            -73.975,
-            40.775556
-          ]
+        id: 'urn:ngsi-ld:TemperatureSensor:001',
+        type: 'TemperatureSensor',
+        category: 'sensor',
+        temperature: 25,
+        location: {
+          type: 'Point',
+          coordinates: [-73.975, 40.775556]
         }
       });
     });
@@ -222,8 +207,8 @@ describe('entity.js', () => {
         url: '/read-entity',
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
         data: {
-          'entityId': 'urn:ngsi-ld:TemperatureSensor:001',
-          'sysAttrs': true
+          entityId: 'urn:ngsi-ld:TemperatureSensor:001',
+          sysAttrs: true
         }
       });
 
@@ -237,32 +222,29 @@ describe('entity.js', () => {
         url: '/read-entity',
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
         data: {
-          'entityId': 'urn:ngsi-ld:TemperatureSensor:001',
-          'accept': 'application/json'
+          entityId: 'urn:ngsi-ld:TemperatureSensor:001',
+          accept: 'application/json'
         }
       });
 
       assert.equal(actual.status, 200);
       assert.deepEqual(actual.data, {
-        'id': 'urn:ngsi-ld:TemperatureSensor:001',
-        'type': 'TemperatureSensor',
-        'category': {
-          'type': 'Property',
-          'value': 'sensor'
+        id: 'urn:ngsi-ld:TemperatureSensor:001',
+        type: 'TemperatureSensor',
+        category: {
+          type: 'Property',
+          value: 'sensor'
         },
-        'temperature': {
-          'type': 'Property',
-          'value': 25,
-          'unitCode': 'CEL'
+        temperature: {
+          type: 'Property',
+          value: 25,
+          unitCode: 'CEL'
         },
-        'location': {
-          'type': 'GeoProperty',
-          'value': {
-            'type': 'Point',
-            'coordinates': [
-              -73.975,
-              40.775556
-            ]
+        location: {
+          type: 'GeoProperty',
+          value: {
+            type: 'Point',
+            coordinates: [-73.975, 40.775556]
           }
         }
       });
@@ -273,44 +255,38 @@ describe('entity.js', () => {
         url: '/read-entity',
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
         data: {
-          'entityId': 'urn:ngsi-ld:TemperatureSensor:001',
-          'accept': 'application/geo+json'
+          entityId: 'urn:ngsi-ld:TemperatureSensor:001',
+          accept: 'application/geo+json'
         }
       });
 
       assert.equal(actual.status, 200);
       assert.deepEqual(actual.data, {
-        'id': 'urn:ngsi-ld:TemperatureSensor:001',
-        'type': 'Feature',
-        'properties': {
-          'type': 'TemperatureSensor',
-          'category': {
-            'type': 'Property',
-            'value': 'sensor'
+        id: 'urn:ngsi-ld:TemperatureSensor:001',
+        type: 'Feature',
+        properties: {
+          type: 'TemperatureSensor',
+          category: {
+            type: 'Property',
+            value: 'sensor'
           },
-          'temperature': {
-            'type': 'Property',
-            'value': 25,
-            'unitCode': 'CEL'
+          temperature: {
+            type: 'Property',
+            value: 25,
+            unitCode: 'CEL'
           },
-          'location': {
-            'type': 'GeoProperty',
-            'value': {
-              'type': 'Point',
-              'coordinates': [
-                -73.975,
-                40.775556
-              ]
+          location: {
+            type: 'GeoProperty',
+            value: {
+              type: 'Point',
+              coordinates: [-73.975, 40.775556]
             }
           }
         },
         '@context': 'https://raw.githubusercontent.com/FIWARE/tutorials.CRUD-Operations/NGSI-LD/data-models/ngsi-context.jsonld',
-        'geometry': {
-          'type': 'Point',
-          'coordinates': [
-            -73.975,
-            40.775556
-          ]
+        geometry: {
+          type: 'Point',
+          coordinates: [-73.975, 40.775556]
         }
       });
     });

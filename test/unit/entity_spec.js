@@ -46,15 +46,27 @@ describe('entity.js', () => {
     });
     it('get entity', async () => {
       entityNode.__set__('lib', {
-        http: async () => Promise.resolve({
-          status: 200,
-          headers: {},
-          data: { 'id': 'urn:ngsi-ld:TemperatureSensor:001', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } },
-        }),
-        buildHTTPHeader: () => { return {}; },
+        http: async () =>
+          Promise.resolve({
+            status: 200,
+            headers: {},
+            data: {
+              id: 'urn:ngsi-ld:TemperatureSensor:001',
+              type: 'TemperatureSensor',
+              category: { type: 'Property', value: 'sensor' },
+              temperature: { type: 'Property', value: 25, unitCode: 'CEL' },
+              location: {
+                type: 'GeoProperty',
+                value: { type: 'Point', coordinates: [-73.975, 40.775556] }
+              }
+            }
+          }),
+        buildHTTPHeader: () => {
+          return {};
+        },
         buildParams: () => new URLSearchParams(),
         encodeNGSI: (data) => data,
-        decodeNGSI: (data) => data,
+        decodeNGSI: (data) => data
       });
       const httpRequest = entityNode.__get__('httpRequest');
 
@@ -64,25 +76,40 @@ describe('entity.js', () => {
         pathname: '/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001',
         config: {
           actionType: 'read',
-          forbidden: false,
-        },
+          forbidden: false
+        }
       };
 
       const message = {};
       await httpRequest(message, param);
 
-      assert.deepEqual(message, { payload: { 'id': 'urn:ngsi-ld:TemperatureSensor:001', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } }, statusCode: 200 });
+      assert.deepEqual(message, {
+        payload: {
+          id: 'urn:ngsi-ld:TemperatureSensor:001',
+          type: 'TemperatureSensor',
+          category: { type: 'Property', value: 'sensor' },
+          temperature: { type: 'Property', value: 25, unitCode: 'CEL' },
+          location: {
+            type: 'GeoProperty',
+            value: { type: 'Point', coordinates: [-73.975, 40.775556] }
+          }
+        },
+        statusCode: 200
+      });
     });
     it('create entity', async () => {
       entityNode.__set__('lib', {
-        http: async () => Promise.resolve({
-          status: 201,
-          headers: {},
-        }),
-        buildHTTPHeader: () => { return {}; },
+        http: async () =>
+          Promise.resolve({
+            status: 201,
+            headers: {}
+          }),
+        buildHTTPHeader: () => {
+          return {};
+        },
         buildParams: () => new URLSearchParams(),
         encodeNGSI: (data) => data,
-        decodeNGSI: (data) => data,
+        decodeNGSI: (data) => data
       });
       const httpRequest = entityNode.__get__('httpRequest');
 
@@ -92,9 +119,18 @@ describe('entity.js', () => {
         pathname: '/ngsi-ld/v1/entities/',
         config: {
           actionType: 'create',
-          data: { 'id': 'urn:ngsi-ld:TemperatureSensor:001', 'type': 'TemperatureSensor', 'category': { 'type': 'Property', 'value': 'sensor' }, 'temperature': { 'type': 'Property', 'value': 25, 'unitCode': 'CEL' }, 'location': { 'type': 'GeoProperty', 'value': { 'type': 'Point', 'coordinates': [-73.975, 40.775556] } } },
-          forbidden: false,
-        },
+          data: {
+            id: 'urn:ngsi-ld:TemperatureSensor:001',
+            type: 'TemperatureSensor',
+            category: { type: 'Property', value: 'sensor' },
+            temperature: { type: 'Property', value: 25, unitCode: 'CEL' },
+            location: {
+              type: 'GeoProperty',
+              value: { type: 'Point', coordinates: [-73.975, 40.775556] }
+            }
+          },
+          forbidden: false
+        }
       };
 
       const message = {};
@@ -105,14 +141,17 @@ describe('entity.js', () => {
     });
     it('delete entity', async () => {
       entityNode.__set__('lib', {
-        http: async () => Promise.resolve({
-          status: 204,
-          headers: {},
-        }),
-        buildHTTPHeader: () => { return {}; },
+        http: async () =>
+          Promise.resolve({
+            status: 204,
+            headers: {}
+          }),
+        buildHTTPHeader: () => {
+          return {};
+        },
         buildParams: () => new URLSearchParams(),
         encodeNGSI: (data) => data,
-        decodeNGSI: (data) => data,
+        decodeNGSI: (data) => data
       });
       const httpRequest = entityNode.__get__('httpRequest');
 
@@ -122,8 +161,8 @@ describe('entity.js', () => {
         pathname: '/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001',
         config: {
           actionType: 'delete',
-          forbidden: false,
-        },
+          forbidden: false
+        }
       };
 
       const message = {};
@@ -135,10 +174,12 @@ describe('entity.js', () => {
     it('should be 400 Bad Request', async () => {
       entityNode.__set__('lib', {
         http: async () => Promise.resolve({ status: 400, statusText: 'Bad Request' }),
-        buildHTTPHeader: () => { return {}; },
+        buildHTTPHeader: () => {
+          return {};
+        },
         buildParams: () => new URLSearchParams(),
         encodeNGSI: (data) => data,
-        decodeNGSI: (data) => data,
+        decodeNGSI: (data) => data
       });
       const httpRequest = entityNode.__get__('httpRequest');
 
@@ -148,12 +189,17 @@ describe('entity.js', () => {
         pathname: '/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001',
         config: {
           actionType: 'read',
-          forbidden: false,
-        },
+          forbidden: false
+        }
       };
 
       let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
+      const node = {
+        msg: '',
+        error: (e) => {
+          msg = e;
+        }
+      };
 
       const message = {};
       await httpRequest.call(node, message, param);
@@ -164,11 +210,18 @@ describe('entity.js', () => {
     });
     it('should be 400 Bad Request with details', async () => {
       entityNode.__set__('lib', {
-        http: async () => Promise.resolve({ status: 400, statusText: 'Bad Request', data: { error: 'detail' } }),
-        buildHTTPHeader: () => { return {}; },
+        http: async () =>
+          Promise.resolve({
+            status: 400,
+            statusText: 'Bad Request',
+            data: { error: 'detail' }
+          }),
+        buildHTTPHeader: () => {
+          return {};
+        },
         buildParams: () => new URLSearchParams(),
         encodeNGSI: (data) => data,
-        decodeNGSI: (data) => data,
+        decodeNGSI: (data) => data
       });
       const httpRequest = entityNode.__get__('httpRequest');
 
@@ -178,30 +231,34 @@ describe('entity.js', () => {
         pathname: '/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001',
         config: {
           actionType: 'read',
-          forbidden: false,
-        },
+          forbidden: false
+        }
       };
 
       let msg = [];
-      const node = { msg: '', error: (e) => { msg.push(e); } };
+      const node = {
+        msg: '',
+        error: (e) => {
+          msg.push(e);
+        }
+      };
 
       const message = {};
       await httpRequest.call(node, message, param);
 
-      assert.deepEqual(msg, [
-        'Error while managing entity: 400 Bad Request',
-        'Error details: {"error":"detail"}',
-      ]);
+      assert.deepEqual(msg, ['Error while managing entity: 400 Bad Request', 'Error details: {"error":"detail"}']);
       assert.deepEqual(message.payload, { error: 'detail' });
       assert.equal(message.statusCode, 400);
     });
     it('Should be unknown error', async () => {
       entityNode.__set__('lib', {
         http: async () => Promise.reject({ message: 'unknown error' }),
-        buildHTTPHeader: () => { return {}; },
+        buildHTTPHeader: () => {
+          return {};
+        },
         buildParams: () => new URLSearchParams(),
         encodeNGSI: (data) => data,
-        decodeNGSI: (data) => data,
+        decodeNGSI: (data) => data
       });
       const httpRequest = entityNode.__get__('httpRequest');
 
@@ -211,12 +268,17 @@ describe('entity.js', () => {
         pathname: '/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001',
         config: {
           actionType: 'read',
-          forbidden: false,
-        },
+          forbidden: false
+        }
       };
 
       let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
+      const node = {
+        msg: '',
+        error: (e) => {
+          msg = e;
+        }
+      };
 
       const message = {};
       await httpRequest.call(node, message, param);
@@ -231,7 +293,11 @@ describe('entity.js', () => {
       const validateConfig = entityNode.__get__('validateConfig');
 
       const msg = {};
-      const actual = validateConfig(msg, { actionType: 'read', entityId: 'urn:ngsi-ld:TemperatureSensor:001', entity: {} });
+      const actual = validateConfig(msg, {
+        actionType: 'read',
+        entityId: 'urn:ngsi-ld:TemperatureSensor:001',
+        entity: {}
+      });
 
       assert.equal(actual, true);
       assert.deepEqual(msg, {});
@@ -249,7 +315,10 @@ describe('entity.js', () => {
       const validateConfig = entityNode.__get__('validateConfig');
 
       const msg = {};
-      const actual = validateConfig(msg, { actionType: 'delete', entityId: '' });
+      const actual = validateConfig(msg, {
+        actionType: 'delete',
+        entityId: ''
+      });
 
       assert.equal(actual, false);
       assert.deepEqual(msg, { payload: { error: 'Entity id not found' } });
@@ -258,7 +327,11 @@ describe('entity.js', () => {
       const validateConfig = entityNode.__get__('validateConfig');
 
       const msg = {};
-      const actual = validateConfig(msg, { actionType: 'read', entityId: 'urn:ngsi-ld:TemperatureSensor:001', entity: '' });
+      const actual = validateConfig(msg, {
+        actionType: 'read',
+        entityId: 'urn:ngsi-ld:TemperatureSensor:001',
+        entity: ''
+      });
 
       assert.equal(actual, false);
       assert.deepEqual(msg, { payload: { error: 'Payload not JSON Object' } });
@@ -267,7 +340,11 @@ describe('entity.js', () => {
       const validateConfig = entityNode.__get__('validateConfig');
 
       const msg = {};
-      const actual = validateConfig(msg, { atContext: 123, actionType: 'delete', entityId: 'urn:ngsi-ld:TemperatureSensor:001' });
+      const actual = validateConfig(msg, {
+        atContext: 123,
+        actionType: 'delete',
+        entityId: 'urn:ngsi-ld:TemperatureSensor:001'
+      });
 
       assert.equal(actual, false);
       assert.deepEqual(msg, { payload: { error: 'atContext not string' } });
@@ -276,16 +353,25 @@ describe('entity.js', () => {
       const validateConfig = entityNode.__get__('validateConfig');
 
       const msg = {};
-      const actual = validateConfig(msg, { representation: true, actionType: 'delete', entityId: 'urn:ngsi-ld:TemperatureSensor:001' });
+      const actual = validateConfig(msg, {
+        representation: true,
+        actionType: 'delete',
+        entityId: 'urn:ngsi-ld:TemperatureSensor:001'
+      });
 
       assert.equal(actual, false);
-      assert.deepEqual(msg, { payload: { error: 'representation not string' } });
+      assert.deepEqual(msg, {
+        payload: { error: 'representation not string' }
+      });
     });
     it('entityId not string', () => {
       const validateConfig = entityNode.__get__('validateConfig');
 
       const msg = {};
-      const actual = validateConfig(msg, { actionType: 'delete', entityId: [] });
+      const actual = validateConfig(msg, {
+        actionType: 'delete',
+        entityId: []
+      });
 
       assert.equal(actual, false);
       assert.deepEqual(msg, { payload: { error: 'entityId not string' } });
@@ -303,10 +389,15 @@ describe('entity.js', () => {
       const validateConfig = entityNode.__get__('validateConfig');
 
       const msg = {};
-      const actual = validateConfig(msg, { geometryProperty: 123, actionType: 'create' });
+      const actual = validateConfig(msg, {
+        geometryProperty: 123,
+        actionType: 'create'
+      });
 
       assert.equal(actual, false);
-      assert.deepEqual(msg, { payload: { error: 'geometryProperty not string' } });
+      assert.deepEqual(msg, {
+        payload: { error: 'geometryProperty not string' }
+      });
     });
     it('lang not string', () => {
       const validateConfig = entityNode.__get__('validateConfig');
@@ -330,7 +421,10 @@ describe('entity.js', () => {
       const validateConfig = entityNode.__get__('validateConfig');
 
       const msg = {};
-      const actual = validateConfig(msg, { sysAttrs: 'true', actionType: 'create' });
+      const actual = validateConfig(msg, {
+        sysAttrs: 'true',
+        actionType: 'create'
+      });
 
       assert.equal(actual, false);
       assert.deepEqual(msg, { payload: { error: 'sysAttrs not boolean' } });
@@ -339,7 +433,10 @@ describe('entity.js', () => {
       const validateConfig = entityNode.__get__('validateConfig');
 
       const msg = {};
-      const actual = validateConfig(msg, { forbidden: 'true', actionType: 'create' });
+      const actual = validateConfig(msg, {
+        forbidden: 'true',
+        actionType: 'create'
+      });
 
       assert.equal(actual, false);
       assert.deepEqual(msg, { payload: { error: 'forbidden not boolean' } });
@@ -359,14 +456,14 @@ describe('entity.js', () => {
         geometryProperty: '',
         lang: '',
         accept: 'application/ld+json',
-        forbidden: 'true',
+        forbidden: 'true'
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
         mintaka: '',
         getToken: null,
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       const actual = createParam(msg, config, brokerConfig);
@@ -385,9 +482,9 @@ describe('entity.js', () => {
           geometryProperty: '',
           lang: '',
           accept: 'application/ld+json',
-          forbidden: true,
+          forbidden: true
         },
-        method: 'get',
+        method: 'get'
       };
       assert.deepEqual(actual, expected);
     });
@@ -395,25 +492,22 @@ describe('entity.js', () => {
       const createParam = entityNode.__get__('createParam');
       const msg = {
         payload: {
-          'id': 'urn:ngsi-ld:TemperatureSensor:001',
-          'type': 'TemperatureSensor',
-          'category': {
-            'type': 'Property',
-            'value': 'sensor'
+          id: 'urn:ngsi-ld:TemperatureSensor:001',
+          type: 'TemperatureSensor',
+          category: {
+            type: 'Property',
+            value: 'sensor'
           },
-          'temperature': {
-            'type': 'Property',
-            'value': 25,
-            'unitCode': 'CEL'
+          temperature: {
+            type: 'Property',
+            value: 25,
+            unitCode: 'CEL'
           },
-          'location': {
-            'type': 'GeoProperty',
-            'value': {
-              'type': 'Point',
-              'coordinates': [
-                -73.975,
-                40.775556
-              ]
+          location: {
+            type: 'GeoProperty',
+            value: {
+              type: 'Point',
+              coordinates: [-73.975, 40.775556]
             }
           }
         }
@@ -427,14 +521,14 @@ describe('entity.js', () => {
         sysAttrs: false,
         geometryProperty: '',
         lang: '',
-        accept: 'application/ld+json',
+        accept: 'application/ld+json'
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
         mintaka: '',
         getToken: null,
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       const actual = createParam(msg, config, brokerConfig);
@@ -452,27 +546,24 @@ describe('entity.js', () => {
             type: 'TemperatureSensor',
             category: {
               type: 'Property',
-              value: 'sensor',
+              value: 'sensor'
             },
             temperature: {
               type: 'Property',
               value: 25,
-              unitCode: 'CEL',
+              unitCode: 'CEL'
             },
             location: {
               type: 'GeoProperty',
               value: {
                 type: 'Point',
-                coordinates: [
-                  -73.975,
-                  40.775556,
-                ],
-              },
-            },
+                coordinates: [-73.975, 40.775556]
+              }
+            }
           },
-          forbidden: false,
+          forbidden: false
         },
-        method: 'post',
+        method: 'post'
       };
       assert.deepEqual(actual, expected);
     });
@@ -488,14 +579,14 @@ describe('entity.js', () => {
         sysAttrs: false,
         geometryProperty: '',
         lang: '',
-        accept: 'application/ld+json',
+        accept: 'application/ld+json'
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
         mintaka: '',
         getToken: null,
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       const actual = createParam(msg, config, brokerConfig);
@@ -507,9 +598,9 @@ describe('entity.js', () => {
         config: {
           tenant: 'openiot',
           atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
-          actionType: 'delete',
+          actionType: 'delete'
         },
-        method: 'delete',
+        method: 'delete'
       };
       assert.deepEqual(actual, expected);
     });
@@ -525,14 +616,14 @@ describe('entity.js', () => {
         sysAttrs: false,
         geometryProperty: '',
         lang: '',
-        accept: 'application/ld+json',
+        accept: 'application/ld+json'
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
         mintaka: '',
-        getToken: () => { },
+        getToken: () => {},
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       const actual = createParam(msg, config, brokerConfig);
@@ -551,14 +642,14 @@ describe('entity.js', () => {
         sysAttrs: false,
         geometryProperty: '',
         lang: '',
-        accept: 'application/ld+json',
+        accept: 'application/ld+json'
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
         mintaka: '',
         getToken: null,
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       const actual = createParam(msg, config, brokerConfig);
@@ -570,16 +661,16 @@ describe('entity.js', () => {
         config: {
           tenant: 'openiot',
           atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.5.jsonld',
-          actionType: 'delete',
+          actionType: 'delete'
         },
-        method: 'delete',
+        method: 'delete'
       };
       assert.deepEqual(actual, expected);
     });
     it('Payload not stirng or JSON Object', () => {
       const createParam = entityNode.__get__('createParam');
       const msg = {
-        payload: [],
+        payload: []
       };
       const config = {
         atContext: '',
@@ -590,21 +681,23 @@ describe('entity.js', () => {
         sysAttrs: false,
         geometryProperty: '',
         lang: '',
-        accept: 'application/ld+json',
+        accept: 'application/ld+json'
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
         mintaka: '',
         getToken: null,
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       const actual = createParam(msg, config, brokerConfig);
 
       const expected = null;
       assert.equal(actual, expected);
-      assert.deepEqual(msg, { payload: { error: 'Payload not stirng or JSON Object' } });
+      assert.deepEqual(msg, {
+        payload: { error: 'Payload not stirng or JSON Object' }
+      });
     });
     it('ActionType error', () => {
       const createParam = entityNode.__get__('createParam');
@@ -618,14 +711,14 @@ describe('entity.js', () => {
         sysAttrs: false,
         geometryProperty: '',
         lang: '',
-        accept: 'application/ld+json',
+        accept: 'application/ld+json'
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
         mintaka: '',
         getToken: null,
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       const actual = createParam(msg, config, brokerConfig);
@@ -648,14 +741,14 @@ describe('entity.js', () => {
         sysAttrs: false,
         geometryProperty: '',
         lang: '',
-        accept: 'application/ld+json',
+        accept: 'application/ld+json'
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
         mintaka: '',
         getToken: null,
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       const actual = createParam(msg, config, brokerConfig);
@@ -689,7 +782,7 @@ describe('entity.js', () => {
           mintaka: '',
           tenant: 'openiot',
           atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
-          getToken: null,
+          getToken: null
         }
       });
 
@@ -702,25 +795,22 @@ describe('entity.js', () => {
 
       await red.inputWithAwait({
         payload: {
-          'id': 'urn:ngsi-ld:TemperatureSensor:001',
-          'type': 'TemperatureSensor',
-          'category': {
-            'type': 'Property',
-            'value': 'sensor'
+          id: 'urn:ngsi-ld:TemperatureSensor:001',
+          type: 'TemperatureSensor',
+          category: {
+            type: 'Property',
+            value: 'sensor'
           },
-          'temperature': {
-            'type': 'Property',
-            'value': 25,
-            'unitCode': 'CEL'
+          temperature: {
+            type: 'Property',
+            value: 25,
+            unitCode: 'CEL'
           },
-          'location': {
-            'type': 'GeoProperty',
-            'value': {
-              'type': 'Point',
-              'coordinates': [
-                -73.975,
-                40.775556
-              ]
+          location: {
+            type: 'GeoProperty',
+            value: {
+              type: 'Point',
+              coordinates: [-73.975, 40.775556]
             }
           }
         }
@@ -745,27 +835,24 @@ describe('entity.js', () => {
             type: 'TemperatureSensor',
             category: {
               type: 'Property',
-              value: 'sensor',
+              value: 'sensor'
             },
             temperature: {
               type: 'Property',
               value: 25,
-              unitCode: 'CEL',
+              unitCode: 'CEL'
             },
             location: {
               type: 'GeoProperty',
               value: {
                 type: 'Point',
-                coordinates: [
-                  -73.975,
-                  40.775556,
-                ],
-              },
-            },
+                coordinates: [-73.975, 40.775556]
+              }
+            }
           },
-          forbidden: false,
+          forbidden: false
         },
-        method: 'post',
+        method: 'post'
       });
     });
     it('ActionType error: append', async () => {
@@ -788,31 +875,28 @@ describe('entity.js', () => {
           mintaka: '',
           tenant: 'openiot',
           atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
-          getToken: null,
+          getToken: null
         }
       });
 
       await red.inputWithAwait({
         payload: {
-          'id': 'urn:ngsi-ld:TemperatureSensor:001',
-          'type': 'TemperatureSensor',
-          'category': {
-            'type': 'Property',
-            'value': 'sensor'
+          id: 'urn:ngsi-ld:TemperatureSensor:001',
+          type: 'TemperatureSensor',
+          category: {
+            type: 'Property',
+            value: 'sensor'
           },
-          'temperature': {
-            'type': 'Property',
-            'value': 25,
-            'unitCode': 'CEL'
+          temperature: {
+            type: 'Property',
+            value: 25,
+            unitCode: 'CEL'
           },
-          'location': {
-            'type': 'GeoProperty',
-            'value': {
-              'type': 'Point',
-              'coordinates': [
-                -73.975,
-                40.775556
-              ]
+          location: {
+            type: 'GeoProperty',
+            value: {
+              type: 'Point',
+              coordinates: [-73.975, 40.775556]
             }
           }
         }
@@ -823,7 +907,6 @@ describe('entity.js', () => {
         statusCode: 500
       });
       assert.equal(red.getMessage(), 'ActionType error: append');
-
     });
   });
 });

@@ -62,25 +62,22 @@ describe('entity-attributes.js', () => {
         url: '/create-entity',
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
         data: {
-          'id': 'urn:ngsi-ld:TemperatureSensor:201',
-          'type': 'TemperatureSensor',
-          'category': {
-            'type': 'Property',
-            'value': 'sensor'
+          id: 'urn:ngsi-ld:TemperatureSensor:201',
+          type: 'TemperatureSensor',
+          category: {
+            type: 'Property',
+            value: 'sensor'
           },
-          'temperature': {
-            'type': 'Property',
-            'value': 25,
-            'unitCode': 'CEL'
+          temperature: {
+            type: 'Property',
+            value: 25,
+            unitCode: 'CEL'
           },
-          'location': {
-            'type': 'GeoProperty',
-            'value': {
-              'type': 'Point',
-              'coordinates': [
-                -73.975,
-                40.775556
-              ]
+          location: {
+            type: 'GeoProperty',
+            value: {
+              type: 'Point',
+              coordinates: [-73.975, 40.775556]
             }
           }
         }
@@ -100,25 +97,22 @@ describe('entity-attributes.js', () => {
       assert.equal(actual.status, 200);
       assert.deepEqual(actual.data, {
         '@context': 'https://raw.githubusercontent.com/FIWARE/tutorials.CRUD-Operations/NGSI-LD/data-models/ngsi-context.jsonld',
-        'id': 'urn:ngsi-ld:TemperatureSensor:201',
-        'type': 'TemperatureSensor',
-        'category': {
-          'type': 'Property',
-          'value': 'sensor'
+        id: 'urn:ngsi-ld:TemperatureSensor:201',
+        type: 'TemperatureSensor',
+        category: {
+          type: 'Property',
+          value: 'sensor'
         },
-        'temperature': {
-          'type': 'Property',
-          'value': 25,
-          'unitCode': 'CEL'
+        temperature: {
+          type: 'Property',
+          value: 25,
+          unitCode: 'CEL'
         },
-        'location': {
-          'type': 'GeoProperty',
-          'value': {
-            'type': 'Point',
-            'coordinates': [
-              -73.975,
-              40.775556
-            ]
+        location: {
+          type: 'GeoProperty',
+          value: {
+            type: 'Point',
+            coordinates: [-73.975, 40.775556]
           }
         }
       });
@@ -129,14 +123,14 @@ describe('entity-attributes.js', () => {
         url: '/append-attrs',
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
         data: {
-          'batteryLevel': {
-            'type': 'Property',
-            'value': 0.9,
-            'unitCode': 'C62'
+          batteryLevel: {
+            type: 'Property',
+            value: 0.9,
+            unitCode: 'C62'
           },
-          'controlledAsset': {
-            'type': 'Relationship',
-            'object': 'urn:ngsi-ld:Building:barn002'
+          controlledAsset: {
+            type: 'Relationship',
+            object: 'urn:ngsi-ld:Building:barn002'
           }
         }
       });
@@ -155,35 +149,32 @@ describe('entity-attributes.js', () => {
       assert.equal(actual.status, 200);
       assert.deepEqual(actual.data, {
         '@context': 'https://raw.githubusercontent.com/FIWARE/tutorials.CRUD-Operations/NGSI-LD/data-models/ngsi-context.jsonld',
-        'id': 'urn:ngsi-ld:TemperatureSensor:201',
-        'type': 'TemperatureSensor',
-        'category': {
-          'type': 'Property',
-          'value': 'sensor'
+        id: 'urn:ngsi-ld:TemperatureSensor:201',
+        type: 'TemperatureSensor',
+        category: {
+          type: 'Property',
+          value: 'sensor'
         },
-        'temperature': {
-          'type': 'Property',
-          'value': 25,
-          'unitCode': 'CEL'
+        temperature: {
+          type: 'Property',
+          value: 25,
+          unitCode: 'CEL'
         },
-        'location': {
-          'type': 'GeoProperty',
-          'value': {
-            'type': 'Point',
-            'coordinates': [
-              -73.975,
-              40.775556
-            ]
+        location: {
+          type: 'GeoProperty',
+          value: {
+            type: 'Point',
+            coordinates: [-73.975, 40.775556]
           }
         },
-        'batteryLevel': {
-          'value': 0.9,
-          'type': 'Property',
-          'unitCode': 'C62'
+        batteryLevel: {
+          value: 0.9,
+          type: 'Property',
+          unitCode: 'C62'
         },
-        'controlledAsset': {
-          'object': 'urn:ngsi-ld:Building:barn002',
-          'type': 'Relationship'
+        controlledAsset: {
+          object: 'urn:ngsi-ld:Building:barn002',
+          type: 'Relationship'
         }
       });
     });
@@ -193,14 +184,14 @@ describe('entity-attributes.js', () => {
         url: '/update-attrs',
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
         data: {
-          'batteryLevel': {
-            'type': 'Property',
-            'value': 0.5,
-            'unitCode': 'C62'
+          batteryLevel: {
+            type: 'Property',
+            value: 0.5,
+            unitCode: 'C62'
           },
-          'controlledAsset': {
-            'type': 'Relationship',
-            'object': 'urn:ngsi-ld:Building:barn001'
+          controlledAsset: {
+            type: 'Relationship',
+            object: 'urn:ngsi-ld:Building:barn001'
           }
         }
       });
@@ -219,35 +210,32 @@ describe('entity-attributes.js', () => {
       assert.equal(actual.status, 200);
       assert.deepEqual(actual.data, {
         '@context': 'https://raw.githubusercontent.com/FIWARE/tutorials.CRUD-Operations/NGSI-LD/data-models/ngsi-context.jsonld',
-        'id': 'urn:ngsi-ld:TemperatureSensor:201',
-        'type': 'TemperatureSensor',
-        'category': {
-          'type': 'Property',
-          'value': 'sensor'
+        id: 'urn:ngsi-ld:TemperatureSensor:201',
+        type: 'TemperatureSensor',
+        category: {
+          type: 'Property',
+          value: 'sensor'
         },
-        'temperature': {
-          'type': 'Property',
-          'value': 25,
-          'unitCode': 'CEL'
+        temperature: {
+          type: 'Property',
+          value: 25,
+          unitCode: 'CEL'
         },
-        'location': {
-          'type': 'GeoProperty',
-          'value': {
-            'type': 'Point',
-            'coordinates': [
-              -73.975,
-              40.775556
-            ]
+        location: {
+          type: 'GeoProperty',
+          value: {
+            type: 'Point',
+            coordinates: [-73.975, 40.775556]
           }
         },
-        'batteryLevel': {
-          'type': 'Property',
-          'value': 0.5,
-          'unitCode': 'C62'
+        batteryLevel: {
+          type: 'Property',
+          value: 0.5,
+          unitCode: 'C62'
         },
-        'controlledAsset': {
-          'type': 'Relationship',
-          'object': 'urn:ngsi-ld:Building:barn001'
+        controlledAsset: {
+          type: 'Relationship',
+          object: 'urn:ngsi-ld:Building:barn001'
         }
       });
     });
@@ -257,19 +245,19 @@ describe('entity-attributes.js', () => {
         url: '/upsert-attrs',
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
         data: {
-          'batteryLevel': {
-            'type': 'Property',
-            'value': 0.1,
-            'unitCode': 'C62'
+          batteryLevel: {
+            type: 'Property',
+            value: 0.1,
+            unitCode: 'C62'
           },
-          'controlledAsset': {
-            'type': 'Relationship',
-            'object': 'urn:ngsi-ld:Building:barn003'
+          controlledAsset: {
+            type: 'Relationship',
+            object: 'urn:ngsi-ld:Building:barn003'
           },
-          'humidity': {
-            'type': 'Property',
-            'value': 49.8,
-            'unitCode': 'P1'
+          humidity: {
+            type: 'Property',
+            value: 49.8,
+            unitCode: 'P1'
           }
         }
       });
@@ -288,40 +276,37 @@ describe('entity-attributes.js', () => {
       assert.equal(actual.status, 200);
       assert.deepEqual(actual.data, {
         '@context': 'https://raw.githubusercontent.com/FIWARE/tutorials.CRUD-Operations/NGSI-LD/data-models/ngsi-context.jsonld',
-        'id': 'urn:ngsi-ld:TemperatureSensor:201',
-        'type': 'TemperatureSensor',
-        'category': {
-          'type': 'Property',
-          'value': 'sensor'
+        id: 'urn:ngsi-ld:TemperatureSensor:201',
+        type: 'TemperatureSensor',
+        category: {
+          type: 'Property',
+          value: 'sensor'
         },
-        'temperature': {
-          'type': 'Property',
-          'value': 25,
-          'unitCode': 'CEL'
+        temperature: {
+          type: 'Property',
+          value: 25,
+          unitCode: 'CEL'
         },
-        'location': {
-          'type': 'GeoProperty',
-          'value': {
-            'type': 'Point',
-            'coordinates': [
-              -73.975,
-              40.775556
-            ]
+        location: {
+          type: 'GeoProperty',
+          value: {
+            type: 'Point',
+            coordinates: [-73.975, 40.775556]
           }
         },
-        'batteryLevel': {
-          'value': 0.1,
-          'type': 'Property',
-          'unitCode': 'C62'
+        batteryLevel: {
+          value: 0.1,
+          type: 'Property',
+          unitCode: 'C62'
         },
-        'controlledAsset': {
-          'object': 'urn:ngsi-ld:Building:barn003',
-          'type': 'Relationship'
+        controlledAsset: {
+          object: 'urn:ngsi-ld:Building:barn003',
+          type: 'Relationship'
         },
-        'humidity': {
-          'value': 49.8,
-          'type': 'Property',
-          'unitCode': 'P1'
+        humidity: {
+          value: 49.8,
+          type: 'Property',
+          unitCode: 'P1'
         }
       });
     });

@@ -40,7 +40,7 @@ const getEntities = async function (msg, param) {
       baseURL: param.host,
       url: param.pathname,
       headers: await lib.buildHTTPHeader(param),
-      params: lib.buildParams(param.config),
+      params: lib.buildParams(param.config)
     };
 
     try {
@@ -93,13 +93,13 @@ const nobuffering = {
     message.statusCode = 200;
     this.node.send(message);
   },
-  close: function () { },
+  close: function () {},
   out: function (entities) {
     const message = Object.assign({}, this.msg);
     message.payload = entities;
     message.statusCode = 200;
     this.node.send(message);
-  },
+  }
 };
 
 const buffering = {
@@ -122,7 +122,7 @@ const buffering = {
   },
   out: function (entities) {
     this.entities = this.entities.concat(entities);
-  },
+  }
 };
 
 const validateConfig = function (msg, config) {
@@ -151,11 +151,7 @@ const validateConfig = function (msg, config) {
     }
   }
 
-  const boolean_items = [
-    'buffering',
-    'sysAttrs',
-    'forbidden'
-  ];
+  const boolean_items = ['buffering', 'sysAttrs', 'forbidden'];
   for (let i = 0; i < boolean_items.length; i++) {
     const e = boolean_items[i];
     if (config[e] && typeof config[e] !== 'boolean') {
@@ -212,8 +208,8 @@ const createParam = function (msg, config, brokerConfig) {
       buffering: config.buffering === 'on',
       forbidden: config.forbidden ? config.forbidden === 'true' : false,
       limit: 100,
-      offset: 0,
-    },
+      offset: 0
+    }
   };
 
   [
@@ -235,7 +231,8 @@ const createParam = function (msg, config, brokerConfig) {
     'buffering',
     'forbidden',
     'limit',
-    'offset'].forEach(e => {
+    'offset'
+  ].forEach((e) => {
     if (msg.payload[e]) {
       param.config[e] = msg.payload[e];
     }

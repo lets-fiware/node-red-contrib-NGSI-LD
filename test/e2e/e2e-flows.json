@@ -1,1410 +1,1178 @@
 [
-    {
-        "id": "716ed2717683565d",
-        "type": "tab",
-        "label": "Flow 1",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "088fae07b9446fb6",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/version",
-        "method": "get",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 170,
-        "y": 60,
-        "wires": [
-            [
-                "29a0e201dc42b296"
-            ]
-        ]
-    },
-    {
-        "id": "ce574ef4130d6d14",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 670,
-        "y": 60,
-        "wires": []
-    },
-    {
-        "id": "29a0e201dc42b296",
-        "type": "NGSI-LD broker version",
-        "z": "716ed2717683565d",
-        "name": "",
-        "broker": "907c553d7533ec10",
-        "x": 430,
-        "y": 60,
-        "wires": [
-            [
-                "ce574ef4130d6d14"
-            ]
-        ]
-    },
-    {
-        "id": "319e0bc8417ed708",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/create-entity",
-        "method": "post",
-        "upload": true,
-        "swaggerDoc": "",
-        "x": 190,
-        "y": 160,
-        "wires": [
-            [
-                "b0b1737734829641"
-            ]
-        ]
-    },
-    {
-        "id": "966f3b856eeb8b63",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 670,
-        "y": 160,
-        "wires": []
-    },
-    {
-        "id": "b0b1737734829641",
-        "type": "NGSI-LD Entity",
-        "z": "716ed2717683565d",
-        "name": "",
-        "broker": "907c553d7533ec10",
-        "atContext": "",
-        "actionType": "create",
-        "entityId": "",
-        "attrs": "",
-        "sysAttrs": "false",
-        "representation": "normalized",
-        "geometryProperty": "",
-        "lang": "",
-        "accept": "application/ld+json",
-        "forbidden": "false",
-        "x": 420,
-        "y": 160,
-        "wires": [
-            [
-                "966f3b856eeb8b63"
-            ]
-        ]
-    },
-    {
-        "id": "e0ff87d053bc9b40",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/read-entity",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 180,
-        "y": 220,
-        "wires": [
-            [
-                "19cf015a6165f22a"
-            ]
-        ]
-    },
-    {
-        "id": "333f3fbd7775e6d7",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 670,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "19cf015a6165f22a",
-        "type": "NGSI-LD Entity",
-        "z": "716ed2717683565d",
-        "name": "",
-        "broker": "907c553d7533ec10",
-        "atContext": "",
-        "actionType": "read",
-        "entityId": "",
-        "attrs": "",
-        "sysAttrs": "false",
-        "representation": "normalized",
-        "geometryProperty": "",
-        "lang": "",
-        "accept": "application/ld+json",
-        "forbidden": "false",
-        "x": 420,
-        "y": 220,
-        "wires": [
-            [
-                "333f3fbd7775e6d7"
-            ]
-        ]
-    },
-    {
-        "id": "15b4a62e75427063",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/delete-entity",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 190,
-        "y": 280,
-        "wires": [
-            [
-                "7a5c4d4d69abd505"
-            ]
-        ]
-    },
-    {
-        "id": "481e01eaf00c7f04",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 670,
-        "y": 280,
-        "wires": []
-    },
-    {
-        "id": "7a5c4d4d69abd505",
-        "type": "NGSI-LD Entity",
-        "z": "716ed2717683565d",
-        "name": "",
-        "broker": "907c553d7533ec10",
-        "atContext": "",
-        "actionType": "delete",
-        "entityId": "",
-        "attrs": "",
-        "sysAttrs": "false",
-        "representation": "normalized",
-        "geometryProperty": "",
-        "lang": "",
-        "accept": "application/ld+json",
-        "forbidden": "false",
-        "x": 420,
-        "y": 280,
-        "wires": [
-            [
-                "481e01eaf00c7f04"
-            ]
-        ]
-    },
-    {
-        "id": "29edfcde03f50c91",
-        "type": "NGSI-LD entities",
-        "z": "716ed2717683565d",
-        "name": "",
-        "broker": "907c553d7533ec10",
-        "representation": "normalized",
-        "entityId": "",
-        "entityType": "",
-        "idPattern": "",
-        "attrs": "",
-        "sysAttrs": "false",
-        "query": "",
-        "csf": "",
-        "georel": "",
-        "geometry": "",
-        "coordinates": "",
-        "geoproperty": "",
-        "geometryProperty": "",
-        "lang": "",
-        "accept": "application/ld+json",
-        "atContext": "",
-        "buffering": "on",
-        "forbidden": "false",
-        "x": 430,
-        "y": 380,
-        "wires": [
-            [
-                "c05e3b7d71eb5e64"
-            ]
-        ]
-    },
-    {
-        "id": "f73b1275d9b7df9b",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/read-entities",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 190,
-        "y": 380,
-        "wires": [
-            [
-                "29edfcde03f50c91"
-            ]
-        ]
-    },
-    {
-        "id": "c05e3b7d71eb5e64",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 670,
-        "y": 380,
-        "wires": []
-    },
-    {
-        "id": "4986f6b7e326a853",
-        "type": "NGSI-LD entity attributes",
-        "z": "716ed2717683565d",
-        "name": "",
-        "broker": "907c553d7533ec10",
-        "actionType": "append",
-        "entityId": "urn:ngsi-ld:TemperatureSensor:201",
-        "atContext": "",
-        "forbidden": "false",
-        "x": 440,
-        "y": 740,
-        "wires": [
-            [
-                "a85cea344760636f"
-            ]
-        ]
-    },
-    {
-        "id": "520309c7d9afb417",
-        "type": "NGSI-LD entity attributes",
-        "z": "716ed2717683565d",
-        "name": "",
-        "broker": "907c553d7533ec10",
-        "actionType": "update",
-        "entityId": "urn:ngsi-ld:TemperatureSensor:201",
-        "atContext": "",
-        "forbidden": "false",
-        "x": 440,
-        "y": 800,
-        "wires": [
-            [
-                "e9cb8a4ea71c953b"
-            ]
-        ]
-    },
-    {
-        "id": "b7a5c786f3251125",
-        "type": "NGSI-LD entity attributes",
-        "z": "716ed2717683565d",
-        "name": "",
-        "broker": "907c553d7533ec10",
-        "actionType": "upsert",
-        "entityId": "urn:ngsi-ld:TemperatureSensor:201",
-        "atContext": "",
-        "forbidden": "false",
-        "x": 440,
-        "y": 860,
-        "wires": [
-            [
-                "a3d2eaad0c33e939"
-            ]
-        ]
-    },
-    {
-        "id": "a85cea344760636f",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 670,
-        "y": 740,
-        "wires": []
-    },
-    {
-        "id": "e9cb8a4ea71c953b",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 670,
-        "y": 800,
-        "wires": []
-    },
-    {
-        "id": "a3d2eaad0c33e939",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 670,
-        "y": 860,
-        "wires": []
-    },
-    {
-        "id": "624e5af8ba90ef6b",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/append-attrs",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 190,
-        "y": 740,
-        "wires": [
-            [
-                "4986f6b7e326a853"
-            ]
-        ]
-    },
-    {
-        "id": "0a0442ef696ed5b8",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/update-attrs",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 190,
-        "y": 800,
-        "wires": [
-            [
-                "520309c7d9afb417"
-            ]
-        ]
-    },
-    {
-        "id": "5ec35b01ecb4d4d1",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/upsert-attrs",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 190,
-        "y": 860,
-        "wires": [
-            [
-                "b7a5c786f3251125"
-            ]
-        ]
-    },
-    {
-        "id": "d9d3bb825df65377",
-        "type": "NGSI-LD Batch operations",
-        "z": "716ed2717683565d",
-        "name": "",
-        "broker": "907c553d7533ec10",
-        "actionType": "create",
-        "atContext": "",
-        "forbidden": "false",
-        "x": 460,
-        "y": 460,
-        "wires": [
-            [
-                "5236d8b661b36852"
-            ]
-        ]
-    },
-    {
-        "id": "5288f2a48a61bdd6",
-        "type": "NGSI-LD Batch operations",
-        "z": "716ed2717683565d",
-        "name": "",
-        "broker": "907c553d7533ec10",
-        "actionType": "update",
-        "atContext": "",
-        "forbidden": "false",
-        "x": 460,
-        "y": 520,
-        "wires": [
-            [
-                "7788ef215021306a"
-            ]
-        ]
-    },
-    {
-        "id": "3636f821ca6af15c",
-        "type": "NGSI-LD Batch operations",
-        "z": "716ed2717683565d",
-        "name": "",
-        "broker": "907c553d7533ec10",
-        "actionType": "upsert",
-        "atContext": "",
-        "forbidden": "false",
-        "x": 460,
-        "y": 580,
-        "wires": [
-            [
-                "c5ba1004bc473d13"
-            ]
-        ]
-    },
-    {
-        "id": "6e34bfc82801b753",
-        "type": "NGSI-LD entity attribute",
-        "z": "716ed2717683565d",
-        "name": "",
-        "broker": "907c553d7533ec10",
-        "actionType": "update",
-        "entityId": "urn:ngsi-ld:TemperatureSensor:301",
-        "attrName": "category",
-        "deleteAll": "false",
-        "datasetId": "",
-        "atContext": "",
-        "forbidden": "false",
-        "x": 430,
-        "y": 980,
-        "wires": [
-            [
-                "4fd9221a621fe9ca"
-            ]
-        ]
-    },
-    {
-        "id": "b9b68d1c3f608e51",
-        "type": "NGSI-LD entity attribute",
-        "z": "716ed2717683565d",
-        "name": "",
-        "broker": "907c553d7533ec10",
-        "actionType": "delete",
-        "entityId": "urn:ngsi-ld:TemperatureSensor:301",
-        "attrName": "",
-        "deleteAll": "false",
-        "datasetId": "",
-        "atContext": "",
-        "forbidden": "false",
-        "x": 430,
-        "y": 1040,
-        "wires": [
-            [
-                "828b4679cd54e301"
-            ]
-        ]
-    },
-    {
-        "id": "dc74ee0eca75763b",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/batch-create",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 190,
-        "y": 460,
-        "wires": [
-            [
-                "d9d3bb825df65377"
-            ]
-        ]
-    },
-    {
-        "id": "fe41d438aeb829ed",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/batch-update",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 190,
-        "y": 520,
-        "wires": [
-            [
-                "5288f2a48a61bdd6"
-            ]
-        ]
-    },
-    {
-        "id": "988fcdd1fd47316e",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/batch-upsert",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 190,
-        "y": 580,
-        "wires": [
-            [
-                "3636f821ca6af15c"
-            ]
-        ]
-    },
-    {
-        "id": "5236d8b661b36852",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 690,
-        "y": 460,
-        "wires": []
-    },
-    {
-        "id": "7788ef215021306a",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 690,
-        "y": 520,
-        "wires": []
-    },
-    {
-        "id": "c5ba1004bc473d13",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 690,
-        "y": 580,
-        "wires": []
-    },
-    {
-        "id": "17a6fb9c276554f5",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/batch-delete",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 190,
-        "y": 640,
-        "wires": [
-            [
-                "04aa8276cfe1bf8c"
-            ]
-        ]
-    },
-    {
-        "id": "7f9b9cedb44751dc",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 690,
-        "y": 640,
-        "wires": []
-    },
-    {
-        "id": "04aa8276cfe1bf8c",
-        "type": "NGSI-LD Batch operations",
-        "z": "716ed2717683565d",
-        "name": "",
-        "broker": "907c553d7533ec10",
-        "actionType": "delete",
-        "atContext": "",
-        "forbidden": "false",
-        "x": 460,
-        "y": 640,
-        "wires": [
-            [
-                "7f9b9cedb44751dc"
-            ]
-        ]
-    },
-    {
-        "id": "3b1a4870f1ae74fe",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/update-attr",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 180,
-        "y": 980,
-        "wires": [
-            [
-                "6e34bfc82801b753"
-            ]
-        ]
-    },
-    {
-        "id": "4fd9221a621fe9ca",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 670,
-        "y": 980,
-        "wires": []
-    },
-    {
-        "id": "3d3d1667437ce0ad",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/delete-attr",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 180,
-        "y": 1040,
-        "wires": [
-            [
-                "b9b68d1c3f608e51"
-            ]
-        ]
-    },
-    {
-        "id": "828b4679cd54e301",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 670,
-        "y": 1040,
-        "wires": []
-    },
-    {
-        "id": "e8bff226a857751d",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/create-entity-forbidden",
-        "method": "post",
-        "upload": true,
-        "swaggerDoc": "",
-        "x": 960,
-        "y": 160,
-        "wires": [
-            [
-                "2fab5ae0e8a11525"
-            ]
-        ]
-    },
-    {
-        "id": "73f168dffeba3a36",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 1490,
-        "y": 160,
-        "wires": []
-    },
-    {
-        "id": "2fab5ae0e8a11525",
-        "type": "NGSI-LD Entity",
-        "z": "716ed2717683565d",
-        "name": "",
-        "broker": "907c553d7533ec10",
-        "atContext": "",
-        "actionType": "create",
-        "entityId": "",
-        "attrs": "",
-        "sysAttrs": "false",
-        "representation": "normalized",
-        "geometryProperty": "",
-        "lang": "",
-        "accept": "application/ld+json",
-        "forbidden": "true",
-        "x": 1240,
-        "y": 160,
-        "wires": [
-            [
-                "73f168dffeba3a36"
-            ]
-        ]
-    },
-    {
-        "id": "b6624f56a4b7e546",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/read-entity-forbidden",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 960,
-        "y": 220,
-        "wires": [
-            [
-                "ce88fcd75722feb1"
-            ]
-        ]
-    },
-    {
-        "id": "274543ae91ec8eec",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 1490,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "ce88fcd75722feb1",
-        "type": "NGSI-LD Entity",
-        "z": "716ed2717683565d",
-        "name": "",
-        "broker": "907c553d7533ec10",
-        "atContext": "",
-        "actionType": "read",
-        "entityId": "",
-        "attrs": "",
-        "sysAttrs": "false",
-        "representation": "normalized",
-        "geometryProperty": "",
-        "lang": "",
-        "accept": "application/ld+json",
-        "forbidden": "true",
-        "x": 1240,
-        "y": 220,
-        "wires": [
-            [
-                "274543ae91ec8eec"
-            ]
-        ]
-    },
-    {
-        "id": "7383452920042c2e",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/delete-entity-forbidden",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 960,
-        "y": 280,
-        "wires": [
-            [
-                "11294daf06e61c8c"
-            ]
-        ]
-    },
-    {
-        "id": "d47c9e6512df4ced",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 1490,
-        "y": 280,
-        "wires": []
-    },
-    {
-        "id": "11294daf06e61c8c",
-        "type": "NGSI-LD Entity",
-        "z": "716ed2717683565d",
-        "name": "",
-        "broker": "907c553d7533ec10",
-        "atContext": "",
-        "actionType": "delete",
-        "entityId": "",
-        "attrs": "",
-        "sysAttrs": "false",
-        "representation": "normalized",
-        "geometryProperty": "",
-        "lang": "",
-        "accept": "application/ld+json",
-        "forbidden": "true",
-        "x": 1240,
-        "y": 280,
-        "wires": [
-            [
-                "d47c9e6512df4ced"
-            ]
-        ]
-    },
-    {
-        "id": "10d9a42ef3e35910",
-        "type": "NGSI-LD entities",
-        "z": "716ed2717683565d",
-        "name": "",
-        "broker": "907c553d7533ec10",
-        "representation": "normalized",
-        "entityId": "",
-        "entityType": "",
-        "idPattern": "",
-        "attrs": "",
-        "sysAttrs": "false",
-        "query": "",
-        "csf": "",
-        "georel": "",
-        "geometry": "",
-        "coordinates": "",
-        "geoproperty": "",
-        "geometryProperty": "",
-        "lang": "",
-        "accept": "application/ld+json",
-        "atContext": "",
-        "buffering": "on",
-        "forbidden": "true",
-        "x": 1250,
-        "y": 380,
-        "wires": [
-            [
-                "103412b333fba163"
-            ]
-        ]
-    },
-    {
-        "id": "0f6452a33b29cf14",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/read-entities-forbidden",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 960,
-        "y": 380,
-        "wires": [
-            [
-                "10d9a42ef3e35910"
-            ]
-        ]
-    },
-    {
-        "id": "103412b333fba163",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 1490,
-        "y": 380,
-        "wires": []
-    },
-    {
-        "id": "3724b7d12c09ed2b",
-        "type": "NGSI-LD entity attributes",
-        "z": "716ed2717683565d",
-        "name": "",
-        "broker": "907c553d7533ec10",
-        "actionType": "append",
-        "entityId": "urn:ngsi-ld:TemperatureSensor:201",
-        "atContext": "",
-        "forbidden": "true",
-        "x": 1260,
-        "y": 740,
-        "wires": [
-            [
-                "b6710d3d039d0733"
-            ]
-        ]
-    },
-    {
-        "id": "2aac06ec02fcd025",
-        "type": "NGSI-LD entity attributes",
-        "z": "716ed2717683565d",
-        "name": "",
-        "broker": "907c553d7533ec10",
-        "actionType": "update",
-        "entityId": "urn:ngsi-ld:TemperatureSensor:201",
-        "atContext": "",
-        "forbidden": "true",
-        "x": 1260,
-        "y": 800,
-        "wires": [
-            [
-                "2a711175d7e4a87b"
-            ]
-        ]
-    },
-    {
-        "id": "ad1e3fc832e18655",
-        "type": "NGSI-LD entity attributes",
-        "z": "716ed2717683565d",
-        "name": "",
-        "broker": "907c553d7533ec10",
-        "actionType": "upsert",
-        "entityId": "urn:ngsi-ld:TemperatureSensor:201",
-        "atContext": "",
-        "forbidden": "true",
-        "x": 1260,
-        "y": 860,
-        "wires": [
-            [
-                "820abafb8764bbbc"
-            ]
-        ]
-    },
-    {
-        "id": "b6710d3d039d0733",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 1490,
-        "y": 740,
-        "wires": []
-    },
-    {
-        "id": "2a711175d7e4a87b",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 1490,
-        "y": 800,
-        "wires": []
-    },
-    {
-        "id": "820abafb8764bbbc",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 1490,
-        "y": 860,
-        "wires": []
-    },
-    {
-        "id": "5fd2d79ef7903757",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/append-attrs-forbidden",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 960,
-        "y": 740,
-        "wires": [
-            [
-                "3724b7d12c09ed2b"
-            ]
-        ]
-    },
-    {
-        "id": "70a4376aef2b5bbd",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/update-attrs-forbidden",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 960,
-        "y": 800,
-        "wires": [
-            [
-                "2aac06ec02fcd025"
-            ]
-        ]
-    },
-    {
-        "id": "4611c522c7eeb49f",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/upsert-attrs-forbidden",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 960,
-        "y": 860,
-        "wires": [
-            [
-                "ad1e3fc832e18655"
-            ]
-        ]
-    },
-    {
-        "id": "e88e31d56499f3cd",
-        "type": "NGSI-LD Batch operations",
-        "z": "716ed2717683565d",
-        "name": "",
-        "broker": "907c553d7533ec10",
-        "actionType": "create",
-        "atContext": "",
-        "forbidden": "true",
-        "x": 1280,
-        "y": 460,
-        "wires": [
-            [
-                "59d5aac418dca1a8"
-            ]
-        ]
-    },
-    {
-        "id": "d9a187d77c03a49e",
-        "type": "NGSI-LD Batch operations",
-        "z": "716ed2717683565d",
-        "name": "",
-        "broker": "907c553d7533ec10",
-        "actionType": "update",
-        "atContext": "",
-        "forbidden": "true",
-        "x": 1280,
-        "y": 520,
-        "wires": [
-            [
-                "f04abaa8c11f6cd3"
-            ]
-        ]
-    },
-    {
-        "id": "21f9e4dadda3a98b",
-        "type": "NGSI-LD Batch operations",
-        "z": "716ed2717683565d",
-        "name": "",
-        "broker": "907c553d7533ec10",
-        "actionType": "upsert",
-        "atContext": "",
-        "forbidden": "true",
-        "x": 1280,
-        "y": 580,
-        "wires": [
-            [
-                "fcca80249163e938"
-            ]
-        ]
-    },
-    {
-        "id": "9d9e4fdcf2656298",
-        "type": "NGSI-LD entity attribute",
-        "z": "716ed2717683565d",
-        "name": "",
-        "broker": "907c553d7533ec10",
-        "actionType": "update",
-        "entityId": "urn:ngsi-ld:TemperatureSensor:301",
-        "attrName": "category",
-        "deleteAll": "false",
-        "datasetId": "",
-        "atContext": "",
-        "forbidden": "true",
-        "x": 1250,
-        "y": 980,
-        "wires": [
-            [
-                "ad0e525f97c0cddf"
-            ]
-        ]
-    },
-    {
-        "id": "1c0e92a6ce9e5817",
-        "type": "NGSI-LD entity attribute",
-        "z": "716ed2717683565d",
-        "name": "",
-        "broker": "907c553d7533ec10",
-        "actionType": "delete",
-        "entityId": "urn:ngsi-ld:TemperatureSensor:301",
-        "attrName": "",
-        "deleteAll": "false",
-        "datasetId": "",
-        "atContext": "",
-        "forbidden": "true",
-        "x": 1250,
-        "y": 1040,
-        "wires": [
-            [
-                "0793c05afd8127e2"
-            ]
-        ]
-    },
-    {
-        "id": "11196fb92a49ea51",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/batch-create-forbidden",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 960,
-        "y": 460,
-        "wires": [
-            [
-                "e88e31d56499f3cd"
-            ]
-        ]
-    },
-    {
-        "id": "a80db4a0610854ad",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/batch-update-forbidden",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 960,
-        "y": 520,
-        "wires": [
-            [
-                "d9a187d77c03a49e"
-            ]
-        ]
-    },
-    {
-        "id": "006038a68d82c8c5",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/batch-upsert-forbidden",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 960,
-        "y": 580,
-        "wires": [
-            [
-                "21f9e4dadda3a98b"
-            ]
-        ]
-    },
-    {
-        "id": "59d5aac418dca1a8",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 1510,
-        "y": 460,
-        "wires": []
-    },
-    {
-        "id": "f04abaa8c11f6cd3",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 1510,
-        "y": 520,
-        "wires": []
-    },
-    {
-        "id": "fcca80249163e938",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 1510,
-        "y": 580,
-        "wires": []
-    },
-    {
-        "id": "4eccf5453a95fc23",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/batch-delete-forbidden",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 960,
-        "y": 640,
-        "wires": [
-            [
-                "3bc22ecf65c89950"
-            ]
-        ]
-    },
-    {
-        "id": "0e1cc0d80adc60fe",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 1510,
-        "y": 640,
-        "wires": []
-    },
-    {
-        "id": "3bc22ecf65c89950",
-        "type": "NGSI-LD Batch operations",
-        "z": "716ed2717683565d",
-        "name": "",
-        "broker": "907c553d7533ec10",
-        "actionType": "delete",
-        "atContext": "",
-        "forbidden": "true",
-        "x": 1280,
-        "y": 640,
-        "wires": [
-            [
-                "0e1cc0d80adc60fe"
-            ]
-        ]
-    },
-    {
-        "id": "2f1bab5a2938af62",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/update-attr-forbidden",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 960,
-        "y": 980,
-        "wires": [
-            [
-                "9d9e4fdcf2656298"
-            ]
-        ]
-    },
-    {
-        "id": "ad0e525f97c0cddf",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 1490,
-        "y": 980,
-        "wires": []
-    },
-    {
-        "id": "31d206a04a871c38",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/delete-attr-forbidden",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 950,
-        "y": 1040,
-        "wires": [
-            [
-                "1c0e92a6ce9e5817"
-            ]
-        ]
-    },
-    {
-        "id": "0793c05afd8127e2",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 1490,
-        "y": 1040,
-        "wires": []
-    },
-    {
-        "id": "3d72fa856058edfe",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/encode",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 170,
-        "y": 1140,
-        "wires": [
-            [
-                "2e1e1dedf3e17be6"
-            ]
-        ]
-    },
-    {
-        "id": "e8d708ab219a0123",
-        "type": "http in",
-        "z": "716ed2717683565d",
-        "name": "",
-        "url": "/decode",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 170,
-        "y": 1200,
-        "wires": [
-            [
-                "f06dbc43702bea4f"
-            ]
-        ]
-    },
-    {
-        "id": "5b008569ae44870a",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 670,
-        "y": 1140,
-        "wires": []
-    },
-    {
-        "id": "1348a181254fcb4f",
-        "type": "http response",
-        "z": "716ed2717683565d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 670,
-        "y": 1200,
-        "wires": []
-    },
-    {
-        "id": "2e1e1dedf3e17be6",
-        "type": "NGSI-LD Encode",
-        "z": "716ed2717683565d",
-        "name": "",
-        "x": 430,
-        "y": 1140,
-        "wires": [
-            [
-                "5b008569ae44870a"
-            ]
-        ]
-    },
-    {
-        "id": "f06dbc43702bea4f",
-        "type": "NGSI-LD Decode",
-        "z": "716ed2717683565d",
-        "name": "",
-        "x": 430,
-        "y": 1200,
-        "wires": [
-            [
-                "1348a181254fcb4f"
-            ]
-        ]
-    },
-    {
-        "id": "907c553d7533ec10",
-        "type": "NGSI-LD broker",
-        "name": "Orion-LD",
-        "brokerType": "orion-ld",
-        "apiEndpoint": "http://localhost:1026",
-        "mintaka": "http://localhost:8080",
-        "atContext": "https://raw.githubusercontent.com/FIWARE/tutorials.CRUD-Operations/NGSI-LD/data-models/ngsi-context.jsonld",
-        "tenant": "",
-        "idmEndpoint": "",
-        "idmType": "none"
-    }
+  {
+    "id": "716ed2717683565d",
+    "type": "tab",
+    "label": "Flow 1",
+    "disabled": false,
+    "info": "",
+    "env": []
+  },
+  {
+    "id": "088fae07b9446fb6",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/version",
+    "method": "get",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 170,
+    "y": 60,
+    "wires": [["29a0e201dc42b296"]]
+  },
+  {
+    "id": "ce574ef4130d6d14",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 670,
+    "y": 60,
+    "wires": []
+  },
+  {
+    "id": "29a0e201dc42b296",
+    "type": "NGSI-LD broker version",
+    "z": "716ed2717683565d",
+    "name": "",
+    "broker": "907c553d7533ec10",
+    "x": 430,
+    "y": 60,
+    "wires": [["ce574ef4130d6d14"]]
+  },
+  {
+    "id": "319e0bc8417ed708",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/create-entity",
+    "method": "post",
+    "upload": true,
+    "swaggerDoc": "",
+    "x": 190,
+    "y": 160,
+    "wires": [["b0b1737734829641"]]
+  },
+  {
+    "id": "966f3b856eeb8b63",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 670,
+    "y": 160,
+    "wires": []
+  },
+  {
+    "id": "b0b1737734829641",
+    "type": "NGSI-LD Entity",
+    "z": "716ed2717683565d",
+    "name": "",
+    "broker": "907c553d7533ec10",
+    "atContext": "",
+    "actionType": "create",
+    "entityId": "",
+    "attrs": "",
+    "sysAttrs": "false",
+    "representation": "normalized",
+    "geometryProperty": "",
+    "lang": "",
+    "accept": "application/ld+json",
+    "forbidden": "false",
+    "x": 420,
+    "y": 160,
+    "wires": [["966f3b856eeb8b63"]]
+  },
+  {
+    "id": "e0ff87d053bc9b40",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/read-entity",
+    "method": "post",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 180,
+    "y": 220,
+    "wires": [["19cf015a6165f22a"]]
+  },
+  {
+    "id": "333f3fbd7775e6d7",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 670,
+    "y": 220,
+    "wires": []
+  },
+  {
+    "id": "19cf015a6165f22a",
+    "type": "NGSI-LD Entity",
+    "z": "716ed2717683565d",
+    "name": "",
+    "broker": "907c553d7533ec10",
+    "atContext": "",
+    "actionType": "read",
+    "entityId": "",
+    "attrs": "",
+    "sysAttrs": "false",
+    "representation": "normalized",
+    "geometryProperty": "",
+    "lang": "",
+    "accept": "application/ld+json",
+    "forbidden": "false",
+    "x": 420,
+    "y": 220,
+    "wires": [["333f3fbd7775e6d7"]]
+  },
+  {
+    "id": "15b4a62e75427063",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/delete-entity",
+    "method": "post",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 190,
+    "y": 280,
+    "wires": [["7a5c4d4d69abd505"]]
+  },
+  {
+    "id": "481e01eaf00c7f04",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 670,
+    "y": 280,
+    "wires": []
+  },
+  {
+    "id": "7a5c4d4d69abd505",
+    "type": "NGSI-LD Entity",
+    "z": "716ed2717683565d",
+    "name": "",
+    "broker": "907c553d7533ec10",
+    "atContext": "",
+    "actionType": "delete",
+    "entityId": "",
+    "attrs": "",
+    "sysAttrs": "false",
+    "representation": "normalized",
+    "geometryProperty": "",
+    "lang": "",
+    "accept": "application/ld+json",
+    "forbidden": "false",
+    "x": 420,
+    "y": 280,
+    "wires": [["481e01eaf00c7f04"]]
+  },
+  {
+    "id": "29edfcde03f50c91",
+    "type": "NGSI-LD entities",
+    "z": "716ed2717683565d",
+    "name": "",
+    "broker": "907c553d7533ec10",
+    "representation": "normalized",
+    "entityId": "",
+    "entityType": "",
+    "idPattern": "",
+    "attrs": "",
+    "sysAttrs": "false",
+    "query": "",
+    "csf": "",
+    "georel": "",
+    "geometry": "",
+    "coordinates": "",
+    "geoproperty": "",
+    "geometryProperty": "",
+    "lang": "",
+    "accept": "application/ld+json",
+    "atContext": "",
+    "buffering": "on",
+    "forbidden": "false",
+    "x": 430,
+    "y": 380,
+    "wires": [["c05e3b7d71eb5e64"]]
+  },
+  {
+    "id": "f73b1275d9b7df9b",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/read-entities",
+    "method": "post",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 190,
+    "y": 380,
+    "wires": [["29edfcde03f50c91"]]
+  },
+  {
+    "id": "c05e3b7d71eb5e64",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 670,
+    "y": 380,
+    "wires": []
+  },
+  {
+    "id": "4986f6b7e326a853",
+    "type": "NGSI-LD entity attributes",
+    "z": "716ed2717683565d",
+    "name": "",
+    "broker": "907c553d7533ec10",
+    "actionType": "append",
+    "entityId": "urn:ngsi-ld:TemperatureSensor:201",
+    "atContext": "",
+    "forbidden": "false",
+    "x": 440,
+    "y": 740,
+    "wires": [["a85cea344760636f"]]
+  },
+  {
+    "id": "520309c7d9afb417",
+    "type": "NGSI-LD entity attributes",
+    "z": "716ed2717683565d",
+    "name": "",
+    "broker": "907c553d7533ec10",
+    "actionType": "update",
+    "entityId": "urn:ngsi-ld:TemperatureSensor:201",
+    "atContext": "",
+    "forbidden": "false",
+    "x": 440,
+    "y": 800,
+    "wires": [["e9cb8a4ea71c953b"]]
+  },
+  {
+    "id": "b7a5c786f3251125",
+    "type": "NGSI-LD entity attributes",
+    "z": "716ed2717683565d",
+    "name": "",
+    "broker": "907c553d7533ec10",
+    "actionType": "upsert",
+    "entityId": "urn:ngsi-ld:TemperatureSensor:201",
+    "atContext": "",
+    "forbidden": "false",
+    "x": 440,
+    "y": 860,
+    "wires": [["a3d2eaad0c33e939"]]
+  },
+  {
+    "id": "a85cea344760636f",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 670,
+    "y": 740,
+    "wires": []
+  },
+  {
+    "id": "e9cb8a4ea71c953b",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 670,
+    "y": 800,
+    "wires": []
+  },
+  {
+    "id": "a3d2eaad0c33e939",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 670,
+    "y": 860,
+    "wires": []
+  },
+  {
+    "id": "624e5af8ba90ef6b",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/append-attrs",
+    "method": "post",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 190,
+    "y": 740,
+    "wires": [["4986f6b7e326a853"]]
+  },
+  {
+    "id": "0a0442ef696ed5b8",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/update-attrs",
+    "method": "post",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 190,
+    "y": 800,
+    "wires": [["520309c7d9afb417"]]
+  },
+  {
+    "id": "5ec35b01ecb4d4d1",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/upsert-attrs",
+    "method": "post",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 190,
+    "y": 860,
+    "wires": [["b7a5c786f3251125"]]
+  },
+  {
+    "id": "d9d3bb825df65377",
+    "type": "NGSI-LD Batch operations",
+    "z": "716ed2717683565d",
+    "name": "",
+    "broker": "907c553d7533ec10",
+    "actionType": "create",
+    "atContext": "",
+    "forbidden": "false",
+    "x": 460,
+    "y": 460,
+    "wires": [["5236d8b661b36852"]]
+  },
+  {
+    "id": "5288f2a48a61bdd6",
+    "type": "NGSI-LD Batch operations",
+    "z": "716ed2717683565d",
+    "name": "",
+    "broker": "907c553d7533ec10",
+    "actionType": "update",
+    "atContext": "",
+    "forbidden": "false",
+    "x": 460,
+    "y": 520,
+    "wires": [["7788ef215021306a"]]
+  },
+  {
+    "id": "3636f821ca6af15c",
+    "type": "NGSI-LD Batch operations",
+    "z": "716ed2717683565d",
+    "name": "",
+    "broker": "907c553d7533ec10",
+    "actionType": "upsert",
+    "atContext": "",
+    "forbidden": "false",
+    "x": 460,
+    "y": 580,
+    "wires": [["c5ba1004bc473d13"]]
+  },
+  {
+    "id": "6e34bfc82801b753",
+    "type": "NGSI-LD entity attribute",
+    "z": "716ed2717683565d",
+    "name": "",
+    "broker": "907c553d7533ec10",
+    "actionType": "update",
+    "entityId": "urn:ngsi-ld:TemperatureSensor:301",
+    "attrName": "category",
+    "deleteAll": "false",
+    "datasetId": "",
+    "atContext": "",
+    "forbidden": "false",
+    "x": 430,
+    "y": 980,
+    "wires": [["4fd9221a621fe9ca"]]
+  },
+  {
+    "id": "b9b68d1c3f608e51",
+    "type": "NGSI-LD entity attribute",
+    "z": "716ed2717683565d",
+    "name": "",
+    "broker": "907c553d7533ec10",
+    "actionType": "delete",
+    "entityId": "urn:ngsi-ld:TemperatureSensor:301",
+    "attrName": "",
+    "deleteAll": "false",
+    "datasetId": "",
+    "atContext": "",
+    "forbidden": "false",
+    "x": 430,
+    "y": 1040,
+    "wires": [["828b4679cd54e301"]]
+  },
+  {
+    "id": "dc74ee0eca75763b",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/batch-create",
+    "method": "post",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 190,
+    "y": 460,
+    "wires": [["d9d3bb825df65377"]]
+  },
+  {
+    "id": "fe41d438aeb829ed",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/batch-update",
+    "method": "post",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 190,
+    "y": 520,
+    "wires": [["5288f2a48a61bdd6"]]
+  },
+  {
+    "id": "988fcdd1fd47316e",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/batch-upsert",
+    "method": "post",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 190,
+    "y": 580,
+    "wires": [["3636f821ca6af15c"]]
+  },
+  {
+    "id": "5236d8b661b36852",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 690,
+    "y": 460,
+    "wires": []
+  },
+  {
+    "id": "7788ef215021306a",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 690,
+    "y": 520,
+    "wires": []
+  },
+  {
+    "id": "c5ba1004bc473d13",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 690,
+    "y": 580,
+    "wires": []
+  },
+  {
+    "id": "17a6fb9c276554f5",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/batch-delete",
+    "method": "post",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 190,
+    "y": 640,
+    "wires": [["04aa8276cfe1bf8c"]]
+  },
+  {
+    "id": "7f9b9cedb44751dc",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 690,
+    "y": 640,
+    "wires": []
+  },
+  {
+    "id": "04aa8276cfe1bf8c",
+    "type": "NGSI-LD Batch operations",
+    "z": "716ed2717683565d",
+    "name": "",
+    "broker": "907c553d7533ec10",
+    "actionType": "delete",
+    "atContext": "",
+    "forbidden": "false",
+    "x": 460,
+    "y": 640,
+    "wires": [["7f9b9cedb44751dc"]]
+  },
+  {
+    "id": "3b1a4870f1ae74fe",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/update-attr",
+    "method": "post",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 180,
+    "y": 980,
+    "wires": [["6e34bfc82801b753"]]
+  },
+  {
+    "id": "4fd9221a621fe9ca",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 670,
+    "y": 980,
+    "wires": []
+  },
+  {
+    "id": "3d3d1667437ce0ad",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/delete-attr",
+    "method": "post",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 180,
+    "y": 1040,
+    "wires": [["b9b68d1c3f608e51"]]
+  },
+  {
+    "id": "828b4679cd54e301",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 670,
+    "y": 1040,
+    "wires": []
+  },
+  {
+    "id": "e8bff226a857751d",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/create-entity-forbidden",
+    "method": "post",
+    "upload": true,
+    "swaggerDoc": "",
+    "x": 960,
+    "y": 160,
+    "wires": [["2fab5ae0e8a11525"]]
+  },
+  {
+    "id": "73f168dffeba3a36",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 1490,
+    "y": 160,
+    "wires": []
+  },
+  {
+    "id": "2fab5ae0e8a11525",
+    "type": "NGSI-LD Entity",
+    "z": "716ed2717683565d",
+    "name": "",
+    "broker": "907c553d7533ec10",
+    "atContext": "",
+    "actionType": "create",
+    "entityId": "",
+    "attrs": "",
+    "sysAttrs": "false",
+    "representation": "normalized",
+    "geometryProperty": "",
+    "lang": "",
+    "accept": "application/ld+json",
+    "forbidden": "true",
+    "x": 1240,
+    "y": 160,
+    "wires": [["73f168dffeba3a36"]]
+  },
+  {
+    "id": "b6624f56a4b7e546",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/read-entity-forbidden",
+    "method": "post",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 960,
+    "y": 220,
+    "wires": [["ce88fcd75722feb1"]]
+  },
+  {
+    "id": "274543ae91ec8eec",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 1490,
+    "y": 220,
+    "wires": []
+  },
+  {
+    "id": "ce88fcd75722feb1",
+    "type": "NGSI-LD Entity",
+    "z": "716ed2717683565d",
+    "name": "",
+    "broker": "907c553d7533ec10",
+    "atContext": "",
+    "actionType": "read",
+    "entityId": "",
+    "attrs": "",
+    "sysAttrs": "false",
+    "representation": "normalized",
+    "geometryProperty": "",
+    "lang": "",
+    "accept": "application/ld+json",
+    "forbidden": "true",
+    "x": 1240,
+    "y": 220,
+    "wires": [["274543ae91ec8eec"]]
+  },
+  {
+    "id": "7383452920042c2e",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/delete-entity-forbidden",
+    "method": "post",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 960,
+    "y": 280,
+    "wires": [["11294daf06e61c8c"]]
+  },
+  {
+    "id": "d47c9e6512df4ced",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 1490,
+    "y": 280,
+    "wires": []
+  },
+  {
+    "id": "11294daf06e61c8c",
+    "type": "NGSI-LD Entity",
+    "z": "716ed2717683565d",
+    "name": "",
+    "broker": "907c553d7533ec10",
+    "atContext": "",
+    "actionType": "delete",
+    "entityId": "",
+    "attrs": "",
+    "sysAttrs": "false",
+    "representation": "normalized",
+    "geometryProperty": "",
+    "lang": "",
+    "accept": "application/ld+json",
+    "forbidden": "true",
+    "x": 1240,
+    "y": 280,
+    "wires": [["d47c9e6512df4ced"]]
+  },
+  {
+    "id": "10d9a42ef3e35910",
+    "type": "NGSI-LD entities",
+    "z": "716ed2717683565d",
+    "name": "",
+    "broker": "907c553d7533ec10",
+    "representation": "normalized",
+    "entityId": "",
+    "entityType": "",
+    "idPattern": "",
+    "attrs": "",
+    "sysAttrs": "false",
+    "query": "",
+    "csf": "",
+    "georel": "",
+    "geometry": "",
+    "coordinates": "",
+    "geoproperty": "",
+    "geometryProperty": "",
+    "lang": "",
+    "accept": "application/ld+json",
+    "atContext": "",
+    "buffering": "on",
+    "forbidden": "true",
+    "x": 1250,
+    "y": 380,
+    "wires": [["103412b333fba163"]]
+  },
+  {
+    "id": "0f6452a33b29cf14",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/read-entities-forbidden",
+    "method": "post",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 960,
+    "y": 380,
+    "wires": [["10d9a42ef3e35910"]]
+  },
+  {
+    "id": "103412b333fba163",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 1490,
+    "y": 380,
+    "wires": []
+  },
+  {
+    "id": "3724b7d12c09ed2b",
+    "type": "NGSI-LD entity attributes",
+    "z": "716ed2717683565d",
+    "name": "",
+    "broker": "907c553d7533ec10",
+    "actionType": "append",
+    "entityId": "urn:ngsi-ld:TemperatureSensor:201",
+    "atContext": "",
+    "forbidden": "true",
+    "x": 1260,
+    "y": 740,
+    "wires": [["b6710d3d039d0733"]]
+  },
+  {
+    "id": "2aac06ec02fcd025",
+    "type": "NGSI-LD entity attributes",
+    "z": "716ed2717683565d",
+    "name": "",
+    "broker": "907c553d7533ec10",
+    "actionType": "update",
+    "entityId": "urn:ngsi-ld:TemperatureSensor:201",
+    "atContext": "",
+    "forbidden": "true",
+    "x": 1260,
+    "y": 800,
+    "wires": [["2a711175d7e4a87b"]]
+  },
+  {
+    "id": "ad1e3fc832e18655",
+    "type": "NGSI-LD entity attributes",
+    "z": "716ed2717683565d",
+    "name": "",
+    "broker": "907c553d7533ec10",
+    "actionType": "upsert",
+    "entityId": "urn:ngsi-ld:TemperatureSensor:201",
+    "atContext": "",
+    "forbidden": "true",
+    "x": 1260,
+    "y": 860,
+    "wires": [["820abafb8764bbbc"]]
+  },
+  {
+    "id": "b6710d3d039d0733",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 1490,
+    "y": 740,
+    "wires": []
+  },
+  {
+    "id": "2a711175d7e4a87b",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 1490,
+    "y": 800,
+    "wires": []
+  },
+  {
+    "id": "820abafb8764bbbc",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 1490,
+    "y": 860,
+    "wires": []
+  },
+  {
+    "id": "5fd2d79ef7903757",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/append-attrs-forbidden",
+    "method": "post",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 960,
+    "y": 740,
+    "wires": [["3724b7d12c09ed2b"]]
+  },
+  {
+    "id": "70a4376aef2b5bbd",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/update-attrs-forbidden",
+    "method": "post",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 960,
+    "y": 800,
+    "wires": [["2aac06ec02fcd025"]]
+  },
+  {
+    "id": "4611c522c7eeb49f",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/upsert-attrs-forbidden",
+    "method": "post",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 960,
+    "y": 860,
+    "wires": [["ad1e3fc832e18655"]]
+  },
+  {
+    "id": "e88e31d56499f3cd",
+    "type": "NGSI-LD Batch operations",
+    "z": "716ed2717683565d",
+    "name": "",
+    "broker": "907c553d7533ec10",
+    "actionType": "create",
+    "atContext": "",
+    "forbidden": "true",
+    "x": 1280,
+    "y": 460,
+    "wires": [["59d5aac418dca1a8"]]
+  },
+  {
+    "id": "d9a187d77c03a49e",
+    "type": "NGSI-LD Batch operations",
+    "z": "716ed2717683565d",
+    "name": "",
+    "broker": "907c553d7533ec10",
+    "actionType": "update",
+    "atContext": "",
+    "forbidden": "true",
+    "x": 1280,
+    "y": 520,
+    "wires": [["f04abaa8c11f6cd3"]]
+  },
+  {
+    "id": "21f9e4dadda3a98b",
+    "type": "NGSI-LD Batch operations",
+    "z": "716ed2717683565d",
+    "name": "",
+    "broker": "907c553d7533ec10",
+    "actionType": "upsert",
+    "atContext": "",
+    "forbidden": "true",
+    "x": 1280,
+    "y": 580,
+    "wires": [["fcca80249163e938"]]
+  },
+  {
+    "id": "9d9e4fdcf2656298",
+    "type": "NGSI-LD entity attribute",
+    "z": "716ed2717683565d",
+    "name": "",
+    "broker": "907c553d7533ec10",
+    "actionType": "update",
+    "entityId": "urn:ngsi-ld:TemperatureSensor:301",
+    "attrName": "category",
+    "deleteAll": "false",
+    "datasetId": "",
+    "atContext": "",
+    "forbidden": "true",
+    "x": 1250,
+    "y": 980,
+    "wires": [["ad0e525f97c0cddf"]]
+  },
+  {
+    "id": "1c0e92a6ce9e5817",
+    "type": "NGSI-LD entity attribute",
+    "z": "716ed2717683565d",
+    "name": "",
+    "broker": "907c553d7533ec10",
+    "actionType": "delete",
+    "entityId": "urn:ngsi-ld:TemperatureSensor:301",
+    "attrName": "",
+    "deleteAll": "false",
+    "datasetId": "",
+    "atContext": "",
+    "forbidden": "true",
+    "x": 1250,
+    "y": 1040,
+    "wires": [["0793c05afd8127e2"]]
+  },
+  {
+    "id": "11196fb92a49ea51",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/batch-create-forbidden",
+    "method": "post",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 960,
+    "y": 460,
+    "wires": [["e88e31d56499f3cd"]]
+  },
+  {
+    "id": "a80db4a0610854ad",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/batch-update-forbidden",
+    "method": "post",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 960,
+    "y": 520,
+    "wires": [["d9a187d77c03a49e"]]
+  },
+  {
+    "id": "006038a68d82c8c5",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/batch-upsert-forbidden",
+    "method": "post",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 960,
+    "y": 580,
+    "wires": [["21f9e4dadda3a98b"]]
+  },
+  {
+    "id": "59d5aac418dca1a8",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 1510,
+    "y": 460,
+    "wires": []
+  },
+  {
+    "id": "f04abaa8c11f6cd3",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 1510,
+    "y": 520,
+    "wires": []
+  },
+  {
+    "id": "fcca80249163e938",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 1510,
+    "y": 580,
+    "wires": []
+  },
+  {
+    "id": "4eccf5453a95fc23",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/batch-delete-forbidden",
+    "method": "post",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 960,
+    "y": 640,
+    "wires": [["3bc22ecf65c89950"]]
+  },
+  {
+    "id": "0e1cc0d80adc60fe",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 1510,
+    "y": 640,
+    "wires": []
+  },
+  {
+    "id": "3bc22ecf65c89950",
+    "type": "NGSI-LD Batch operations",
+    "z": "716ed2717683565d",
+    "name": "",
+    "broker": "907c553d7533ec10",
+    "actionType": "delete",
+    "atContext": "",
+    "forbidden": "true",
+    "x": 1280,
+    "y": 640,
+    "wires": [["0e1cc0d80adc60fe"]]
+  },
+  {
+    "id": "2f1bab5a2938af62",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/update-attr-forbidden",
+    "method": "post",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 960,
+    "y": 980,
+    "wires": [["9d9e4fdcf2656298"]]
+  },
+  {
+    "id": "ad0e525f97c0cddf",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 1490,
+    "y": 980,
+    "wires": []
+  },
+  {
+    "id": "31d206a04a871c38",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/delete-attr-forbidden",
+    "method": "post",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 950,
+    "y": 1040,
+    "wires": [["1c0e92a6ce9e5817"]]
+  },
+  {
+    "id": "0793c05afd8127e2",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 1490,
+    "y": 1040,
+    "wires": []
+  },
+  {
+    "id": "3d72fa856058edfe",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/encode",
+    "method": "post",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 170,
+    "y": 1140,
+    "wires": [["2e1e1dedf3e17be6"]]
+  },
+  {
+    "id": "e8d708ab219a0123",
+    "type": "http in",
+    "z": "716ed2717683565d",
+    "name": "",
+    "url": "/decode",
+    "method": "post",
+    "upload": false,
+    "swaggerDoc": "",
+    "x": 170,
+    "y": 1200,
+    "wires": [["f06dbc43702bea4f"]]
+  },
+  {
+    "id": "5b008569ae44870a",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 670,
+    "y": 1140,
+    "wires": []
+  },
+  {
+    "id": "1348a181254fcb4f",
+    "type": "http response",
+    "z": "716ed2717683565d",
+    "name": "",
+    "statusCode": "",
+    "headers": {},
+    "x": 670,
+    "y": 1200,
+    "wires": []
+  },
+  {
+    "id": "2e1e1dedf3e17be6",
+    "type": "NGSI-LD Encode",
+    "z": "716ed2717683565d",
+    "name": "",
+    "x": 430,
+    "y": 1140,
+    "wires": [["5b008569ae44870a"]]
+  },
+  {
+    "id": "f06dbc43702bea4f",
+    "type": "NGSI-LD Decode",
+    "z": "716ed2717683565d",
+    "name": "",
+    "x": 430,
+    "y": 1200,
+    "wires": [["1348a181254fcb4f"]]
+  },
+  {
+    "id": "907c553d7533ec10",
+    "type": "NGSI-LD broker",
+    "name": "Orion-LD",
+    "brokerType": "orion-ld",
+    "apiEndpoint": "http://localhost:1026",
+    "mintaka": "http://localhost:8080",
+    "atContext": "https://raw.githubusercontent.com/FIWARE/tutorials.CRUD-Operations/NGSI-LD/data-models/ngsi-context.jsonld",
+    "tenant": "",
+    "idmEndpoint": "",
+    "idmType": "none"
+  }
 ]

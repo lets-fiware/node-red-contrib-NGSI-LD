@@ -36,7 +36,7 @@ const httpRequest = async function (msg, param) {
     baseURL: param.host,
     url: param.pathname,
     headers: await lib.buildHTTPHeader(param),
-    params: lib.buildParams(param.config),
+    params: lib.buildParams(param.config)
   };
 
   if (param.config.actionType === 'create') {
@@ -78,15 +78,7 @@ const validateConfig = function (msg, config) {
     return false;
   }
 
-  const items = [
-    'atContext',
-    'representation',
-    'entityId',
-    'attrs',
-    'geometryProperty',
-    'lang',
-    'accept'
-  ];
+  const items = ['atContext', 'representation', 'entityId', 'attrs', 'geometryProperty', 'lang', 'accept'];
   for (let i = 0; i < items.length; i++) {
     const e = items[i];
     if (config[e] && typeof config[e] !== 'string') {
@@ -95,10 +87,7 @@ const validateConfig = function (msg, config) {
     }
   }
 
-  const boolean_items = [
-    'sysAttrs',
-    'forbidden'
-  ];
+  const boolean_items = ['sysAttrs', 'forbidden'];
   for (let i = 0; i < boolean_items.length; i++) {
     const e = boolean_items[i];
     if (config[e] && typeof config[e] !== 'boolean') {
@@ -124,8 +113,8 @@ const createParam = function (msg, config, brokerConfig) {
       tenant: brokerConfig.tenant.trim(),
       atContext: config.atContext === '' ? brokerConfig.atContext.trim() : config.atContext.trim(),
       actionType: config.actionType,
-      entityId: config.entityId.trim(),
-    },
+      entityId: config.entityId.trim()
+    }
   };
 
   const defaultConfig = {
@@ -135,22 +124,13 @@ const createParam = function (msg, config, brokerConfig) {
     geometryProperty: config.geometryProperty,
     lang: config.lang,
     accept: config.accept,
-    forbidden: config.forbidden ? config.forbidden === 'true' : false,
+    forbidden: config.forbidden ? config.forbidden === 'true' : false
   };
 
   if (typeof msg.payload === 'string') {
     param.config.entityId = msg.payload;
   } else {
-    [
-      'entityId',
-      'attrs',
-      'representation',
-      'sysAttrs',
-      'geometryProperty',
-      'lang',
-      'accept',
-      'forbidden'
-    ].forEach(e => {
+    ['entityId', 'attrs', 'representation', 'sysAttrs', 'geometryProperty', 'lang', 'accept', 'forbidden'].forEach((e) => {
       if (msg.payload[e]) {
         defaultConfig[e] = msg.payload[e];
       }

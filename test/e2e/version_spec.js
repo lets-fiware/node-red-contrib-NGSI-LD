@@ -58,7 +58,6 @@ const baseURL = 'http://127.0.0.1:1880';
 describe('version.js', () => {
   describe('Version node', () => {
     it('orion-ld version', async () => {
-
       const actual = await http({
         method: 'get',
         baseURL: baseURL,

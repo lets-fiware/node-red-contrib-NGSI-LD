@@ -108,7 +108,7 @@ function buildParams(config) {
     'aggrMethods',
     'aggrPeriodDuration',
     'pageSize',
-    'pageAnchor',
+    'pageAnchor'
   ].forEach((e) => {
     if (config[e] && config[e] !== '') {
       params.set(e, config[e]);
@@ -125,7 +125,7 @@ function buildParams(config) {
       options.push('concise');
       break;
   }
-  ['count', 'sysAttrs', 'noOverwrite', 'temporalValues', 'aggregatedValues'].forEach(e => {
+  ['count', 'sysAttrs', 'noOverwrite', 'temporalValues', 'aggregatedValues'].forEach((e) => {
     if (typeof config[e] !== 'undefined' && config[e]) {
       options.push(e);
     }
@@ -187,8 +187,28 @@ function isStringOrJson(data) {
   return typeof data === 'string' || (typeof data === 'object' && !Array.isArray(data));
 }
 
-const encodeforbiddenChar = value => value.replace(/%/g, '%25').replace(/"/g, '%22').replace(/'/g, '%27').replace(/\(/g, '%28').replace(/\)/g, '%29').replace(/;/g, '%3B').replace(/</g, '%3C').replace(/=/g, '%3D').replace(/>/g, '%3E');
-const decodeforbiddenChar = value => value.replace(/%25/g, '%').replace(/%22/g, '"').replace(/%27/g, '\'').replace(/%28/g, '(').replace(/%29/g, ')').replace(/%3B/g, ';').replace(/%3C/g, '<').replace(/%3D/g, '=').replace(/%3E/g, '>');
+const encodeforbiddenChar = (value) =>
+  value
+    .replace(/%/g, '%25')
+    .replace(/"/g, '%22')
+    .replace(/'/g, '%27')
+    .replace(/\(/g, '%28')
+    .replace(/\)/g, '%29')
+    .replace(/;/g, '%3B')
+    .replace(/</g, '%3C')
+    .replace(/=/g, '%3D')
+    .replace(/>/g, '%3E');
+const decodeforbiddenChar = (value) =>
+  value
+    .replace(/%25/g, '%')
+    .replace(/%22/g, '"')
+    .replace(/%27/g, "'")
+    .replace(/%28/g, '(')
+    .replace(/%29/g, ')')
+    .replace(/%3B/g, ';')
+    .replace(/%3C/g, '<')
+    .replace(/%3D/g, '=')
+    .replace(/%3E/g, '>');
 
 function replaceObject(json, func) {
   for (const [key, value] of Object.entries(json)) {
@@ -248,5 +268,5 @@ module.exports = {
   encodeNGSI,
   decodeNGSI,
   encodeforbiddenChar,
-  decodeforbiddenChar,
+  decodeforbiddenChar
 };

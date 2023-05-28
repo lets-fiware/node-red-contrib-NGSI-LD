@@ -46,13 +46,16 @@ describe('entity-attributes.js', () => {
     });
     it('update attributes', async () => {
       entityAttributesNode.__set__('lib', {
-        http: async () => Promise.resolve({
-          status: 204,
-          headers: {},
-        }),
-        buildHTTPHeader: async () => { return {}; },
+        http: async () =>
+          Promise.resolve({
+            status: 204,
+            headers: {}
+          }),
+        buildHTTPHeader: async () => {
+          return {};
+        },
         buildParams: () => new URLSearchParams(),
-        encodeNGSI: (data) => data,
+        encodeNGSI: (data) => data
       });
 
       const updateAttrs = entityAttributesNode.__get__('updateAttrs');
@@ -63,18 +66,18 @@ describe('entity-attributes.js', () => {
         method: 'update',
         config: {
           attributes: {
-            'batteryLevel': {
-              'type': 'Property',
-              'value': 0.9,
-              'unitCode': 'C62'
+            batteryLevel: {
+              type: 'Property',
+              value: 0.9,
+              unitCode: 'C62'
             },
-            'controlledAsset': {
-              'type': 'Relationship',
-              'object': 'urn:ngsi-ld:Building:barn002'
+            controlledAsset: {
+              type: 'Relationship',
+              object: 'urn:ngsi-ld:Building:barn002'
             }
           },
-          forbidden: false,
-        },
+          forbidden: false
+        }
       };
 
       const message = {};
@@ -87,9 +90,11 @@ describe('entity-attributes.js', () => {
     it('should be 400 Bad Request', async () => {
       entityAttributesNode.__set__('lib', {
         http: async () => Promise.resolve({ status: 400, statusText: 'Bad Request' }),
-        buildHTTPHeader: () => { return {}; },
+        buildHTTPHeader: () => {
+          return {};
+        },
         buildParams: () => new URLSearchParams(),
-        encodeNGSI: (data) => data,
+        encodeNGSI: (data) => data
       });
       const updateAttrs = entityAttributesNode.__get__('updateAttrs');
 
@@ -98,14 +103,18 @@ describe('entity-attributes.js', () => {
         pathname: '/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001/attrs',
         method: 'update',
         config: {
-          attributes: {
-          },
-          forbidden: false,
-        },
+          attributes: {},
+          forbidden: false
+        }
       };
 
       let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
+      const node = {
+        msg: '',
+        error: (e) => {
+          msg = e;
+        }
+      };
 
       const message = {};
 
@@ -117,10 +126,17 @@ describe('entity-attributes.js', () => {
     });
     it('should be 400 Bad Request with details', async () => {
       entityAttributesNode.__set__('lib', {
-        http: async () => Promise.resolve({ status: 400, statusText: 'Bad Request', data: { error: 'detail' } }),
-        buildHTTPHeader: () => { return {}; },
+        http: async () =>
+          Promise.resolve({
+            status: 400,
+            statusText: 'Bad Request',
+            data: { error: 'detail' }
+          }),
+        buildHTTPHeader: () => {
+          return {};
+        },
         buildParams: () => new URLSearchParams(),
-        encodeNGSI: (data) => data,
+        encodeNGSI: (data) => data
       });
       const updateAttrs = entityAttributesNode.__get__('updateAttrs');
 
@@ -129,32 +145,35 @@ describe('entity-attributes.js', () => {
         pathname: '/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001/attrs',
         method: 'update',
         config: {
-          attributes: {
-          },
-          forbidden: false,
-        },
+          attributes: {},
+          forbidden: false
+        }
       };
 
       let msg = [];
-      const node = { msg: '', error: (e) => { msg.push(e); } };
+      const node = {
+        msg: '',
+        error: (e) => {
+          msg.push(e);
+        }
+      };
 
       const message = {};
 
       await updateAttrs.call(node, message, param);
 
-      assert.deepEqual(msg, [
-        'Error while updating attributes: 400 Bad Request',
-        'Error details: {"error":"detail"}',
-      ]);
+      assert.deepEqual(msg, ['Error while updating attributes: 400 Bad Request', 'Error details: {"error":"detail"}']);
       assert.deepEqual(message.payload, { error: 'detail' });
       assert.equal(message.statusCode, 400);
     });
     it('Should be unknown error', async () => {
       entityAttributesNode.__set__('lib', {
         http: async () => Promise.reject({ message: 'unknown error' }),
-        buildHTTPHeader: () => { return {}; },
+        buildHTTPHeader: () => {
+          return {};
+        },
         buildParams: () => new URLSearchParams(),
-        encodeNGSI: (data) => data,
+        encodeNGSI: (data) => data
       });
       const updateAttrs = entityAttributesNode.__get__('updateAttrs');
 
@@ -163,14 +182,18 @@ describe('entity-attributes.js', () => {
         pathname: '/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001/attrs',
         method: 'update',
         config: {
-          attributes: {
-          },
-          forbidden: false,
-        },
+          attributes: {},
+          forbidden: false
+        }
       };
 
       let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
+      const node = {
+        msg: '',
+        error: (e) => {
+          msg = e;
+        }
+      };
 
       const message = {};
 
@@ -189,7 +212,7 @@ describe('entity-attributes.js', () => {
       const actual = validateConfig(msg, {
         entityId: 'urn:ngsi-ld:TemperatureSensor:001',
         attributes: {},
-        forbidden: false,
+        forbidden: false
       });
 
       assert.equal(actual, true);
@@ -202,7 +225,7 @@ describe('entity-attributes.js', () => {
       const actual = validateConfig(msg, {
         entityId: {},
         attributes: {},
-        forbidden: false,
+        forbidden: false
       });
 
       assert.equal(actual, false);
@@ -215,7 +238,7 @@ describe('entity-attributes.js', () => {
       const actual = validateConfig(msg, {
         entityId: '',
         attributes: {},
-        forbidden: 'true',
+        forbidden: 'true'
       });
 
       assert.equal(actual, false);
@@ -245,7 +268,9 @@ describe('entity-attributes.js', () => {
       });
 
       assert.equal(actual, false);
-      assert.deepEqual(msg, { payload: { error: 'attributes not JSON Object' } });
+      assert.deepEqual(msg, {
+        payload: { error: 'attributes not JSON Object' }
+      });
     });
   });
   describe('createParam', () => {
@@ -253,14 +278,14 @@ describe('entity-attributes.js', () => {
       const createParam = entityAttributesNode.__get__('createParam');
       const msg = {
         payload: {
-          'batteryLevel': {
-            'type': 'Property',
-            'value': 0.9,
-            'unitCode': 'C62'
+          batteryLevel: {
+            type: 'Property',
+            value: 0.9,
+            unitCode: 'C62'
           },
-          'controlledAsset': {
-            'type': 'Relationship',
-            'object': 'urn:ngsi-ld:Building:barn002'
+          controlledAsset: {
+            type: 'Relationship',
+            object: 'urn:ngsi-ld:Building:barn002'
           }
         }
       };
@@ -268,14 +293,14 @@ describe('entity-attributes.js', () => {
         actionType: 'append',
         entityId: 'urn:ngsi-ld:TemperatureSensor:001',
         atContext: '',
-        forbidden: 'true',
+        forbidden: 'true'
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
         mintaka: '',
         getToken: null,
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       const actual = createParam(msg, config, brokerConfig);
@@ -293,43 +318,43 @@ describe('entity-attributes.js', () => {
           batteryLevel: {
             type: 'Property',
             value: 0.9,
-            unitCode: 'C62',
+            unitCode: 'C62'
           },
           controlledAsset: {
             type: 'Relationship',
-            object: 'urn:ngsi-ld:Building:barn002',
-          },
+            object: 'urn:ngsi-ld:Building:barn002'
+          }
         },
         noOverwrite: true,
-        forbidden: true,
+        forbidden: true
       });
     });
     it('upsert attributes', () => {
       const createParam = entityAttributesNode.__get__('createParam');
       const msg = {
         payload: {
-          'batteryLevel': {
-            'type': 'Property',
-            'value': 0.9,
-            'unitCode': 'C62'
+          batteryLevel: {
+            type: 'Property',
+            value: 0.9,
+            unitCode: 'C62'
           },
-          'controlledAsset': {
-            'type': 'Relationship',
-            'object': 'urn:ngsi-ld:Building:barn002'
+          controlledAsset: {
+            type: 'Relationship',
+            object: 'urn:ngsi-ld:Building:barn002'
           }
         }
       };
       const config = {
         actionType: 'upsert',
         entityId: 'urn:ngsi-ld:TemperatureSensor:001',
-        atContext: '',
+        atContext: ''
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
         mintaka: '',
         getToken: null,
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       const actual = createParam(msg, config, brokerConfig);
@@ -347,42 +372,42 @@ describe('entity-attributes.js', () => {
           batteryLevel: {
             type: 'Property',
             value: 0.9,
-            unitCode: 'C62',
+            unitCode: 'C62'
           },
           controlledAsset: {
             type: 'Relationship',
-            object: 'urn:ngsi-ld:Building:barn002',
-          },
+            object: 'urn:ngsi-ld:Building:barn002'
+          }
         },
-        forbidden: false,
+        forbidden: false
       });
     });
     it('update attributes', () => {
       const createParam = entityAttributesNode.__get__('createParam');
       const msg = {
         payload: {
-          'batteryLevel': {
-            'type': 'Property',
-            'value': 0.9,
-            'unitCode': 'C62'
+          batteryLevel: {
+            type: 'Property',
+            value: 0.9,
+            unitCode: 'C62'
           },
-          'controlledAsset': {
-            'type': 'Relationship',
-            'object': 'urn:ngsi-ld:Building:barn002'
+          controlledAsset: {
+            type: 'Relationship',
+            object: 'urn:ngsi-ld:Building:barn002'
           }
         }
       };
       const config = {
         actionType: 'update',
         entityId: 'urn:ngsi-ld:TemperatureSensor:001',
-        atContext: '',
+        atContext: ''
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
         mintaka: '',
         getToken: null,
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       const actual = createParam(msg, config, brokerConfig);
@@ -400,14 +425,14 @@ describe('entity-attributes.js', () => {
           batteryLevel: {
             type: 'Property',
             value: 0.9,
-            unitCode: 'C62',
+            unitCode: 'C62'
           },
           controlledAsset: {
             type: 'Relationship',
-            object: 'urn:ngsi-ld:Building:barn002',
-          },
+            object: 'urn:ngsi-ld:Building:barn002'
+          }
         },
-        forbidden: false,
+        forbidden: false
       });
     });
     it('append attribute with entityId and attrs', () => {
@@ -416,14 +441,14 @@ describe('entity-attributes.js', () => {
         payload: {
           entityId: 'urn:ngsi-ld:TemperatureSensor:002',
           attrs: {
-            'batteryLevel': {
-              'type': 'Property',
-              'value': 0.9,
-              'unitCode': 'C62'
+            batteryLevel: {
+              type: 'Property',
+              value: 0.9,
+              unitCode: 'C62'
             },
-            'controlledAsset': {
-              'type': 'Relationship',
-              'object': 'urn:ngsi-ld:Building:barn002'
+            controlledAsset: {
+              type: 'Relationship',
+              object: 'urn:ngsi-ld:Building:barn002'
             }
           }
         }
@@ -431,14 +456,14 @@ describe('entity-attributes.js', () => {
       const config = {
         actionType: 'update',
         entityId: 'urn:ngsi-ld:TemperatureSensor:001',
-        atContext: '',
+        atContext: ''
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
         mintaka: '',
         getToken: null,
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       const actual = createParam(msg, config, brokerConfig);
@@ -456,42 +481,42 @@ describe('entity-attributes.js', () => {
           batteryLevel: {
             type: 'Property',
             value: 0.9,
-            unitCode: 'C62',
+            unitCode: 'C62'
           },
           controlledAsset: {
             type: 'Relationship',
-            object: 'urn:ngsi-ld:Building:barn002',
-          },
+            object: 'urn:ngsi-ld:Building:barn002'
+          }
         },
-        forbidden: false,
+        forbidden: false
       });
     });
     it('getToken', () => {
       const createParam = entityAttributesNode.__get__('createParam');
       const msg = {
         payload: {
-          'batteryLevel': {
-            'type': 'Property',
-            'value': 0.9,
-            'unitCode': 'C62'
+          batteryLevel: {
+            type: 'Property',
+            value: 0.9,
+            unitCode: 'C62'
           },
-          'controlledAsset': {
-            'type': 'Relationship',
-            'object': 'urn:ngsi-ld:Building:barn002'
+          controlledAsset: {
+            type: 'Relationship',
+            object: 'urn:ngsi-ld:Building:barn002'
           }
         }
       };
       const config = {
         actionType: 'update',
         entityId: 'urn:ngsi-ld:TemperatureSensor:001',
-        atContext: '',
+        atContext: ''
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
         mintaka: '',
-        getToken: () => { },
+        getToken: () => {},
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       const actual = createParam(msg, config, brokerConfig);
@@ -508,42 +533,42 @@ describe('entity-attributes.js', () => {
           batteryLevel: {
             type: 'Property',
             value: 0.9,
-            unitCode: 'C62',
+            unitCode: 'C62'
           },
           controlledAsset: {
             type: 'Relationship',
-            object: 'urn:ngsi-ld:Building:barn002',
-          },
+            object: 'urn:ngsi-ld:Building:barn002'
+          }
         },
-        forbidden: false,
+        forbidden: false
       });
     });
     it('atContext', () => {
       const createParam = entityAttributesNode.__get__('createParam');
       const msg = {
         payload: {
-          'batteryLevel': {
-            'type': 'Property',
-            'value': 0.9,
-            'unitCode': 'C62'
+          batteryLevel: {
+            type: 'Property',
+            value: 0.9,
+            unitCode: 'C62'
           },
-          'controlledAsset': {
-            'type': 'Relationship',
-            'object': 'urn:ngsi-ld:Building:barn002'
+          controlledAsset: {
+            type: 'Relationship',
+            object: 'urn:ngsi-ld:Building:barn002'
           }
         }
       };
       const config = {
         actionType: 'update',
         entityId: 'urn:ngsi-ld:TemperatureSensor:001',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.5.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.5.jsonld'
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
         mintaka: '',
         getToken: null,
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       const actual = createParam(msg, config, brokerConfig);
@@ -560,14 +585,14 @@ describe('entity-attributes.js', () => {
           batteryLevel: {
             type: 'Property',
             value: 0.9,
-            unitCode: 'C62',
+            unitCode: 'C62'
           },
           controlledAsset: {
             type: 'Relationship',
-            object: 'urn:ngsi-ld:Building:barn002',
-          },
+            object: 'urn:ngsi-ld:Building:barn002'
+          }
         },
-        forbidden: false,
+        forbidden: false
       });
     });
     it('payload not JSON Object', () => {
@@ -576,14 +601,14 @@ describe('entity-attributes.js', () => {
       const config = {
         actionType: 'update',
         entityId: 'urn:ngsi-ld:TemperatureSensor:001',
-        atContext: '',
+        atContext: ''
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
         mintaka: '',
-        getToken: () => { },
+        getToken: () => {},
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       const actual = createParam(msg, config, brokerConfig);
@@ -598,14 +623,14 @@ describe('entity-attributes.js', () => {
         payload: {
           entityId: 'urn:ngsi-ld:TemperatureSensor:002',
           attrs: {
-            'batteryLevel': {
-              'type': 'Property',
-              'value': 0.9,
-              'unitCode': 'C62'
+            batteryLevel: {
+              type: 'Property',
+              value: 0.9,
+              unitCode: 'C62'
             },
-            'controlledAsset': {
-              'type': 'Relationship',
-              'object': 'urn:ngsi-ld:Building:barn002'
+            controlledAsset: {
+              type: 'Relationship',
+              object: 'urn:ngsi-ld:Building:barn002'
             }
           }
         }
@@ -613,14 +638,14 @@ describe('entity-attributes.js', () => {
       const config = {
         actionType: 'create',
         entityId: 'urn:ngsi-ld:TemperatureSensor:001',
-        atContext: '',
+        atContext: ''
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
         mintaka: '',
         getToken: null,
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       const actual = createParam(msg, config, brokerConfig);
@@ -635,14 +660,14 @@ describe('entity-attributes.js', () => {
         payload: {
           entityId: {},
           attrs: {
-            'batteryLevel': {
-              'type': 'Property',
-              'value': 0.9,
-              'unitCode': 'C62'
+            batteryLevel: {
+              type: 'Property',
+              value: 0.9,
+              unitCode: 'C62'
             },
-            'controlledAsset': {
-              'type': 'Relationship',
-              'object': 'urn:ngsi-ld:Building:barn002'
+            controlledAsset: {
+              type: 'Relationship',
+              object: 'urn:ngsi-ld:Building:barn002'
             }
           }
         }
@@ -650,14 +675,14 @@ describe('entity-attributes.js', () => {
       const config = {
         actionType: 'update',
         entityId: 'urn:ngsi-ld:TemperatureSensor:001',
-        atContext: '',
+        atContext: ''
       };
       const brokerConfig = {
         apiEndpoint: 'http://orion-ld:1026',
         mintaka: '',
         getToken: null,
         tenant: 'openiot',
-        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
       };
 
       const actual = createParam(msg, config, brokerConfig);
@@ -673,15 +698,22 @@ describe('entity-attributes.js', () => {
     });
     it('Updte attribute', async () => {
       entityAttributesNode.__set__('lib', {
-        http: async () => Promise.resolve({
-          status: 204,
-          headers: {},
-        }),
-        buildHTTPHeader: () => { return {}; },
+        http: async () =>
+          Promise.resolve({
+            status: 204,
+            headers: {}
+          }),
+        buildHTTPHeader: () => {
+          return {};
+        },
         buildParams: () => new URLSearchParams(),
-        isStringOrJson: () => { return true; },
-        isJson: () => { return true; },
-        encodeNGSI: (data) => data,
+        isStringOrJson: () => {
+          return true;
+        },
+        isJson: () => {
+          return true;
+        },
+        encodeNGSI: (data) => data
       });
       const red = new MockRed();
       entityAttributesNode(red);
@@ -695,25 +727,28 @@ describe('entity-attributes.js', () => {
           mintaka: '',
           tenant: 'openiot',
           atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
-          getToken: null,
+          getToken: null
         }
       });
 
       await red.inputWithAwait({
         payload: {
-          'batteryLevel': {
-            'type': 'Property',
-            'value': 0.9,
-            'unitCode': 'C62'
+          batteryLevel: {
+            type: 'Property',
+            value: 0.9,
+            unitCode: 'C62'
           },
-          'controlledAsset': {
-            'type': 'Relationship',
-            'object': 'urn:ngsi-ld:Building:barn002'
+          controlledAsset: {
+            type: 'Relationship',
+            object: 'urn:ngsi-ld:Building:barn002'
           }
         }
       });
 
-      assert.deepEqual(red.getOutput(), { payload: undefined, statusCode: 204 });
+      assert.deepEqual(red.getOutput(), {
+        payload: undefined,
+        statusCode: 204
+      });
     });
     it('ActionType error', async () => {
       const red = new MockRed();
@@ -728,25 +763,28 @@ describe('entity-attributes.js', () => {
           mintaka: '',
           tenant: 'openiot',
           atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
-          getToken: null,
+          getToken: null
         }
       });
 
       await red.inputWithAwait({
         payload: {
-          'batteryLevel': {
-            'type': 'Property',
-            'value': 0.9,
-            'unitCode': 'C62'
+          batteryLevel: {
+            type: 'Property',
+            value: 0.9,
+            unitCode: 'C62'
           },
-          'controlledAsset': {
-            'type': 'Relationship',
-            'object': 'urn:ngsi-ld:Building:barn002'
+          controlledAsset: {
+            type: 'Relationship',
+            object: 'urn:ngsi-ld:Building:barn002'
           }
         }
       });
 
-      assert.deepEqual(red.getOutput(), { payload: { error: 'ActionType error: delete' }, statusCode: 500 });
+      assert.deepEqual(red.getOutput(), {
+        payload: { error: 'ActionType error: delete' },
+        statusCode: 500
+      });
       assert.equal(red.getMessage(), 'ActionType error: delete');
     });
   });

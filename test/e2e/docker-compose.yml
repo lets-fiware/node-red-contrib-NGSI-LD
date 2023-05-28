@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 services:
   orion-ld:
     image: fiware/orion-ld:1.1.2
@@ -41,7 +41,7 @@ services:
     image: timescale/timescaledb-postgis:1.7.5-pg12
     restart: always
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U orion" ]
+      test: ['CMD-SHELL', 'pg_isready -U orion']
       interval: 15s
       timeout: 15s
       retries: 5
@@ -50,6 +50,6 @@ services:
       - POSTGRES_USER=orion
       - POSTGRES_PASSWORD=orion
       - POSTGRES_HOST_AUTH_METHOD=trust
-    command: ["postgres", "-c", "log_statement=none"]
+    command: ['postgres', '-c', 'log_statement=none']
     ports:
       - 5432:5432

@@ -61,15 +61,13 @@ describe('lib.js', () => {
       const Mockaxios = async () => Promise.reject({ status: 400 });
       Mockaxios.isAxiosError = () => true;
       lib.__set__('axios', Mockaxios);
-      await lib.http({}).catch(() => {
-      });
+      await lib.http({}).catch(() => {});
     });
     it('should be unknown exception', async () => {
       const Mockaxios = async () => Promise.reject({});
       Mockaxios.isAxiosError = () => false;
       lib.__set__('axios', Mockaxios);
-      await lib.http({}).catch(() => {
-      });
+      await lib.http({}).catch(() => {});
     });
   });
 
@@ -91,11 +89,15 @@ describe('lib.js', () => {
       assert.deepEqual(actual, expected);
     });
     it('Has Link header', async () => {
-      const param = { config: { atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld' } };
+      const param = {
+        config: {
+          atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
+        }
+      };
       const actual = await lib.buildHTTPHeader(param);
 
       const expected = {
-        'Link': '<https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"',
+        Link: '<https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"',
         'Content-Type': 'application/json'
       };
 
@@ -105,15 +107,21 @@ describe('lib.js', () => {
       const param = { config: { accept: 'application/json' } };
       const actual = await lib.buildHTTPHeader(param);
 
-      const expected = { 'Accept': 'application/json' };
+      const expected = { Accept: 'application/json' };
 
       assert.deepEqual(actual, expected);
     });
     it('Has Authorization header', async () => {
-      const param = { getToken: async () => { return '3b7c02f9e8a0b8fb1ca0df27052b6dfc00f32df4'; } };
+      const param = {
+        getToken: async () => {
+          return '3b7c02f9e8a0b8fb1ca0df27052b6dfc00f32df4';
+        }
+      };
       const actual = await lib.buildHTTPHeader(param);
 
-      const expected = { 'Authorization': 'Bearer 3b7c02f9e8a0b8fb1ca0df27052b6dfc00f32df4' };
+      const expected = {
+        Authorization: 'Bearer 3b7c02f9e8a0b8fb1ca0df27052b6dfc00f32df4'
+      };
 
       assert.deepEqual(actual, expected);
     });
@@ -152,7 +160,13 @@ describe('lib.js', () => {
       assert.equal(actual.toString(), 'q=brandName%21%3D%22Mercedes%22');
     });
     it('geo query', () => {
-      const param = { georel: 'near', geometry: 'point', coordinates: '[-40.4,-3.5]', geoproperty: 'location', geometryProperty: 'position' };
+      const param = {
+        georel: 'near',
+        geometry: 'point',
+        coordinates: '[-40.4,-3.5]',
+        geoproperty: 'location',
+        geometryProperty: 'position'
+      };
       const actual = lib.buildParams(param);
 
       assert.equal(actual.get('georel'), 'near');
@@ -224,7 +238,11 @@ describe('lib.js', () => {
       assert.equal(actual.toString(), 'options=aggregatedValues');
     });
     it('id, type param', () => {
-      const param = { id: 'urn:ngsi-ld:Building:store001', type: 'Building', idPattern: '.*' };
+      const param = {
+        id: 'urn:ngsi-ld:Building:store001',
+        type: 'Building',
+        idPattern: '.*'
+      };
       const actual = lib.buildParams(param);
 
       assert.equal(actual.get('options'), null);
@@ -311,7 +329,12 @@ describe('lib.js', () => {
       const value = '-a';
       const unit = 'day';
       let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
+      const node = {
+        msg: '',
+        error: (e) => {
+          msg = e;
+        }
+      };
 
       const actual = lib.convertDateTime.call(node, dt, value, unit);
 
@@ -323,7 +346,12 @@ describe('lib.js', () => {
       const value = '-1';
       const unit = 'day';
       let msg = '';
-      const node = { msg: '', error: (e) => { msg = e; } };
+      const node = {
+        msg: '',
+        error: (e) => {
+          msg = e;
+        }
+      };
 
       const actual = lib.convertDateTime.call(node, dt, value, unit);
 
@@ -358,7 +386,10 @@ describe('lib.js', () => {
   });
   describe('decodeforbiddenChar', () => {
     it('decode forbidden characters', () => {
-      const actual = lib.decodeforbiddenChar('%25%3C%3E%22%27%3D%3B%28%29%25%3C%3E%22%27%3D%3B%28%29%25%3C%3E%22%27%3D%3B%28%29%25%3C%3E%22%27%3D%3B%28%29', true);
+      const actual = lib.decodeforbiddenChar(
+        '%25%3C%3E%22%27%3D%3B%28%29%25%3C%3E%22%27%3D%3B%28%29%25%3C%3E%22%27%3D%3B%28%29%25%3C%3E%22%27%3D%3B%28%29',
+        true
+      );
 
       const expected = '%<>"\'=;()%<>"\'=;()%<>"\'=;()%<>"\'=;()';
 

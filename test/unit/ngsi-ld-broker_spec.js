@@ -87,7 +87,7 @@ describe('ngsi-ld-broker.js', () => {
     it('should get cached access token', async () => {
       const config = {
         accessToken: '3b7c02f9e8a0b8fb1ca0df27052b6dfc00f32df4',
-        tokenExpires: new Date(Date.now() + 10 * 1000),
+        tokenExpires: new Date(Date.now() + 10 * 1000)
       };
       const actual = await getToken.call(config);
       assert.equal(actual, '3b7c02f9e8a0b8fb1ca0df27052b6dfc00f32df4');
@@ -100,21 +100,20 @@ describe('ngsi-ld-broker.js', () => {
           username: 'fiware',
           password: '1234',
           clientid: null,
-          clientsecret: null,
+          clientsecret: null
         },
         accessToken: '',
-        tokenExpires: null,
+        tokenExpires: null
       };
       brokerNode.__set__('http', async () => {
         return {
-          status: 200, data: {
-            'access_token': '3b7c02f9e8a0b8fb1ca0df27052b6dfc00f32df4',
-            'token_type': 'bearer',
-            'expires_in': 3599,
-            'refresh_token': '8b23aeabcb97b2b6b09670c8fa4c448a46ab5268',
-            'scope': [
-              'bearer'
-            ]
+          status: 200,
+          data: {
+            access_token: '3b7c02f9e8a0b8fb1ca0df27052b6dfc00f32df4',
+            token_type: 'bearer',
+            expires_in: 3599,
+            refresh_token: '8b23aeabcb97b2b6b09670c8fa4c448a46ab5268',
+            scope: ['bearer']
           }
         };
       });
@@ -129,21 +128,20 @@ describe('ngsi-ld-broker.js', () => {
           username: 'fiware',
           password: '1234',
           clientid: null,
-          clientsecret: null,
+          clientsecret: null
         },
         accessToken: '',
-        tokenExpires: null,
+        tokenExpires: null
       };
       brokerNode.__set__('http', async () => {
         return {
-          status: 200, data: {
-            'access_token': '3b7c02f9e8a0b8fb1ca0df27052b6dfc00f32df4',
-            'token_type': 'bearer',
-            'expires_in': 3599,
-            'refresh_token': '8b23aeabcb97b2b6b09670c8fa4c448a46ab5268',
-            'scope': [
-              'bearer'
-            ]
+          status: 200,
+          data: {
+            access_token: '3b7c02f9e8a0b8fb1ca0df27052b6dfc00f32df4',
+            token_type: 'bearer',
+            expires_in: 3599,
+            refresh_token: '8b23aeabcb97b2b6b09670c8fa4c448a46ab5268',
+            scope: ['bearer']
           }
         };
       });
@@ -158,21 +156,20 @@ describe('ngsi-ld-broker.js', () => {
           username: 'fiware',
           password: '1234',
           clientid: '58de156f-0fec-400b-bc7c-86265a885bee',
-          clientsecret: '921cf732-b39c-4e7c-815c-a91277e52b70',
+          clientsecret: '921cf732-b39c-4e7c-815c-a91277e52b70'
         },
         accessToken: '',
-        tokenExpires: null,
+        tokenExpires: null
       };
       brokerNode.__set__('http', async () => {
         return {
-          status: 200, data: {
-            'access_token': '3b7c02f9e8a0b8fb1ca0df27052b6dfc00f32df4',
-            'token_type': 'bearer',
-            'expires_in': 3599,
-            'refresh_token': '8b23aeabcb97b2b6b09670c8fa4c448a46ab5268',
-            'scope': [
-              'bearer'
-            ]
+          status: 200,
+          data: {
+            access_token: '3b7c02f9e8a0b8fb1ca0df27052b6dfc00f32df4',
+            token_type: 'bearer',
+            expires_in: 3599,
+            refresh_token: '8b23aeabcb97b2b6b09670c8fa4c448a46ab5268',
+            scope: ['bearer']
           }
         };
       });
@@ -187,21 +184,20 @@ describe('ngsi-ld-broker.js', () => {
           username: 'fiware',
           password: '1234',
           clientid: '58de156f-0fec-400b-bc7c-86265a885bee',
-          clientsecret: '921cf732-b39c-4e7c-815c-a91277e52b70',
+          clientsecret: '921cf732-b39c-4e7c-815c-a91277e52b70'
         },
         accessToken: '',
-        tokenExpires: null,
+        tokenExpires: null
       };
       brokerNode.__set__('http', async () => {
         return {
-          status: 200, data: {
-            'access_token': '3b7c02f9e8a0b8fb1ca0df27052b6dfc00f32df4',
-            'token_type': 'bearer',
-            'expires_in': 3599,
-            'refresh_token': '8b23aeabcb97b2b6b09670c8fa4c448a46ab5268',
-            'scope': [
-              'bearer'
-            ]
+          status: 200,
+          data: {
+            access_token: '3b7c02f9e8a0b8fb1ca0df27052b6dfc00f32df4',
+            token_type: 'bearer',
+            expires_in: 3599,
+            refresh_token: '8b23aeabcb97b2b6b09670c8fa4c448a46ab5268',
+            scope: ['bearer']
           }
         };
       });
@@ -217,11 +213,13 @@ describe('ngsi-ld-broker.js', () => {
           username: 'fiware',
           password: '1234',
           clientid: '58de156f-0fec-400b-bc7c-86265a885bee',
-          clientsecret: '921cf732-b39c-4e7c-815c-a91277e52b70',
+          clientsecret: '921cf732-b39c-4e7c-815c-a91277e52b70'
         },
         accessToken: '',
         tokenExpires: null,
-        error: (msg) => { message = msg; },
+        error: (msg) => {
+          message = msg;
+        }
       };
       brokerNode.__set__('http', async () => {
         return { status: 401, statusText: 'Unauthorized' };
@@ -238,11 +236,13 @@ describe('ngsi-ld-broker.js', () => {
           username: 'fiware',
           password: '1234',
           clientid: '58de156f-0fec-400b-bc7c-86265a885bee',
-          clientsecret: '921cf732-b39c-4e7c-815c-a91277e52b70',
+          clientsecret: '921cf732-b39c-4e7c-815c-a91277e52b70'
         },
         accessToken: '',
         tokenExpires: null,
-        error: (msg) => { message = msg; },
+        error: (msg) => {
+          message = msg;
+        }
       };
       brokerNode.__set__('http', async () => Promise.reject('unknown error'));
       await getToken.call(config);
@@ -260,7 +260,7 @@ describe('ngsi-ld-broker.js', () => {
         tenant: 'openiot',
         atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
         idmEndpoint: '',
-        idmType: '',
+        idmType: ''
       });
     });
     it('Init NGSI-LD broker node', async () => {
@@ -273,7 +273,7 @@ describe('ngsi-ld-broker.js', () => {
         tenant: 'openiot',
         atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
         idmEndpoint: '',
-        idmType: 'none',
+        idmType: 'none'
       });
     });
     it('Init NGSI-LD broker node with IdM', async () => {
@@ -286,7 +286,7 @@ describe('ngsi-ld-broker.js', () => {
         tenant: 'openiot',
         atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld',
         idmEndpoint: '',
-        idmType: 'keyrock',
+        idmType: 'keyrock'
       });
     });
   });

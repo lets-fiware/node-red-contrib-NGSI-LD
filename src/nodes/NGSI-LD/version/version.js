@@ -35,7 +35,7 @@ const getVersion = async function (msg, param) {
     method: 'get',
     baseURL: param.host,
     headers: await lib.buildHTTPHeader(param),
-    url: param.pathname,
+    url: param.pathname
   };
 
   try {
@@ -66,7 +66,7 @@ module.exports = function (RED) {
         const param = {
           host: brokerConfig.apiEndpoint,
           pathname: '/ngsi-ld/ex/v1/version',
-          getToken: brokerConfig.getToken === null ? null : brokerConfig.getToken.bind(brokerConfig),
+          getToken: brokerConfig.getToken === null ? null : brokerConfig.getToken.bind(brokerConfig)
         };
         await getVersion.call(node, msg, param);
       } else {

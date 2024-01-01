@@ -50,5 +50,5 @@ npm install node-red-contrib-ngsi-ld
 
 ## Copyright and License
 
-Copyright 2023 Kazuhito Suda<br>
+Copyright 2023-2024 Kazuhito Suda<br>
 Licensed under the [MIT License](./LICENSE).

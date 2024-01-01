@@ -1,5 +1,6 @@
 ## node-red-contrib-letsfiware-NGSI v0.4.0-next
 
+-   Update copyright date (#28)
 -   ADD prettier command (#27)
 -   Update node.js dependencies (#26)
 -   ADD GitHub action to close inactive issues (#25)

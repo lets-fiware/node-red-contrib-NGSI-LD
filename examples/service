@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # MIT License
-# Copyright 2023 Kazuhito Suda
+# Copyright 2023-2024 Kazuhito Suda
 # This file is part of node-red-contrib-NGSI-LD
 # https://github.com/lets-fiware/node-red-contrib-NGSI-LD
 # Permission is hereby granted, free of charge, to any person obtaining a copy

@@ -79,52 +79,6 @@ const getEntities = async function (msg, param) {
   param.buffer.close();
 };
 
-const nobuffering = {
-  node: null,
-  msg: null,
-  open: function (node, msg) {
-    this.node = node;
-    this.msg = msg;
-    return this;
-  },
-  send: function (entities) {
-    const message = Object.assign({}, this.msg);
-    message.payload = entities;
-    message.statusCode = 200;
-    this.node.send(message);
-  },
-  close: function () {},
-  out: function (entities) {
-    const message = Object.assign({}, this.msg);
-    message.payload = entities;
-    message.statusCode = 200;
-    this.node.send(message);
-  }
-};
-
-const buffering = {
-  node: null,
-  msg: null,
-  entities: [],
-  open: function (node, msg) {
-    this.node = node;
-    this.msg = msg;
-    this.entities = [];
-    return this;
-  },
-  send: function (entities) {
-    this.entities = this.entities.concat(entities);
-  },
-  close: function () {
-    this.msg.payload = this.entities;
-    this.msg.statusCode = 200;
-    this.node.send(this.msg);
-  },
-  out: function (entities) {
-    this.entities = this.entities.concat(entities);
-  }
-};
-
 const validateConfig = function (msg, config) {
   const items = [
     'atContext',
@@ -241,6 +195,52 @@ const createParam = function (msg, config, brokerConfig) {
   if (!validateConfig(msg, param.config)) {
     return null;
   }
+
+  const buffering = {
+    node: null,
+    msg: null,
+    entities: [],
+    open: function (node, msg) {
+      this.node = node;
+      this.msg = msg;
+      this.entities = [];
+      return this;
+    },
+    send: function (entities) {
+      this.entities = this.entities.concat(entities);
+    },
+    close: function () {
+      this.msg.payload = this.entities;
+      this.msg.statusCode = 200;
+      this.node.send(this.msg);
+    },
+    out: function (entities) {
+      this.entities = this.entities.concat(entities);
+    }
+  };
+
+  const nobuffering = {
+    node: null,
+    msg: null,
+    open: function (node, msg) {
+      this.node = node;
+      this.msg = msg;
+      return this;
+    },
+    send: function (entities) {
+      const message = Object.assign({}, this.msg);
+      message.payload = entities;
+      message.statusCode = 200;
+      this.node.send(message);
+    },
+    close: function () {},
+    out: function (entities) {
+      const message = Object.assign({}, this.msg);
+      message.payload = entities;
+      message.statusCode = 200;
+      this.node.send(message);
+    }
+  };
 
   param.buffer = param.config.buffering ? buffering.open(this, msg) : nobuffering.open(this, msg);
 

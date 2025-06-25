@@ -1,3 +1,7 @@
+## node-red-contrib-letsfiware-NGSI v0.4.2
+
+- Fix shared buffer in entities node (#30)
+
 ## node-red-contrib-letsfiware-NGSI v0.4.0-next
 
 -   Update copyright date (#28)

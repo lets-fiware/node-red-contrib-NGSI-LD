@@ -1,22 +1,22 @@
 /*
    MIT License
- 
+
    Copyright 2023-2024 Kazuhito Suda
- 
+
    This file is part of node-red-contrib-NGSI-LD
- 
+
    https://github.com/lets-fiware/node-red-contrib-NGSI-LD
- 
+
    Permission is hereby granted, free of charge, to any person obtaining a copy
    of this software and associated documentation files (the "Software"), to deal
    in the Software without restriction, including without limitation the rights
    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
    copies of the Software, and to permit persons to whom the Software is
    furnished to do so, subject to the following conditions:
- 
+
    The above copyright notice and this permission notice shall be included in all
    copies or substantial portions of the Software.
- 
+
    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -38,6 +38,29 @@ const { assert } = require('chai');
 
 const entitiesNode = require('../../src/nodes/NGSI-LD/entities/entities.js');
 const MockRed = require('./helpers/mockred.js');
+
+const buffering = {
+  node: null,
+  msg: null,
+  entities: [],
+  open: function (node, msg) {
+    this.node = node;
+    this.msg = msg;
+    this.entities = [];
+    return this;
+  },
+  send: function (entities) {
+    this.entities = this.entities.concat(entities);
+  },
+  close: function () {
+    this.msg.payload = this.entities;
+    this.msg.statusCode = 200;
+    this.node.send(this.msg);
+  },
+  out: function (entities) {
+    this.entities = this.entities.concat(entities);
+  }
+};
 
 describe('entities.js', () => {
   describe('getEntities', () => {
@@ -166,7 +189,6 @@ describe('entities.js', () => {
       });
 
       const getEntities = entitiesNode.__get__('getEntities');
-      const buffering = entitiesNode.__get__('buffering');
 
       let actual = [];
       const param = {
@@ -530,7 +552,6 @@ describe('entities.js', () => {
   });
   describe('buffering', () => {
     it('should have a entity', () => {
-      const buffering = entitiesNode.__get__('buffering');
       const errmsg = {};
       const actual = [];
 
@@ -548,7 +569,6 @@ describe('entities.js', () => {
       assert.deepEqual(actual, [{ payload: [{ id: 'E1', type: 'T' }], statusCode: 200 }]);
     });
     it('should have a entities', () => {
-      const buffering = entitiesNode.__get__('buffering');
       const errmsg = {};
       const actual = [];
 
@@ -575,7 +595,6 @@ describe('entities.js', () => {
       ]);
     });
     it('should be empty', () => {
-      const buffering = entitiesNode.__get__('buffering');
       const errmsg = {};
       const actual = [];
 
@@ -592,7 +611,6 @@ describe('entities.js', () => {
       assert.deepEqual(actual, [{ payload: [], statusCode: 200 }]);
     });
     it('should have a entity', () => {
-      const buffering = entitiesNode.__get__('buffering');
       const errmsg = {};
       const actual = [];
 
@@ -1178,7 +1196,100 @@ describe('entities.js', () => {
       assert.equal(actual, expected);
       assert.deepEqual(msg, { payload: { error: 'lang not string' } });
     });
+
+    describe('buffering', () => {
+      it('should create a buffering object', () => {
+        const createParam = entitiesNode.__get__('createParam');
+        const msg = { payload: { idPattern: '.*' } };
+        const config = {
+          representation: 'normalized',
+          entityId: '',
+          entityType: '',
+          idPattern: '',
+          attrs: '',
+          sysAttrs: 'false',
+          query: '',
+          csf: '',
+          georel: '',
+          geometry: '',
+          coordinates: '',
+          geoproperty: '',
+          geometryProperty: '',
+          lang: '',
+          accept: 'application/ld+json',
+          atContext: '',
+          buffering: 'on'
+        };
+        const brokerConfig = {
+          apiEndpoint: 'http://orion-ld:1026',
+          mintaka: '',
+          getToken: () => {},
+          tenant: 'openiot',
+          atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
+        };
+
+        const node = { msg: '' };
+        const param1 = createParam.call(node, msg, config, brokerConfig);
+        const param2 = createParam.call(node, msg, config, brokerConfig);
+
+        // Check that params are not the same instance
+        assert.notEqual(param1, param2);
+      });
+
+      it('should create a buffering object that allows opening and closing', () => {
+        const createParam = entitiesNode.__get__('createParam');
+        const msg = { payload: { idPattern: '.*' } };
+        const config = {
+          representation: 'normalized',
+          entityId: '',
+          entityType: '',
+          idPattern: '',
+          attrs: '',
+          sysAttrs: 'false',
+          query: '',
+          csf: '',
+          georel: '',
+          geometry: '',
+          coordinates: '',
+          geoproperty: '',
+          geometryProperty: '',
+          lang: '',
+          accept: 'application/ld+json',
+          atContext: '',
+          buffering: 'on'
+        };
+        const brokerConfig = {
+          apiEndpoint: 'http://orion-ld:1026',
+          mintaka: '',
+          getToken: () => {},
+          tenant: 'openiot',
+          atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
+        };
+
+        let outData;
+
+        const node = { msg: '', send: (data) => { outData = data; } };
+        const param = createParam.call(node, msg, config, brokerConfig);
+
+        const buffering = param.buffer;
+        buffering.open(
+          node,
+          { payload: null }
+        );
+
+        buffering.send([{ id: 'E1', type: 'T' }]);
+        buffering.out([{ id: 'E2', type: 'T' }]);
+
+        buffering.close();
+
+        assert.deepEqual(outData, {
+          payload: [{ id: 'E1', type: 'T' }, { id: 'E2', type: 'T' }],
+          statusCode: 200
+        });
+      });
+    });
   });
+
   describe('NGSI-LD entities node', () => {
     afterEach(() => {
       entitiesNode.__ResetDependency__('lib');

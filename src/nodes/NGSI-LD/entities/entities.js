@@ -102,29 +102,6 @@ const nobuffering = {
   }
 };
 
-const buffering = {
-  node: null,
-  msg: null,
-  entities: [],
-  open: function (node, msg) {
-    this.node = node;
-    this.msg = msg;
-    this.entities = [];
-    return this;
-  },
-  send: function (entities) {
-    this.entities = this.entities.concat(entities);
-  },
-  close: function () {
-    this.msg.payload = this.entities;
-    this.msg.statusCode = 200;
-    this.node.send(this.msg);
-  },
-  out: function (entities) {
-    this.entities = this.entities.concat(entities);
-  }
-};
-
 const validateConfig = function (msg, config) {
   const items = [
     'atContext',
@@ -241,6 +218,29 @@ const createParam = function (msg, config, brokerConfig) {
   if (!validateConfig(msg, param.config)) {
     return null;
   }
+
+  const buffering = {
+    node: null,
+    msg: null,
+    entities: [],
+    open: function (node, msg) {
+      this.node = node;
+      this.msg = msg;
+      this.entities = [];
+      return this;
+    },
+    send: function (entities) {
+      this.entities = this.entities.concat(entities);
+    },
+    close: function () {
+      this.msg.payload = this.entities;
+      this.msg.statusCode = 200;
+      this.node.send(this.msg);
+    },
+    out: function (entities) {
+      this.entities = this.entities.concat(entities);
+    }
+  };
 
   param.buffer = param.config.buffering ? buffering.open(this, msg) : nobuffering.open(this, msg);
 

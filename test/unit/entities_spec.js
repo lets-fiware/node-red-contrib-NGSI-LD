@@ -62,6 +62,29 @@ const buffering = {
   }
 };
 
+const nobuffering = {
+  node: null,
+  msg: null,
+  open: function (node, msg) {
+    this.node = node;
+    this.msg = msg;
+    return this;
+  },
+  send: function (entities) {
+    const message = Object.assign({}, this.msg);
+    message.payload = entities;
+    message.statusCode = 200;
+    this.node.send(message);
+  },
+  close: function () {},
+  out: function (entities) {
+    const message = Object.assign({}, this.msg);
+    message.payload = entities;
+    message.statusCode = 200;
+    this.node.send(message);
+  }
+};
+
 describe('entities.js', () => {
   describe('getEntities', () => {
     afterEach(() => {
@@ -104,7 +127,6 @@ describe('entities.js', () => {
       });
 
       const getEntities = entitiesNode.__get__('getEntities');
-      const nobuffering = entitiesNode.__get__('nobuffering');
 
       let actual;
       const param = {
@@ -277,7 +299,6 @@ describe('entities.js', () => {
       });
 
       const getEntities = entitiesNode.__get__('getEntities');
-      const nobuffering = entitiesNode.__get__('nobuffering');
 
       let actual;
       const param = {
@@ -316,7 +337,6 @@ describe('entities.js', () => {
       });
 
       const getEntities = entitiesNode.__get__('getEntities');
-      const nobuffering = entitiesNode.__get__('nobuffering');
 
       let actual;
       const param = {
@@ -353,7 +373,6 @@ describe('entities.js', () => {
         buildParams: () => new URLSearchParams()
       });
       const getEntities = entitiesNode.__get__('getEntities');
-      const nobuffering = entitiesNode.__get__('nobuffering');
 
       const param = {
         host: 'http://orion-ld:1026',
@@ -399,7 +418,6 @@ describe('entities.js', () => {
         decodeNGSI: (data) => data
       });
       const getEntities = entitiesNode.__get__('getEntities');
-      const nobuffering = entitiesNode.__get__('nobuffering');
 
       const param = {
         host: 'http://orion-ld:1026',
@@ -440,7 +458,6 @@ describe('entities.js', () => {
         decodeNGSI: (data) => data
       });
       const getEntities = entitiesNode.__get__('getEntities');
-      const nobuffering = entitiesNode.__get__('nobuffering');
 
       const param = {
         host: 'http://orion-ld:1026',
@@ -474,8 +491,46 @@ describe('entities.js', () => {
     });
   });
   describe('nobuffering', () => {
+    let nobuffering;
+
+    before(() => {
+      // Create a param
+      const createParam = entitiesNode.__get__('createParam');
+      const msg = { payload: { idPattern: '.*' } };
+      const config = {
+        representation: 'normalized',
+        entityId: '',
+        entityType: '',
+        idPattern: '',
+        attrs: '',
+        sysAttrs: 'false',
+        query: '',
+        csf: '',
+        georel: '',
+        geometry: '',
+        coordinates: '',
+        geoproperty: '',
+        geometryProperty: '',
+        lang: '',
+        accept: 'application/ld+json',
+        atContext: '',
+        buffering: 'off'
+      };
+      const brokerConfig = {
+        apiEndpoint: 'http://orion-ld:1026',
+        mintaka: '',
+        getToken: () => {},
+        tenant: 'openiot',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
+      };
+
+      const node = { msg: '' };
+      const param = createParam.call(node, msg, config, brokerConfig);
+
+      nobuffering = param.buffer;
+    });
+
     it('should have a entity', () => {
-      const nobuffering = entitiesNode.__get__('nobuffering');
       const errmsg = {};
       const actual = [];
 
@@ -493,7 +548,6 @@ describe('entities.js', () => {
       assert.deepEqual(actual, [{ payload: [{ id: 'E1', type: 'T' }], statusCode: 200 }]);
     });
     it('should have entities', () => {
-      const nobuffering = entitiesNode.__get__('nobuffering');
       const errmsg = {};
       const actual = [];
 
@@ -515,7 +569,6 @@ describe('entities.js', () => {
       ]);
     });
     it('should be empty', () => {
-      const nobuffering = entitiesNode.__get__('nobuffering');
       const errmsg = {};
       const actual = [];
 
@@ -532,7 +585,6 @@ describe('entities.js', () => {
       assert.deepEqual(actual, []);
     });
     it('should have a entity', () => {
-      const nobuffering = entitiesNode.__get__('nobuffering');
       const errmsg = {};
       const actual = [];
 
@@ -550,7 +602,47 @@ describe('entities.js', () => {
       assert.deepEqual(actual, [{ payload: [{ id: 'E1', type: 'T' }], statusCode: 200 }]);
     });
   });
+
   describe('buffering', () => {
+    let buffering;
+
+    before(() => {
+      // Create a param
+      const createParam = entitiesNode.__get__('createParam');
+      const msg = { payload: { idPattern: '.*' } };
+      const config = {
+        representation: 'normalized',
+        entityId: '',
+        entityType: '',
+        idPattern: '',
+        attrs: '',
+        sysAttrs: 'false',
+        query: '',
+        csf: '',
+        georel: '',
+        geometry: '',
+        coordinates: '',
+        geoproperty: '',
+        geometryProperty: '',
+        lang: '',
+        accept: 'application/ld+json',
+        atContext: '',
+        buffering: 'on'
+      };
+      const brokerConfig = {
+        apiEndpoint: 'http://orion-ld:1026',
+        mintaka: '',
+        getToken: () => {},
+        tenant: 'openiot',
+        atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
+      };
+
+      const node = { msg: '' };
+      const param = createParam.call(node, msg, config, brokerConfig);
+
+      buffering = param.buffer;
+    });
+
     it('should have a entity', () => {
       const errmsg = {};
       const actual = [];
@@ -1236,7 +1328,7 @@ describe('entities.js', () => {
         assert.notEqual(param1, param2);
       });
 
-      it('should create a buffering object that allows opening and closing', () => {
+      it('should create a nobuffering object', () => {
         const createParam = entitiesNode.__get__('createParam');
         const msg = { payload: { idPattern: '.*' } };
         const config = {
@@ -1256,7 +1348,7 @@ describe('entities.js', () => {
           lang: '',
           accept: 'application/ld+json',
           atContext: '',
-          buffering: 'on'
+          buffering: 'off'
         };
         const brokerConfig = {
           apiEndpoint: 'http://orion-ld:1026',
@@ -1266,26 +1358,12 @@ describe('entities.js', () => {
           atContext: 'https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld'
         };
 
-        let outData;
+        const node = { msg: '' };
+        const param1 = createParam.call(node, msg, config, brokerConfig);
+        const param2 = createParam.call(node, msg, config, brokerConfig);
 
-        const node = { msg: '', send: (data) => { outData = data; } };
-        const param = createParam.call(node, msg, config, brokerConfig);
-
-        const buffering = param.buffer;
-        buffering.open(
-          node,
-          { payload: null }
-        );
-
-        buffering.send([{ id: 'E1', type: 'T' }]);
-        buffering.out([{ id: 'E2', type: 'T' }]);
-
-        buffering.close();
-
-        assert.deepEqual(outData, {
-          payload: [{ id: 'E1', type: 'T' }, { id: 'E2', type: 'T' }],
-          statusCode: 200
-        });
+        // Check that params are not the same instance
+        assert.notEqual(param1, param2);
       });
     });
   });

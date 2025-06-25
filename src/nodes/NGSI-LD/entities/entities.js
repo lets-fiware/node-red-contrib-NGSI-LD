@@ -79,29 +79,6 @@ const getEntities = async function (msg, param) {
   param.buffer.close();
 };
 
-const nobuffering = {
-  node: null,
-  msg: null,
-  open: function (node, msg) {
-    this.node = node;
-    this.msg = msg;
-    return this;
-  },
-  send: function (entities) {
-    const message = Object.assign({}, this.msg);
-    message.payload = entities;
-    message.statusCode = 200;
-    this.node.send(message);
-  },
-  close: function () {},
-  out: function (entities) {
-    const message = Object.assign({}, this.msg);
-    message.payload = entities;
-    message.statusCode = 200;
-    this.node.send(message);
-  }
-};
-
 const validateConfig = function (msg, config) {
   const items = [
     'atContext',
@@ -239,6 +216,29 @@ const createParam = function (msg, config, brokerConfig) {
     },
     out: function (entities) {
       this.entities = this.entities.concat(entities);
+    }
+  };
+
+  const nobuffering = {
+    node: null,
+    msg: null,
+    open: function (node, msg) {
+      this.node = node;
+      this.msg = msg;
+      return this;
+    },
+    send: function (entities) {
+      const message = Object.assign({}, this.msg);
+      message.payload = entities;
+      message.statusCode = 200;
+      this.node.send(message);
+    },
+    close: function () {},
+    out: function (entities) {
+      const message = Object.assign({}, this.msg);
+      message.payload = entities;
+      message.statusCode = 200;
+      this.node.send(message);
     }
   };
 
